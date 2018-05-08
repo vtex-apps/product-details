@@ -1,0 +1,31 @@
+{
+  "name": "product-details",
+  "vendor": "vtex",
+  "version": "0.0.0",
+  "title": "Product Details",
+  "description": "Product details component",
+  "defaultLocale": "pt-BR",
+  "mustUpdateAt": "2019-05-08",
+  "registries": ["smartcheckout"],
+  "scripts": {
+    "postreleasy": "vtex publish --public"
+  },
+  "builders": {
+    "react": "2.x",
+    "pages": "0.x"
+  },
+  "policies": [
+    {
+      "name": "resolve-graphql"
+    }
+  ],
+  "dependencies": {
+    "vtex.store-graphql": "2.x"
+  },
+  "billingOptions": {
+    "billingListeningRoute": "/_v/deactivateMePlease",
+    "termsURL": "http://route.to.the/terms",
+    "version": "0.1",
+    "free": true
+  }
+}

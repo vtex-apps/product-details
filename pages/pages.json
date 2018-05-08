@@ -1,0 +1,12 @@
+{
+  "pages": {
+    "product-details": {
+      "path": "/_v/product-details"
+    }
+  },
+  "extensions": {
+    "product-details": {
+      "component": "ProductDetails"
+    }
+  }
+}
