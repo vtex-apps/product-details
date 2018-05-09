@@ -1,7 +1,7 @@
 {
   "pricing.installment-display":
-    "ou até {installments} {times} de {installmentPrice}",
-  "pricing.from": "de:",
-  "pricing.to": "por:",
+    "Ou até {installments} {times} de {installmentPrice}",
+  "pricing.from": "De:",
+  "pricing.to": "Por:",
   "button-label": "Comprar"
 }

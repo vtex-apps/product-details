@@ -15,13 +15,3 @@
 :global .vtex-price {
   height: 125px;
 }
-
-/*:global div:has(div.vtex-price-list__label) {
-  background-color: blue;
-}
-
-:global .vtex-price,
-:global .vtex-price-list__label,
-:global .vtex-selling-price__label {
-  float: left;
-} */
