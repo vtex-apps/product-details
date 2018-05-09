@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
+import { graphql } from 'react-apollo'
 
 import { ProductName } from '@vtex/product-details'
 import BuyButton from '@vtex/buy-button'
 
-import { createProduct } from './ProductFactory'
 import Price from './Price'
+
+import productQuery from './graphql/productQuery.gql'
 
 import './product-details.css'
 
 class ProductDetails extends Component {
   render() {
-    const { product } = this.props
+    const { product } = this.props.data
+
+    const selectedItem = product.items[0]
+    const { commertialOffer } = selectedItem.sellers[0]
 
     return (
       <div className="vtex-product-details flex">
@@ -24,18 +29,16 @@ class ProductDetails extends Component {
             <div className="pv2">
               <ProductName
                 name={product.productName}
-                skuName={product.sku.name}
+                skuName={selectedItem.name}
                 brandName={product.brand}
               />
             </div>
             <div className="pt4">
               <Price
-                listPrice={product.sku.seller.commertialOffer.ListPrice}
-                sellingPrice={product.sku.seller.commertialOffer.Price}
-                installments={product.sku.seller.commertialOffer.Installments}
-                installmentPrice={
-                  product.sku.seller.commertialOffer.InstallmentPrice
-                }
+                listPrice={commertialOffer.ListPrice}
+                sellingPrice={commertialOffer.Price}
+                installments={commertialOffer.Installments}
+                installmentPrice={commertialOffer.InstallmentPrice}
                 showListPrice
                 showLabels
                 showInstallments
@@ -48,9 +51,9 @@ class ProductDetails extends Component {
               {/* TODO: Implement something after click and use real Seller and SalesChannel*/}
               <BuyButton
                 salesChannel="1"
-                seller="1"
-                skuId={product.sku.referenceId.Value}
-                afterClick={event => event.stopPropagation()}>
+                seller={selectedItem.sellers[0].sellerId}
+                skuId={selectedItem.itemId}
+                afterClick={() => null}>
                 <FormattedMessage id="button-label" />
               </BuyButton>
             </div>
@@ -61,49 +64,68 @@ class ProductDetails extends Component {
   }
 
   static propTypes = {
+    /** Product slug */
+    slug: PropTypes.string.isRequired,
     /** Product that owns the informations */
-    product: PropTypes.shape({
-      /** Product's link text */
-      linkText: PropTypes.string.isRequired,
-      /** Product's name */
-      productName: PropTypes.string.isRequired,
-      /** Product's brand */
-      brand: PropTypes.string.isRequired,
-      /** Product's SKU */
-      sku: PropTypes.shape({
-        /** SKU name */
-        name: PropTypes.string.isRequired,
-        /** SKU reference id */
-        referenceId: PropTypes.shape({
-          /** Reference id value */
-          Value: PropTypes.string.isRequired,
-        }),
-        /** SKU Image to be shown */
-        image: PropTypes.shape({
-          /** Image URL */
-          imageUrl: PropTypes.string.isRequired,
-          /** Image tag as string */
-          imageTag: PropTypes.string.isRequired,
-        }).isRequired,
-        /** SKU seller */
-        seller: PropTypes.shape({
-          /** Seller comertial offer */
-          commertialOffer: PropTypes.shape({
-            /** Selling Price */
-            Price: PropTypes.number.isRequired,
-            /** List Price */
-            ListPrice: PropTypes.number.isRequired,
-          }).isRequired,
-        }).isRequired,
+    data: PropTypes.shape({
+      product: PropTypes.shape({
+        /** Product's id */
+        productId: PropTypes.string.isRequired,
+        /** Product's name */
+        productName: PropTypes.string.isRequired,
+        /** Product's brand */
+        brand: PropTypes.string.isRequired,
+        /** Product's SKUs */
+        items: PropTypes.arrayOf(
+          PropTypes.shape({
+            /** SKU id */
+            itemId: PropTypes.string.isRequired,
+            /** SKU name */
+            name: PropTypes.string.isRequired,
+            /** SKU Images to be shown */
+            images: PropTypes.arrayOf(
+              PropTypes.shape({
+                /** Image id */
+                imageId: PropTypes.string.isRequired,
+                /** Image label */
+                imageLabel: PropTypes.string.isRequired,
+                /** Image tag as string */
+                imageTag: PropTypes.string.isRequired,
+                /** Image URL */
+                imageUrl: PropTypes.string.isRequired,
+                /** Image text */
+                imageText: PropTypes.string.isRequired,
+              })
+            ).isRequired,
+            /** SKU sellers */
+            sellers: PropTypes.arrayOf(
+              PropTypes.shape({
+                /** Seller id */
+                sellerId: PropTypes.string.isRequired,
+                /** Seller comertial offer */
+                commertialOffer: PropTypes.shape({
+                  /** Selling Price */
+                  Price: PropTypes.number.isRequired,
+                  /** List Price */
+                  ListPrice: PropTypes.number.isRequired,
+                }).isRequired,
+              })
+            ).isRequired,
+          })
+        ).isRequired,
       }).isRequired,
     }),
     /** intl property to format data */
     intl: intlShape.isRequired,
   }
-
-  static defaultProps = {
-    product: createProduct(),
-  }
 }
 
-export default injectIntl(ProductDetails)
+const options = {
+  options: ({ slug }) => ({
+    variables: {
+      slug,
+    },
+  }),
+}
+
+export default graphql(productQuery, options)(injectIntl(ProductDetails))
