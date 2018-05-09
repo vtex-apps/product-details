@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo'
 
 import { ProductName } from '@vtex/product-details'
 import BuyButton from '@vtex/buy-button'
+import Spinner from '@vtex/styleguide/lib/Spinner'
 
 import Price from './Price'
 import ProductImages from './ProductImages'
@@ -16,6 +17,15 @@ import './product-details.css'
 class ProductDetails extends Component {
   render() {
     const { product } = this.props.data
+    if (!product) {
+      return (
+        <div className="w-100 flex justify-center" >
+          <div className="w-10">
+            <Spinner />
+          </div>
+        </div >
+      )
+    }
 
     const selectedItem = product.items[0]
     const { commertialOffer } = selectedItem.sellers[0]
