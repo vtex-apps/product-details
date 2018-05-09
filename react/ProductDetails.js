@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
-import { ProductName } from '@vtex/product-details'
+import { ProductName, ProductImages } from '@vtex/product-details'
 import BuyButton from '@vtex/buy-button'
 
 import Price from './Price'
@@ -22,7 +22,12 @@ class ProductDetails extends Component {
     return (
       <div className="vtex-product-details flex">
         <div className="vtex-product-details__images-container w-50 pr5">
-          <div className="fr">Product Images</div>
+          <div className="fr">
+            <ProductImages
+              images={selectedItem.images}
+              thumbnailSliderOrientation="HORIZONTAL"
+            />
+          </div>
         </div>
         <div className="vtex-product-details__details-container w-50 pl5">
           <div className="fl w-100">
