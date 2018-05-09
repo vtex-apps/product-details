@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
-import { compose } from 'react-apollo'
 
 import { ProductName } from '@vtex/product-details'
 import BuyButton from '@vtex/buy-button'
@@ -11,10 +10,9 @@ import Price from './Price'
 
 import './product-details.css'
 
-// TODO: Implement Component logic
 class ProductDetails extends Component {
   render() {
-    const product = this.props.product || createProduct()
+    const { product } = this.props
 
     return (
       <div className="vtex-product-details flex">
@@ -47,13 +45,12 @@ class ProductDetails extends Component {
               <hr className="b--black-10" />
             </div>
             <div>
+              {/* TODO: Implement something after click and use real Seller and SalesChannel*/}
               <BuyButton
                 salesChannel="1"
                 seller="1"
                 skuId={product.sku.referenceId.Value}
-                afterClick={event =>
-                  console.log('implement something after click :)', event)
-                }>
+                afterClick={event => event.stopPropagation()}>
                 <FormattedMessage id="button-label" />
               </BuyButton>
             </div>
@@ -103,6 +100,10 @@ class ProductDetails extends Component {
     /** intl property to format data */
     intl: intlShape.isRequired,
   }
+
+  static defaultProps = {
+    product: createProduct(),
+  }
 }
 
-export default compose()(injectIntl(ProductDetails))
+export default injectIntl(ProductDetails)
