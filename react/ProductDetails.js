@@ -23,6 +23,7 @@ class ProductDetails extends Component {
       <div className="vtex-product-details flex">
         <div className="vtex-product-details__images-container w-50 pr5">
           <div className="fr">
+            {/* TODO: Manage screen resize */}
             <ProductImages
               images={selectedItem.images}
               thumbnailSliderOrientation="HORIZONTAL"
