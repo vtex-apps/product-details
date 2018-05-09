@@ -2,7 +2,7 @@
   "name": "product-details",
   "version": "0.1.0",
   "dependencies": {
-    "@vtex/buy-button": "^0.1.16",
+    "@vtex/buy-button": "0.1.21",
     "@vtex/product-details": "1.2.11"
   }
 }
