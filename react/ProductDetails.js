@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
-import { ProductName, ProductImages } from '@vtex/product-details'
+import { ProductName } from '@vtex/product-details'
 import BuyButton from '@vtex/buy-button'
 
 import Price from './Price'
+import ProductImages from './ProductImages'
 
 import productQuery from './graphql/productQuery.gql'
 
@@ -56,7 +57,6 @@ class ProductDetails extends Component {
             <div>
               {/* TODO: Implement something after click and use real Seller and SalesChannel*/}
               <BuyButton
-                salesChannel="1"
                 seller={selectedItem.sellers[0].sellerId}
                 skuId={selectedItem.itemId}
                 afterClick={() => null}>
