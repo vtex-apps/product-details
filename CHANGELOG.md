@@ -9,5 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* Add the _ProductImages_ Component.
+* Add the Product Query and remove _ProductFactory_ (mocks).
 * Add the _ProductName_, _Price_ and _BuyButton_ Components.
 * Add the initial files to link the App.
