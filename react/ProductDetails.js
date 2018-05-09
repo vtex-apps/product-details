@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
-import { ProductName, ProductImages } from '@vtex/product-details'
+import { ProductName } from '@vtex/product-details'
 import BuyButton from '@vtex/buy-button'
+import Spinner from '@vtex/styleguide/lib/Spinner'
 
 import Price from './Price'
+import ProductImages from './ProductImages'
 
 import productQuery from './graphql/productQuery.gql'
 
@@ -15,6 +17,15 @@ import './product-details.css'
 class ProductDetails extends Component {
   render() {
     const { product } = this.props.data
+    if (!product) {
+      return (
+        <div className="w-100 flex justify-center" >
+          <div className="w-10">
+            <Spinner />
+          </div>
+        </div >
+      )
+    }
 
     const selectedItem = product.items[0]
     const { commertialOffer } = selectedItem.sellers[0]
@@ -56,7 +67,6 @@ class ProductDetails extends Component {
             <div>
               {/* TODO: Implement something after click and use real Seller and SalesChannel*/}
               <BuyButton
-                salesChannel="1"
                 seller={selectedItem.sellers[0].sellerId}
                 skuId={selectedItem.itemId}
                 afterClick={() => null}>

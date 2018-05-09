@@ -2,7 +2,11 @@
   "name": "product-details",
   "version": "0.1.0",
   "dependencies": {
-    "@vtex/buy-button": "^0.1.16",
-    "@vtex/product-details": "1.2.11"
+    "@vtex/buy-button": "0.1.21",
+    "@vtex/product-details": "1.2.1",
+    "@vtex/slick-components": "^1.0.14",
+    "@vtex/styleguide": "^2.3.0",
+    "react-slick": "^0.23.1",
+    "slick-carousel": "^1.8.1"
   }
 }

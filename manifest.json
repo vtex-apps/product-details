@@ -1,12 +1,14 @@
 {
   "name": "product-details",
   "vendor": "vtex",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "title": "Product Details",
   "description": "Product details component",
   "defaultLocale": "pt-BR",
   "mustUpdateAt": "2019-05-08",
-  "registries": ["smartcheckout"],
+  "registries": [
+    "smartcheckout"
+  ],
   "scripts": {
     "postreleasy": "vtex publish --public"
   },
