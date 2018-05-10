@@ -6,7 +6,7 @@
   },
   "extensions": {
     "product-details": {
-      "component": "index"
+      "component": "ProductDetails"
     }
   }
 }

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
+import BuyButton from 'vtex.storecomponents/BuyButton'
+
 import { ProductName } from '@vtex/product-details'
-import BuyButton from '@vtex/buy-button'
 import Spinner from '@vtex/styleguide/lib/Spinner'
 
 import Price from './Price'
@@ -19,11 +20,11 @@ class ProductDetails extends Component {
     const { product } = this.props.data
     if (!product) {
       return (
-        <div className="w-100 flex justify-center" >
+        <div className="w-100 flex justify-center">
           <div className="w-10">
             <Spinner />
           </div>
-        </div >
+        </div>
       )
     }
 
@@ -31,26 +32,29 @@ class ProductDetails extends Component {
     const { commertialOffer } = selectedItem.sellers[0]
 
     return (
-      <div className="vtex-product-details flex">
-        <div className="vtex-product-details__images-container w-50 pr5">
-          <div className="fr">
+      <div className="vtex-product-details flex flex-wrap">
+        <div className="vtex-product-details__images-container w-50-ns w-100-s pr5">
+          <div className="fr-ns w-100 h-100">
             {/* TODO: Manage screen resize */}
-            <ProductImages
-              images={selectedItem.images}
-              thumbnailSliderOrientation="HORIZONTAL"
-            />
+            <div className="">
+              <ProductImages
+                images={selectedItem.images}
+                thumbnailSliderOrientation="HORIZONTAL"
+              />
+            </div>
+            <div className="dn-ns bg-silver tc w-100 h-100">Product Images</div>
           </div>
         </div>
-        <div className="vtex-product-details__details-container w-50 pl5">
-          <div className="fl w-100">
-            <div className="pv2">
+        <div className="vtex-product-details__details-container w-50-ns w-100-s pl5">
+          <div className="fl-ns w-100">
+            <div className="vtex-product-details__name-container pv2">
               <ProductName
                 name={product.productName}
                 skuName={selectedItem.name}
                 brandName={product.brand}
               />
             </div>
-            <div className="pt4">
+            <div className="vtex-product-details__price-container pt4">
               <Price
                 listPrice={commertialOffer.ListPrice}
                 sellingPrice={commertialOffer.Price}
@@ -129,7 +133,7 @@ class ProductDetails extends Component {
             ).isRequired,
           })
         ).isRequired,
-      }).isRequired,
+      }),
     }),
     /** intl property to format data */
     intl: intlShape.isRequired,
