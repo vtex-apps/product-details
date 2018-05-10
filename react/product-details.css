@@ -12,6 +12,6 @@
   font-size: 1.25rem;
 }
 
-:global .vtex-price {
+:global .vtex-product-details > .vtex-price {
   height: 125px;
 }
