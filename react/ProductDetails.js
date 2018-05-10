@@ -67,7 +67,7 @@ class ProductDetails extends Component {
             <div>
               {/* TODO: Implement something after click and use real Seller and SalesChannel*/}
               <BuyButton
-                seller={selectedItem.sellers[0].sellerId}
+                seller={parseInt(selectedItem.sellers[0].sellerId)}
                 skuId={selectedItem.itemId}
                 afterClick={() => null}>
                 <FormattedMessage id="button-label" />
