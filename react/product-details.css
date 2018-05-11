@@ -33,6 +33,6 @@
   }
 }
 
-:global .vtex-product-details > .vtex-price {
+.vtex-product-details > .vtex-price {
   height: 125px;
 }
