@@ -6,10 +6,6 @@
 @custom-media --breakpoint-extra-large screen and (min-width: 80em); */
 
 @media screen and (min-width: 20em) {
-  .vtex-product-details {
-    padding-top: 150px;
-  }
-
   .vtex-product-details__name-container .vtex-product-name__brand {
     font-size: 1.5rem;
   }
@@ -21,10 +17,6 @@
 }
 
 @media screen and (min-width: 40em) {
-  .vtex-product-details {
-    padding-top: 90px;
-  }
-
   .vtex-product-details__name-container .vtex-product-name__brand {
     font-size: 2.25rem;
   }
