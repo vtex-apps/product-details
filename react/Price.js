@@ -19,10 +19,12 @@ class Price extends Component {
       installmentPrice,
       showInstallments,
       showLabels,
+      showSavings,
       intl: { formatNumber },
     } = this.props
 
-    const showListPrice = this.props.showListPrice && sellingPrice !== listPrice
+    const differentPrices =
+      this.props.showListPrice && sellingPrice !== listPrice
 
     const currencyOptions = {
       style: 'currency',
@@ -48,7 +50,7 @@ class Price extends Component {
 
     return (
       <div className="vtex-price flex flex-column justify-around">
-        {showListPrice && (
+        {differentPrices && (
           <div className="pv1 f6-ns f7-s normal">
             {showLabels && (
               <div className="vtex-price-list__label dib strike">
@@ -93,6 +95,22 @@ class Price extends Component {
             </div>
           </div>
         )}
+        {differentPrices &&
+          showSavings && (
+          <div className="f6-ns f7-s">
+            <div className="vtex-price-savings dib">
+              <FormattedMessage
+                id="pricing.savings"
+                values={{
+                  savings: formatNumber(
+                    listPrice - sellingPrice,
+                    currencyOptions
+                  ),
+                }}
+              />
+            </div>
+          </div>
+        )}
       </div>
     )
   }
@@ -113,6 +131,8 @@ Price.propTypes = {
   installments: PropTypes.number,
   /** Single installment price */
   installmentPrice: PropTypes.number,
+  /** Determines if the savings information is shown */
+  showSavings: PropTypes.bool,
   /** intl property to format data */
   intl: intlShape.isRequired,
 }

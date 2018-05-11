@@ -3,5 +3,6 @@
     "Ou até {installments} {times} de {installmentPrice}",
   "pricing.from": "De:",
   "pricing.to": "Por:",
+  "pricing.savings": "Economize: {savings}",
   "button-label": "Comprar"
 }
