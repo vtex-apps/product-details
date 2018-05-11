@@ -35,14 +35,16 @@ class ProductDetails extends Component {
       <div className="vtex-product-details flex flex-wrap">
         <div className="vtex-product-details__images-container w-50-ns w-100-s pr5">
           <div className="fr-ns w-100 h-100">
-            {/* TODO: Manage screen resize */}
-            <div className="">
+            {/* FIXME: Change when ProductImages become stable */}
+            <div className="dn-s db-l">
               <ProductImages
                 images={selectedItem.images}
                 thumbnailSliderOrientation="HORIZONTAL"
               />
             </div>
-            <div className="dn-ns bg-silver tc w-100 h-100">Product Images</div>
+            <div className="db-s dn-ns bg-silver tc w-100 h-100">
+              Product Images
+            </div>
           </div>
         </div>
         <div className="vtex-product-details__details-container w-50-ns w-100-s pl5">
