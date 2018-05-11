@@ -7,8 +7,6 @@ import SelectedImage from './components/SelectedImage'
 import VTEXClasses from './constants/productImagesClasses'
 import { VERTICAL, HORIZONTAL } from './constants/orientation'
 
-import './product-image.css'
-
 const DEFAULT_SELECTED_IMAGE = 0
 
 /**
