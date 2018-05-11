@@ -5,14 +5,14 @@
 @custom-media --breakpoint-large screen and (min-width: 64em) and (max-width: 80em);
 @custom-media --breakpoint-extra-large screen and (min-width: 80em); */
 
-:global .vtex-product-details {
+.vtex-product-details {
   height: 673px;
   padding-top: 86.5px;
   padding-bottom: 86.5px;
 }
 
 @media screen and (min-width: 20em) {
-  :global .vtex-product-details__name-container .vtex-product-name__brand {
+  .vtex-product-details__name-container .vtex-product-name__brand {
     font-size: 1.5rem;
   }
 
@@ -25,7 +25,7 @@
 }
 
 @media screen and (min-width: 40em) {
-  :global .vtex-product-details__name-container .vtex-product-name__brand {
+  .vtex-product-details__name-container .vtex-product-name__brand {
     font-size: 2.25rem;
   }
 
