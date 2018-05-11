@@ -33,7 +33,7 @@ class ProductDetails extends Component {
     const { commertialOffer } = selectedItem.sellers[0]
 
     return (
-      <div className="vtex-product-details flex flex-wrap">
+      <div className="vtex-product-details flex flex-wrap ph6">
         <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
           <div className="fr-ns w-100 h-100">
             {/* FIXME: Change when ProductImages become stable */}
