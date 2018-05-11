@@ -13,6 +13,7 @@ import ProductImages from './ProductImages'
 
 import productQuery from './graphql/productQuery.gql'
 
+import './global.css'
 import './product-details.css'
 
 class ProductDetails extends Component {
