@@ -4,6 +4,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
 import BuyButton from 'vtex.storecomponents/BuyButton'
+import ProductDescription from 'vtex.storecomponents/ProductDescription'
 
 import { ProductName } from '@vtex/product-details'
 import Spinner from '@vtex/styleguide/lib/Spinner'
@@ -33,7 +34,7 @@ class ProductDetails extends Component {
 
     return (
       <div className="vtex-product-details flex flex-wrap">
-        <div className="vtex-product-details__images-container w-50-ns w-100-s pr5">
+        <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
           <div className="fr-ns w-100 h-100">
             {/* FIXME: Change when ProductImages become stable */}
             <div className="dn-s db-l">
@@ -47,7 +48,7 @@ class ProductDetails extends Component {
             </div>
           </div>
         </div>
-        <div className="vtex-product-details__details-container w-50-ns w-100-s pl5">
+        <div className="vtex-product-details__details-container w-50-ns w-100-s pl5-ns">
           <div className="fl-ns w-100">
             <div className="vtex-product-details__name-container pv2">
               <ProductName
@@ -65,10 +66,11 @@ class ProductDetails extends Component {
                 showListPrice
                 showLabels
                 showInstallments
+                showSavings
               />
             </div>
             <div className="pv2">
-              <hr className="b--black-10" />
+              <hr className="b--black-10" size="0" />
             </div>
             <div>
               {/* TODO: Implement something after click and use real Seller and SalesChannel*/}
@@ -80,6 +82,14 @@ class ProductDetails extends Component {
               </BuyButton>
             </div>
           </div>
+        </div>
+        <div className="pv4 w-100">
+          <hr className="b--black-10" size="0" />
+        </div>
+        <div className="vtex-product-details__description-container pv2 w-100 h-100">
+          <ProductDescription>
+            <span className="measure-wide">{product.description}</span>
+          </ProductDescription>
         </div>
       </div>
     )
