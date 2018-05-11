@@ -16,6 +16,7 @@
     font-size: 1.5rem;
   }
 
+  /* TODO: Change after vtex.storecomponents update */
   .vtex-product-details__name-container .vtex-product-name__brand + div {
     font-size: 1rem;
   }
@@ -26,6 +27,7 @@
     font-size: 2.25rem;
   }
 
+  /* TODO: Change after vtex.storecomponents update */
   .vtex-product-details__name-container .vtex-product-name__brand + div {
     font-size: 1.25rem;
   }
