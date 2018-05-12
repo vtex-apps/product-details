@@ -12,8 +12,8 @@ class SelectedImage extends Component {
     const { imageUrl, imageText } = this.props.image
 
     return (
-      <div className={`${VTEXClasses.SELECTED_IMAGE} dn di-ns`}>
-        <img className="mw-100 mh-100" src={imageUrl} alt={imageText} />
+      <div className={`${VTEXClasses.SELECTED_IMAGE} dn db-ns`}>
+        <img src={imageUrl} alt={imageText} />
       </div>
     )
   }
