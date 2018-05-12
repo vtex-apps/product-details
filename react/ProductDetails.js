@@ -116,9 +116,9 @@ class ProductDetails extends Component {
                 /** Image id */
                 imageId: PropTypes.string.isRequired,
                 /** Image label */
-                imageLabel: PropTypes.string.isRequired,
+                imageLabel: PropTypes.string,
                 /** Image tag as string */
-                imageTag: PropTypes.string.isRequired,
+                imageTag: PropTypes.string,
                 /** Image URL */
                 imageUrl: PropTypes.string.isRequired,
                 /** Image text */
