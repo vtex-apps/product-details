@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.0.5] - 2018-05-12
+### Fixed
+- Fix warning of required properties on images of product details
+
 ## [0.0.4] - 2018-05-12
 ### Fixed
 - Fix responsivity of mobile product images
