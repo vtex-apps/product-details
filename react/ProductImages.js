@@ -53,7 +53,7 @@ class ProductImages extends Component {
 
     return (
       <div className={className}>
-        {images.length > 1 && <ThumbnailSlider {...thumbnailProps} />}
+        <ThumbnailSlider {...thumbnailProps} />
         <SelectedImage image={this.state.selectedImage} />
       </div>
     )

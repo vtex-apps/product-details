@@ -21,7 +21,7 @@ class ThumbnailItem extends Component {
 
     return (
       <div className={VTEXClasses.THUMBNAIL_ITEM} onClick={this.handleClick}>
-        <img className="mw-100 mh-100" src={imageUrl} alt={imageText} />
+        <img src={imageUrl} alt={imageText} />
       </div>
     )
   }

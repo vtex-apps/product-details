@@ -1,45 +1,34 @@
-.vtex-product-image .vtex-product-image__horizontal {
-  width: 500px;
+/* 
+@custom-media --breakpoint-small screen and (min-width: 20em);
+@custom-media --breakpoint-not-small screen and (min-width: 40em);
+@custom-media --breakpoint-medium screen and (min-width: 40em) and (max-width: 64em);
+@custom-media --breakpoint-large screen and (min-width: 64em) and (max-width: 80em);
+@custom-media --breakpoint-extra-large screen and (min-width: 80em); 
+*/
+
+.vtex-product-image__thumbnail-slider-item {
+  max-width: 100%;
 }
 
-.vtex-product-image .vtex-product-image__vertical {
-  width: 600px;
+.vtex-product-image__vertical {
+  max-width: 325px;
 }
 
-/* Selected Image */
-.vtex-product-image .vtex-product-image__selected-image {
-  width: 500px;
-  height: 500px;
+.vtex-product-image__horizontal {
+  max-width: 325px;
 }
 
-/* Thumbnail Slider */
-.vtex-product-image .vtex-product-image__horizontal-thumbnail-slider,
-.vtex-product-image .vtex-product-image__vertical-thumbnail-slider {
-  width: 100%;
-  height: 100%;
-}
-
-@media (min-width: 700px) {
-  .vtex-product-image .vtex-product-image__vertical-thumbnail-slider {
-    width: 100px;
-    height: 500px;
+@media only screen and (min-width: 40em) {
+  .vtex-product-image__vertical {
+    max-width: 100%;
   }
 
-  .vtex-product-image .vtex-product-image__horizontal-thumbnail-slider {
-    width: 500px;
-    height: 100px;
+  .vtex-product-image__horizontal {
+    max-width: 100%;
   }
-}
 
-/* Thumbnail Slider Item */
-.vtex-product-image .vtex-product-image__thumbnail-slider-item {
-  width: 100%;
-}
-
-@media (min-width: 700px) {
-  .vtex-product-image .vtex-product-image__thumbnail-slider-item {
-    width: 100px;
-    height: 100px;
+  .vtex-product-image__thumbnail-slider-item img {
+    max-width: 100px;
   }
 }
 
@@ -82,6 +71,10 @@
 /* Dots */
 .vtex-product-image .vtex-product-image__dots li button {
   color: inherit;
+}
+
+.vtex-product-image .vtex-product-image__dots {
+  margin-bottom: 20px;
 }
 
 .vtex-product-image .vtex-product-image__dots li button:before {
