@@ -5,8 +5,8 @@ import { graphql } from 'react-apollo'
 
 import BuyButton from 'vtex.storecomponents/BuyButton'
 import ProductDescription from 'vtex.storecomponents/ProductDescription'
+import ProductName from 'vtex.storecomponents/ProductName'
 
-import { ProductName } from '@vtex/product-details'
 import Spinner from '@vtex/styleguide/lib/Spinner'
 
 import Price from './Price'

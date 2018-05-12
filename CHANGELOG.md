@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * Add _ProductDescription_ Component and savings information in _Price_ Component.
 
+### Fixed
+
+* Remove padding and use _ProductName_ from `vtex.storecomponents`.
+
 ## [0.0.2] - 2018-05-10
 
 ### Fixed
