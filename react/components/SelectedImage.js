@@ -13,7 +13,9 @@ class SelectedImage extends Component {
 
     return (
       <div className={`${VTEXClasses.SELECTED_IMAGE} dn db-ns`}>
-        <img src={imageUrl} alt={imageText} />
+        <div className="flex justify-center items-center">
+          <img src={imageUrl} alt={imageText} />
+        </div>
       </div>
     )
   }
