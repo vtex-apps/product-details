@@ -14,10 +14,13 @@ const DEFAULT_SELECTED_IMAGE = 0
  *  Display a list of thumbnail images in a slider and a main image of a product.
  */
 class ProductImages extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedImage: this.props.images[DEFAULT_SELECTED_IMAGE],
+  state = {
+    selectedImage: this.props.images[DEFAULT_SELECTED_IMAGE],
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      selectedImage: nextProps.images[DEFAULT_SELECTED_IMAGE],
     }
   }
 
