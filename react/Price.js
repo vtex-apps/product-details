@@ -64,11 +64,11 @@ class Price extends Component {
         )}
         <div className="pv1 b f4-ns f5-s">
           {showLabels && (
-            <div className="vtex-selling-price__label dib">
+            <div className="vtex-selling-price__label f2 dib">
               <FormattedMessage id="pricing.to" />
             </div>
           )}
-          <div className="vtex-selling-price dib ph2 f1-ns f2-s">
+          <div className="vtex-selling-price dib ph2 f2-ns f2-s">
             {formatNumber(sellingPrice, currencyOptions)}
           </div>
         </div>
