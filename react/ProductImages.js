@@ -47,7 +47,7 @@ class ProductImages extends Component {
       maxVisibleItems: thumbnailMaxVisibleItems,
     }
 
-    let className = `${VTEXClasses.MAIN_CLASS} flex inline-flex-ns`
+    let className = `${VTEXClasses.MAIN_CLASS} mb7 mb0-ns w-100 flex inline-flex-ns`
     if (thumbnailSliderOrientation === VERTICAL) {
       className += ` ${VTEXClasses.VERTICAL_COMPONENT} `
     } else {
