@@ -2,7 +2,6 @@
   "name": "product-details",
   "version": "0.1.0",
   "dependencies": {
-    "@vtex/product-details": "1.2.1",
     "@vtex/slick-components": "^1.0.14",
     "@vtex/styleguide": "^2.3.0",
     "react-slick": "^0.23.1",
