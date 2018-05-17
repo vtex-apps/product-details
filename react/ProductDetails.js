@@ -21,10 +21,8 @@ class ProductDetails extends Component {
     const { product } = this.props.data
     if (!product) {
       return (
-        <div className="w-100 flex justify-center">
-          <div className="w-10">
-            <Spinner />
-          </div>
+        <div className="pt6 tc">
+          <Spinner />
         </div>
       )
     }
@@ -33,7 +31,7 @@ class ProductDetails extends Component {
     const { commertialOffer } = selectedItem.sellers[0]
 
     return (
-      <div className="vtex-product-details flex flex-wrap ph6">
+      <div className="vtex-product-details flex flex-wrap pa6">
         <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
           <div className="fr-ns w-100 h-100">
             <div className="flex justify-center">

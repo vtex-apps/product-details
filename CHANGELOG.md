@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Fix bug of different images size
 
+### Fixed
+- Update the spinner to be in the center.
+
 ## [0.0.6] - 2018-05-14
 ### Fixed
 - `ProductImages` component not updating selected image when props changed.
