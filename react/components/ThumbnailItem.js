@@ -20,7 +20,7 @@ class ThumbnailItem extends Component {
     const { imageUrl, imageText } = this.props.image
 
     return (
-      <div className={VTEXClasses.THUMBNAIL_ITEM} onClick={this.handleClick}>
+      <div className={`${VTEXClasses.THUMBNAIL_ITEM} flex justify-center`} onClick={this.handleClick}>
         <img src={imageUrl} alt={imageText} />
       </div>
     )

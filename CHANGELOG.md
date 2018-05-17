@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.0.6] - 2018-05-14
 ### Fixed
+- Fix bug of different images size
+
+## [0.0.6] - 2018-05-14
+### Fixed
 - `ProductImages` component not updating selected image when props changed.
+- Fix arrows z-index
 
 ## [0.0.5] - 2018-05-12
 ### Fixed

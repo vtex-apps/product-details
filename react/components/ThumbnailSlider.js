@@ -54,6 +54,9 @@ class ThumbnailSlider extends Component {
           }
         />
       ),
+      appendDots: dots => (
+        <Dots dots={dots} cssClass={VTEXClasses.DOTS_CLASS} />
+      ),
       slidesToShow: numOfVisibleItems,
       vertical: sliderVertical,
       verticalSwiping: sliderVertical,
@@ -65,9 +68,6 @@ class ThumbnailSlider extends Component {
           settings: {
             arrows: false,
             dots: true,
-            appendDots: dots => (
-              <Dots dots={dots} cssClass={VTEXClasses.DOTS_CLASS} />
-            ),
             slidesToShow: 1,
             vertical: false,
             verticalSwiping: false,

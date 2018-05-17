@@ -36,7 +36,7 @@ class ProductDetails extends Component {
       <div className="vtex-product-details flex flex-wrap ph6">
         <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
           <div className="fr-ns w-100 h-100">
-            <div className="db">
+            <div className="flex justify-center">
               <ProductImages
                 images={selectedItem.images}
                 thumbnailSliderOrientation="HORIZONTAL"

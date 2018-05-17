@@ -12,8 +12,10 @@ class SelectedImage extends Component {
     const { imageUrl, imageText } = this.props.image
 
     return (
-      <div className={`${VTEXClasses.SELECTED_IMAGE} dn db-ns`}>
-        <img src={imageUrl} alt={imageText} />
+      <div className={`${VTEXClasses.SELECTED_IMAGE} flex-ns justify-center-ns items-center-ns dn`}>
+        <div className="flex justify-center items-center">
+          <img src={imageUrl} alt={imageText} />
+        </div>
       </div>
     )
   }
