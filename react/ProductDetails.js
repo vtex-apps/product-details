@@ -6,10 +6,10 @@ import { graphql } from 'react-apollo'
 import BuyButton from 'vtex.storecomponents/BuyButton'
 import ProductDescription from 'vtex.storecomponents/ProductDescription'
 import ProductName from 'vtex.storecomponents/ProductName'
+import Price from 'vtex.storecomponents/Price'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
 
-import Price from './Price'
 import ProductImages from './ProductImages'
 
 import productQuery from './graphql/productQuery.gql'

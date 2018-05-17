@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Integrate with `vtex.storecomponents/Slider`
 
+### Changed
+- Remove `@vtex/product-details` dependency and _Price_ Component and use `vtex.storecomponents`.
+
 ## [0.0.6] - 2018-05-14
 ### Fixed
 - Fix bug of different images size
