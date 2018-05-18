@@ -6,9 +6,7 @@
   "description": "Product details component",
   "defaultLocale": "pt-BR",
   "mustUpdateAt": "2019-05-08",
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "scripts": {
     "postreleasy": "vtex publish --public"
   },
@@ -27,7 +25,7 @@
   ],
   "dependencies": {
     "vtex.store-graphql": "2.x",
-    "vtex.storecomponents": "0.x"
+    "vtex.storecomponents": "1.x"
   },
   "billingOptions": {
     "billingListeningRoute": "/_v/deactivateMePlease",

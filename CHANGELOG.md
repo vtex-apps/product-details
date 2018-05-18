@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Remove `@vtex/product-details` dependency and _Price_ Component and use `vtex.storecomponents`.
+- Update `vtex.storecomponents` dependency version to `1.x`.
 
 ## [0.0.6] - 2018-05-14
 ### Fixed
