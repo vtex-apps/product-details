@@ -1,2 +1,82 @@
-@import url('product-details.css');
-@import url('product-images.css');
+/* VTEX Tachyons Media Queries */
+/* 
+- s  @custom-media --breakpoint-small screen and (min-width: 20em);
+- ns @custom-media --breakpoint-not-small screen and (min-width: 40em);
+- m  @custom-media --breakpoint-medium screen and (min-width: 40em) and (max-width: 64em);
+- l  @custom-media --breakpoint-large screen and (min-width: 64em) and (max-width: 80em);
+- xl @custom-media --breakpoint-extra-large screen and (min-width: 80em); 
+*/
+
+/* Small */
+@media screen and (min-width: 20em) {
+  .vtex-product-details__name-container .vtex-product-name__brand {
+    font-size: 1.5rem;
+  }
+
+  .vtex-product-details__name-container .vtex-product-name__sku {
+    font-size: 1rem;
+  }
+
+  .vtex-product-details .vtex-price-list__container {
+    font-size: 0.75rem;
+  }
+
+  .vtex-product-details .vtex-price-selling__label {
+    font-size: 1rem;
+  }
+
+  .vtex-product-details .vtex-price-selling {
+    font-size: 2.25rem;
+  }
+
+  .vtex-product-details .vtex-price-installments__container {
+    font-size: 0.75rem;
+  }
+
+  .vtex-product-details .vtex-price-installments__value {
+    font-size: 1rem;
+  }
+
+  .vtex-product-details .vtex-price-savings {
+    font-size: 0.75rem;
+  }
+}
+
+/* Not Small */
+@media screen and (min-width: 40em) {
+  .vtex-product-details__name-container .vtex-product-name__brand {
+    font-size: 2.25rem;
+  }
+
+  .vtex-product-details__name-container .vtex-product-name__sku {
+    font-size: 1.25rem;
+  }
+
+  .vtex-product-details .vtex-price-list__container {
+    font-size: 0.875rem;
+  }
+
+  .vtex-product-details .vtex-price-selling__label {
+    font-size: 1.25rem;
+  }
+
+  .vtex-product-details .vtex-price-selling {
+    font-size: 3rem;
+  }
+
+  .vtex-product-details .vtex-price-installments__container {
+    font-size: 0.875rem;
+  }
+
+  .vtex-product-details .vtex-price-installments__value {
+    font-size: 1.25rem;
+  }
+
+  .vtex-product-details .vtex-price-savings {
+    font-size: 0.875rem;
+  }
+}
+
+.vtex-product-details > .vtex-price {
+  height: 125px;
+}
