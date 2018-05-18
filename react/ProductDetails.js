@@ -7,10 +7,9 @@ import BuyButton from 'vtex.storecomponents/BuyButton'
 import ProductDescription from 'vtex.storecomponents/ProductDescription'
 import ProductName from 'vtex.storecomponents/ProductName'
 import Price from 'vtex.storecomponents/ProductPrice'
+import ProductImages from 'vtex.storecomponents/ProductImages'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
-
-import ProductImages from './ProductImages'
 
 import productQuery from './graphql/productQuery.gql'
 
