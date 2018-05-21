@@ -8,6 +8,7 @@ import ProductDescription from 'vtex.storecomponents/ProductDescription'
 import ProductName from 'vtex.storecomponents/ProductName'
 import Price from 'vtex.storecomponents/ProductPrice'
 import ProductImages from 'vtex.storecomponents/ProductImages'
+import ShippingSimulator from 'vtex.storecomponents/ShippingSimulator'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
 
@@ -65,7 +66,10 @@ class ProductDetails extends Component {
             <div className="pv2">
               <hr className="b--black-10" size="0" />
             </div>
-            <div>
+            <div className="pv2">
+              <ShippingSimulator />
+            </div>
+            <div className="pv2">
               {/* TODO: Implement something after click and use real Seller and SalesChannel*/}
               <BuyButton
                 seller={parseInt(selectedItem.sellers[0].sellerId)}

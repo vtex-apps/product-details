@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Integrate with `vtex.storecomponents/Slider`
+- Integrate with `vtex.storecomponents/Slider`.
+- Add `vtex.storecomponents/ShippingSimulator`.
 
 ### Changed
 - Remove `@vtex/product-details` dependency and _Price_ Component and use `vtex.storecomponents`.
