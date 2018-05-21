@@ -18,7 +18,7 @@ class ThumbnailSlider extends Component {
    * Function that configure slider settings according to the component props
    */
   configureSliderSettings = () => {
-    const { images, maxVisibleItems, orientation } = this.props
+    const { maxVisibleItems, orientation } = this.props
     const sliderVertical = orientation === VERTICAL
 
     /** Number of visible slider items should not exceed the number of images, in the case that this condition is not satisfied,
@@ -26,7 +26,6 @@ class ThumbnailSlider extends Component {
      * than the maximum allowed value that is defined by MAX_VISIBLE_ITEMS */
     const numOfVisibleItems = Math.min(
       maxVisibleItems,
-      images.length,
       MAX_VISIBLE_ITEMS
     )
 
