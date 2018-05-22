@@ -25,5 +25,9 @@ query Product($slug: String) {
         }
       }
     }
+    properties {
+      name
+      values
+    }
   }
 }
