@@ -7,17 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Integrate with `vtex.storecomponents/TechnicalSpecifications`.
+- Integrate with `vtex.store-components/TechnicalSpecifications`.
 
 ## [0.1.0] - 2018-05-21
 ### Added
-- Integrate with `vtex.storecomponents/Slider`.
-- Add `vtex.storecomponents/ShippingSimulator`.
+- Integrate with `vtex.store-components/Slider`.
+- Add `vtex.store-components/ShippingSimulator`.
 
 ### Changed
-- Remove `@vtex/product-details` dependency and _Price_ Component and use `vtex.storecomponents`.
-- Update `vtex.storecomponents` dependency version to `1.x`.
-- Remove _ProductImages_ Component to use `vtex.storecomponents` updated version.
+- Remove `@vtex/product-details` dependency and _Price_ Component and use `vtex.store-components`.
+- Update `vtex.store-components` dependency version to `1.x`.
+- Remove _ProductImages_ Component to use `vtex.store-components` updated version.
 
 ## [0.0.6] - 2018-05-14
 ### Fixed
@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add _ProductDescription_ Component and savings information in _Price_ Component.
 
 ### Fixed
-- Remove padding and use _ProductName_ from `vtex.storecomponents`.
+- Remove padding and use _ProductName_ from `vtex.store-components`.
 
 ## [0.0.2] - 2018-05-10
 ### Fixed
