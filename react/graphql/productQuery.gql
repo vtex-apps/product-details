@@ -20,6 +20,13 @@ query Product($slug: String) {
         addToCartLink
         sellerDefault
         commertialOffer {
+          Installments {
+            Value
+            InterestRate
+            TotalValuePlusInterestRate
+            NumberOfInstallments
+            Name
+          }
           Price
           ListPrice
         }
