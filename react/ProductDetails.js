@@ -9,7 +9,6 @@ import ProductName from 'vtex.store-components/ProductName'
 import Price from 'vtex.store-components/ProductPrice'
 import ProductImages from 'vtex.store-components/ProductImages'
 import ShippingSimulator from 'vtex.store-components/ShippingSimulator'
-import TechnicalSpecifications from 'vtex.store-components/TechnicalSpecifications'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
 
@@ -85,12 +84,9 @@ class ProductDetails extends Component {
           <hr className="b--black-10" size="0" />
         </div>
         <div className="vtex-product-details__description-container pv2 w-100 h-100">
-          <ProductDescription>
+          <ProductDescription specifications={product.properties} skuName={selectedItem.name} >
             <span className="measure-wide">{product.description}</span>
           </ProductDescription>
-        </div>
-        <div className="vtex-product-details__technical-specifications-container w-100">
-          <TechnicalSpecifications specifications={product.properties} skuName={selectedItem.name} />
         </div>
       </div>
     )
