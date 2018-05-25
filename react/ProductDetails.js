@@ -56,7 +56,6 @@ class ProductDetails extends Component {
                 listPrice={commertialOffer.ListPrice}
                 sellingPrice={commertialOffer.Price}
                 installments={commertialOffer.Installments}
-                installmentPrice={commertialOffer.InstallmentPrice}
                 showListPrice
                 showLabels
                 showInstallments
@@ -84,7 +83,9 @@ class ProductDetails extends Component {
           <hr className="b--black-10" size="0" />
         </div>
         <div className="vtex-product-details__description-container pv2 w-100 h-100">
-          <ProductDescription specifications={product.properties} skuName={selectedItem.name} >
+          <ProductDescription
+            specifications={product.properties}
+            skuName={selectedItem.name}>
             <span className="measure-wide">{product.description}</span>
           </ProductDescription>
         </div>
