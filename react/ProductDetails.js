@@ -134,6 +134,21 @@ class ProductDetails extends Component {
                 sellerId: PropTypes.string.isRequired,
                 /** Seller comertial offer */
                 commertialOffer: PropTypes.shape({
+                  /** SKU installments */
+                  Installments: PropTypes.arrayOf(
+                    PropTypes.shape({
+                      /** Installment value */
+                      Value: PropTypes.number.isRequired,
+                      /** Interest rate (zero if interest-free) */
+                      InterestRate: PropTypes.number.isRequired,
+                      /** Calculated total value */
+                      TotalValuePlusInterestRate: PropTypes.number,
+                      /** Number of installments */
+                      NumberOfInstallments: PropTypes.number.isRequired,
+                      /** Installments offer name */
+                      Name: PropTypes.string,
+                    })
+                  ),
                   /** Selling Price */
                   Price: PropTypes.number.isRequired,
                   /** List Price */
