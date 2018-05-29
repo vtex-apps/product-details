@@ -20,6 +20,8 @@ export default {
           itemId: PropTypes.string.isRequired,
           /** SKU name */
           name: PropTypes.string.isRequired,
+          /** EAN */
+          ean: PropTypes.string.isRequired,
           /** SKU Images to be shown */
           images: PropTypes.arrayOf(
             PropTypes.shape({

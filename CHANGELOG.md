@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
+- Requesting EAN info from product and passing it to `vtex.store-components/ProductName`
+
+## [0.2.0] - 2018-05-29
+### Changed
 - Integration with `vtex.store-components/TechnicalSpecifications`, this component is inside of `vtex.store-components/ProductDescription`.
 
 ### Fixed
