@@ -29,6 +29,7 @@ class ProductDetails extends Component {
 
     const selectedItem = product.items[0]
     const { commertialOffer } = selectedItem.sellers[0]
+    const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
     return (
       <div className="vtex-product-details flex flex-wrap pa6">
@@ -66,14 +67,13 @@ class ProductDetails extends Component {
               <hr className="b--black-10" size="0" />
             </div>
             <div className="pv2">
-              <ShippingSimulator />
+              <ShippingSimulator skuId={selectedItem.itemId} seller={sellerId} country="BRA" />
             </div>
             <div className="pv2">
-              {/* TODO: Implement something after click and use real Seller and SalesChannel*/}
               <BuyButton
-                seller={parseInt(selectedItem.sellers[0].sellerId)}
+                seller={sellerId}
                 skuId={selectedItem.itemId}
-                afterClick={() => null}>
+              >
                 <FormattedMessage id="button-label" />
               </BuyButton>
             </div>
