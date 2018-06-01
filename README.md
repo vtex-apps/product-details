@@ -17,7 +17,7 @@ To use it, you need to add the dependency in your `manifest.json`
 You can use it in your code like so
 
 ```jsx
-<ExtensionPoint id="produt-details" />
+<ExtensionPoint id="product-details" />
 ```
 
 And in your `pages.json`
