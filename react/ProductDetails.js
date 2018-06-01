@@ -49,7 +49,7 @@ class ProductDetails extends Component {
                 name={product.productName}
                 skuName={selectedItem.name}
                 brandName={product.brand}
-                ean={selectedItem.ean}
+                productReference={product.productReference}
               />
             </div>
             <div className="vtex-product-details__price-container pt4">

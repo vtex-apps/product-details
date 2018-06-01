@@ -11,6 +11,8 @@ export default {
       productId: PropTypes.string.isRequired,
       /** Product's name */
       productName: PropTypes.string.isRequired,
+      /** Product reference */
+      productReference: PropTypes.string.isRequired,
       /** Product's brand */
       brand: PropTypes.string.isRequired,
       /** Product's SKUs */
@@ -20,8 +22,6 @@ export default {
           itemId: PropTypes.string.isRequired,
           /** SKU name */
           name: PropTypes.string.isRequired,
-          /** EAN */
-          ean: PropTypes.string.isRequired,
           /** SKU Images to be shown */
           images: PropTypes.arrayOf(
             PropTypes.shape({
