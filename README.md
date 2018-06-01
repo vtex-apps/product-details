@@ -9,7 +9,7 @@ To use it, you need to add the dependency in your `manifest.json`
 ```json
 {
   "dependencies": {
-    "vtex.product-details": "0.2.x"
+    "vtex.product-details": "0.x"
   }
 }
 ```
