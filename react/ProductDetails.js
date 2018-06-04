@@ -106,8 +106,7 @@ class ProductDetails extends Component {
                 <FormattedMessage id="share-label" />:
               </div>
               <Share 
-                options={{'size': '25'}} 
-                social={{'Facebook': true, 'WhatsApp': true, 'Twitter': true }} 
+                options={{'size': 25}}
               />
             </div>
           </div>
