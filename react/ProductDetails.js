@@ -8,6 +8,8 @@ import ProductName from 'vtex.store-components/ProductName'
 import Price from 'vtex.store-components/ProductPrice'
 import ProductImages from 'vtex.store-components/ProductImages'
 import ShippingSimulator from 'vtex.store-components/ShippingSimulator'
+import SKUSelector from 'vtex.store-components/SKUSelector'
+import Share from 'vtex.store-components/Share'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
 
@@ -17,6 +19,14 @@ import productQuery from './graphql/productQuery.gql'
 import './global.css'
 
 class ProductDetails extends Component {
+  state = {
+    skuIndex: 0
+  }
+
+  handleSkuChange = skuIndex => {
+    this.setState({skuIndex})
+  }
+
   render() {
     const { product } = this.props.data
     if (!product) {
@@ -27,7 +37,7 @@ class ProductDetails extends Component {
       )
     }
 
-    const selectedItem = product.items[0]
+    const selectedItem = product.items[this.state.skuIndex]
     const { commertialOffer } = selectedItem.sellers[0]
     const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
@@ -52,7 +62,7 @@ class ProductDetails extends Component {
                 brandName={product.brand}
               />
             </div>
-            <div className="vtex-product-details__price-container pt4">
+            <div className="vtex-product-details__price-container pt1">
               <Price
                 listPrice={commertialOffer.ListPrice}
                 sellingPrice={commertialOffer.Price}
@@ -66,16 +76,39 @@ class ProductDetails extends Component {
             <div className="pv2">
               <hr className="b--black-10" size="0" />
             </div>
-            <div className="pv2">
-              <ShippingSimulator skuId={selectedItem.itemId} seller={sellerId} country="BRA" />
+            <div>
+              <div className="f7">
+                <FormattedMessage id="sku-label" />
+              </div>
+              <SKUSelector
+                skuItems={product.items}
+                onSKUSelected={this.handleSkuChange}
+              />
             </div>
             <div className="pv2">
-              <BuyButton
-                seller={sellerId}
-                skuId={selectedItem.itemId}
-              >
-                <FormattedMessage id="button-label" />
-              </BuyButton>
+              <hr className="b--black-10" size="0" />
+            </div>
+            <div className="flex w-100 pv2">
+              <div className="flex pr2">
+                <BuyButton
+                  seller={sellerId}
+                  skuId={selectedItem.itemId}
+                >
+                  <FormattedMessage id="button-label" />
+                </BuyButton>
+              </div>
+            </div>
+            <div className="pv4">
+              <ShippingSimulator skuId={selectedItem.itemId} seller={sellerId} country="BRA" />
+            </div>
+            <div className="flex w-100 pv2">
+              <div className="pv2 pr3 f6">
+                <FormattedMessage id="share-label" />:
+              </div>
+              <Share 
+                options={{'size': '25'}} 
+                social={{'Facebook': true, 'WhatsApp': true, 'Twitter': true }} 
+              />
             </div>
           </div>
         </div>
