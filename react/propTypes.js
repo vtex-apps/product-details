@@ -11,6 +11,8 @@ export default {
       productId: PropTypes.string.isRequired,
       /** Product's name */
       productName: PropTypes.string.isRequired,
+      /** Product reference */
+      productReference: PropTypes.string.isRequired,
       /** Product's brand */
       brand: PropTypes.string.isRequired,
       /** Product's SKUs */

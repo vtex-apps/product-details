@@ -2,6 +2,7 @@ query Product($slug: String) {
   product(slug: $slug) {
     productId
     productName
+    productReference
     brand
     description
     items {

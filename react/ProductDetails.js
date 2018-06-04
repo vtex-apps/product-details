@@ -62,6 +62,7 @@ class ProductDetails extends Component {
                 name={product.productName}
                 skuName={selectedItem.name}
                 brandName={product.brand}
+                productReference={product.productReference}
               />
             </div>
             <div className="vtex-product-details__price-container pt1">
