@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { graphql } from 'react-apollo'
 
-import BuyButton from 'vtex.store-components/BuyButton'
-import ProductDescription from 'vtex.store-components/ProductDescription'
-import ProductName from 'vtex.store-components/ProductName'
-import Price from 'vtex.store-components/ProductPrice'
-import ProductImages from 'vtex.store-components/ProductImages'
-import ShippingSimulator from 'vtex.store-components/ShippingSimulator'
-import SKUSelector from 'vtex.store-components/SKUSelector'
-import Share from 'vtex.store-components/Share'
+import { 
+  BuyButton, 
+  ProductDescription, 
+  ProductName, 
+  ProductPrice, 
+  ProductImages, 
+  ShippingSimulator, 
+  SKUSelector, 
+  Share 
+} from 'vtex.store-components'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
 
@@ -63,7 +65,7 @@ class ProductDetails extends Component {
               />
             </div>
             <div className="vtex-product-details__price-container pt1">
-              <Price
+              <ProductPrice
                 listPrice={commertialOffer.ListPrice}
                 sellingPrice={commertialOffer.Price}
                 installments={commertialOffer.Installments}
