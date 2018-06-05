@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add `SkuSelector` and `Share` components.
 
+### Updated
+- Sku items sorted by the each one's price.
+
 ### Changed
 - Update props passed to `ShippingSimulator`.
 
