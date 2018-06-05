@@ -29,6 +29,15 @@ class ProductDetails extends Component {
   handleSkuChange = skuIndex => {
     this.setState({ skuIndex })
   }
+  
+  compareSku = (item1, item2) => {
+    if (item1.sellers[0].commertialOffer.AvailableQuantity === 0) {
+      return 1
+    } else if (item2.sellers[0].commertialOffer.AvailableQuantity === 0) {
+      return -1
+    }
+    return item1.sellers[0].commertialOffer.Price - item2.sellers[0].commertialOffer.Price
+  }
 
   render() {
     const { product } = this.props.data
@@ -149,15 +158,5 @@ const options = {
     },
   }),
 }
-
-compareSku = (item1, item2) => {
-  if (item1.sellers[0].commertialOffer.AvailableQuantity === 0) {
-    return 1
-  } else if (item2.sellers[0].commertialOffer.AvailableQuantity === 0) {
-    return -1
-  }
-  return item1.sellers[0].commertialOffer.Price - item2.sellers[0].commertialOffer.Price
-}
-
 
 export default graphql(productQuery, options)(injectIntl(ProductDetails))
