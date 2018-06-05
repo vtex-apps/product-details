@@ -30,6 +30,7 @@ query Product($slug: String) {
           }
           Price
           ListPrice
+          AvailableQuantity
         }
       }
     }

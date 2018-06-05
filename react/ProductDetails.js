@@ -10,7 +10,8 @@ import {
   ProductImages, 
   ShippingSimulator, 
   SKUSelector, 
-  Share 
+  Share,
+  AvailabilitySubscriber 
 } from 'vtex.store-components'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
@@ -65,19 +66,21 @@ class ProductDetails extends Component {
                 productReference={product.productReference}
               />
             </div>
-            <div className="vtex-product-details__price-container pt1">
-              <ProductPrice
-                listPrice={commertialOffer.ListPrice}
-                sellingPrice={commertialOffer.Price}
-                installments={commertialOffer.Installments}
-                showListPrice
-                showLabels
-                showInstallments
-                showSavings
-              />
-            </div>
+            {commertialOffer.AvailableQuantity > 0 && 
+              <div className="vtex-product-details__price-container pt1">
+                <ProductPrice
+                  listPrice={commertialOffer.ListPrice}
+                  sellingPrice={commertialOffer.Price}
+                  installments={commertialOffer.Installments}
+                  showListPrice
+                  showLabels
+                  showInstallments
+                  showSavings
+                />
+              </div>
+            }
             <div className="pv2">
-              <hr className="b--black-10" size="0" />
+              <hr className="o-30" size="1"/>
             </div>
             <div>
               <div className="f7">
@@ -89,21 +92,26 @@ class ProductDetails extends Component {
               />
             </div>
             <div className="pv2">
-              <hr className="b--black-10" size="0" />
+              <hr className="o-30" size="1"/>
             </div>
-            <div className="flex w-100 pv2">
-              <div className="flex pr2">
-                <BuyButton
-                  seller={sellerId}
-                  skuId={selectedItem.itemId}
-                >
-                  <FormattedMessage id="button-label" />
-                </BuyButton>
+            {commertialOffer.AvailableQuantity > 0 ?
+              <div>
+                <div className="pv2">
+                  <BuyButton
+                    seller={sellerId}
+                    skuId={selectedItem.itemId}
+                  >
+                    <FormattedMessage id="button-label" />
+                  </BuyButton>
+                </div> 
+                <div className="pv4">
+                  <ShippingSimulator skuId={selectedItem.itemId} seller={sellerId} country="BRA" />
+                </div>
+              </div> :
+              <div className="pv4">
+                <AvailabilitySubscriber skuId={selectedItem.itemId} />
               </div>
-            </div>
-            <div className="pv4">
-              <ShippingSimulator skuId={selectedItem.itemId} seller={sellerId} country="BRA" />
-            </div>
+            }
             <div className="flex w-100 pv2">
               <div className="pv2 pr3 f6">
                 <FormattedMessage id="share-label" />:
