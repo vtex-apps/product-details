@@ -28,6 +28,7 @@ query Product($slug: String) {
             NumberOfInstallments
             Name
           }
+          AvailableQuantity
           Price
           ListPrice
           AvailableQuantity

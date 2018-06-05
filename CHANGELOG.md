@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Update props passed to `ShippingSimulator`.
+- Sku items sorted by price.
 
 ## [0.2.0] - 2018-05-29
 ### Changed

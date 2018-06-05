@@ -27,7 +27,7 @@ class ProductDetails extends Component {
   }
 
   handleSkuChange = skuIndex => {
-    this.setState({skuIndex})
+    this.setState({ skuIndex })
   }
 
   render() {
@@ -40,7 +40,10 @@ class ProductDetails extends Component {
       )
     }
 
-    const selectedItem = product.items[this.state.skuIndex]
+    let skuItems = product.items.slice()
+    skuItems.sort(this.compareSku)
+
+    const selectedItem = skuItems[this.state.skuIndex]
     const { commertialOffer } = selectedItem.sellers[0]
     const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
@@ -87,7 +90,7 @@ class ProductDetails extends Component {
                 <FormattedMessage id="sku-label" />
               </div>
               <SKUSelector
-                skuItems={product.items}
+                skuItems={skuItems}
                 onSKUSelected={this.handleSkuChange}
               />
             </div>
@@ -116,8 +119,8 @@ class ProductDetails extends Component {
               <div className="pv2 pr3 f6">
                 <FormattedMessage id="share-label" />:
               </div>
-              <Share 
-                options={{'size': 25}}
+              <Share
+                options={{ 'size': 25 }}
               />
             </div>
           </div>
@@ -146,5 +149,15 @@ const options = {
     },
   }),
 }
+
+compareSku = (item1, item2) => {
+  if (item1.sellers[0].commertialOffer.AvailableQuantity === 0) {
+    return 1
+  } else if (item2.sellers[0].commertialOffer.AvailableQuantity === 0) {
+    return -1
+  }
+  return item1.sellers[0].commertialOffer.Price - item2.sellers[0].commertialOffer.Price
+}
+
 
 export default graphql(productQuery, options)(injectIntl(ProductDetails))
