@@ -31,7 +31,6 @@ query Product($slug: String) {
           AvailableQuantity
           Price
           ListPrice
-          AvailableQuantity
         }
       }
     }
