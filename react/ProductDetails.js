@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { graphql } from 'react-apollo'
 
-import {
-  BuyButton,
-  ProductDescription,
-  ProductName,
-  ProductPrice,
-  ProductImages,
-  ShippingSimulator,
-  SKUSelector,
-  Share
+import { 
+  BuyButton, 
+  ProductDescription, 
+  ProductName, 
+  ProductPrice, 
+  ProductImages, 
+  ShippingSimulator, 
+  SKUSelector, 
+  Share,
+  AvailabilitySubscriber 
 } from 'vtex.store-components'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
@@ -22,11 +23,28 @@ import './global.css'
 
 class ProductDetails extends Component {
   state = {
-    skuIndex: 0
+    skuIndex: null
   }
 
   handleSkuChange = skuIndex => {
     this.setState({ skuIndex })
+  }
+  
+  compareSku = (item, otherItem) => {
+    const [{
+      commertialOffer: {
+        AvailableQuantity: quantity, 
+        Price: price
+      }
+    }] = item.sellers
+    const [{
+      commertialOffer: {
+        AvailableQuantity: otherQuantity, 
+        Price: otherPrice
+      }
+    }] = otherItem.sellers
+
+    return quantity === 0 ? 1 : otherQuantity === 0 && -1 || price - otherPrice
   }
 
   render() {
@@ -39,11 +57,19 @@ class ProductDetails extends Component {
       )
     }
 
+    const [{ itemId: initialItem}] = product.items
+
     let skuItems = product.items.slice()
     skuItems.sort(this.compareSku)
 
-    const selectedItem = skuItems[this.state.skuIndex]
-    const { commertialOffer } = selectedItem.sellers[0]
+    const initialItemIndex = skuItems.findIndex(item => item.itemId == initialItem)
+    
+    let selectedItem = skuItems[this.state.skuIndex]
+    if (selectedItem == null) {
+      selectedItem = skuItems[initialItemIndex]
+    }
+
+    const [{ commertialOffer }] = selectedItem.sellers
     const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
     return (
@@ -68,19 +94,21 @@ class ProductDetails extends Component {
                 productReference={product.productReference}
               />
             </div>
-            <div className="vtex-product-details__price-container pt1">
-              <ProductPrice
-                listPrice={commertialOffer.ListPrice}
-                sellingPrice={commertialOffer.Price}
-                installments={commertialOffer.Installments}
-                showListPrice
-                showLabels
-                showInstallments
-                showSavings
-              />
-            </div>
+            {commertialOffer.AvailableQuantity > 0 && 
+              <div className="vtex-product-details__price-container pt1">
+                <ProductPrice
+                  listPrice={commertialOffer.ListPrice}
+                  sellingPrice={commertialOffer.Price}
+                  installments={commertialOffer.Installments}
+                  showListPrice
+                  showLabels
+                  showInstallments
+                  showSavings
+                />
+              </div>
+            }
             <div className="pv2">
-              <hr className="b--black-10" size="0" />
+              <hr className="o-30" size="1"/>
             </div>
             <div>
               <div className="f7">
@@ -88,25 +116,31 @@ class ProductDetails extends Component {
               </div>
               <SKUSelector
                 skuItems={skuItems}
+                defaultIndex={initialItemIndex}
                 onSKUSelected={this.handleSkuChange}
               />
             </div>
             <div className="pv2">
-              <hr className="b--black-10" size="0" />
+              <hr className="o-30" size="1"/>
             </div>
-            <div className="flex w-100 pv2">
-              <div className="flex pr2">
-                <BuyButton
-                  seller={sellerId}
-                  skuId={selectedItem.itemId}
-                >
-                  <FormattedMessage id="button-label" />
-                </BuyButton>
+            {commertialOffer.AvailableQuantity > 0 ?
+              <div>
+                <div className="pv2">
+                  <BuyButton
+                    seller={sellerId}
+                    skuId={selectedItem.itemId}
+                  >
+                    <FormattedMessage id="button-label" />
+                  </BuyButton>
+                </div> 
+                <div className="pv4">
+                  <ShippingSimulator skuId={selectedItem.itemId} seller={sellerId} country="BRA" />
+                </div>
+              </div> :
+              <div className="pv4">
+                <AvailabilitySubscriber skuId={selectedItem.itemId} />
               </div>
-            </div>
-            <div className="pv4">
-              <ShippingSimulator skuId={selectedItem.itemId} seller={sellerId} country="BRA" />
-            </div>
+            }
             <div className="flex w-100 pv2">
               <div className="pv2 pr3 f6">
                 <FormattedMessage id="share-label" />:
@@ -141,15 +175,5 @@ const options = {
     },
   }),
 }
-
-compareSku = (item1, item2) => {
-  if (item1.sellers[0].commertialOffer.AvailableQuantity === 0) {
-    return 1
-  } else if (item2.sellers[0].commertialOffer.AvailableQuantity === 0) {
-    return -1
-  }
-  return item1.sellers[0].commertialOffer.Price - item2.sellers[0].commertialOffer.Price
-}
-
 
 export default graphql(productQuery, options)(injectIntl(ProductDetails))
