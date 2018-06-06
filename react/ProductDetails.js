@@ -209,8 +209,8 @@ productDetailsComponent.propTypes = {
 productDetailsComponent.getSchema = props => {
   const shareSchema = Share.schema || Share.getSchema(props)
   return {
-    title: 'Product Details',
-    description: 'Product Details Component',
+    title: 'editor.product-details.title',
+    description: 'editor.product-details.description',
     type: 'object',
     properties: {
       share: shareSchema,

@@ -1,4 +1,6 @@
 {
+  "editor.product-details.title": "Detalhes do Produto",
+  "editor.product-details.description": "Componente de detalhes do produto",
   "button-label": "Comprar",
   "sku-label": "Escolha a cor",
   "share.label": "COMPARTILHE",
