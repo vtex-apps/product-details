@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
+import { mergeDeepRight, mapObjIndexed } from 'ramda'
 
 import {
   BuyButton,
@@ -200,8 +201,17 @@ const productDetailsComponent = graphql(productQuery, options)(
   injectIntl(ProductDetails)
 )
 
-ProductDetails.propTypes = ProductDetailsPropTypes
-productDetailsComponent.propTypes = {
+ProductDetails.defaultProps = productDetailsComponent.defaultProps = {
+  price: {
+    showListPrice: true,
+    showLabels: true,
+    showInstallments: true,
+    showSavings: true,
+  },
+}
+
+productDetailsComponent.propTypes = ProductDetailsPropTypes
+ProductDetails.propTypes = {
   ...ProductDetailsPropTypes,
   /** intl property to format data */
   intl: intlShape.isRequired,
@@ -209,14 +219,31 @@ productDetailsComponent.propTypes = {
 
 productDetailsComponent.getSchema = props => {
   const shareSchema = Share.schema || Share.getSchema(props)
+  const priceSchema = mergeSchemaAndDefaultProps(
+    ProductPrice.schema || ProductPrice.getSchema(props),
+    'price'
+  )
+
   return {
     title: 'editor.product-details.title',
     description: 'editor.product-details.description',
     type: 'object',
     properties: {
       share: shareSchema,
+      price: priceSchema,
     },
   }
+}
+
+function mergeSchemaAndDefaultProps(schema, propName) {
+  return mergeDeepRight(schema, {
+    properties: {
+      ...mapObjIndexed(
+        value => ({ default: value }),
+        productDetailsComponent.defaultProps[propName]
+      ),
+    },
+  })
 }
 
 export default productDetailsComponent
