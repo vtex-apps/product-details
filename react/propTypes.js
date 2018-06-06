@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { intlShape } from 'react-intl'
 
 export default {
   /** Product slug */
@@ -75,6 +74,4 @@ export default {
     /** Social Networks configuration */
     social: PropTypes.object.isRequired,
   }),
-  /** intl property to format data */
-  intl: intlShape.isRequired,
 }
