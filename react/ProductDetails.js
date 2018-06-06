@@ -208,7 +208,7 @@ productDetailsComponent.getSchema = props => {
     description: 'Product Details Component',
     type: 'object',
     properties: {
-      ...shareSchema,
+      share: shareSchema,
     },
   }
 }
