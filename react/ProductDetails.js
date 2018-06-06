@@ -40,7 +40,7 @@ class ProductDetails extends Component {
     }
 
     let skuItems = product.items.slice()
-    skuItems.sort(this.compareSku)
+    skuItems.sort(compareSku)
 
     const selectedItem = skuItems[this.state.skuIndex]
     const { commertialOffer } = selectedItem.sellers[0]
@@ -142,7 +142,7 @@ const options = {
   }),
 }
 
-compareSku = (item1, item2) => {
+const compareSku = (item1, item2) => {
   if (item1.sellers[0].commertialOffer.AvailableQuantity === 0) {
     return 1
   } else if (item2.sellers[0].commertialOffer.AvailableQuantity === 0) {

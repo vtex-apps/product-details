@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Update props passed to `ShippingSimulator`.
 - Sku items sorted by price.
 
+### Fixed
+- Compare sku function not found.
+
 ## [0.2.0] - 2018-05-29
 ### Changed
 - Requesting ProductReference info from product and passing it to `vtex.store-components/ProductName`
