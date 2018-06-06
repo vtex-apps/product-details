@@ -1,5 +1,6 @@
 {
   "button-label": "Comprar",
-  "share-label": "COMPARTILHE",
-  "sku-label": "Escolha a cor"
+  "sku-label": "Escolha a cor",
+  "share.label": "COMPARTILHE",
+  "share.title": "{product} {sku} na {store}: "
 }

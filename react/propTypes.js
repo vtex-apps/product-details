@@ -70,6 +70,11 @@ export default {
       ).isRequired,
     }),
   }),
+  /** Share Schema properties */
+  share: PropTypes.shape({
+    /** Social Networks configuration */
+    social: PropTypes.object.isRequired,
+  }),
   /** intl property to format data */
   intl: intlShape.isRequired,
 }
