@@ -30,13 +30,21 @@ class ProductDetails extends Component {
     this.setState({ skuIndex })
   }
   
-  compareSku = (item1, item2) => {
-    if (item1.sellers[0].commertialOffer.AvailableQuantity === 0) {
-      return 1
-    } else if (item2.sellers[0].commertialOffer.AvailableQuantity === 0) {
-      return -1
-    }
-    return item1.sellers[0].commertialOffer.Price - item2.sellers[0].commertialOffer.Price
+  compareSku = (item, otherItem) => {
+    const [{
+      commertialOffer: {
+        AvailableQuantity: quantity, 
+        Price: price
+      }
+    }] = item.sellers
+    const [{
+      commertialOffer: {
+        AvailableQuantity: otherQuantity, 
+        Price: otherPrice
+      }
+    }] = otherItem.sellers
+
+    return quantity === 0 ? 1 : otherQuantity === 0 && -1 || price - otherPrice
   }
 
   render() {
@@ -49,7 +57,7 @@ class ProductDetails extends Component {
       )
     }
 
-    const initialItem = product.items[0].itemId
+    const [{ itemId: initialItem}] = product.items
 
     let skuItems = product.items.slice()
     skuItems.sort(this.compareSku)
@@ -61,7 +69,7 @@ class ProductDetails extends Component {
       selectedItem = skuItems[initialItemIndex]
     }
 
-    const { commertialOffer } = selectedItem.sellers[0]
+    const [{ commertialOffer }] = selectedItem.sellers
     const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
     return (
