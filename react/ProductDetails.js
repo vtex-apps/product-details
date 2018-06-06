@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormattedMessage, injectIntl } from 'react-intl'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { graphql } from 'react-apollo'
 
 import {
@@ -199,7 +199,12 @@ const productDetailsComponent = graphql(productQuery, options)(
   injectIntl(ProductDetails)
 )
 
-ProductDetails.propTypes = productDetailsComponent.propTypes = ProductDetailsPropTypes
+ProductDetails.propTypes = ProductDetailsPropTypes
+productDetailsComponent.propTypes = {
+  ...ProductDetailsPropTypes,
+  /** intl property to format data */
+  intl: intlShape.isRequired,
+}
 
 productDetailsComponent.getSchema = props => {
   const shareSchema = Share.schema || Share.getSchema(props)
