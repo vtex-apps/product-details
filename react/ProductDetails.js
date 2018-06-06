@@ -23,7 +23,7 @@ import './global.css'
 
 class ProductDetails extends Component {
   state = {
-    skuIndex: 0
+    skuIndex: null
   }
 
   handleSkuChange = skuIndex => {
@@ -49,10 +49,18 @@ class ProductDetails extends Component {
       )
     }
 
+    const initialItem = product.items[0].itemId
+
     let skuItems = product.items.slice()
     skuItems.sort(this.compareSku)
 
-    const selectedItem = skuItems[this.state.skuIndex]
+    const initialItemIndex = skuItems.findIndex(item => item.itemId == initialItem)
+    
+    let selectedItem = skuItems[this.state.skuIndex]
+    if (selectedItem == null) {
+      selectedItem = skuItems[initialItemIndex]
+    }
+
     const { commertialOffer } = selectedItem.sellers[0]
     const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
@@ -100,6 +108,7 @@ class ProductDetails extends Component {
               </div>
               <SKUSelector
                 skuItems={skuItems}
+                defaultIndex={initialItemIndex}
                 onSKUSelected={this.handleSkuChange}
               />
             </div>
