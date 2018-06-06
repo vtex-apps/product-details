@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add `AvailabilitySubscriber`component.
 - Add `SkuSelector` and `Share` components.
+- Add a schema to the `ProductDetails` Component.
 
 ### Changed
 - Update props passed to `ShippingSimulator`.
