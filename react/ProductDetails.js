@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { graphql } from 'react-apollo'
 
-import { 
-  BuyButton, 
-  ProductDescription, 
-  ProductName, 
-  ProductPrice, 
-  ProductImages, 
-  ShippingSimulator, 
-  SKUSelector, 
+import {
+  BuyButton,
+  ProductDescription,
+  ProductName,
+  ProductPrice,
+  ProductImages,
+  ShippingSimulator,
+  SKUSelector,
   Share,
-  AvailabilitySubscriber 
+  AvailabilitySubscriber,
 } from 'vtex.store-components'
 
 import Spinner from '@vtex/styleguide/lib/Spinner'
@@ -21,35 +21,44 @@ import productQuery from './graphql/productQuery.gql'
 
 import './global.css'
 
+const { account } = global.__RUNTIME__
+
 class ProductDetails extends Component {
   state = {
-    skuIndex: null
+    skuIndex: null,
   }
 
   handleSkuChange = skuIndex => {
     this.setState({ skuIndex })
   }
-  
-  compareSku = (item, otherItem) => {
-    const [{
-      commertialOffer: {
-        AvailableQuantity: quantity, 
-        Price: price
-      }
-    }] = item.sellers
-    const [{
-      commertialOffer: {
-        AvailableQuantity: otherQuantity, 
-        Price: otherPrice
-      }
-    }] = otherItem.sellers
 
-    return quantity === 0 ? 1 : otherQuantity === 0 && -1 || price - otherPrice
+  compareSku = (item, otherItem) => {
+    const [
+      {
+        commertialOffer: { AvailableQuantity: quantity, Price: price },
+      },
+    ] = item.sellers
+    const [
+      {
+        commertialOffer: {
+          AvailableQuantity: otherQuantity,
+          Price: otherPrice,
+        },
+      },
+    ] = otherItem.sellers
+
+    return quantity === 0
+      ? 1
+      : (otherQuantity === 0 && -1) || price - otherPrice
   }
 
   render() {
-    const { product } = this.props.data
-    if (!product) {
+    const {
+      intl,
+      data: { product, loading },
+    } = this.props
+
+    if (loading || !product) {
       return (
         <div className="pt6 tc">
           <Spinner />
@@ -57,13 +66,15 @@ class ProductDetails extends Component {
       )
     }
 
-    const [{ itemId: initialItem}] = product.items
+    const [{ itemId: initialItem }] = product.items
 
-    let skuItems = product.items.slice()
+    const skuItems = product.items.slice()
     skuItems.sort(this.compareSku)
 
-    const initialItemIndex = skuItems.findIndex(item => item.itemId == initialItem)
-    
+    const initialItemIndex = skuItems.findIndex(
+      item => item.itemId === initialItem
+    )
+
     let selectedItem = skuItems[this.state.skuIndex]
     if (selectedItem == null) {
       selectedItem = skuItems[initialItemIndex]
@@ -94,7 +105,7 @@ class ProductDetails extends Component {
                 productReference={product.productReference}
               />
             </div>
-            {commertialOffer.AvailableQuantity > 0 && 
+            {commertialOffer.AvailableQuantity > 0 && (
               <div className="vtex-product-details__price-container pt1">
                 <ProductPrice
                   listPrice={commertialOffer.ListPrice}
@@ -106,9 +117,9 @@ class ProductDetails extends Component {
                   showSavings
                 />
               </div>
-            }
+            )}
             <div className="pv2">
-              <hr className="o-30" size="1"/>
+              <hr className="o-30" size="1" />
             </div>
             <div>
               <div className="f7">
@@ -121,32 +132,42 @@ class ProductDetails extends Component {
               />
             </div>
             <div className="pv2">
-              <hr className="o-30" size="1"/>
+              <hr className="o-30" size="1" />
             </div>
-            {commertialOffer.AvailableQuantity > 0 ?
+            {commertialOffer.AvailableQuantity > 0 ? (
               <div>
                 <div className="pv2">
-                  <BuyButton
-                    seller={sellerId}
-                    skuId={selectedItem.itemId}
-                  >
+                  <BuyButton seller={sellerId} skuId={selectedItem.itemId}>
                     <FormattedMessage id="button-label" />
                   </BuyButton>
-                </div> 
-                <div className="pv4">
-                  <ShippingSimulator skuId={selectedItem.itemId} seller={sellerId} country="BRA" />
                 </div>
-              </div> :
+                <div className="pv4">
+                  <ShippingSimulator
+                    skuId={selectedItem.itemId}
+                    seller={sellerId}
+                    country="BRA"
+                  />
+                </div>
+              </div>
+            ) : (
               <div className="pv4">
                 <AvailabilitySubscriber skuId={selectedItem.itemId} />
               </div>
-            }
+            )}
             <div className="flex w-100 pv2">
               <div className="pv2 pr3 f6">
-                <FormattedMessage id="share-label" />:
+                <FormattedMessage id="share.label" />:
               </div>
               <Share
-                options={{ 'size': 25 }}
+                {...this.props.share}
+                title={intl.formatMessage(
+                  { id: 'share.title' },
+                  {
+                    product: product.productName,
+                    sku: selectedItem.name,
+                    store: account,
+                  }
+                )}
               />
             </div>
           </div>
@@ -164,8 +185,6 @@ class ProductDetails extends Component {
       </div>
     )
   }
-
-  static propTypes = ProductDetailsPropTypes
 }
 
 const options = {
@@ -176,4 +195,22 @@ const options = {
   }),
 }
 
-export default graphql(productQuery, options)(injectIntl(ProductDetails))
+const productDetailsComponent = graphql(productQuery, options)(
+  injectIntl(ProductDetails)
+)
+
+ProductDetails.propTypes = productDetailsComponent.propTypes = ProductDetailsPropTypes
+
+productDetailsComponent.getSchema = props => {
+  const shareSchema = Share.schema || Share.getSchema(props)
+  return {
+    title: 'Product Details',
+    description: 'Product Details Component',
+    type: 'object',
+    properties: {
+      ...shareSchema,
+    },
+  }
+}
+
+export default productDetailsComponent
