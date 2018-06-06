@@ -142,6 +142,7 @@ class ProductDetails extends Component {
                   </BuyButton>
                 </div>
                 <div className="pv4">
+                  {/* FIXME: Get this country data correctly */}
                   <ShippingSimulator
                     skuId={selectedItem.itemId}
                     seller={sellerId}
