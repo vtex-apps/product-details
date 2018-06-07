@@ -10,7 +10,7 @@
     "smartcheckout"
   ],
   "scripts": {
-    "postreleasy": "vtex publish --public"
+    "postreleasy": "vtex publish -r vtex --verbose"
   },
   "builders": {
     "react": "2.x",
