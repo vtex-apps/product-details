@@ -112,10 +112,7 @@ class ProductDetails extends Component {
                   listPrice={commertialOffer.ListPrice}
                   sellingPrice={commertialOffer.Price}
                   installments={commertialOffer.Installments}
-                  showListPrice
-                  showLabels
-                  showInstallments
-                  showSavings
+                  {...this.props.price}
                 />
               </div>
             )}
