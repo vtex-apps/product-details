@@ -55,7 +55,7 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { slug } = this.props
+    const { slug, maxImages } = this.props
 
     return (
       <IntlInjector>
@@ -98,6 +98,7 @@ class ProductDetails extends Component {
                         <ProductImages
                           images={selectedItem.images}
                           thumbnailSliderOrientation="HORIZONTAL"
+                          thumbnailMaxVisibleItems={maxImages}
                         />
                       </div>
                     </div>
@@ -222,6 +223,16 @@ ProductDetails.getSchema = props => {
     properties: {
       share: shareSchema,
       price: priceSchema,
+      maxImages: {
+        title: 'editor.product-details.maxImages.title',
+        type: 'number',
+        minimum: 1,
+        maximum: 10,
+        defaultValue: 4,
+        widget: {
+          'ui:widget': 'range',
+        },
+      },
     },
   }
 }
