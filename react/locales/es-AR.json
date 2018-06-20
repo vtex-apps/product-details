@@ -2,6 +2,7 @@
   "editor.product-details.title": "Detalles del producto",
   "editor.product-details.description": "Componente de detalles del producto",
   "editor.product-details.maxImages.title": "Número máximo de imágenes en miniatura",
+  "editor.product-details.displayVertically.title": "Mostrar miniaturas verticalmente",
   "button-label": "Comprar",
   "sku-label": "Elige el color",
   "share.label": "COMPARTIR",
