@@ -51,6 +51,12 @@ class ProductDetails extends Component {
       properties: {
         share: shareSchema,
         price: priceSchema,
+        displayVertically: {
+          title: 'editor.product-details.displayVertically.title',
+          type: 'boolean',
+          default: false,
+          isLayout: true,
+        },
         maxImages: {
           title: 'editor.product-details.maxImages.title',
           type: 'number',
@@ -60,6 +66,7 @@ class ProductDetails extends Component {
           widget: {
             'ui:widget': 'range',
           },
+          isLayout: true,
         },
       },
     }
@@ -94,7 +101,7 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { slug, maxImages } = this.props
+    const { slug, maxImages, displayVertically } = this.props
 
     return (
       <IntlInjector>
@@ -136,7 +143,7 @@ class ProductDetails extends Component {
                       <div className="flex justify-center">
                         <ProductImages
                           images={selectedItem.images}
-                          thumbnailSliderOrientation="HORIZONTAL"
+                          thumbnailSliderOrientation={displayVertically ? 'VERTICAL' : 'HORIZONTAL'}
                           thumbnailMaxVisibleItems={maxImages}
                         />
                       </div>

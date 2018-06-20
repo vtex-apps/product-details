@@ -2,6 +2,7 @@
   "editor.product-details.title": "Product Details",
   "editor.product-details.description": "Product Details Component",
   "editor.product-details.maxImages.title": "Max thumbnail images",
+  "editor.product-details.displayVertically.title": "Display thumbnails vertically",
   "button-label": "Buy",
   "sku-label": "Choose Color",
   "share.label": "SHARE",
