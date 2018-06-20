@@ -26,6 +26,45 @@ import './global.css'
 const { account } = global.__RUNTIME__
 
 class ProductDetails extends Component {
+  static defaultProps = {
+    price: {
+      showListPrice: true,
+      showLabels: true,
+      showInstallments: true,
+      showSavings: true,
+    },
+  }
+
+  static propTypes = ProductDetailsPropTypes
+
+  static getSchema = props => {
+    const shareSchema = Share.schema || Share.getSchema(props)
+    const priceSchema = mergeSchemaAndDefaultProps(
+      ProductPrice.schema || ProductPrice.getSchema(props),
+      'price'
+    )
+
+    return {
+      title: 'editor.product-details.title',
+      description: 'editor.product-details.description',
+      type: 'object',
+      properties: {
+        share: shareSchema,
+        price: priceSchema,
+        maxImages: {
+          title: 'editor.product-details.maxImages.title',
+          type: 'number',
+          minimum: 1,
+          maximum: 10,
+          defaultValue: 4,
+          widget: {
+            'ui:widget': 'range',
+          },
+        },
+      },
+    }
+  }
+
   state = {
     skuIndex: null,
   }
@@ -195,45 +234,6 @@ class ProductDetails extends Component {
         )}
       </IntlInjector>
     )
-  }
-}
-
-ProductDetails.defaultProps = {
-  price: {
-    showListPrice: true,
-    showLabels: true,
-    showInstallments: true,
-    showSavings: true,
-  },
-}
-
-ProductDetails.propTypes = ProductDetailsPropTypes
-
-ProductDetails.getSchema = props => {
-  const shareSchema = Share.schema || Share.getSchema(props)
-  const priceSchema = mergeSchemaAndDefaultProps(
-    ProductPrice.schema || ProductPrice.getSchema(props),
-    'price'
-  )
-
-  return {
-    title: 'editor.product-details.title',
-    description: 'editor.product-details.description',
-    type: 'object',
-    properties: {
-      share: shareSchema,
-      price: priceSchema,
-      maxImages: {
-        title: 'editor.product-details.maxImages.title',
-        type: 'number',
-        minimum: 1,
-        maximum: 10,
-        defaultValue: 4,
-        widget: {
-          'ui:widget': 'range',
-        },
-      },
-    },
   }
 }
 
