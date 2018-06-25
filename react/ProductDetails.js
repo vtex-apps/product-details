@@ -57,17 +57,6 @@ class ProductDetails extends Component {
           default: false,
           isLayout: true,
         },
-        maxImages: {
-          title: 'editor.product-details.maxImages.title',
-          type: 'number',
-          minimum: 1,
-          maximum: 10,
-          defaultValue: 4,
-          widget: {
-            'ui:widget': 'range',
-          },
-          isLayout: true,
-        },
       },
     }
   }
@@ -101,7 +90,7 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { slug, maxImages, displayVertically } = this.props
+    const { slug, displayVertically } = this.props
 
     return (
       <IntlInjector>
@@ -144,7 +133,6 @@ class ProductDetails extends Component {
                         <ProductImages
                           images={selectedItem.images}
                           thumbnailSliderOrientation={displayVertically ? 'VERTICAL' : 'HORIZONTAL'}
-                          thumbnailMaxVisibleItems={maxImages}
                         />
                       </div>
                     </div>
