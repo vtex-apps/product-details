@@ -95,68 +95,75 @@ class ProductDetails extends Component {
     return (
       <IntlInjector>
         {intl => (
-          <Query
-            query={productQuery}
-            variables={{ slug }}
-          >
+          <Query query={productQuery} variables={{ slug }}>
             {({ loading, data: { product } }) => {
-              if (loading || !product) {
-                return (
-                  <div className="pt6 tc">
-                    <Spinner />
-                  </div>
+              let shouldDisplayLoader = loading || !product
+              let selectedItem,
+                commertialOffer,
+                sellerId,
+                skuItems,
+                initialItemIndex
+              if (!shouldDisplayLoader) {
+                const [{ itemId: initialItem }] = product.items
+
+                skuItems = product.items.slice()
+                skuItems.sort(this.compareSku)
+
+                initialItemIndex = skuItems.findIndex(
+                  item => item.itemId === initialItem
                 )
+
+                selectedItem = skuItems[this.state.skuIndex]
+                if (selectedItem == null) {
+                  selectedItem = skuItems[initialItemIndex]
+                }
+
+                ;[{ commertialOffer }] = selectedItem.sellers
+                const sellerId = parseInt(selectedItem.sellers[0].sellerId)
               }
-
-              const [{ itemId: initialItem }] = product.items
-
-              const skuItems = product.items.slice()
-              skuItems.sort(this.compareSku)
-
-              const initialItemIndex = skuItems.findIndex(
-                item => item.itemId === initialItem
-              )
-
-              let selectedItem = skuItems[this.state.skuIndex]
-              if (selectedItem == null) {
-                selectedItem = skuItems[initialItemIndex]
-              }
-
-              const [{ commertialOffer }] = selectedItem.sellers
-              const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
               return (
                 <div className="vtex-product-details flex flex-wrap pa6">
                   <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
                     <div className="fr-ns w-100 h-100">
                       <div className="flex justify-center">
-                        <ProductImages
-                          images={selectedItem.images}
-                          thumbnailSliderOrientation={displayVertically ? 'VERTICAL' : 'HORIZONTAL'}
-                        />
+                        {!shouldDisplayLoader ? (
+                          <ProductImages
+                            images={selectedItem.images}
+                            thumbnailSliderOrientation={
+                              displayVertically ? 'VERTICAL' : 'HORIZONTAL'
+                            }
+                          />
+                        ) : (
+                          <ProductImages loading={shouldDisplayLoader} />
+                        )}
                       </div>
                     </div>
                   </div>
                   <div className="vtex-product-details__details-container w-50-ns w-100-s pl5-ns">
                     <div className="fl-ns w-100">
                       <div className="vtex-product-details__name-container pv2">
-                        <ProductName
-                          name={product.productName}
-                          skuName={selectedItem.name}
-                          brandName={product.brand}
-                          productReference={product.productReference}
-                        />
-                      </div>
-                      {commertialOffer.AvailableQuantity > 0 && (
-                        <div className="vtex-product-details__price-container pt1">
-                          <ProductPrice
-                            listPrice={commertialOffer.ListPrice}
-                            sellingPrice={commertialOffer.Price}
-                            installments={commertialOffer.Installments}
-                            {...this.props.price}
+                        {!shouldDisplayLoader ? (
+                          <ProductName
+                            name={product.productName}
+                            skuName={selectedItem.name}
+                            brandName={product.brand}
+                            productReference={product.productReference}
                           />
-                        </div>
-                      )}
+                        ) : null}
+                      </div>
+                      {!shouldDisplayLoader
+                        ? commertialOffer.AvailableQuantity > 0 && (
+                            <div className="vtex-product-details__price-container pt1">
+                              <ProductPrice
+                                listPrice={commertialOffer.ListPrice}
+                                sellingPrice={commertialOffer.Price}
+                                installments={commertialOffer.Installments}
+                                {...this.props.price}
+                              />
+                            </div>
+                          )
+                        : null}
                       <div className="pv2">
                         <hr className="o-30" size="1" />
                       </div>
@@ -164,51 +171,62 @@ class ProductDetails extends Component {
                         <div className="f7">
                           <FormattedMessage id="sku-label" />
                         </div>
-                        <SKUSelector
-                          skuItems={skuItems}
-                          defaultIndex={initialItemIndex}
-                          onSKUSelected={this.handleSkuChange}
-                        />
+                        {!shouldDisplayLoader ? (
+                          <SKUSelector
+                            skuItems={skuItems}
+                            defaultIndex={initialItemIndex}
+                            onSKUSelected={this.handleSkuChange}
+                          />
+                        ) : null}
                       </div>
                       <div className="pv2">
                         <hr className="o-30" size="1" />
                       </div>
-                      {commertialOffer.AvailableQuantity > 0 ? (
-                        <div>
-                          <div className="pv2">
-                            <BuyButton seller={sellerId} skuId={selectedItem.itemId}>
-                              <FormattedMessage id="button-label" />
-                            </BuyButton>
+                      {!shouldDisplayLoader ? (
+                        commertialOffer.AvailableQuantity > 0 ? (
+                          <div>
+                            <div className="pv2">
+                              <BuyButton
+                                seller={sellerId}
+                                skuId={selectedItem.itemId}
+                              >
+                                <FormattedMessage id="button-label" />
+                              </BuyButton>
+                            </div>
+                            <div className="pv4">
+                              {/* FIXME: Get this country data correctly */}
+                              <ShippingSimulator
+                                skuId={selectedItem.itemId}
+                                seller={sellerId}
+                                country="BRA"
+                              />
+                            </div>
                           </div>
+                        ) : (
                           <div className="pv4">
-                            {/* FIXME: Get this country data correctly */}
-                            <ShippingSimulator
+                            <AvailabilitySubscriber
                               skuId={selectedItem.itemId}
-                              seller={sellerId}
-                              country="BRA"
                             />
                           </div>
-                        </div>
-                      ) : (
-                        <div className="pv4">
-                          <AvailabilitySubscriber skuId={selectedItem.itemId} />
-                        </div>
-                      )}
+                        )
+                      ) : null}
                       <div className="flex w-100 pv2">
                         <div className="pv2 pr3 f6">
                           <FormattedMessage id="share.label" />:
                         </div>
-                        <Share
-                          {...this.props.share}
-                          title={intl.formatMessage(
-                            { id: 'share.title' },
-                            {
-                              product: product.productName,
-                              sku: selectedItem.name,
-                              store: account,
-                            }
-                          )}
-                        />
+                        {!shouldDisplayLoader ? (
+                          <Share
+                            {...this.props.share}
+                            title={intl.formatMessage(
+                              { id: 'share.title' },
+                              {
+                                product: product.productName,
+                                sku: selectedItem.name,
+                                store: account,
+                              }
+                            )}
+                          />
+                        ) : null}
                       </div>
                     </div>
                   </div>
@@ -216,11 +234,16 @@ class ProductDetails extends Component {
                     <hr className="b--black-10" size="0" />
                   </div>
                   <div className="vtex-product-details__description-container pv2 w-100 h-100">
-                    <ProductDescription
-                      specifications={product.properties}
-                      skuName={selectedItem.name}>
-                      <span className="measure-wide">{product.description}</span>
-                    </ProductDescription>
+                    {!shouldDisplayLoader ? (
+                      <ProductDescription
+                        specifications={product.properties}
+                        skuName={selectedItem.name}
+                      >
+                        <span className="measure-wide">
+                          {product.description}
+                        </span>
+                      </ProductDescription>
+                    ) : null}
                   </div>
                 </div>
               )
