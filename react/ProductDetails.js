@@ -218,9 +218,9 @@ class ProductDetails extends Component {
                   <div className="vtex-product-details__description-container pv2 w-100 h-100">
                     <ProductDescription
                       specifications={product.properties}
-                      skuName={selectedItem.name}>
-                      <span className="measure-wide">{product.description}</span>
-                    </ProductDescription>
+                      skuName={selectedItem.name}
+                      description={product.description}
+                    />
                   </div>
                 </div>
               )
