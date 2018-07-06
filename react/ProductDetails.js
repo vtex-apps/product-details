@@ -15,6 +15,8 @@ import {
   AvailabilitySubscriber,
 } from 'vtex.store-components'
 
+import { ProductKit } from 'vtex.product-kit'
+
 import Spinner from '@vtex/styleguide/lib/Spinner'
 
 import ProductDetailsPropTypes from './propTypes'
@@ -221,6 +223,9 @@ class ProductDetails extends Component {
                       skuName={selectedItem.name}
                       description={product.description}
                     />
+                  </div>
+                  <div className="vtex-product-details__kit-container pv2 w-100 h-100 dn db-ns">
+                    { product.benefits.length > 0 && <ProductKit kit={product.benefits[0]} /> }
                   </div>
                 </div>
               )

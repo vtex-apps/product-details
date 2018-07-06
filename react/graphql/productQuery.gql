@@ -38,5 +38,50 @@ query Product($slug: String) {
       name
       values
     }
+    benefits {
+      featured
+      name
+      items {
+        product {
+          productId
+          productName
+          productReference
+          brand
+          description
+          items {
+            itemId
+            name
+            images {
+              imageId
+              imageLabel
+              imageTag
+              imageUrl
+              imageText
+            }
+            sellers {
+              sellerId
+              sellerName
+              addToCartLink
+              sellerDefault
+              commertialOffer {
+                Installments {
+                  Value
+                  InterestRate
+                  TotalValuePlusInterestRate
+                  NumberOfInstallments
+                  Name
+                }
+                AvailableQuantity
+                Price
+                ListPrice
+              }
+            }
+          }
+        }
+        discount
+        minQuantity
+      }
+      teaserType
+    }
   }
 }
