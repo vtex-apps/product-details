@@ -119,7 +119,7 @@ class ProductDetails extends Component {
                 }
 
                 [{ commertialOffer }] = selectedItem.sellers
-                const sellerId = parseInt(selectedItem.sellers[0].sellerId)
+                sellerId = parseInt(selectedItem.sellers[0].sellerId)
               }
 
               return (
@@ -130,12 +130,18 @@ class ProductDetails extends Component {
                         {!shouldDisplayLoader ? (
                           <ProductImages
                             images={selectedItem.images}
+                            loading
                             thumbnailSliderOrientation={
                               displayVertically ? 'VERTICAL' : 'HORIZONTAL'
                             }
                           />
                         ) : (
-                          <ProductImages loading={shouldDisplayLoader} />
+                          <ProductImages
+                            loading={shouldDisplayLoader}
+                            thumbnailSliderOrientation={
+                              displayVertically ? 'VERTICAL' : 'HORIZONTAL'
+                            }
+                          />
                         )}
                       </div>
                     </div>
@@ -154,7 +160,7 @@ class ProductDetails extends Component {
                       </div>
                       {!shouldDisplayLoader
                         ? commertialOffer.AvailableQuantity > 0 && (
-                          <div className="vtex-product-details__price-container pt1">
+                        <div className="vtex-product-details__price-container pt1">
                             <ProductPrice
                               listPrice={commertialOffer.ListPrice}
                               sellingPrice={commertialOffer.Price}
