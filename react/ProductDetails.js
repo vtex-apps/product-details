@@ -97,7 +97,7 @@ class ProductDetails extends Component {
         {intl => (
           <Query query={productQuery} variables={{ slug }}>
             {({ loading, data: { product } }) => {
-              let shouldDisplayLoader = loading || !product
+              const shouldDisplayLoader = loading || !product
               let selectedItem,
                 commertialOffer,
                 sellerId,
@@ -118,7 +118,7 @@ class ProductDetails extends Component {
                   selectedItem = skuItems[initialItemIndex]
                 }
 
-                ;[{ commertialOffer }] = selectedItem.sellers
+                [{ commertialOffer }] = selectedItem.sellers
                 const sellerId = parseInt(selectedItem.sellers[0].sellerId)
               }
 
@@ -154,15 +154,15 @@ class ProductDetails extends Component {
                       </div>
                       {!shouldDisplayLoader
                         ? commertialOffer.AvailableQuantity > 0 && (
-                            <div className="vtex-product-details__price-container pt1">
-                              <ProductPrice
-                                listPrice={commertialOffer.ListPrice}
-                                sellingPrice={commertialOffer.Price}
-                                installments={commertialOffer.Installments}
-                                {...this.props.price}
-                              />
-                            </div>
-                          )
+                          <div className="vtex-product-details__price-container pt1">
+                            <ProductPrice
+                              listPrice={commertialOffer.ListPrice}
+                              sellingPrice={commertialOffer.Price}
+                              installments={commertialOffer.Installments}
+                              {...this.props.price}
+                            />
+                          </div>
+                        )
                         : null}
                       <div className="pv2">
                         <hr className="o-30" size="1" />
@@ -238,11 +238,8 @@ class ProductDetails extends Component {
                       <ProductDescription
                         specifications={product.properties}
                         skuName={selectedItem.name}
-                      >
-                        <span className="measure-wide">
-                          {product.description}
-                        </span>
-                      </ProductDescription>
+                        description={product.description}
+                      />
                     ) : null}
                   </div>
                 </div>
