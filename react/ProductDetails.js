@@ -49,14 +49,14 @@ class ProductDetails extends Component {
       description: 'editor.product-details.description',
       type: 'object',
       properties: {
-        share: shareSchema,
-        price: priceSchema,
         displayVertically: {
           title: 'editor.product-details.displayVertically.title',
           type: 'boolean',
           default: false,
           isLayout: true,
         },
+        share: shareSchema,
+        price: priceSchema,
       },
     }
   }
@@ -190,10 +190,10 @@ class ProductDetails extends Component {
                           </div>
                         </div>
                       ) : (
-                        <div className="pv4">
-                          <AvailabilitySubscriber skuId={selectedItem.itemId} />
-                        </div>
-                      )}
+                          <div className="pv4">
+                            <AvailabilitySubscriber skuId={selectedItem.itemId} />
+                          </div>
+                        )}
                       <div className="flex w-100 pv2">
                         <div className="pv2 pr3 f6">
                           <FormattedMessage id="share.label" />:
