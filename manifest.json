@@ -28,11 +28,5 @@
   "dependencies": {
     "vtex.store-graphql": "2.x",
     "vtex.store-components": "1.x"
-  },
-  "billingOptions": {
-    "billingListeningRoute": "/_v/deactivateMePlease",
-    "termsURL": "http://route.to.the/terms",
-    "version": "0.1",
-    "free": true
   }
 }
