@@ -141,7 +141,7 @@ class ProductDetails extends Component {
                   selectedItem = skuItems[initialItemIndex]
                 }
 
-                [{ commertialOffer }] = selectedItem.sellers
+                ;[{ commertialOffer }] = selectedItem.sellers
                 sellerId = parseInt(selectedItem.sellers[0].sellerId)
               }
 
@@ -266,9 +266,11 @@ class ProductDetails extends Component {
 }
 
 ProductDetails.Loader = () => {
+  const uniquekey = 'vtex-product-details-loader'
+
   return (
     <div className="w-100" style={{ maxWidth: '600px' }}>
-      <ContentLoader height={600} width={500}>
+      <ContentLoader uniquekey={uniquekey} height={600} width={500}>
         <rect x="13" y="46.23" rx="4" ry="4" width="164.97" height="14.72" />
         <rect x="13" y="12" rx="3" ry="3" width="418.2" height="26.18" />
         <rect x="13" y="69.88" rx="3" ry="3" width="115.5" height="8.96" />
