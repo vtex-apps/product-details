@@ -176,7 +176,7 @@ class ProductDetails extends Component {
                       {commertialOffer.AvailableQuantity > 0 ? (
                         <div>
                           <div className="pv2">
-                            <BuyButton seller={sellerId} skuId={selectedItem.itemId}>
+                            <BuyButton skuItems={[{ skuId: selectedItem.itemId, quantity: 1, seller: sellerId }]}>
                               <FormattedMessage id="button-label" />
                             </BuyButton>
                           </div>
