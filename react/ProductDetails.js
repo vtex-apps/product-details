@@ -49,14 +49,14 @@ class ProductDetails extends Component {
       description: 'editor.product-details.description',
       type: 'object',
       properties: {
-        share: shareSchema,
-        price: priceSchema,
         displayVertically: {
           title: 'editor.product-details.displayVertically.title',
           type: 'boolean',
           default: false,
           isLayout: true,
         },
+        share: shareSchema,
+        price: priceSchema,
       },
     }
   }
@@ -203,8 +203,13 @@ class ProductDetails extends Component {
                             <div>
                               <div className="pv2">
                                 <BuyButton
-                                  seller={sellerId}
-                                  skuId={selectedItem.itemId}
+                                  skuItems={[
+                                    {
+                                      skuId: selectedItem.itemId,
+                                      quantity: 1,
+                                      seller: sellerId,
+                                    },
+                                  ]}
                                 >
                                   <FormattedMessage id="button-label" />
                                 </BuyButton>

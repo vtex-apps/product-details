@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Loader for `ProductDetails`
+### Fixed
+- `BuyButton` passed props.
+
+## [0.4.3] - 2018-07-10
+### Removed
+- billingOptions from `manifest.json`
+
+## [0.4.2] - 2018-07-10
+### Changed
+- Adjust schema props order.
 
 ## [0.4.1] - 2018-7-6
 ### Changed
