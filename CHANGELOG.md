@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Loader for `ProductDetails`
 
+### Changed
+- Removed product query and receiving loading information from ProductPage
+
 ## [0.4.4] - 2018-07-12
 ### Fixed
 - `BuyButton` passed props.
