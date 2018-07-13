@@ -92,14 +92,14 @@ class ProductDetails extends Component {
   renderLoader() {
     const { displayVertically } = this.props
 
-    const isVertical = displayVertically ? 'VERTICAL' : 'HORIZONTAL'
+    const orientation = displayVertically ? 'VERTICAL' : 'HORIZONTAL'
 
     return (
       <div className="vtex-product-details flex flex-wrap pa6">
         <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
           <div className="fr-ns w-100 h-100">
             <div className="flex justify-center">
-              <ProductImages.Loader isVertical={isVertical} />
+              <ProductImages.Loader isVertical={orientation} />
             </div>
           </div>
         </div>
@@ -141,7 +141,7 @@ class ProductDetails extends Component {
                   selectedItem = skuItems[initialItemIndex]
                 }
 
-                ;[{ commertialOffer }] = selectedItem.sellers
+                [{ commertialOffer }] = selectedItem.sellers
                 sellerId = parseInt(selectedItem.sellers[0].sellerId)
               }
 
