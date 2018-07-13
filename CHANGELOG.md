@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Loader for `ProductDetails`
+
+## [0.4.4] - 2018-07-12
 ### Fixed
 - `BuyButton` passed props.
 
