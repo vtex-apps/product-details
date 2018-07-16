@@ -31,6 +31,7 @@ class ProductDetails extends Component {
       showInstallments: true,
       showSavings: true,
     },
+    displayVertically: false,
   }
 
   static propTypes = ProductDetailsPropTypes
@@ -109,7 +110,8 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { product, loading, displayVertically } = this.props
+    const { productQuery, displayVertically } = this.props
+    const { product, loading } = productQuery
 
     const shouldDisplayLoader = loading || !product
 
