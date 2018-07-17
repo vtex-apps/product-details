@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 export default {
   /** Product slug */
   slug: PropTypes.string.isRequired,
-  /** Product that owns the informations */
-  data: PropTypes.shape({
+  /** Product Query from the graphql */
+  productQuery: PropTypes.shape({
+    /** Product that owns the informations */
     product: PropTypes.shape({
       /** Product's id */
       productId: PropTypes.string.isRequired,
       /** Product's name */
       productName: PropTypes.string.isRequired,
       /** Product reference */
-      productReference: PropTypes.string.isRequired,
+      productReference: PropTypes.string,
       /** Product's brand */
       brand: PropTypes.string.isRequired,
       /** Product's SKUs */
@@ -68,6 +69,8 @@ export default {
         })
       ).isRequired,
     }),
+    /** Loading info */
+    loading: PropTypes.bool.isRequired,
   }),
   /** Share Schema properties */
   share: PropTypes.shape({
