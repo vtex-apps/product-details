@@ -110,10 +110,9 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { productQuery, displayVertically } = this.props
-    const { product, loading } = productQuery
+    const { productQuery: { product }, displayVertically } = this.props
 
-    const shouldDisplayLoader = loading || !product
+    const shouldDisplayLoader = !product
 
     let selectedItem, commertialOffer, sellerId, skuItems, initialItemIndex
 
