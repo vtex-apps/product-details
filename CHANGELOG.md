@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.5.1] - 2018-07-23
+### Added
+- Stale cache for product preview
+
 ## [0.5.0] - 2018-07-17
 ### Added
 - Loader for `ProductDetails`
