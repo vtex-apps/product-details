@@ -110,7 +110,7 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { productQuery: { product }, displayVertically } = this.props
+    const { productQuery: { product, loading }, displayVertically } = this.props
 
     const shouldDisplayLoader = !product
 
@@ -215,7 +215,10 @@ class ProductDetails extends Component {
                       </div>
                     ) : (
                       <div className="pv4">
-                        <AvailabilitySubscriber skuId={selectedItem.itemId} />
+                        <AvailabilitySubscriber 
+                          skuId={selectedItem.itemId} 
+                          loading={loading}
+                        />
                       </div>
                     )}
                     <div className="flex w-100 pv2">
@@ -244,6 +247,7 @@ class ProductDetails extends Component {
                     specifications={product.properties}
                     skuName={selectedItem.name}
                     description={product.description}
+                    loading={loading}
                   />
                 </div>
               </div>
