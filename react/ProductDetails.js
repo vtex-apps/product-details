@@ -1,25 +1,24 @@
-import React, { Component } from 'react'
-import { FormattedMessage } from 'react-intl'
-import { mergeDeepRight, mapObjIndexed } from 'ramda'
-import { NoSSR } from 'render'
-import ContentLoader from 'react-content-loader'
+import './global.css'
 
+import { mapObjIndexed, mergeDeepRight } from 'ramda'
+import React, { Component } from 'react'
+import ContentLoader from 'react-content-loader'
+import { FormattedMessage } from 'react-intl'
+import { NoSSR } from 'render'
 import {
+  AvailabilitySubscriber,
   BuyButton,
   ProductDescription,
+  ProductImages,
   ProductName,
   ProductPrice,
-  ProductImages,
+  Share,
   ShippingSimulator,
   SKUSelector,
-  Share,
-  AvailabilitySubscriber,
 } from 'vtex.store-components'
 
-import ProductDetailsPropTypes from './propTypes'
 import IntlInjector from './components/IntlInjector'
-
-import './global.css'
+import ProductDetailsPropTypes from './propTypes'
 
 const { account } = global.__RUNTIME__
 
@@ -58,6 +57,41 @@ class ProductDetails extends Component {
         price: priceSchema,
       },
     }
+  }
+
+  static Loader = () => {
+    const uniquekey = 'vtex-product-details-loader'
+
+    return (
+      <div className="w-100" style={{ maxWidth: '600px' }}>
+        <ContentLoader uniquekey={uniquekey} height={600} width={500}>
+          <rect x="13" y="46.23" rx="4" ry="4" width="164.97" height="14.72" />
+          <rect x="13" y="12" rx="3" ry="3" width="418.2" height="26.18" />
+          <rect x="13" y="69.88" rx="3" ry="3" width="115.5" height="8.96" />
+          <rect x="16" y="108.23" rx="3" ry="3" width="45.6" height="17.28" />
+          <rect x="73" y="95" rx="3" ry="3" width="233.16" height="34.82" />
+          <rect x="13" y="147.23" rx="0" ry="0" width="208" height="10.98" />
+          <rect x="13" y="171.23" rx="0" ry="0" width="176" height="13.11" />
+          <rect x="16.45" y="220.23" rx="0" ry="0" width="40" height="40" />
+          <rect x="63.85" y="220.23" rx="0" ry="0" width="40" height="40" />
+          <rect x="13" y="195.23" rx="0" ry="0" width="57" height="12" />
+          <rect x="13" y="279.63" rx="0" ry="0" width="105.02" height="32.8" />
+          <rect
+            x="132.85"
+            y="333.63"
+            rx="0"
+            ry="0"
+            width="174.72"
+            height="30.07"
+          />
+          <rect x="13" y="341.63" rx="0" ry="0" width="101.26" height="19" />
+          <rect x="13" y="395.63" rx="0" ry="0" width="115.2" height="15.96" />
+          <circle cx="161.91" cy="402" r="18" />
+          <circle cx="207.25" cy="402" r="18" />
+          <circle cx="253.38" cy="402" r="18" />
+        </ContentLoader>
+      </div>
+    )
   }
 
   state = {
@@ -110,9 +144,12 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { productQuery: { product }, displayVertically } = this.props
+    const {
+      productQuery: { product, loading },
+      displayVertically,
+    } = this.props
 
-    const shouldDisplayLoader = !product
+    const shouldDisplayLoader = !product || loading
 
     let selectedItem, commertialOffer, sellerId, skuItems, initialItemIndex
 
@@ -199,8 +236,7 @@ class ProductDetails extends Component {
                                 quantity: 1,
                                 seller: sellerId,
                               },
-                            ]}
-                          >
+                            ]}>
                             <FormattedMessage id="button-label" />
                           </BuyButton>
                         </div>
@@ -253,41 +289,6 @@ class ProductDetails extends Component {
       </IntlInjector>
     )
   }
-}
-
-ProductDetails.Loader = () => {
-  const uniquekey = 'vtex-product-details-loader'
-
-  return (
-    <div className="w-100" style={{ maxWidth: '600px' }}>
-      <ContentLoader uniquekey={uniquekey} height={600} width={500}>
-        <rect x="13" y="46.23" rx="4" ry="4" width="164.97" height="14.72" />
-        <rect x="13" y="12" rx="3" ry="3" width="418.2" height="26.18" />
-        <rect x="13" y="69.88" rx="3" ry="3" width="115.5" height="8.96" />
-        <rect x="16" y="108.23" rx="3" ry="3" width="45.6" height="17.28" />
-        <rect x="73" y="95" rx="3" ry="3" width="233.16" height="34.82" />
-        <rect x="13" y="147.23" rx="0" ry="0" width="208" height="10.98" />
-        <rect x="13" y="171.23" rx="0" ry="0" width="176" height="13.11" />
-        <rect x="16.45" y="220.23" rx="0" ry="0" width="40" height="40" />
-        <rect x="63.85" y="220.23" rx="0" ry="0" width="40" height="40" />
-        <rect x="13" y="195.23" rx="0" ry="0" width="57" height="12" />
-        <rect x="13" y="279.63" rx="0" ry="0" width="105.02" height="32.8" />
-        <rect
-          x="132.85"
-          y="333.63"
-          rx="0"
-          ry="0"
-          width="174.72"
-          height="30.07"
-        />
-        <rect x="13" y="341.63" rx="0" ry="0" width="101.26" height="19" />
-        <rect x="13" y="395.63" rx="0" ry="0" width="115.2" height="15.96" />
-        <circle cx="161.91" cy="402" r="18" />
-        <circle cx="207.25" cy="402" r="18" />
-        <circle cx="253.38" cy="402" r="18" />
-      </ContentLoader>
-    </div>
-  )
 }
 
 function mergeSchemaAndDefaultProps(schema, propName) {
