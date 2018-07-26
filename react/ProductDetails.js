@@ -65,8 +65,6 @@ class ProductDetails extends Component {
     return (
       <div className="w-100" style={{ maxWidth: '600px' }}>
         <ContentLoader uniquekey={uniquekey} height={600} width={500}>
-          <rect x="13" y="46.23" rx="4" ry="4" width="164.97" height="14.72" />
-          <rect x="13" y="12" rx="3" ry="3" width="418.2" height="26.18" />
           <rect x="13" y="69.88" rx="3" ry="3" width="115.5" height="8.96" />
           <rect x="16" y="108.23" rx="3" ry="3" width="45.6" height="17.28" />
           <rect x="73" y="95" rx="3" ry="3" width="233.16" height="34.82" />
@@ -96,6 +94,9 @@ class ProductDetails extends Component {
 
   state = {
     skuIndex: null,
+    // Test Code
+    name: null,
+    skuName: null,
   }
 
   handleSkuChange = skuIndex => {
@@ -170,6 +171,18 @@ class ProductDetails extends Component {
       sellerId = parseInt(selectedItem.sellers[0].sellerId)
     }
 
+    // Test code
+    if (!this.state.name) {
+      setTimeout(
+        () =>
+          this.setState({
+            name: product.productName,
+            skuName: selectedItem.name,
+          }),
+        2000
+      )
+    }
+
     return (
       <IntlInjector>
         {intl => (
@@ -193,9 +206,10 @@ class ProductDetails extends Component {
                 <div className="vtex-product-details__details-container w-50-ns w-100-s pl5-ns">
                   <div className="fl-ns w-100">
                     <div className="vtex-product-details__name-container pv2">
+                      {/* Test code */}
                       <ProductName
-                        name={product.productName}
-                        skuName={selectedItem.name}
+                        name={this.state.name}
+                        skuName={this.state.skuName}
                         brandName={product.brand}
                         productReference={product.productReference}
                       />
