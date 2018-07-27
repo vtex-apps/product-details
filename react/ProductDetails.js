@@ -65,10 +65,6 @@ class ProductDetails extends Component {
     return (
       <div className="w-100" style={{ maxWidth: '600px' }}>
         <ContentLoader uniquekey={uniquekey} height={600} width={500}>
-          <rect x="13" y="69.88" rx="3" ry="3" width="115.5" height="8.96" />
-          <rect x="16" y="108.23" rx="3" ry="3" width="45.6" height="17.28" />
-          <rect x="73" y="95" rx="3" ry="3" width="233.16" height="34.82" />
-          <rect x="13" y="147.23" rx="0" ry="0" width="208" height="10.98" />
           <rect x="13" y="171.23" rx="0" ry="0" width="176" height="13.11" />
           <rect x="16.45" y="220.23" rx="0" ry="0" width="40" height="40" />
           <rect x="63.85" y="220.23" rx="0" ry="0" width="40" height="40" />
@@ -97,6 +93,8 @@ class ProductDetails extends Component {
     // Test Code
     name: null,
     skuName: null,
+    sellingPrice: null,
+    listPrice: null,
   }
 
   handleSkuChange = skuIndex => {
@@ -181,6 +179,15 @@ class ProductDetails extends Component {
           }),
         2000
       )
+
+      setTimeout(
+        () =>
+          this.setState({
+            listPrice: commertialOffer.ListPrice,
+            sellingPrice: commertialOffer.Price,
+          }),
+        3000
+      )
     }
 
     return (
@@ -217,8 +224,8 @@ class ProductDetails extends Component {
                     {commertialOffer.AvailableQuantity > 0 && (
                       <div className="vtex-product-details__price-container pt1">
                         <ProductPrice
-                          listPrice={commertialOffer.ListPrice}
-                          sellingPrice={commertialOffer.Price}
+                          listPrice={this.state.listPrice}
+                          sellingPrice={this.state.sellingPrice}
                           installments={commertialOffer.Installments}
                           {...this.props.price}
                         />
