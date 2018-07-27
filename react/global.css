@@ -17,19 +17,51 @@
     font-size: 1rem;
   }
 
+  .vtex-product-details .vtex-product-name-loader {
+    padding-top: 10px;
+    max-height: 90px;
+    max-width: 450px;
+  }
+
   .vtex-product-details .vtex-product-name__brand--loader {
-    rx: 3;
-    ry: 3;
     width: 100%;
     height: 26.1px;
   }
 
   .vtex-product-details .vtex-product-name__sku--loader {
-    rx: 4;
-    ry: 4;
     y: 41.1px;
     width: 164.97px;
     height: 16.72px;
+  }
+
+  .vtex-product-details .vtex-price-loader {
+    max-height: 170px;
+    max-width: 450px;
+    padding-top: 10px;
+  }
+
+  .vtex-product-details .vtex-price-list__container--loader {
+    width: 115.5px;
+    height: 8.96px;
+  }
+
+  .vtex-product-details .vtex-price-selling__label--loader {
+    width: 45.6px;
+    height: 17.28px;
+    y: 38.35;
+  }
+
+  .vtex-product-details .vtex-price-selling--loader {
+    x: 60;
+    y: 25.12;
+    width: 233.16px;
+    height: 34.82px;
+  }
+
+  .vtex-product-details .vtex-price-savings--loader {
+    y: 77.35;
+    width: 208px;
+    height: 10.98px;
   }
 
   .vtex-product-details .vtex-price-list__container {
