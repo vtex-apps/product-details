@@ -65,6 +65,12 @@ class ProductDetails extends Component {
     return (
       <div className="w-100" style={{ maxWidth: '600px' }}>
         <ContentLoader uniquekey={uniquekey} height={600} width={500}>
+          <rect x="13" y="46.23" rx="4" ry="4" width="164.97" height="14.72" />
+          <rect x="13" y="12" rx="3" ry="3" width="418.2" height="26.18" />
+          <rect x="13" y="69.88" rx="3" ry="3" width="115.5" height="8.96" />
+          <rect x="16" y="108.23" rx="3" ry="3" width="45.6" height="17.28" />
+          <rect x="73" y="95" rx="3" ry="3" width="233.16" height="34.82" />
+          <rect x="13" y="147.23" rx="0" ry="0" width="208" height="10.98" />
           <rect x="13" y="171.23" rx="0" ry="0" width="176" height="13.11" />
           <rect x="16.45" y="220.23" rx="0" ry="0" width="40" height="40" />
           <rect x="63.85" y="220.23" rx="0" ry="0" width="40" height="40" />
@@ -90,11 +96,6 @@ class ProductDetails extends Component {
 
   state = {
     skuIndex: null,
-    // Test Code
-    name: null,
-    skuName: null,
-    sellingPrice: null,
-    listPrice: null,
   }
 
   handleSkuChange = skuIndex => {
@@ -144,110 +145,84 @@ class ProductDetails extends Component {
 
   render() {
     const {
-      productQuery: { product, loading },
+      productQuery: { product },
       displayVertically,
     } = this.props
 
-    const shouldDisplayLoader = !product || loading
-
-    let selectedItem, commertialOffer, sellerId, skuItems, initialItemIndex
-
-    if (!shouldDisplayLoader) {
-      const [{ itemId: initialItem }] = product.items
-
-      skuItems = product.items.slice()
-      skuItems.sort(this.compareSku)
-
-      initialItemIndex = skuItems.findIndex(item => item.itemId === initialItem)
-
-      selectedItem = skuItems[this.state.skuIndex]
-      if (selectedItem == null) {
-        selectedItem = skuItems[initialItemIndex]
-      }
-
-      [{ commertialOffer }] = selectedItem.sellers
-      sellerId = parseInt(selectedItem.sellers[0].sellerId)
+    if (!product) {
+      return this.renderLoader()
     }
 
-    // Test code
-    if (!this.state.name) {
-      setTimeout(
-        () =>
-          this.setState({
-            name: product.productName,
-            skuName: selectedItem.name,
-          }),
-        2000
-      )
+    const [{ itemId: initialItem }] = product.items
 
-      setTimeout(
-        () =>
-          this.setState({
-            listPrice: commertialOffer.ListPrice,
-            sellingPrice: commertialOffer.Price,
-          }),
-        3000
-      )
-    }
+    const skuItems = product.items.slice()
+    skuItems.sort(this.compareSku)
+
+    const initialItemIndex = skuItems.findIndex(
+      item => item.itemId === initialItem
+    )
+
+    const selectedItem =
+      skuItems[this.state.skuIndex] || skuItems[initialItemIndex]
+    const [{ commertialOffer }] = selectedItem.sellers
+    const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
     return (
       <IntlInjector>
         {intl => (
           <NoSSR onSSR={this.renderLoader()}>
-            {shouldDisplayLoader ? (
-              this.renderLoader()
-            ) : (
-              <div className="vtex-product-details flex flex-wrap pa6">
-                <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
-                  <div className="fr-ns w-100 h-100">
-                    <div className="flex justify-center">
-                      <ProductImages
-                        images={selectedItem.images}
-                        thumbnailSliderOrientation={
-                          displayVertically ? 'VERTICAL' : 'HORIZONTAL'
-                        }
-                      />
-                    </div>
+            <div className="vtex-product-details flex flex-wrap pa6">
+              <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
+                <div className="fr-ns w-100 h-100">
+                  <div className="flex justify-center pt2">
+                    <ProductImages
+                      images={selectedItem.images}
+                      thumbnailSliderOrientation={
+                        displayVertically ? 'VERTICAL' : 'HORIZONTAL'
+                      }
+                    />
                   </div>
                 </div>
-                <div className="vtex-product-details__details-container w-50-ns w-100-s pl5-ns">
-                  <div className="fl-ns w-100">
-                    <div className="vtex-product-details__name-container pv2">
-                      {/* Test code */}
-                      <ProductName
-                        name={this.state.name}
-                        skuName={this.state.skuName}
-                        brandName={product.brand}
-                        productReference={product.productReference}
-                      />
-                    </div>
-                    {commertialOffer.AvailableQuantity > 0 && (
+              </div>
+              <div className="vtex-product-details__details-container w-50-ns w-100-s pl5-ns">
+                <div className="fl-ns w-100">
+                  <div className="vtex-product-details__name-container pv2">
+                    <ProductName
+                      name={product.productName}
+                      skuName={selectedItem.name}
+                      brandName={product.brand}
+                      productReference={product.productReference}
+                    />
+                  </div>
+                  {!Number.isNaN(+commertialOffer.AvailableQuantity) &&
+                    commertialOffer.AvailableQuantity > 0 && (
                       <div className="vtex-product-details__price-container pt1">
                         <ProductPrice
-                          listPrice={this.state.listPrice}
-                          sellingPrice={this.state.sellingPrice}
+                          listPrice={commertialOffer.ListPrice}
+                          sellingPrice={commertialOffer.Price}
                           installments={commertialOffer.Installments}
                           {...this.props.price}
                         />
                       </div>
                     )}
-                    <div className="pv2">
-                      <hr className="o-30" size="1" />
+                  <div className="pv2">
+                    <hr className="o-30" size="1" />
+                  </div>
+                  <div>
+                    <div className="f7">
+                      <FormattedMessage id="sku-label" />
                     </div>
-                    <div>
-                      <div className="f7">
-                        <FormattedMessage id="sku-label" />
-                      </div>
-                      <SKUSelector
-                        skuItems={skuItems}
-                        defaultIndex={initialItemIndex}
-                        onSKUSelected={this.handleSkuChange}
-                      />
-                    </div>
-                    <div className="pv2">
-                      <hr className="o-30" size="1" />
-                    </div>
-                    {commertialOffer.AvailableQuantity > 0 ? (
+                    <SKUSelector
+                      skuItems={skuItems}
+                      defaultIndex={initialItemIndex}
+                      onSKUSelected={this.handleSkuChange}
+                    />
+                  </div>
+                  <div className="pv2">
+                    <hr className="o-30" size="1" />
+                  </div>
+                  {!Number.isNaN(+commertialOffer.AvailableQuantity) &&
+                    (commertialOffer.AvailableQuantity > 0 ? (
                       <div>
                         <div className="pv2">
                           <BuyButton
@@ -274,37 +249,36 @@ class ProductDetails extends Component {
                       <div className="pv4">
                         <AvailabilitySubscriber skuId={selectedItem.itemId} />
                       </div>
-                    )}
-                    <div className="flex w-100 pv2">
-                      <div className="pv2 pr3 f6">
-                        <FormattedMessage id="share.label" />:
-                      </div>
-                      <Share
-                        {...this.props.share}
-                        title={intl.formatMessage(
-                          { id: 'share.title' },
-                          {
-                            product: product.productName,
-                            sku: selectedItem.name,
-                            store: account,
-                          }
-                        )}
-                      />
+                    ))}
+                  <div className="flex w-100 pv2">
+                    <div className="pv2 pr3 f6">
+                      <FormattedMessage id="share.label" />:
                     </div>
+                    <Share
+                      {...this.props.share}
+                      title={intl.formatMessage(
+                        { id: 'share.title' },
+                        {
+                          product: product.productName,
+                          sku: selectedItem.name,
+                          store: account,
+                        }
+                      )}
+                    />
                   </div>
                 </div>
-                <div className="pv4 w-100">
-                  <hr className="b--black-10" size="0" />
-                </div>
-                <div className="vtex-product-details__description-container pv2 w-100 h-100">
-                  <ProductDescription
-                    specifications={product.properties}
-                    skuName={selectedItem.name}
-                    description={product.description}
-                  />
-                </div>
               </div>
-            )}
+              <div className="pv4 w-100">
+                <hr className="b--black-10" size="0" />
+              </div>
+              <div className="vtex-product-details__description-container pv2 w-100 h-100">
+                <ProductDescription
+                  specifications={product.properties}
+                  skuName={selectedItem.name}
+                  description={product.description}
+                />
+              </div>
+            </div>
           </NoSSR>
         )}
       </IntlInjector>
