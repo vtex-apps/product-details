@@ -1,6 +1,6 @@
 import './global.css'
 
-import { mapObjIndexed, mergeDeepRight } from 'ramda'
+import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
 import React, { Component } from 'react'
 import ContentLoader from 'react-content-loader'
 import { FormattedMessage } from 'react-intl'
@@ -143,29 +143,48 @@ class ProductDetails extends Component {
     )
   }
 
+  get skuItems() {
+    const {
+      productQuery: { product },
+    } = this.props
+    if (!product) return null
+
+    const skuItems = product.items.slice()
+    skuItems.sort(this.compareSku)
+    return skuItems
+  }
+
+  get initialItemIndex() {
+    const {
+      productQuery: { product },
+    } = this.props
+    if (!product) return null
+
+    const [{ itemId: initialItem }] = product.items
+    return this.skuItems.findIndex(item => item.itemId === initialItem)
+  }
+
+  get selectedItem() {
+    return (
+      this.skuItems &&
+      (this.skuItems[this.state.skuIndex] ||
+        this.skuItems[this.initialItemIndex])
+    )
+  }
+
+  get commertialOffer() {
+    return path(['sellers', 0, 'commertialOffer'], this.selectedItem)
+  }
+
+  get sellerId() {
+    return parseInt(path(['sellers', 0, 'sellerId'], this.selectedItem))
+  }
+
   render() {
     const {
       productQuery: { product },
       displayVertically,
     } = this.props
-
-    if (!product) {
-      return this.renderLoader()
-    }
-
-    const [{ itemId: initialItem }] = product.items
-
-    const skuItems = product.items.slice()
-    skuItems.sort(this.compareSku)
-
-    const initialItemIndex = skuItems.findIndex(
-      item => item.itemId === initialItem
-    )
-
-    const selectedItem =
-      skuItems[this.state.skuIndex] || skuItems[initialItemIndex]
-    const [{ commertialOffer }] = selectedItem.sellers
-    const sellerId = parseInt(selectedItem.sellers[0].sellerId)
 
     return (
       <IntlInjector>
@@ -176,7 +195,7 @@ class ProductDetails extends Component {
                 <div className="fr-ns w-100 h-100">
                   <div className="flex justify-center pt2">
                     <ProductImages
-                      images={selectedItem.images}
+                      images={path(['images'], this.selectedItem)}
                       thumbnailSliderOrientation={
                         displayVertically ? 'VERTICAL' : 'HORIZONTAL'
                       }
@@ -188,23 +207,28 @@ class ProductDetails extends Component {
                 <div className="fl-ns w-100">
                   <div className="vtex-product-details__name-container pv2">
                     <ProductName
-                      name={product.productName}
-                      skuName={selectedItem.name}
-                      brandName={product.brand}
-                      productReference={product.productReference}
+                      name={path(['productName'], product)}
+                      skuName={path(['name'], this.selectedItem)}
+                      brandName={path(['brand'], product)}
+                      productReference={path(['productReference'], product)}
                     />
                   </div>
-                  {!Number.isNaN(+commertialOffer.AvailableQuantity) &&
-                    commertialOffer.AvailableQuantity > 0 && (
-                      <div className="vtex-product-details__price-container pt1">
-                        <ProductPrice
-                          listPrice={commertialOffer.ListPrice}
-                          sellingPrice={commertialOffer.Price}
-                          installments={commertialOffer.Installments}
-                          {...this.props.price}
-                        />
-                      </div>
-                    )}
+                  {(Number.isNaN(
+                    +path(['AvailableQuantity'], this.commertialOffer)
+                  ) ||
+                    path(['AvailableQuantity'], this.commertialOffer) > 0) && (
+                    <div className="vtex-product-details__price-container pt1">
+                      <ProductPrice
+                        listPrice={path(['ListPrice'], this.commertialOffer)}
+                        sellingPrice={path(['Price'], this.commertialOffer)}
+                        installments={path(
+                          ['Installments'],
+                          this.commertialOffer
+                        )}
+                        {...this.props.price}
+                      />
+                    </div>
+                  )}
                   <div className="pv2">
                     <hr className="o-30" size="1" />
                   </div>
@@ -212,25 +236,29 @@ class ProductDetails extends Component {
                     <div className="f7">
                       <FormattedMessage id="sku-label" />
                     </div>
-                    <SKUSelector
-                      skuItems={skuItems}
-                      defaultIndex={initialItemIndex}
-                      onSKUSelected={this.handleSkuChange}
-                    />
+                    {product && (
+                      <SKUSelector
+                        skuItems={this.skuItems}
+                        defaultIndex={this.initialItemIndex}
+                        onSKUSelected={this.handleSkuChange}
+                      />
+                    )}
                   </div>
                   <div className="pv2">
                     <hr className="o-30" size="1" />
                   </div>
-                  {!Number.isNaN(+commertialOffer.AvailableQuantity) &&
-                    (commertialOffer.AvailableQuantity > 0 ? (
+                  {!Number.isNaN(
+                    +path(['AvailableQuantity'], this.commertialOffer)
+                  ) &&
+                    (path(['AvailableQuantity'], this.commertialOffer) > 0 ? (
                       <div>
                         <div className="pv2">
                           <BuyButton
                             skuItems={[
                               {
-                                skuId: selectedItem.itemId,
+                                skuId: this.selectedItem.itemId,
                                 quantity: 1,
-                                seller: sellerId,
+                                seller: this.sellerId,
                               },
                             ]}>
                             <FormattedMessage id="button-label" />
@@ -239,15 +267,17 @@ class ProductDetails extends Component {
                         <div className="pv4">
                           {/* FIXME: Get this country data correctly */}
                           <ShippingSimulator
-                            skuId={selectedItem.itemId}
-                            seller={sellerId}
+                            skuId={this.selectedItem.itemId}
+                            seller={this.sellerId}
                             country="BRA"
                           />
                         </div>
                       </div>
                     ) : (
                       <div className="pv4">
-                        <AvailabilitySubscriber skuId={selectedItem.itemId} />
+                        <AvailabilitySubscriber
+                          skuId={this.selectedItem.itemId}
+                        />
                       </div>
                     ))}
                   <div className="flex w-100 pv2">
@@ -259,8 +289,8 @@ class ProductDetails extends Component {
                       title={intl.formatMessage(
                         { id: 'share.title' },
                         {
-                          product: product.productName,
-                          sku: selectedItem.name,
+                          product: path(['productName'], product),
+                          sku: path(['name'], this.selectedItem),
                           store: account,
                         }
                       )}
@@ -273,9 +303,9 @@ class ProductDetails extends Component {
               </div>
               <div className="vtex-product-details__description-container pv2 w-100 h-100">
                 <ProductDescription
-                  specifications={product.properties}
-                  skuName={selectedItem.name}
-                  description={product.description}
+                  specifications={path(['properties'], product)}
+                  skuName={path(['name'], this.selectedItem)}
+                  description={path(['description'], product)}
                 />
               </div>
             </div>
