@@ -18,50 +18,50 @@
   }
 
   .vtex-product-details .vtex-product-name-loader {
-    padding-top: 10px;
-    max-height: 90px;
-    max-width: 450px;
+    padding-top: 0.625em;
+    max-height: 5.625em;
+    max-width: 28.125em;
   }
 
   .vtex-product-details .vtex-product-name__brand--loader {
     width: 100%;
-    height: 26.1px;
+    height: 1.631em;
   }
 
   .vtex-product-details .vtex-product-name__sku--loader {
-    y: 41.1px;
-    width: 164.97px;
-    height: 16.72px;
+    y: 2.569em;
+    width: 10.311em;
+    height: 1.045em;
   }
 
   .vtex-product-details .vtex-price-loader {
-    max-height: 170px;
+    max-height: 10.625em;
     max-width: 450px;
-    padding-top: 10px;
+    padding-top: 28.125em;
   }
 
   .vtex-product-details .vtex-price-list__container--loader {
-    width: 115.5px;
-    height: 8.96px;
+    width: 7.219em;
+    height: 0.56em;
   }
 
   .vtex-product-details .vtex-price-selling__label--loader {
-    width: 45.6px;
-    height: 17.28px;
+    width: 2.85em;
+    height: 1.08em;
     y: 38.35;
   }
 
   .vtex-product-details .vtex-price-selling--loader {
     x: 60;
     y: 25.12;
-    width: 233.16px;
-    height: 34.82px;
+    width: 14.572em;
+    height: 2.176em;
   }
 
   .vtex-product-details .vtex-price-savings--loader {
     y: 77.35;
-    width: 208px;
-    height: 10.98px;
+    width: 13em;
+    height: 0.686em;
   }
 
   .vtex-product-details .vtex-price-list__container {
