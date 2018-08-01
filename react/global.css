@@ -127,3 +127,7 @@
 .vtex-product-details > .vtex-price {
   height: 125px;
 }
+
+.vtex-product-details .vtex-share {
+  height: 2em;
+}

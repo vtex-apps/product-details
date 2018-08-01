@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Add `ProductName`, `ProductPrice` and `ProductImages` loaders CSS.
+- Add the rest of the content loaders logic and CSS.
 
 ## [0.5.2] - 2018-07-25
 ### Fixed

@@ -128,6 +128,10 @@ class ProductDetails extends Component {
       displayVertically,
     } = this.props
 
+    const showBuyButton =
+      Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
+      path(['AvailableQuantity'], this.commertialOffer) > 0
+
     return (
       <IntlInjector>
         {intl => (
@@ -188,45 +192,44 @@ class ProductDetails extends Component {
                 <div className="pv2">
                   <hr className="o-30" size="1" />
                 </div>
-                {!Number.isNaN(
-                  +path(['AvailableQuantity'], this.commertialOffer)
-                ) &&
-                  (path(['AvailableQuantity'], this.commertialOffer) > 0 ? (
-                    <div>
-                      <div className="pv2">
-                        <BuyButton
-                          skuItems={[
+                {showBuyButton ? (
+                  <div>
+                    <div className="pv2">
+                      <BuyButton
+                        skuItems={
+                          this.selectedItem &&
+                          this.sellerId && [
                             {
                               skuId: this.selectedItem.itemId,
                               quantity: 1,
                               seller: this.sellerId,
                             },
-                          ]}>
-                          <FormattedMessage id="button-label" />
-                        </BuyButton>
-                      </div>
-                      <div className="pv4">
-                        {/* FIXME: Get this country data correctly */}
-                        <ShippingSimulator
-                          skuId={this.selectedItem.itemId}
-                          seller={this.sellerId}
-                          country="BRA"
-                        />
-                      </div>
+                          ]
+                        }>
+                        <FormattedMessage id="button-label" />
+                      </BuyButton>
                     </div>
-                  ) : (
                     <div className="pv4">
-                      <AvailabilitySubscriber
-                        skuId={this.selectedItem.itemId}
+                      {/* FIXME: Get this country data correctly */}
+                      <ShippingSimulator
+                        skuId={path(['itemId'], this.selectedItem)}
+                        seller={this.sellerId}
+                        country="BRA"
                       />
                     </div>
-                  ))}
+                  </div>
+                ) : (
+                  <div className="pv4">
+                    <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
+                  </div>
+                )}
                 <div className="flex w-100 pv2">
                   <div className="pv2 pr3 f6">
                     <FormattedMessage id="share.label" />:
                   </div>
                   <Share
                     {...this.props.share}
+                    loading={!path(['name'], this.selectedItem)}
                     title={intl.formatMessage(
                       { id: 'share.title' },
                       {
