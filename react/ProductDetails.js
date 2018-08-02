@@ -1,7 +1,7 @@
 import './global.css'
 
 import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { FormattedMessage } from 'react-intl'
 import {
   AvailabilitySubscriber,
@@ -193,7 +193,7 @@ class ProductDetails extends Component {
                   <hr className="o-30" size="1" />
                 </div>
                 {showBuyButton ? (
-                  <div>
+                  <Fragment>
                     <div className="pv2">
                       <BuyButton
                         skuItems={
@@ -217,7 +217,7 @@ class ProductDetails extends Component {
                         country="BRA"
                       />
                     </div>
-                  </div>
+                  </Fragment>
                 ) : (
                   <div className="pv4">
                     <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
