@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 
 export default {
+  skuId: PropTypes.string,
   /** Product slug */
   slug: PropTypes.string.isRequired,
   /** Product Query from the graphql */

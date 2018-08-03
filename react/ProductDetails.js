@@ -57,14 +57,6 @@ class ProductDetails extends Component {
     }
   }
 
-  state = {
-    skuIndex: null,
-  }
-
-  handleSkuChange = skuIndex => {
-    this.setState({ skuIndex })
-  }
-
   compareSku = (item, otherItem) => {
     const [
       {
@@ -86,32 +78,17 @@ class ProductDetails extends Component {
   }
 
   get skuItems() {
-    const {
-      productQuery: { product },
-    } = this.props
-    if (!product) return null
-
+    const { productQuery: { product = { items : [] } } } = this.props
     const skuItems = product.items.slice()
     skuItems.sort(this.compareSku)
     return skuItems
   }
 
-  get initialItemIndex() {
-    const {
-      productQuery: { product },
-    } = this.props
-    if (!product) return null
-
-    const [{ itemId: initialItem }] = product.items
-    return this.skuItems.findIndex(item => item.itemId === initialItem)
-  }
-
   get selectedItem() {
-    return (
-      this.skuItems &&
-      (this.skuItems[this.state.skuIndex] ||
-        this.skuItems[this.initialItemIndex])
-    )
+    const { productQuery: { product = { items : [] } } } = this.props
+    if (!this.props.query.skuId) return product.items[0]
+    const [selected] = product.items.filter(sku => sku.itemId == this.props.query.skuId)
+    return selected
   }
 
   get commertialOffer() {
@@ -184,8 +161,8 @@ class ProductDetails extends Component {
                   {product && (
                     <SKUSelector
                       skuItems={this.skuItems}
-                      defaultIndex={this.initialItemIndex}
-                      onSKUSelected={this.handleSkuChange}
+                      skuSelected={this.selectedItem}
+                      productSlug={product.linkText}
                     />
                   )}
                 </div>
