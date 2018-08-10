@@ -85,9 +85,10 @@ class ProductDetails extends Component {
   }
 
   get selectedItem() {
-    const { productQuery: { product = { items : [] } } } = this.props
-    if (!this.props.query.skuId) return product.items[0]
-    const [selected] = product.items.filter(sku => sku.itemId == this.props.query.skuId)
+    const { productQuery: { product } } = this.props
+    const {items} = product || { items : [] }
+    if (!this.props.query.skuId) return items[0]
+    const [selected] = items.filter(sku => sku.itemId == this.props.query.skuId)
     return selected
   }
 
