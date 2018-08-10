@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 
 export default {
+  /** SKU's id */
   skuId: PropTypes.string,
   /** Product slug */
   slug: PropTypes.string.isRequired,
