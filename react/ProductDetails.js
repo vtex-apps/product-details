@@ -78,16 +78,16 @@ class ProductDetails extends Component {
   }
 
   get skuItems() {
-    const { productQuery: { product = { items : [] } } } = this.props
-    const skuItems = product.items.slice()
+    const items = path(['productQuery', 'product', 'items'], this.props) || []
+    const skuItems = items.slice()
     skuItems.sort(this.compareSku)
     return skuItems
   }
 
   get selectedItem() {
-    const { productQuery: { product = { items : [] } } } = this.props
-    if (!this.props.query.skuId) return product.items[0]
-    const [selected] = product.items.filter(sku => sku.itemId == this.props.query.skuId)
+    const items = path(['productQuery', 'product', 'items'], this.props) || []
+    if (!this.props.query.skuId) return items[0]
+    const [selected] = items.filter(sku => sku.itemId == this.props.query.skuId)
     return selected
   }
 
