@@ -1,8 +1,8 @@
-import './global.css'
+import './global.css';
 
-import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
-import React, { Component, Fragment } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { mapObjIndexed, mergeDeepRight, path } from 'ramda';
+import React, { Component, Fragment } from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
   AvailabilitySubscriber,
   BuyButton,
@@ -13,12 +13,56 @@ import {
   Share,
   ShippingSimulator,
   SKUSelector,
-} from 'vtex.store-components'
+} from 'vtex.store-components';
 
-import IntlInjector from './components/IntlInjector'
-import ProductDetailsPropTypes from './propTypes'
+import IntlInjector from './components/IntlInjector';
+import ProductDetailsPropTypes from './propTypes';
 
 const { account } = global.__RUNTIME__
+const productNameLoaderStyles = {
+  'vtex-product-name__brand--loader': {
+    x: 0,
+    width: '100%',
+    height: '1.631em',
+  },
+  'vtex-product-name__sku--loader': {
+    x: 0,
+    y: '2.569em',
+    width: '10.311em',
+    height: '1.045em',
+  },
+}
+const productPriceLoaderStyles = {
+  'vtex-price-list__container--loader': {
+    x: 0,
+    width: '7.219em',
+    height: '0.56em',
+  },
+  'vtex-price-selling__label--loader': {
+    x: 0,
+    y: '2em',
+    width: '2.85em',
+    height: '1.08em',
+  },
+  'vtex-price-selling--loader': {
+    x: '3.25em',
+    y: '0.86em',
+    width: '14.572em',
+    height: '2.176em',
+  },
+  'vtex-price-installments--loader': {
+    x: 0,
+    y: '3.75em',
+    width: '12em',
+    height: '0.825em',
+  },
+  'vtex-price-savings--loader': {
+    x: 0,
+    y: '5em',
+    width: '10em',
+    height: '0.686em',
+  },
+}
 
 class ProductDetails extends Component {
   static defaultProps = {
@@ -129,6 +173,7 @@ class ProductDetails extends Component {
               <div className="fl-ns w-100">
                 <div className="vtex-product-details__name-container pv2">
                   <ProductName
+                    styles={productNameLoaderStyles}
                     name={path(['productName'], product)}
                     skuName={path(['name'], this.selectedItem)}
                     brandName={path(['brand'], product)}
@@ -141,6 +186,7 @@ class ProductDetails extends Component {
                   path(['AvailableQuantity'], this.commertialOffer) > 0) && (
                   <div className="vtex-product-details__price-container pt1">
                     <ProductPrice
+                      styles={productPriceLoaderStyles}
                       listPrice={path(['ListPrice'], this.commertialOffer)}
                       sellingPrice={path(['Price'], this.commertialOffer)}
                       installments={path(
