@@ -1,8 +1,8 @@
-import './global.css';
+import './global.css'
 
-import { mapObjIndexed, mergeDeepRight, path } from 'ramda';
-import React, { Component, Fragment } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
+import React, { Component, Fragment } from 'react'
+import { FormattedMessage } from 'react-intl'
 import {
   AvailabilitySubscriber,
   BuyButton,
@@ -13,10 +13,10 @@ import {
   Share,
   ShippingSimulator,
   SKUSelector,
-} from 'vtex.store-components';
+} from 'vtex.store-components'
 
-import IntlInjector from './components/IntlInjector';
-import ProductDetailsPropTypes from './propTypes';
+import IntlInjector from './components/IntlInjector'
+import ProductDetailsPropTypes from './propTypes'
 
 const { account } = global.__RUNTIME__
 const productNameLoaderStyles = {
