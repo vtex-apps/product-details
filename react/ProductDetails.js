@@ -72,6 +72,11 @@ class ProductDetails extends Component {
       showInstallments: true,
       showSavings: true,
     },
+    name: {
+      showProductReference: false,
+      showBrandName: false,
+      showSku: false,
+    },
     displayVertically: false,
   }
 
@@ -83,6 +88,7 @@ class ProductDetails extends Component {
       ProductPrice.schema || ProductPrice.getSchema(props),
       'price'
     )
+    const nameSchema = ProductName.schema || ProductName.getSchema(props)
 
     return {
       title: 'editor.product-details.title',
@@ -97,6 +103,7 @@ class ProductDetails extends Component {
         },
         share: shareSchema,
         price: priceSchema,
+        name: nameSchema,
       },
     }
   }
@@ -178,6 +185,7 @@ class ProductDetails extends Component {
                     skuName={path(['name'], this.selectedItem)}
                     brandName={path(['brand'], product)}
                     productReference={path(['productReference'], product)}
+                    {...this.props.name}
                   />
                 </div>
                 {(Number.isNaN(
@@ -228,7 +236,8 @@ class ProductDetails extends Component {
                               seller: this.sellerId,
                             },
                           ]
-                        }>
+                        }
+                      >
                         <FormattedMessage id="button-label" />
                       </BuyButton>
                     </div>
