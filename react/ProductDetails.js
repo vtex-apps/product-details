@@ -163,7 +163,7 @@ class ProductDetails extends Component {
     return (
       <IntlInjector>
         {intl => (
-          <div className="vtex-product-details flex flex-wrap pa6">
+          <div className="vtex-product-details vtex-page-padding flex flex-wrap pa6">
             <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
               <div className="fr-ns w-100 h-100">
                 <div className="flex justify-center pt2">
@@ -236,8 +236,7 @@ class ProductDetails extends Component {
                               seller: this.sellerId,
                             },
                           ]
-                        }
-                      >
+                        }>
                         <FormattedMessage id="button-label" />
                       </BuyButton>
                     </div>
