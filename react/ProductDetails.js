@@ -12,7 +12,7 @@ import {
   ShippingSimulator,
   SKUSelector,
 } from 'vtex.store-components'
-import { ExtensionPoint } from 'render'
+import { ExtensionPoint, withRuntimeContext } from 'render'
 
 import IntlInjector from './components/IntlInjector'
 import ProductDetailsPropTypes from './propTypes'
@@ -159,11 +159,13 @@ class ProductDetails extends Component {
       term,
       slug,
       categories,
+      runtime,
     } = this.props
 
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
+    const country = path(['culture', 'country'], runtime)
 
     return (
       <IntlInjector>
@@ -254,11 +256,10 @@ class ProductDetails extends Component {
                         </BuyButton>
                       </div>
                       <div className="pv4">
-                        {/* FIXME: Get this country data correctly */}
                         <ShippingSimulator
                           skuId={path(['itemId'], this.selectedItem)}
                           seller={this.sellerId}
-                          country="BRA"
+                          country={country}
                         />
                       </div>
                     </Fragment>
@@ -315,4 +316,4 @@ function mergeSchemaAndDefaultProps(schema, propName) {
   })
 }
 
-export default ProductDetails
+export default withRuntimeContext(ProductDetails)
