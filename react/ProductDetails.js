@@ -207,26 +207,23 @@ class ProductDetails extends Component {
                     +path(['AvailableQuantity'], this.commertialOffer)
                   ) ||
                     path(['AvailableQuantity'], this.commertialOffer) > 0) && (
-                    <div className="vtex-product-details__price-container pt1">
-                      <ProductPrice
-                        styles={productPriceLoaderStyles}
-                        listPrice={path(['ListPrice'], this.commertialOffer)}
-                        sellingPrice={path(['Price'], this.commertialOffer)}
-                        installments={path(
-                          ['Installments'],
-                          this.commertialOffer
-                        )}
-                        {...this.props.price}
-                      />
-                    </div>
-                  )}
+                      <div className="vtex-product-details__price-container pt1">
+                        <ProductPrice
+                          styles={productPriceLoaderStyles}
+                          listPrice={path(['ListPrice'], this.commertialOffer)}
+                          sellingPrice={path(['Price'], this.commertialOffer)}
+                          installments={path(
+                            ['Installments'],
+                            this.commertialOffer
+                          )}
+                          {...this.props.price}
+                        />
+                      </div>
+                    )}
                   <div className="pv2">
                     <hr className="o-30" size="1" />
                   </div>
                   <div>
-                    <div className="f7">
-                      <FormattedMessage id="sku-label" />
-                    </div>
                     {product && (
                       <SKUSelector
                         skuItems={this.skuItems}
@@ -264,10 +261,10 @@ class ProductDetails extends Component {
                       </div>
                     </Fragment>
                   ) : (
-                    <div className="pv4">
-                      <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
-                    </div>
-                  )}
+                      <div className="pv4">
+                        <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
+                      </div>
+                    )}
                   <div className="flex w-100 pv2">
                     <div className="pv2 pr3 f6">
                       <FormattedMessage id="share.label" />:
