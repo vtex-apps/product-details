@@ -16,7 +16,7 @@ export default {
       /** Product reference */
       productReference: PropTypes.string,
       /** Product's brand */
-      brand: PropTypes.string.isRequired,
+      brand: PropTypes.string,
       /** Product's SKUs */
       items: PropTypes.arrayOf(
         PropTypes.shape({
