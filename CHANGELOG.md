@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.8.1] - 2018-10-05
+### Fixed
+- Removing required from prop productQuery.product.brand in ProductDetails
+
 ## [0.8.0] - 2018-09-28
 ### Added
 - New `SKUSelector`
