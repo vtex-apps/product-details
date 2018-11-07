@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.8.3] - 2018-11-07
+### Fixed
+- Center using vtex-page-padding class instead of tachyons.
+
 ## [0.8.2] - 2018-11-07
 ### Fixed
 - Remove product description when there is no description and remove SkuSelector when there is no variations

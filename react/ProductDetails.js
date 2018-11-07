@@ -174,7 +174,7 @@ class ProductDetails extends Component {
     return (
       <IntlInjector>
         {intl => (
-          <div className="vtex-page-padding">
+          <div className="vtex-page-padding center">
             <ExtensionPoint
               id="breadcrumb"
               term={term}
@@ -182,7 +182,7 @@ class ProductDetails extends Component {
               categories={categories}
             />
 
-            <div className="vtex-product-details flex flex-wrap pb7">
+            <div className="vtex-product-details flex flex-wrap pl4 pr4">
               <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
                 <div className="fr-ns w-100 h-100">
                   <div className="flex justify-center pt2">
