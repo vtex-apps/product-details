@@ -167,6 +167,10 @@ class ProductDetails extends Component {
       path(['AvailableQuantity'], this.commertialOffer) > 0
     const country = path(['culture', 'country'], runtime)
 
+    const specifications = path(['properties'], product)
+    const skuName = path(['name'], this.selectedItem)
+    const description = path(['description'], product)
+
     return (
       <IntlInjector>
         {intl => (
@@ -178,7 +182,7 @@ class ProductDetails extends Component {
               categories={categories}
             />
 
-            <div className="vtex-product-details flex flex-wrap">
+            <div className="vtex-product-details flex flex-wrap pb7">
               <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
                 <div className="fr-ns w-100 h-100">
                   <div className="flex justify-center pt2">
@@ -284,16 +288,20 @@ class ProductDetails extends Component {
                   </div>
                 </div>
               </div>
-              <div className="pv4 w-100">
-                <hr className="b--black-10" size="0" />
-              </div>
-              <div className="vtex-product-details__description-container pv2 w-100 h-100">
-                <ProductDescription
-                  specifications={path(['properties'], product)}
-                  skuName={path(['name'], this.selectedItem)}
-                  description={path(['description'], product)}
-                />
-              </div>
+              {description && specifications && (
+                <Fragment>
+                  <div className="pv4 w-100">
+                    <hr className="b--black-10" size="0" />
+                  </div>
+                  <div className="vtex-product-details__description-container pv2 w-100 h-100">
+                    <ProductDescription
+                      specifications={specifications}
+                      skuName={skuName}
+                      description={description}
+                    />
+                  </div>
+                </Fragment>
+              )}
             </div>
           </div>
         )}
