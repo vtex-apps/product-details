@@ -171,6 +171,8 @@ class ProductDetails extends Component {
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
 
+    console.log('skuItems', this.skuItems)
+
     return (
       <IntlInjector>
         {intl => (
@@ -224,18 +226,20 @@ class ProductDetails extends Component {
                         />
                       </div>
                     )}
-                  <div className="pv2">
-                    <hr className="o-30" size="1" />
-                  </div>
-                  <div>
-                    {product && (
-                      <SKUSelector
-                        skuItems={this.skuItems}
-                        skuSelected={this.selectedItem}
-                        productSlug={product.linkText}
-                      />
+                  {product && this.selectedItem.variations
+                    && this.selectedItem.variations.length > 0
+                    && (
+                      <Fragment>
+                        <div className="pv2">
+                          <hr className="o-30" size="1" />
+                        </div>
+                        <SKUSelector
+                          skuItems={this.skuItems}
+                          skuSelected={this.selectedItem}
+                          productSlug={product.linkText}
+                        />
+                      </Fragment>
                     )}
-                  </div>
                   <div className="pv2">
                     <hr className="o-30" size="1" />
                   </div>
