@@ -171,8 +171,6 @@ class ProductDetails extends Component {
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
 
-    console.log('skuItems', this.skuItems)
-
     return (
       <IntlInjector>
         {intl => (
