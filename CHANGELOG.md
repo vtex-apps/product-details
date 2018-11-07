@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.8.2] - 2018-11-07
+### Fixed
+- Remove product description when there is no description and remove SkuSelector when there is no variations
+
 ## [0.8.1] - 2018-10-05
 ### Fixed
 - Removing required from prop productQuery.product.brand in ProductDetails
