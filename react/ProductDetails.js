@@ -288,7 +288,7 @@ class ProductDetails extends Component {
                         <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
                       </div>
                     )}
-                  <div className="flex w-100 pv2">
+                  <div className="w-100 pv2">
                     <Share
                       {...this.props.share}
                       loading={!path(['name'], this.selectedItem)}
