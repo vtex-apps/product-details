@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0] - 2018-11-28
+### Changed
+- Paddings and margins to match other components.
+- Passing classes via props to ProductPrice and ProductName
+
+### Added
+- Product details with design tokens
+
 ## [0.8.3] - 2018-11-07
 ### Fixed
 - Center using vtex-page-padding class instead of tachyons.
