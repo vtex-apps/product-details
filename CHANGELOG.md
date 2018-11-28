@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Paddings and margins to match other components.
+- Passing classes via props to ProductPrice and ProductName
+
+### Added
+- Product details with design tokens
 
 ## [0.8.3] - 2018-11-07
 ### Fixed
