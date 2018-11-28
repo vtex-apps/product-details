@@ -7,10 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Refact tachyons to use design tokens
+- Refact to use design tokens
+
 ### Changed
 - Paddings and margins to match other components.
-- Pass design tokens via props to ProductPrice and ProductName
+- Passing classes via props to ProductPrice and ProductName
 
 ## [0.8.3] - 2018-11-07
 ### Fixed

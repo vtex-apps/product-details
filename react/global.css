@@ -7,6 +7,6 @@
 - xl @custom-media --breakpoint-extra-large screen and (min-width: 80em); 
 */
 
-.vtex-product-details .vtex-product-name__brand, .vtex-product-details .vtex-price-selling {
+.vtex-product-details .vtex-product-name__brand {
   font-weight: normal !important
 }

@@ -202,6 +202,7 @@ class ProductDetails extends Component {
                       brandNameClass="t-heading-3-s t-heading-2-ns"
                       skuNameClass="t-heading-6-s t-heading-5-ns"
                       loaderClass="pt2-s mw6-s h3-s"
+                      className="c-on-base"
                       styles={productNameLoaderStyles}
                       name={path(['productName'], product)}
                       skuName={path(['name'], this.selectedItem)}
@@ -217,11 +218,18 @@ class ProductDetails extends Component {
                       <div className="vtex-product-details__price-container pt1">
                         <ProductPrice
                           styles={productPriceLoaderStyles}
-                          listPriceContainerClass="t-small-s t-small-ns"
-                          sellingPriceLabelClass="t-heading-6-s t-heading-5-ns"
-                          sellingPriceClass="t-heading-2-s t-heading-1-ns"
+                          listPriceContainerClass="t-small-s t-small-ns c-muted-2"
+                          sellingPriceLabelClass="t-heading-6-s t-heading-5-ns dib"
+                          listPriceLabelClass="dib strike"
+                          listPriceClass="ph2 dib strike"
+                          sellingPriceContainerClass="pv1 b c-muted-1"
+                          sellingPriceClass="t-heading-2-s t-heading-1-ns dib ph2"
+                          installmentClass="t-heading-6-s t-heading-5-ns"
                           savingsClass="t-mini-s t-small-ns"
-                          installmentContainerClass="t-mini-s t-small-ns"
+                          installmentContainerClass="t-mini-s t-small-ns c-muted-2"
+                          interestRateClass="dib ph2"
+                          savingsContainerClass="c-muted-2"
+                          savingsClass="dib t-small-ns t-mini-s"
                           loaderClass="h4-s mw6-s pt2-s"
                           listPrice={path(['ListPrice'], this.commertialOffer)}
                           sellingPrice={path(['Price'], this.commertialOffer)}
