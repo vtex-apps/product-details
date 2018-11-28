@@ -289,9 +289,6 @@ class ProductDetails extends Component {
                       </div>
                     )}
                   <div className="flex w-100 pv2">
-                    <div className="pv2 pr3 t-small">
-                      <FormattedMessage id="share.label" />:
-                    </div>
                     <Share
                       {...this.props.share}
                       loading={!path(['name'], this.selectedItem)}
