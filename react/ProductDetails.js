@@ -174,7 +174,7 @@ class ProductDetails extends Component {
     return (
       <IntlInjector>
         {intl => (
-          <div className="ph4">
+          <div className="vtex-page-padding center">
             <ExtensionPoint
               id="breadcrumb"
               term={term}
@@ -182,7 +182,7 @@ class ProductDetails extends Component {
               categories={categories}
             />
 
-            <div className="vtex-product-details flex flex-wrap">
+            <div className="vtex-product-details flex flex-wrap pl4 pr4">
               <div className="vtex-product-details__images-container w-50-ns w-100-s pr5-ns">
                 <div className="fr-ns w-100 h-100">
                   <div className="flex justify-center pt2">
@@ -199,6 +199,9 @@ class ProductDetails extends Component {
                 <div className="fl-ns w-100">
                   <div className="vtex-product-details__name-container pv2">
                     <ProductName
+                      brandNameClass="t-heading-3-s t-heading-2-ns"
+                      skuNameClass="t-heading-6-s t-heading-5-ns"
+                      loaderClass="pt2-s mw6-s h3-s"
                       styles={productNameLoaderStyles}
                       name={path(['productName'], product)}
                       skuName={path(['name'], this.selectedItem)}
@@ -214,6 +217,12 @@ class ProductDetails extends Component {
                       <div className="vtex-product-details__price-container pt1">
                         <ProductPrice
                           styles={productPriceLoaderStyles}
+                          listPriceContainerClass="t-small-s t-small-ns"
+                          sellingPriceLabelClass="t-heading-6-s t-heading-5-ns"
+                          sellingPriceClass="t-heading-2-s t-heading-1-ns"
+                          savingsClass="t-mini-s t-small-ns"
+                          installmentContainerClass="t-mini-s t-small-ns"
+                          loaderClass="h4-s mw6-s pt2-s"
                           listPrice={path(['ListPrice'], this.commertialOffer)}
                           sellingPrice={path(['Price'], this.commertialOffer)}
                           installments={path(
@@ -272,7 +281,7 @@ class ProductDetails extends Component {
                       </div>
                     )}
                   <div className="flex w-100 pv2">
-                    <div className="pv2 pr3 f6">
+                    <div className="pv2 pr3 t-small">
                       <FormattedMessage id="share.label" />:
                     </div>
                     <Share
@@ -293,7 +302,7 @@ class ProductDetails extends Component {
               {description && specifications && (
                 <Fragment>
                   <div className="pv4 w-100">
-                    <hr className="b--black-10" size="0" />
+                    <hr className="b--disabled" size="0" />
                   </div>
                   <div className="vtex-product-details__description-container pv2 w-100 h-100">
                     <ProductDescription
