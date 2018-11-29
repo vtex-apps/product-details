@@ -2,6 +2,8 @@
   "name": "product-details",
   "version": "0.1.0",
   "dependencies": {
-    "react-content-loader": "^3.1.2"
+    "ramda": "^0.26.1",
+    "react-content-loader": "^3.1.2",
+    "react-intl": "^2.7.2"
   }
 }
