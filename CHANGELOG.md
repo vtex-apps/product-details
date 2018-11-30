@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Update store-components major version. 
 
+### Removed
+- Share label from `locales`.
+
 ## [1.0.0] - 2018-11-28
 ### Changed
 - Paddings and margins to match other components.
