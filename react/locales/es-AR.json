@@ -4,5 +4,7 @@
   "editor.product-details.maxImages.title": "Número máximo de imágenes en miniatura",
   "editor.product-details.displayVertically.title": "Mostrar miniaturas verticalmente",
   "button-label": "Comprar",
+  "addToCartButton.label": "Incluir items en el carrito",
+  "share.label": "COMPARTIR",
   "share.title": "{product} {sku} en la {store}: "
 }
