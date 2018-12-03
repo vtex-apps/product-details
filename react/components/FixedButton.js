@@ -37,7 +37,7 @@ class FixedButton extends Component {
 
     return ReactDOM.createPortal(
       <Fragment>
-        <div className="o-0">
+        <div className="o-0" tabIndex="-1">
           {children}
         </div>
         <div className="fixed bottom-0 left-0 w-100 z-999">
