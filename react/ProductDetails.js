@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
 import { FormattedMessage } from 'react-intl'
 import {
@@ -13,7 +13,7 @@ import {
   SKUSelector,
 } from 'vtex.store-components'
 import { ExtensionPoint, withRuntimeContext } from 'render'
-import { changeImageUrlSize } from './utils/genenarateUrl'
+import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
 
 import IntlInjector from './components/IntlInjector'
@@ -161,7 +161,7 @@ class ProductDetails extends Component {
     return parseInt(path(['sellers', 0, 'sellerId'], this.selectedItem))
   }
 
-  genImages() {
+  getImages() {
     const images = path(['images'], this.selectedItem)
 
     return images ? images.map(
@@ -243,7 +243,7 @@ class ProductDetails extends Component {
     return (
       <IntlInjector>
         {intl => (
-          <div className="mw9 mt6 mb7 center">
+          <div className="mw9 mt6 mb8 center">
             <div className="ph3 ph0-ns">
               {slug && categories && <ExtensionPoint
                 id="breadcrumb"
@@ -260,7 +260,7 @@ class ProductDetails extends Component {
                 <div className="w-60-l w-100">
                   <div className="fr-ns w-100 h-100">
                     <div className="flex justify-center">
-                      <ProductImages images={this.genImages()} />
+                      <ProductImages images={this.getImages()} />
                     </div>
                   </div>
                 </div>
