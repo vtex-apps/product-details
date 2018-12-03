@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-
 
 class FixedButton extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.ref = React.createRef()
     this.state = { mounted: false }
@@ -14,12 +14,11 @@ class FixedButton extends Component {
   componentDidMount() {
     this.fixedRoot = this.ref.current
 
-    while(this.fixedRoot &&
-          window.getComputedStyle(this.fixedRoot).
-          getPropertyValue('overflow') !== 'auto' )
-      this.fixedRoot = this.fixedRoot.parentElement
+    while (this.fixedRoot &&
+          window.getComputedStyle(this.fixedRoot)
+            .getPropertyValue('overflow') !== 'auto') { this.fixedRoot = this.fixedRoot.parentElement }
 
-    if(!this.fixedRoot) this.fixedRoot = document.body
+    if (!this.fixedRoot)this.fixedRoot = document.body
 
     this.fixedRoot && this.fixedRoot.appendChild(this.el)
     this.setState({ mounted: true })
@@ -32,7 +31,7 @@ class FixedButton extends Component {
   render() {
     const { mounted } = this.state
 
-    if(!mounted) return <div ref={this.ref}/>
+    if (!mounted) return <div ref={this.ref} />
 
     const children = this.props.children
 
@@ -41,13 +40,17 @@ class FixedButton extends Component {
         <div className="o-0">
           {children}
         </div>
-        <div className="fixed bottom-0 w-100 z-999">
+        <div className="fixed bottom-0 left-0 w-100 z-999">
           {children}
         </div>
       </Fragment>,
       this.el,
     )
   }
+}
+
+FixedButton.propTypes = {
+  children: PropTypes.node,
 }
 
 export default FixedButton
