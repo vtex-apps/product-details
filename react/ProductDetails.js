@@ -13,7 +13,7 @@ import {
   SKUSelector,
 } from 'vtex.store-components'
 import { ExtensionPoint, withRuntimeContext } from 'render'
-import {  changeImageUrlSize } from './utils/genenarateUrl'
+import { changeImageUrlSize } from './utils/genenarateUrl'
 import FixedButton from './components/FixedButton'
 
 import IntlInjector from './components/IntlInjector'
@@ -69,9 +69,9 @@ const productPriceLoaderStyles = {
 }
 
 const rem = parseFloat(getComputedStyle(document.documentElement).fontSize)
-const thresholds = [40*rem]
-const imageSizes = [80*rem , 120*rem ]
-const thumbnailSize = 10*rem
+const thresholds = [40 * rem]
+const imageSizes = [80 * rem, 120 * rem ]
+const thumbnailSize = 10 * rem
 
 class ProductDetails extends Component {
   static defaultProps = {
@@ -116,6 +116,8 @@ class ProductDetails extends Component {
       },
     }
   }
+
+  state = { selectedQuantity: 1 }
 
   compareSku = (item, otherItem) => {
     const [
@@ -169,7 +171,8 @@ class ProductDetails extends Component {
           thresholds,
           thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
           imageText: image.imageText,
-        }}) : []
+        }
+      }) : []
   }
 
   render() {
@@ -180,6 +183,7 @@ class ProductDetails extends Component {
       categories,
       runtime,
     } = this.props
+    const { selectedQuantity } = this.state
 
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
@@ -196,7 +200,7 @@ class ProductDetails extends Component {
         this.sellerId && [
           {
             skuId: this.selectedItem.itemId,
-            quantity: 1,
+            quantity: selectedQuantity,
             seller: this.sellerId,
           },
         ],
@@ -204,98 +208,95 @@ class ProductDetails extends Component {
       available: showBuyButton,
     }
 
-    const PBuyButton = this.props.BuyButton ? this.props.BuyButton : BuyButton;
+    const productNameProps = {
+      styles: productNameLoaderStyles,
+      name: path(['productName'], product),
+      skuName: path(['name'], this.selectedItem),
+      brandName: path(['brand'], product),
+      productReference: path(['productReference'], product),
+      ...this.props.name,
+    }
+
+    const productPriceProps = {
+      styles: productPriceLoaderStyles,
+      listPriceContainerClass: 't-small-s t-small-ns c-muted-2 mb2',
+      sellingPriceLabelClass: 't-heading-6-s t-heading-5-ns dib',
+      listPriceLabelClass: 'dib strike',
+      listPriceClass: 'ph2 dib strike',
+      sellingPriceContainerClass: 'pv1 b c-on-base',
+      sellingPriceClass: 't-heading-2-s dib ph2',
+      installmentContainerClass: 't-mini-s t-small-ns c-on-base',
+      installmentClass: 't-body',
+      interestRateClass: 'dib ph2',
+      savingsContainerClass: 'c-success mt3',
+      savingsClass: 'dib t-small',
+      loaderClass: 'h4-s mw6-s pt2-s',
+      listPrice: path(['ListPrice'], this.commertialOffer),
+      sellingPrice: path(['Price'], this.commertialOffer),
+      installments: path(['Installments'], this.commertialOffer),
+      ...this.props.price,
+    }
+
+    const availableQuantity = path(['AvailableQuantity'], this.commertialOffer)
+    const showProductPrice = (Number.isNaN(+availableQuantity) || availableQuantity > 0)
 
     return (
       <IntlInjector>
         {intl => (
-          <div className="mw9 center">
-            <div className="ph9-ns">
-              {slug && <ExtensionPoint
+          <div className="mw9 mt6 mb7 center">
+            <div className="ph3 ph0-ns">
+              {slug && categories && <ExtensionPoint
                 id="breadcrumb"
                 term={term}
                 slug={slug}
                 categories={categories}
               />}
 
+              <div className="vtex-product-details__name-container c-on-base t-heading-4 mb4 dn-l">
+                <ProductName {...productNameProps} />
+              </div>
+
               <div className="flex flex-wrap">
                 <div className="w-60-l w-100">
                   <div className="fr-ns w-100 h-100">
                     <div className="flex justify-center">
-                      <ProductImages images={this.genImages()}/>
+                      <ProductImages images={this.genImages()} />
                     </div>
                   </div>
                 </div>
-                <div className="vtex-product-details__details-container w-40-ns w-100 pl5-ns">
-                  <div className="fl-ns w-100">
-                    <div className="vtex-product-details__name-container pv2">
-                      <ProductName
-                        styles={productNameLoaderStyles}
-                        name={path(['productName'], product)}
-                        skuName={path(['name'], this.selectedItem)}
-                        brandName={path(['brand'], product)}
-                        productReference={path(['productReference'], product)}
-                        {...this.props.name}
-                      />
+                <div className="vtex-product-details__details-container pl8-l w-40-l w-100">
+                  <div className="vtex-product-details__name-container c-on-base dn db-l t-heading-4 mb4">
+                    <ProductName {...productNameProps} />
+                  </div>
+                  {showProductPrice && (
+                    <div className="vtex-product-details__price-container pt1 dn db-l">
+                      <ProductPrice {...productPriceProps} />
                     </div>
-                    {(Number.isNaN(
-                      +path(['AvailableQuantity'], this.commertialOffer)
-                      ) ||
-                      path(['AvailableQuantity'], this.commertialOffer) > 0) && (
-                      <div className="vtex-product-details__price-container pt1">
-                        <ProductPrice
-                          styles={productPriceLoaderStyles}
-                          listPriceContainerClass="t-small-s t-small-ns c-muted-2"
-                          sellingPriceLabelClass="t-heading-6-s t-heading-5-ns dib"
-                          listPriceLabelClass="dib strike"
-                          listPriceClass="ph2 dib strike"
-                          sellingPriceContainerClass="pv1 b c-muted-1"
-                          sellingPriceClass="t-heading-2-s t-heading-1-ns dib ph2"
-                          installmentClass="t-heading-6-s t-heading-5-ns"
-                          savingsClass="t-mini-s t-small-ns"
-                          installmentContainerClass="t-mini-s t-small-ns c-muted-2"
-                          interestRateClass="dib ph2"
-                          savingsContainerClass="c-muted-2"
-                          savingsClass="dib t-small-ns t-mini-s"
-                          loaderClass="h4-s mw6-s pt2-s"
-                          listPrice={path(['ListPrice'], this.commertialOffer)}
-                          sellingPrice={path(['Price'], this.commertialOffer)}
-                          installments={path(['Installments'], this.commertialOffer)}
-                          large
-                          {...this.props.price}
-                        />
+                  )}
+                  <div className="mv2 mt5 dn db-l">
+                    <hr className="o-30" size="1" />
+                  </div>
+                  <div className="mt6">
+                    {product && this.selectedItem.variations &&
+                    this.selectedItem.variations.length > 0 &&
+                    (
+                      <SKUSelector
+                        skuItems={this.skuItems}
+                        skuSelected={this.selectedItem}
+                        productSlug={product.linkText}
+                      />
+                    )}
+                    {showProductPrice && (
+                      <div className="vtex-product-details__price-container pt1 mt mt7 mt4-l dn-l">
+                        <ProductPrice {...productPriceProps} />
                       </div>
                     )}
-                    {product && this.selectedItem.variations
-                    && this.selectedItem.variations.length > 0
-                    && (
-                      <Fragment>
-                        <div className="pv2">
-                          <hr className="o-30" size="1" />
-                        </div>
-                        <SKUSelector
-                          skuItems={this.skuItems}
-                          skuSelected={this.selectedItem}
-                          productSlug={product.linkText}
-                        />
-                      </Fragment>
-                    )}
-                    <div className="pv2">
-                      <hr className="o-30" size="1" />
-                    </div>
                     {showBuyButton ? (
-                      <Fragment>
+                      <div className="mt8">
                         <div className="pv2 dn db-l">
-                          <PBuyButton {...buyButtonProps}>
-                            <FormattedMessage id="addToCartButton.label"/>
-                          </PBuyButton>
-                          <FixedButton>
-                            <div className="dn-l bg-base w-100 pa3">
-                              <PBuyButton {...buyButtonProps}>
-                                <FormattedMessage id="addToCartButton.label"/>
-                              </PBuyButton>
-                            </div>
-                          </FixedButton>
+                          <BuyButton {...buyButtonProps}>
+                            <FormattedMessage id="addToCartButton.label" />
+                          </BuyButton>
                         </div>
                         <div className="pv4">
                           <ShippingSimulator
@@ -304,16 +305,20 @@ class ProductDetails extends Component {
                             country={country}
                           />
                         </div>
-                      </Fragment>
+                      </div>
                     ) : (
                       <div className="pv4">
                         <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
                       </div>
                     )}
-                    <div className="flex w-100 pv2">
-                      <div className="pv2 pr3 f6">
-                        <FormattedMessage id="share.label" />:
+                    <FixedButton>
+                      <div className="dn-l bg-base w-100 pa3">
+                        <BuyButton {...buyButtonProps}>
+                          <FormattedMessage id="addToCartButton.label" />
+                        </BuyButton>
                       </div>
+                    </FixedButton>
+                    <div className="flex w-100 pv2">
                       <Share
                         {...this.props.share}
                         loading={!path(['name'], this.selectedItem)}
@@ -332,18 +337,18 @@ class ProductDetails extends Component {
               </div>
             </div>
             {description && specifications && (
-              <Fragment>
-                <div className="pv4 w-100">
-                  <hr className="b--disabled" size="0" />
+              <div className="ph3 ph0-ns">
+                <div className="mv4">
+                  <hr className="o-30 db" size="1" />
                 </div>
-                <div className="pv2 w-100 h-100">
+                <div className="pv2 w-100 mt8 h-100">
                   <ProductDescription
                     specifications={specifications}
                     skuName={skuName}
                     description={description}
                   />
                 </div>
-              </Fragment>
+              </div>
             )}
           </div>
         )}
