@@ -5,6 +5,6 @@
   "editor.product-details.displayVertically.title": "Display thumbnails vertically",
   "button-label": "Buy",
   "addToCartButton.label": "Add item to cart",
-  "share.label": "SHARE",
+  "share.label": "Share",
   "share.title": "{product} {sku} at {store}: "
 }
