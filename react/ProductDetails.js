@@ -165,14 +165,12 @@ class ProductDetails extends Component {
     const images = path(['images'], this.selectedItem)
 
     return images ? images.map(
-      image => {
-        return {
-          imageUrls: imageSizes.map(size => changeImageUrlSize(image.imageUrl, size)),
-          thresholds,
-          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-          imageText: image.imageText,
-        }
-      }) : []
+      image => ({
+        imageUrls: imageSizes.map(size => changeImageUrlSize(image.imageUrl, size)),
+        thresholds,
+        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+        imageText: image.imageText,
+      })) : []
   }
 
   render() {
