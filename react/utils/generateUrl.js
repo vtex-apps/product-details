@@ -18,7 +18,6 @@ export function cleanImageUrl(imageUrl) {
     }
     return resizedImageUrl
   }
-  return undefined
 }
 
 export function changeImageUrlSize(
@@ -26,7 +25,7 @@ export function changeImageUrlSize(
   width = DEFAULT_WIDTH,
   height = DEFAULT_HEIGHT,
 ) {
-  if (!imageUrl) return undefined
+  if (!imageUrl) return
   typeof width === 'number' && (width = Math.min(width, MAX_WIDTH))
   typeof height === 'number' && (height = Math.min(height, MAX_HEIGHT))
 
@@ -36,5 +35,5 @@ export function changeImageUrlSize(
 }
 
 export const nextImageUrl = (imageUrl, initialWidth) => (tryCount) => {
-  return changeImageUrlSize(imageUrl, Math.floor(initialWidth*Math.pow(RESIZE_RATE, tryCount)))
+  return changeImageUrlSize(imageUrl, Math.floor(initialWidth * Math.pow(RESIZE_RATE, tryCount)))
 }
