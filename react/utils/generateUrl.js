@@ -4,9 +4,12 @@ export const MAX_WIDTH = 3000
 export const MAX_HEIGHT = 4000
 
 /**
- * Having the url above as base,
+ * Having the url below as base,
  * https://storecomponents.vteximg.com.br/arquivos/ids/155472/Frame-3.jpg?v=636793763985400000
  * the following regex will match https://storecomponents.vteximg.com.br/arquivos/ids/155472
+ *
+ * Also matches urls with defined sizes like:
+ * https://storecomponents.vteximg.com.br/arquivos/ids/155473-160-auto
  * @type {RegExp}
  */
 const baseUrlRegex = new RegExp(/.+ids\/(\d+)/)
