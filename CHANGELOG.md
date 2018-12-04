@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.0] - 2018-12-04
+### Changed
+- Product page layout
+- Adjust to new ProductImages API
+
+### Added
+- Get images considering the user screen size
+- Fixed buy button
+
 ## [1.0.1] - 2018-11-30
 ### Changed
 - Update store-components major version. 
