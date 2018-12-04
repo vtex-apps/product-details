@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Product page layout
+- Adjust to new ProductImages API
+
+### Added
+- Get images considering the user screen size
+- Fixed buy button
 
 ## [1.0.1] - 2018-11-30
 ### Changed
