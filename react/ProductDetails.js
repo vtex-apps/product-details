@@ -242,7 +242,7 @@ class ProductDetails extends Component {
       <IntlInjector>
         {intl => (
           <div className="mw9 mt6 mb8 center">
-            <div className="ph3 ph0-ns">
+            <div className="ph3 ph0-ns mb7">
               {slug && categories && <ExtensionPoint
                 id="breadcrumb"
                 term={term}
@@ -290,19 +290,10 @@ class ProductDetails extends Component {
                       </div>
                     )}
                     {showBuyButton ? (
-                      <div className="mt8">
-                        <div className="pv2 dn db-l">
-                          <BuyButton {...buyButtonProps}>
-                            <FormattedMessage id="addToCartButton.label" />
-                          </BuyButton>
-                        </div>
-                        <div className="pv4">
-                          <ShippingSimulator
-                            skuId={path(['itemId'], this.selectedItem)}
-                            seller={this.sellerId}
-                            country={country}
-                          />
-                        </div>
+                      <div className="pv2 dn db-l mt8">
+                        <BuyButton {...buyButtonProps}>
+                          <FormattedMessage id="addToCartButton.label" />
+                        </BuyButton>
                       </div>
                     ) : (
                       <div className="pv4">
@@ -316,8 +307,17 @@ class ProductDetails extends Component {
                         </BuyButton>
                       </div>
                     </FixedButton>
-                    <div className="flex w-100 pv2">
+                    <div className="mt8">
+                      <ShippingSimulator
+                        skuId={path(['itemId'], this.selectedItem)}
+                        seller={this.sellerId}
+                        country={country}
+                      />
+                    </div>
+                    <div className="flex w-100 mt7">
                       <Share
+                        shareLabelClass="c-muted-2 t-small mb3"
+                        className="db"
                         {...this.props.share}
                         loading={!path(['name'], this.selectedItem)}
                         title={intl.formatMessage(
