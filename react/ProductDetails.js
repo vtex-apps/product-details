@@ -68,10 +68,9 @@ const productPriceLoaderStyles = {
   },
 }
 
-const rem = parseFloat(getComputedStyle(document.documentElement).fontSize)
-const thresholds = [40 * rem]
-const imageSizes = [80 * rem, 120 * rem ]
-const thumbnailSize = 10 * rem
+const thresholds = [640]
+const imageSizes = [1280, 1920]
+const thumbnailSize = 160
 
 class ProductDetails extends Component {
   static defaultProps = {
