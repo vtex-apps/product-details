@@ -18,7 +18,7 @@ import FixedButton from './components/FixedButton'
 
 import IntlInjector from './components/IntlInjector'
 import ProductDetailsPropTypes from './propTypes'
-import NoSSR from 'react-no-ssr'
+import { NoSSR } from 'render'
 
 import './global.css'
 
