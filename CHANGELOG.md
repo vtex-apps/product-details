@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.2] - 2018-12-07
+### Added
+- BottomExtraSpace component
+### Changed
+- Fixed Button now uses BottomExtraSpace instead of react portal
+- Images thresholds are now in pixels instead of rem
+### Fixed
+- ProductDetails server-side render
+
 ## [1.1.1] - 2018-12-04
 ### Removed
 - Share.label intl string
