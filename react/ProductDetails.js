@@ -18,7 +18,6 @@ import FixedButton from './components/FixedButton'
 
 import IntlInjector from './components/IntlInjector'
 import ProductDetailsPropTypes from './propTypes'
-import { NoSSR } from 'render'
 
 import './global.css'
 
@@ -300,15 +299,13 @@ class ProductDetails extends Component {
                         <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
                       </div>
                     )}
-                    <NoSSR>
-                      <FixedButton>
-                        <div className="dn-l bg-base w-100 pa3">
-                          <BuyButton {...buyButtonProps}>
-                            <FormattedMessage id="addToCartButton.label" />
-                          </BuyButton>
-                        </div>
-                      </FixedButton>
-                    </NoSSR>
+                    <FixedButton>
+                      <div className="dn-l bg-base w-100 pa3">
+                        <BuyButton {...buyButtonProps}>
+                          <FormattedMessage id="addToCartButton.label" />
+                        </BuyButton>
+                      </div>
+                    </FixedButton>
                     <div className="mt8">
                       <ShippingSimulator
                         skuId={path(['itemId'], this.selectedItem)}

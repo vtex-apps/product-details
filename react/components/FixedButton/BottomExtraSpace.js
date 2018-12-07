@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-class FixedButton extends Component {
+class BottomExtraSpace extends Component {
   constructor(props) {
     super(props)
 
@@ -15,8 +15,8 @@ class FixedButton extends Component {
     this.fixedRoot = this.ref.current
 
     while (this.fixedRoot &&
-          window.getComputedStyle(this.fixedRoot)
-            .getPropertyValue('overflow') !== 'auto') { this.fixedRoot = this.fixedRoot.parentElement }
+    window.getComputedStyle(this.fixedRoot)
+      .getPropertyValue('overflow') !== 'auto') { this.fixedRoot = this.fixedRoot.parentElement }
 
     if (!this.fixedRoot)this.fixedRoot = document.body
 
@@ -36,21 +36,16 @@ class FixedButton extends Component {
     const children = this.props.children
 
     return ReactDOM.createPortal(
-      <Fragment>
-        <div className="o-0" tabIndex="-1">
-          {children}
-        </div>
-        <div className="fixed bottom-0 left-0 w-100 z-999">
-          {children}
-        </div>
-      </Fragment>,
+      <div className="o-0" tabIndex="-1">
+        {children}
+      </div>,
       this.el,
     )
   }
 }
 
-FixedButton.propTypes = {
+BottomExtraSpace.propTypes = {
   children: PropTypes.node,
 }
 
-export default FixedButton
+export default BottomExtraSpace
