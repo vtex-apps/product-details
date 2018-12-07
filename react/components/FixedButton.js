@@ -2,9 +2,12 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
+const serverSide = !window.navigator
+
 class FixedButton extends Component {
   constructor(props) {
     super(props)
+    if (serverSide) return
 
     this.ref = React.createRef()
     this.state = { mounted: false }
@@ -12,6 +15,7 @@ class FixedButton extends Component {
   }
 
   componentDidMount() {
+    if (serverSide) return
     this.fixedRoot = this.ref.current
 
     while (this.fixedRoot &&
@@ -25,15 +29,18 @@ class FixedButton extends Component {
   }
 
   componentWillUnmount() {
+    if (serverSide) return
     this.fixedRoot && this.fixedRoot.removeChild(this.el)
   }
 
   render() {
+    const children = this.props.children
+
+    if (serverSide) return children
+
     const { mounted } = this.state
 
     if (!mounted) return <div ref={this.ref} />
-
-    const children = this.props.children
 
     return ReactDOM.createPortal(
       <Fragment>
