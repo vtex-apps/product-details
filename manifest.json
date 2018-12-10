@@ -14,10 +14,11 @@
   },
   "builders": {
     "react": "2.x",
-    "pages": "0.x",
-    "messages": "0.x"
+    "messages": "0.x",
+    "store": "0.x"
   },
   "dependencies": {
+    "vtex.breadcrumb": "1.x",
     "vtex.store-graphql": "2.x",
     "vtex.store-components": "3.x"
   }

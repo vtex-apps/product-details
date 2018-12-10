@@ -1,0 +1,7 @@
+{
+  "product-details": {
+    "allowed": ["breadcrumb"],
+    "required": [],
+    "component": "ProductDetails"
+  }
+}
