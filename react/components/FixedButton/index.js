@@ -4,7 +4,7 @@ import { NoSSR } from 'render'
 
 export default props => (
   <Fragment>
-    <div className="fixed bottom-0 left-0 w-100 z-999">
+    <div className="fixed bottom-0 left-0 w-100 z-4">
       {props.children}
     </div>
     <NoSSR>
