@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2018-12-18
+### Added
+- Support to CSS modules.
+
 ## [1.1.2] - 2018-12-07
 ### Added
 - BottomExtraSpace component

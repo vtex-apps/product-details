@@ -19,7 +19,7 @@ import FixedButton from './components/FixedButton'
 import IntlInjector from './components/IntlInjector'
 import ProductDetailsPropTypes from './propTypes'
 
-import './global.css'
+import productDetails from './productDetails.css'
 
 const { account } = global.__RUNTIME__
 const productNameLoaderStyles = {
@@ -249,7 +249,7 @@ class ProductDetails extends Component {
                 categories={categories}
               />}
 
-              <div className="vtex-product-details__name-container c-on-base t-heading-4 mb4 dn-l">
+              <div className={`${productDetails.nameContainer} c-on-base t-heading-4 mb4 dn-l`}>
                 <ProductName {...productNameProps} />
               </div>
 
@@ -261,12 +261,12 @@ class ProductDetails extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="vtex-product-details__details-container pl8-l w-40-l w-100">
-                  <div className="vtex-product-details__name-container c-on-base dn db-l t-heading-4 mb4">
+                <div className={`${productDetails.detailsContainer} pl8-l w-40-l w-100`}>
+                  <div className={`${productDetails.nameContainer} c-on-base dn db-l t-heading-4 mb4`}>
                     <ProductName {...productNameProps} />
                   </div>
                   {showProductPrice && (
-                    <div className="vtex-product-details__price-container pt1 dn db-l">
+                    <div className={`${productDetails.priceContainer} pt1 dn db-l`}>
                       <ProductPrice {...productPriceProps} />
                     </div>
                   )}
@@ -284,7 +284,7 @@ class ProductDetails extends Component {
                       />
                     )}
                     {showProductPrice && (
-                      <div className="vtex-product-details__price-container pt1 mt mt7 mt4-l dn-l">
+                      <div className={`${productDetails.priceContainer} pt1 mt mt7 mt4-l dn-l`}>
                         <ProductPrice {...productPriceProps} />
                       </div>
                     )}
