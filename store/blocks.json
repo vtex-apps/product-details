@@ -1,6 +1,6 @@
 {
   "product-details": {
     "blocks": [],
-    "component": "ProductDetails"
+    "inheritComponent": true
   }
 }
