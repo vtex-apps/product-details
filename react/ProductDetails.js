@@ -241,7 +241,7 @@ class ProductDetails extends Component {
       <IntlInjector>
         {intl => (
           <div className="mw9 mt6 mb8 center">
-            <div className="ph3 ph0-ns mb7">
+            <div className="ph5 ph0-ns mb7">
               {slug && categories && <ExtensionPoint
                 id="breadcrumb"
                 term={term}
@@ -300,7 +300,7 @@ class ProductDetails extends Component {
                       </div>
                     )}
                     <FixedButton>
-                      <div className="dn-l bg-base w-100 pa3">
+                      <div className="dn-l bg-base w-100 ph5 pv3">
                         <BuyButton {...buyButtonProps}>
                           <FormattedMessage id="addToCartButton.label" />
                         </BuyButton>
