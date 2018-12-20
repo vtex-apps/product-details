@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.3.0] - 2018-12-20
+### Added
+- Support to messages builder. 
+
 ## [1.2.0] - 2018-12-18
 ### Added
 - Support to CSS modules.
@@ -14,9 +18,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.2] - 2018-12-07
 ### Added
 - BottomExtraSpace component
+
 ### Changed
 - Fixed Button now uses BottomExtraSpace instead of react portal
 - Images thresholds are now in pixels instead of rem
+
 ### Fixed
 - ProductDetails server-side render
 
