@@ -334,7 +334,7 @@ class ProductDetails extends Component {
               </div>
             </div>
             {description && specifications && (
-              <div className="ph3 ph0-ns">
+              <div className="ph5 ph0-ns">
                 <div className="mv4">
                   <hr className="o-30 db" size="1" />
                 </div>
