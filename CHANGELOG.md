@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Support to messages builder. 
 
 ## [1.2.0] - 2018-12-18
 ### Added
@@ -14,9 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.2] - 2018-12-07
 ### Added
 - BottomExtraSpace component
+
 ### Changed
 - Fixed Button now uses BottomExtraSpace instead of react portal
 - Images thresholds are now in pixels instead of rem
+
 ### Fixed
 - ProductDetails server-side render
 
