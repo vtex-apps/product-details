@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+  - Bye `pages.json`! Welcome `store-builder`.
 
 ## [1.3.2] - 2019-01-08
 ### Fix
@@ -15,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Lateral padding.
 
+  
 ## [1.3.0] - 2018-12-20
 ### Added
 - Support to messages builder.
