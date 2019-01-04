@@ -18,8 +18,8 @@
     "store": "0.x"
   },
   "dependencies": {
-    "vtex.breadcrumb": "1.0.3-beta",
+    "vtex.breadcrumb": "1.x",
     "vtex.store-graphql": "2.x",
-    "vtex.store-components": "3.3.2-beta"
+    "vtex.store-components": "3.x"
   }
 }
