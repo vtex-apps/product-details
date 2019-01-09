@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.4.0] - 2019-01-09
+### Changed
+  - Bye `pages.json`! Welcome `store-builder`.
+
 ## [1.3.2] - 2019-01-08
 ### Fix
 - Make a replace in the image URL just for legacy file manager.
@@ -15,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Lateral padding.
 
+  
 ## [1.3.0] - 2018-12-20
 ### Added
 - Support to messages builder.
