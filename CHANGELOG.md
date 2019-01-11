@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.4.2] - 2019-01-11
+### Changed
+- Add `Container` for adjusting search result to store padding.
+
 ## [1.4.1] - 2019-01-09
 
 ## [1.4.0] - 2019-01-09
