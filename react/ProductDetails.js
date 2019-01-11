@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
 import { FormattedMessage } from 'react-intl'
+
+import { ExtensionPoint, withRuntimeContext } from 'render'
 import {
   AvailabilitySubscriber,
   BuyButton,
@@ -11,11 +13,11 @@ import {
   Share,
   ShippingSimulator,
   SKUSelector,
+  Container,
 } from 'vtex.store-components'
-import { ExtensionPoint, withRuntimeContext } from 'render'
+
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
-
 import IntlInjector from './components/IntlInjector'
 import ProductDetailsPropTypes from './propTypes'
 
@@ -240,114 +242,116 @@ class ProductDetails extends Component {
     return (
       <IntlInjector>
         {intl => (
-          <div className="mw9 mt6 mb8 center">
-            <div className="ph5 ph0-ns mb7">
-              {slug && categories && <ExtensionPoint
-                id="breadcrumb"
-                term={term}
-                slug={slug}
-                categories={categories}
-              />}
+          <Container className={`${productDetails.container} pt6 pb8 justify-center flex`}>
+            <div className="w-100 mw9">
+              <div className="mb7">
+                {slug && categories && <ExtensionPoint
+                  id="breadcrumb"
+                  term={term}
+                  slug={slug}
+                  categories={categories}
+                />}
 
-              <div className={`${productDetails.nameContainer} c-on-base t-heading-4 mb4 dn-l`}>
-                <ProductName {...productNameProps} />
-              </div>
-
-              <div className="flex flex-wrap">
-                <div className="w-60-l w-100">
-                  <div className="fr-ns w-100 h-100">
-                    <div className="flex justify-center">
-                      <ProductImages images={this.getImages()} />
-                    </div>
-                  </div>
+                <div className={`${productDetails.nameContainer} c-on-base t-heading-4 mb4 dn-l`}>
+                  <ProductName {...productNameProps} />
                 </div>
-                <div className={`${productDetails.detailsContainer} pl8-l w-40-l w-100`}>
-                  <div className={`${productDetails.nameContainer} c-on-base dn db-l t-heading-4 mb4`}>
-                    <ProductName {...productNameProps} />
-                  </div>
-                  {showProductPrice && (
-                    <div className={`${productDetails.priceContainer} pt1 dn db-l`}>
-                      <ProductPrice {...productPriceProps} />
+
+                <div className="flex flex-wrap">
+                  <div className="w-60-l w-100">
+                    <div className="fr-ns w-100 h-100">
+                      <div className="flex justify-center">
+                        <ProductImages images={this.getImages()} />
+                      </div>
                     </div>
-                  )}
-                  <div className="mv2 mt5 dn db-l">
-                    <hr className="o-30" size="1" />
                   </div>
-                  <div className="mt6">
-                    {product && this.selectedItem.variations &&
-                    this.selectedItem.variations.length > 0 &&
-                    (
-                      <SKUSelector
-                        skuItems={this.skuItems}
-                        skuSelected={this.selectedItem}
-                        productSlug={product.linkText}
-                      />
-                    )}
+                  <div className={`${productDetails.detailsContainer} pl8-l w-40-l w-100`}>
+                    <div className={`${productDetails.nameContainer} c-on-base dn db-l t-heading-4 mb4`}>
+                      <ProductName {...productNameProps} />
+                    </div>
                     {showProductPrice && (
-                      <div className={`${productDetails.priceContainer} pt1 mt mt7 mt4-l dn-l`}>
+                      <div className={`${productDetails.priceContainer} pt1 dn db-l`}>
                         <ProductPrice {...productPriceProps} />
                       </div>
                     )}
-                    {showBuyButton ? (
-                      <div className="pv2 dn db-l mt8">
-                        <BuyButton {...buyButtonProps}>
-                          <FormattedMessage id="addToCartButton.label" />
-                        </BuyButton>
-                      </div>
-                    ) : (
-                      <div className="pv4">
-                        <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
-                      </div>
-                    )}
-                    <FixedButton>
-                      <div className="dn-l bg-base w-100 ph5 pv3">
-                        <BuyButton {...buyButtonProps}>
-                          <FormattedMessage id="addToCartButton.label" />
-                        </BuyButton>
-                      </div>
-                    </FixedButton>
-                    <div className="mt8">
-                      <ShippingSimulator
-                        skuId={path(['itemId'], this.selectedItem)}
-                        seller={this.sellerId}
-                        country={country}
-                      />
+                    <div className="mv2 mt5 dn db-l">
+                      <hr className="o-30" size="1" />
                     </div>
-                    <div className="flex w-100 mt7">
-                      <Share
-                        shareLabelClass="c-muted-2 t-small mb3"
-                        className="db"
-                        {...this.props.share}
-                        loading={!path(['name'], this.selectedItem)}
-                        title={intl.formatMessage(
-                          { id: 'share.title' },
-                          {
-                            product: path(['productName'], product),
-                            sku: path(['name'], this.selectedItem),
-                            store: account,
-                          }
+                    <div className="mt6">
+                      {product && this.selectedItem.variations &&
+                        this.selectedItem.variations.length > 0 &&
+                        (
+                          <SKUSelector
+                            skuItems={this.skuItems}
+                            skuSelected={this.selectedItem}
+                            productSlug={product.linkText}
+                          />
                         )}
-                      />
+                      {showProductPrice && (
+                        <div className={`${productDetails.priceContainer} pt1 mt mt7 mt4-l dn-l`}>
+                          <ProductPrice {...productPriceProps} />
+                        </div>
+                      )}
+                      {showBuyButton ? (
+                        <div className="pv2 dn db-l mt8">
+                          <BuyButton {...buyButtonProps}>
+                            <FormattedMessage id="addToCartButton.label" />
+                          </BuyButton>
+                        </div>
+                      ) : (
+                          <div className="pv4">
+                            <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
+                          </div>
+                        )}
+                      <FixedButton>
+                        <div className="dn-l bg-base w-100 ph5 pv3">
+                          <BuyButton {...buyButtonProps}>
+                            <FormattedMessage id="addToCartButton.label" />
+                          </BuyButton>
+                        </div>
+                      </FixedButton>
+                      <div className="mt8">
+                        <ShippingSimulator
+                          skuId={path(['itemId'], this.selectedItem)}
+                          seller={this.sellerId}
+                          country={country}
+                        />
+                      </div>
+                      <div className="flex w-100 mt7">
+                        <Share
+                          shareLabelClass="c-muted-2 t-small mb3"
+                          className="db"
+                          {...this.props.share}
+                          loading={!path(['name'], this.selectedItem)}
+                          title={intl.formatMessage(
+                            { id: 'share.title' },
+                            {
+                              product: path(['productName'], product),
+                              sku: path(['name'], this.selectedItem),
+                              store: account,
+                            }
+                          )}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              {description && specifications && (
+                <div className="ph5 ph0-ns">
+                  <div className="mv4">
+                    <hr className="o-30 db" size="1" />
+                  </div>
+                  <div className="pv2 w-100 mt8 h-100">
+                    <ProductDescription
+                      specifications={specifications}
+                      skuName={skuName}
+                      description={description}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
-            {description && specifications && (
-              <div className="ph5 ph0-ns">
-                <div className="mv4">
-                  <hr className="o-30 db" size="1" />
-                </div>
-                <div className="pv2 w-100 mt8 h-100">
-                  <ProductDescription
-                    specifications={specifications}
-                    skuName={skuName}
-                    description={description}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+          </Container>
         )}
       </IntlInjector>
     )
