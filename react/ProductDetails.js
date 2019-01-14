@@ -417,7 +417,7 @@ class ProductDetails extends Component {
                     tabsMode={showSpecificationsTab}
                     specifications={specifications}
                   />
-                </div>a
+                </div>
               }
             </div>
           </div>
