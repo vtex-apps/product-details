@@ -213,7 +213,7 @@ class ProductDetails extends Component {
       skuName: path(['name'], this.selectedItem),
       brandName: path(['brand'], product),
       productReference: path(['productReference'], product),
-      brandNameClass: 't-heading-4',
+      className: 't-heading-4',
       ...this.props.name,
     }
 
