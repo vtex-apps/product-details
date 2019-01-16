@@ -213,6 +213,7 @@ class ProductDetails extends Component {
       skuName: path(['name'], this.selectedItem),
       brandName: path(['brand'], product),
       productReference: path(['productReference'], product),
+      brandNameClass: 't-heading-4',
       ...this.props.name,
     }
 
@@ -252,7 +253,7 @@ class ProductDetails extends Component {
                   categories={categories}
                 />}
 
-                <div className={`${productDetails.nameContainer} c-on-base t-heading-4 mb4 dn-l`}>
+                <div className={`${productDetails.nameContainer} c-on-base mb4 dn-l`}>
                   <ProductName {...productNameProps} />
                 </div>
 
@@ -265,7 +266,7 @@ class ProductDetails extends Component {
                     </div>
                   </div>
                   <div className={`${productDetails.detailsContainer} pl8-l w-40-l w-100`}>
-                    <div className={`${productDetails.nameContainer} c-on-base dn db-l t-heading-4 mb4`}>
+                    <div className={`${productDetails.nameContainer} c-on-base dn db-l mb4`}>
                       <ProductName {...productNameProps} />
                     </div>
                     {showProductPrice && (
