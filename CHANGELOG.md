@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Pass `ProductName` style through brandNameClass prop.
+- Pass `ProductName` style and tag through props.
 
 ## [1.4.2] - 2019-01-11
 ### Changed

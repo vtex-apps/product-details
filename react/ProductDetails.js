@@ -214,6 +214,7 @@ class ProductDetails extends Component {
       brandName: path(['brand'], product),
       productReference: path(['productReference'], product),
       className: 't-heading-4',
+      tag: 'h1',
       ...this.props.name,
     }
 
