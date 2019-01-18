@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import BottomExtraSpace from './BottomExtraSpace'
-import { NoSSR } from 'render'
+import { NoSSR } from 'vtex.render-runtime'
 
 import productDetails from '../../productDetails'
 export default props => (
