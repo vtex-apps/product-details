@@ -1,6 +1,8 @@
+import hoistNonReactStatic from 'hoist-non-react-statics'
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
-import { FormattedMessage } from 'react-intl'
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
 import {
@@ -18,12 +20,10 @@ import {
 
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
-import IntlInjector from './components/IntlInjector'
-import ProductDetailsPropTypes from './propTypes'
+import { productShape } from './propTypes'
 
 import productDetails from './productDetails.css'
 
-const { account } = global.__RUNTIME__
 const productNameLoaderStyles = {
   'vtex-product-name__brand--loader': {
     x: 0,
@@ -90,7 +90,33 @@ class ProductDetails extends Component {
     displayVertically: false,
   }
 
-  static propTypes = ProductDetailsPropTypes
+  static propTypes = {
+    categories: PropTypes.arrayOf(PropTypes.string),
+    /** Whether to display the preview images on the vertical or not */
+    displayVertically: PropTypes.bool,
+    intl: intlShape,
+    /** Product name schema configuration */
+    name: PropTypes.object,
+    /** Query */
+    productQuery: PropTypes.shape({
+      product: productShape,
+      loading: PropTypes.bool.isRequired,
+    }),
+    /** Product price schema configuration */
+    price: PropTypes.object,
+    /** URL query parameters */
+    query: PropTypes.shape({
+      skuId: PropTypes.string,
+    }),
+    runtime: PropTypes.object,
+    /** Share Schema properties */
+    share: PropTypes.shape({
+      /** Social Networks configuration */
+      social: PropTypes.object.isRequired,
+    }),
+    /** Product slug */
+    slug: PropTypes.string.isRequired,
+  }
 
   static getSchema = props => {
     const shareSchema = Share.schema || Share.getSchema(props)
@@ -150,8 +176,7 @@ class ProductDetails extends Component {
   get selectedItem() {
     const items = path(['productQuery', 'product', 'items'], this.props) || []
     if (!this.props.query.skuId) return items[0]
-    const [selected] = items.filter(sku => sku.itemId === this.props.query.skuId)
-    return selected
+    return items.find(sku => sku.itemId === this.props.query.skuId)
   }
 
   get commertialOffer() {
@@ -177,17 +202,21 @@ class ProductDetails extends Component {
   render() {
     const {
       productQuery: { product },
-      term,
       slug,
       categories,
-      runtime,
+      runtime: {
+        account,
+        culture: {
+          country,
+        },
+      },
+      intl,
     } = this.props
     const { selectedQuantity } = this.state
 
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
-    const country = path(['culture', 'country'], runtime)
 
     const specifications = path(['properties'], product)
     const skuName = path(['name'], this.selectedItem)
@@ -201,6 +230,10 @@ class ProductDetails extends Component {
             skuId: this.selectedItem.itemId,
             quantity: selectedQuantity,
             seller: this.sellerId,
+            name: this.selectedItem.nameComplete,
+            price: this.commertialOffer.Price,
+            variant: this.selectedItem.name,
+            brand: product.brand,
           },
         ],
       large: true,
@@ -242,120 +275,112 @@ class ProductDetails extends Component {
     const showProductPrice = (Number.isNaN(+availableQuantity) || availableQuantity > 0)
 
     return (
-      <IntlInjector>
-        {intl => (
-          <Container className={`${productDetails.container} pt6 pb8 justify-center flex`}>
-            <div className="w-100 mw9">
-              <div className="mb7">
-                {slug && categories && <ExtensionPoint
-                  id="breadcrumb"
-                  term={term}
-                  slug={slug}
-                  categories={categories}
-                />}
+      <Container className={`${productDetails.container} pt6 pb8 justify-center flex`}>
+        <div className="w-100 mw9">
+          <div className="mb7">
+            {slug && categories && (
+              <ExtensionPoint
+                id="breadcrumb"
+                term={slug}
+                categories={categories}
+              />
+            )}
 
-                <div className={`${productDetails.nameContainer} c-on-base mb4 dn-l`}>
-                  <ProductName {...productNameProps} />
-                </div>
+            <div className={`${productDetails.nameContainer} c-on-base mb4 dn-l`}>
+              <ProductName {...productNameProps} />
+            </div>
 
-                <div className="flex flex-wrap">
-                  <div className="w-60-l w-100">
-                    <div className="fr-ns w-100 h-100">
-                      <div className="flex justify-center">
-                        <ProductImages images={this.getImages()} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className={`${productDetails.detailsContainer} pl8-l w-40-l w-100`}>
-                    <div className={`${productDetails.nameContainer} c-on-base dn db-l mb4`}>
-                      <ProductName {...productNameProps} />
-                    </div>
-                    {showProductPrice && (
-                      <div className={`${productDetails.priceContainer} pt1 dn db-l`}>
-                        <ProductPrice {...productPriceProps} />
-                      </div>
-                    )}
-                    <div className="mv2 mt5 dn db-l">
-                      <hr className="o-30" size="1" />
-                    </div>
-                    <div className="mt6">
-                      {product && this.selectedItem.variations &&
-                        this.selectedItem.variations.length > 0 &&
-                        (
-                          <SKUSelector
-                            skuItems={this.skuItems}
-                            skuSelected={this.selectedItem}
-                            productSlug={product.linkText}
-                          />
-                        )}
-                      {showProductPrice && (
-                        <div className={`${productDetails.priceContainer} pt1 mt mt7 mt4-l dn-l`}>
-                          <ProductPrice {...productPriceProps} />
-                        </div>
-                      )}
-                      {showBuyButton ? (
-                        <div className="pv2 dn db-l mt8">
-                          <BuyButton {...buyButtonProps}>
-                            <FormattedMessage id="addToCartButton.label" />
-                          </BuyButton>
-                        </div>
-                      ) : (
-                          <div className="pv4">
-                            <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
-                          </div>
-                        )}
-                      <FixedButton>
-                        <div className="dn-l bg-base w-100 ph5 pv3">
-                          <BuyButton {...buyButtonProps}>
-                            <FormattedMessage id="addToCartButton.label" />
-                          </BuyButton>
-                        </div>
-                      </FixedButton>
-                      <div className="mt8">
-                        <ShippingSimulator
-                          skuId={path(['itemId'], this.selectedItem)}
-                          seller={this.sellerId}
-                          country={country}
-                        />
-                      </div>
-                      <div className="flex w-100 mt7">
-                        <Share
-                          shareLabelClass="c-muted-2 t-small mb3"
-                          className="db"
-                          {...this.props.share}
-                          loading={!path(['name'], this.selectedItem)}
-                          title={intl.formatMessage(
-                            { id: 'share.title' },
-                            {
-                              product: path(['productName'], product),
-                              sku: path(['name'], this.selectedItem),
-                              store: account,
-                            }
-                          )}
-                        />
-                      </div>
-                    </div>
+            <div className="flex flex-wrap">
+              <div className="w-60-l w-100">
+                <div className="fr-ns w-100 h-100">
+                  <div className="flex justify-center">
+                    <ProductImages images={this.getImages()} />
                   </div>
                 </div>
               </div>
-              {description && specifications && (
-                <div className="ph5 ph0-ns">
-                  <div className="mv4">
-                    <hr className="o-30 db" size="1" />
+              <div className={`${productDetails.detailsContainer} pl8-l w-40-l w-100`}>
+                <div className={`${productDetails.nameContainer} c-on-base dn db-l mb4`}>
+                  <ProductName {...productNameProps} />
+                </div>
+                {showProductPrice && (
+                  <div className={`${productDetails.priceContainer} pt1 dn db-l`}>
+                    <ProductPrice {...productPriceProps} />
                   </div>
-                  <div className="pv2 w-100 mt8 h-100">
-                    <ProductDescription
-                      specifications={specifications}
-                      skuName={skuName}
-                      description={description}
+                )}
+                <div className="mv2 mt5 dn db-l">
+                  <hr className="o-30" size="1" />
+                </div>
+                <div className="mt6">
+                  {product && this.selectedItem.variations && this.selectedItem.variations.length > 0 && (
+                    <SKUSelector
+                      skuItems={this.skuItems}
+                      skuSelected={this.selectedItem}
+                      productSlug={product.linkText}
+                    />
+                  )}
+                  {showProductPrice && (
+                    <div className={`${productDetails.priceContainer} pt1 mt mt7 mt4-l dn-l`}>
+                      <ProductPrice {...productPriceProps} />
+                    </div>
+                  )}
+                  {showBuyButton ? (
+                    <div className="pv2 dn db-l mt8">
+                      <BuyButton {...buyButtonProps}>
+                        <FormattedMessage id="addToCartButton.label" />
+                      </BuyButton>
+                    </div>
+                  ) : (
+                    <div className="pv4">
+                      <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
+                    </div>
+                  )}
+                  <FixedButton>
+                    <div className="dn-l bg-base w-100 ph5 pv3">
+                      <BuyButton {...buyButtonProps}>
+                        <FormattedMessage id="addToCartButton.label" />
+                      </BuyButton>
+                    </div>
+                  </FixedButton>
+                  <div className="mt8">
+                    <ShippingSimulator
+                      skuId={path(['itemId'], this.selectedItem)}
+                      seller={this.sellerId}
+                      country={country}
+                    />
+                  </div>
+                  <div className="flex w-100 mt7">
+                    <Share
+                      shareLabelClass="c-muted-2 t-small mb3"
+                      className="db"
+                      {...this.props.share}
+                      loading={!path(['name'], this.selectedItem)}
+                      title={intl.formatMessage({ id: 'share.title' }, {
+                        product: path(['productName'], product),
+                        sku: path(['name'], this.selectedItem),
+                        store: account,
+                      })}
                     />
                   </div>
                 </div>
-              )}
+              </div>
             </div>
-          </Container>
-        )}
-      </IntlInjector>
+          </div>
+          {description && specifications && (
+            <div className="ph5 ph0-ns">
+              <div className="mv4">
+                <hr className="o-30 db" size="1" />
+              </div>
+              <div className="pv2 w-100 mt8 h-100">
+                <ProductDescription
+                  specifications={specifications}
+                  skuName={skuName}
+                  description={description}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </Container>
     )
   }
 }
@@ -371,4 +396,7 @@ function mergeSchemaAndDefaultProps(schema, propName) {
   })
 }
 
-export default withRuntimeContext(ProductDetails)
+export default hoistNonReactStatic(
+  withRuntimeContext(injectIntl(ProductDetails)),
+  ProductDetails
+)
