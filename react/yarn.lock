@@ -7,13 +7,6 @@ hoist-non-react-statics@^2.5.5:
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
-hoist-non-react-statics@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.2.1.tgz#c09c0555c84b38a7ede6912b61efddafd6e75e1e"
-  integrity sha512-TFsu3TV3YLY+zFTZDrN8L2DTFanObwmBLpWvJs1qfUuEQ5bTAdFcwfx2T/bsCXfM9QHSLvjfP+nihEl0yvozxw==
-  dependencies:
-    react-is "^16.3.2"
-
 intl-format-cache@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/intl-format-cache/-/intl-format-cache-2.1.0.tgz#04a369fecbfad6da6005bae1f14333332dcf9316"
@@ -45,19 +38,22 @@ invariant@^2.1.1:
   dependencies:
     loose-envify "^1.0.0"
 
-js-tokens@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
+"js-tokens@^3.0.0 || ^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
+  integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
 loose-envify@^1.0.0, loose-envify@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
+  integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
   dependencies:
-    js-tokens "^3.0.0"
+    js-tokens "^3.0.0 || ^4.0.0"
 
 object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
 
 prop-types@^15.6.2:
   version "15.6.2"
@@ -77,7 +73,7 @@ react-content-loader@^3.1.2:
   resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-3.4.2.tgz#187fbec2aa389635e4613faa046713f196173f40"
   integrity sha512-UsL3uyPUBZbaPXr52E+MMIOjs7qr6QpcCiF9Xt7we0ACEMAFYp6rWNxVwJbk4/1Peqe9Deajs0PRW5ymvyF5SA==
 
-react-intl@^2.7.2:
+react-intl@^2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-2.8.0.tgz#20b0c1f01d1292427768aa8ec9e51ab7e36503ba"
   integrity sha512-1cSasNkHxZOXYYhms9Q1tSEWF8AWZQNq3nPLB/j8mYV0ZTSt2DhGQXHfKrKQMu4cgj9J1Crqg7xFPICTBgzqtQ==
@@ -87,8 +83,3 @@ react-intl@^2.7.2:
     intl-messageformat "^2.1.0"
     intl-relativeformat "^2.1.0"
     invariant "^2.1.1"
-
-react-is@^16.3.2:
-  version "16.7.0"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
-  integrity sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==

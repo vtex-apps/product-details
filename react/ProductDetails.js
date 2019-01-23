@@ -1,4 +1,3 @@
-import hoistNonReactStatic from 'hoist-non-react-statics'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
@@ -396,7 +395,4 @@ function mergeSchemaAndDefaultProps(schema, propName) {
   })
 }
 
-export default hoistNonReactStatic(
-  withRuntimeContext(injectIntl(ProductDetails)),
-  ProductDetails
-)
+export default withRuntimeContext(injectIntl(ProductDetails))
