@@ -1,7 +1,8 @@
 {
   "product-details": {
-    "allowed": ["breadcrumb"],
-    "required": [],
+    "allowed": [
+      "breadcrumb"
+    ],
     "component": "ProductDetails"
   }
 }
