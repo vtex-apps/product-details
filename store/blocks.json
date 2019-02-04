@@ -1,6 +1,6 @@
 {
   "product-details": {
-    "required": [
+    "blocks": [
       "product-name",
       "product-images",
       "product-price",
@@ -8,12 +8,8 @@
       "buy-button",
       "sku-selector",
       "shipping-simulator",
-      "availability-subscriber"
-    ],
-    "allowed": [
-      "breadcrumb",
+      "availability-subscriber",
       "share"
-    ],
-    "component": "ProductDetails"
-  }
+    ]
+  } 
 }
