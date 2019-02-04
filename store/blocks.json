@@ -1,6 +1,7 @@
 {
   "product-details": {
     "blocks": [
+      "breadcrumb",
       "product-name",
       "product-images",
       "product-price",
