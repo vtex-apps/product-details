@@ -4,9 +4,7 @@ import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
-import {
-  Container,
-} from 'vtex.store-components'
+import { Container } from 'vtex.store-components'
 
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
@@ -334,7 +332,10 @@ class ProductDetails extends Component {
                         productDetails.priceContainer
                       } pt1 mt mt7 mt4-l dn-l`}
                     >
-                      <ExtensionPoint id="product-price" {...productPriceProps} />
+                      <ExtensionPoint
+                        id="product-price"
+                        {...productPriceProps}
+                      />
                     </div>
                   )}
                   {showBuyButton ? (
