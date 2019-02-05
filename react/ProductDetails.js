@@ -4,18 +4,7 @@ import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
-import {
-  AvailabilitySubscriber,
-  BuyButton,
-  ProductDescription,
-  ProductImages,
-  ProductName,
-  ProductPrice,
-  Share,
-  ShippingSimulator,
-  SKUSelector,
-  Container,
-} from 'vtex.store-components'
+import { Container } from 'vtex.store-components'
 
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
@@ -189,13 +178,16 @@ class ProductDetails extends Component {
   getImages() {
     const images = path(['images'], this.selectedItem)
 
-    return images ? images.map(
-      image => ({
-        imageUrls: imageSizes.map(size => changeImageUrlSize(image.imageUrl, size)),
-        thresholds,
-        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-        imageText: image.imageText,
-      })) : []
+    return images
+      ? images.map(image => ({
+          imageUrls: imageSizes.map(size =>
+            changeImageUrlSize(image.imageUrl, size)
+          ),
+          thresholds,
+          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+          imageText: image.imageText,
+        }))
+      : []
   }
 
   render() {
@@ -205,9 +197,7 @@ class ProductDetails extends Component {
       categories,
       runtime: {
         account,
-        culture: {
-          country,
-        },
+        culture: { country },
       },
       intl,
     } = this.props
@@ -222,8 +212,7 @@ class ProductDetails extends Component {
     const description = path(['description'], product)
 
     const buyButtonProps = {
-      skuItems:
-        this.selectedItem &&
+      skuItems: this.selectedItem &&
         this.sellerId && [
           {
             skuId: this.selectedItem.itemId,
@@ -271,10 +260,13 @@ class ProductDetails extends Component {
     }
 
     const availableQuantity = path(['AvailableQuantity'], this.commertialOffer)
-    const showProductPrice = (Number.isNaN(+availableQuantity) || availableQuantity > 0)
+    const showProductPrice =
+      Number.isNaN(+availableQuantity) || availableQuantity > 0
 
     return (
-      <Container className={`${productDetails.container} pt6 pb8 justify-center flex`}>
+      <Container
+        className={`${productDetails.container} pt6 pb8 justify-center flex`}
+      >
         <div className="w-100 mw9">
           <div className="mb7">
             {slug && categories && (
@@ -285,79 +277,111 @@ class ProductDetails extends Component {
               />
             )}
 
-            <div className={`${productDetails.nameContainer} c-on-base mb4 dn-l`}>
-              <ProductName {...productNameProps} />
+            <div
+              className={`${productDetails.nameContainer} c-on-base mb4 dn-l`}
+            >
+              <ExtensionPoint id="product-name" {...productNameProps} />
             </div>
-
             <div className="flex flex-wrap">
               <div className="w-60-l w-100">
                 <div className="fr-ns w-100 h-100">
                   <div className="flex justify-center">
-                    <ProductImages images={this.getImages()} />
+                    <ExtensionPoint
+                      id="product-images"
+                      images={this.getImages()}
+                    />
                   </div>
                 </div>
               </div>
-              <div className={`${productDetails.detailsContainer} pl8-l w-40-l w-100`}>
-                <div className={`${productDetails.nameContainer} c-on-base dn db-l mb4`}>
-                  <ProductName {...productNameProps} />
+              <div
+                className={`${
+                  productDetails.detailsContainer
+                } pl8-l w-40-l w-100`}
+              >
+                <div
+                  className={`${
+                    productDetails.nameContainer
+                  } c-on-base dn db-l mb4`}
+                >
+                  <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
                 {showProductPrice && (
-                  <div className={`${productDetails.priceContainer} pt1 dn db-l`}>
-                    <ProductPrice {...productPriceProps} />
+                  <div
+                    className={`${productDetails.priceContainer} pt1 dn db-l`}
+                  >
+                    <ExtensionPoint id="product-price" {...productPriceProps} />
                   </div>
                 )}
                 <div className="mv2 mt5 dn db-l">
                   <hr className="o-30" size="1" />
                 </div>
                 <div className="mt6">
-                  {product && this.selectedItem.variations && this.selectedItem.variations.length > 0 && (
-                    <SKUSelector
-                      skuItems={this.skuItems}
-                      skuSelected={this.selectedItem}
-                      productSlug={product.linkText}
-                    />
-                  )}
+                  {product &&
+                    this.selectedItem.variations &&
+                    this.selectedItem.variations.length > 0 && (
+                      <ExtensionPoint
+                        id="sku-selector"
+                        skuItems={this.skuItems}
+                        skuSelected={this.selectedItem}
+                        productSlug={product.linkText}
+                      />
+                    )}
                   {showProductPrice && (
-                    <div className={`${productDetails.priceContainer} pt1 mt mt7 mt4-l dn-l`}>
-                      <ProductPrice {...productPriceProps} />
+                    <div
+                      className={`${
+                        productDetails.priceContainer
+                      } pt1 mt mt7 mt4-l dn-l`}
+                    >
+                      <ExtensionPoint
+                        id="product-price"
+                        {...productPriceProps}
+                      />
                     </div>
                   )}
                   {showBuyButton ? (
                     <div className="pv2 dn db-l mt8">
-                      <BuyButton {...buyButtonProps}>
+                      <ExtensionPoint id="buy-button" {...buyButtonProps}>
                         <FormattedMessage id="addToCartButton.label" />
-                      </BuyButton>
+                      </ExtensionPoint>
                     </div>
                   ) : (
                     <div className="pv4">
-                      <AvailabilitySubscriber skuId={this.selectedItem.itemId} />
+                      <ExtensionPoint
+                        id="availability-subscriber"
+                        skuId={this.selectedItem.itemId}
+                      />
                     </div>
                   )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
-                      <BuyButton {...buyButtonProps}>
+                      <ExtensionPoint id="buy-button" {...buyButtonProps}>
                         <FormattedMessage id="addToCartButton.label" />
-                      </BuyButton>
+                      </ExtensionPoint>
                     </div>
                   </FixedButton>
                   <div className="mt8">
-                    <ShippingSimulator
+                    <ExtensionPoint
+                      id="shipping-simulator"
                       skuId={path(['itemId'], this.selectedItem)}
                       seller={this.sellerId}
                       country={country}
                     />
                   </div>
                   <div className="flex w-100 mt7">
-                    <Share
+                    <ExtensionPoint
+                      id="share"
                       shareLabelClass="c-muted-2 t-small mb3"
                       className="db"
                       {...this.props.share}
                       loading={!path(['name'], this.selectedItem)}
-                      title={intl.formatMessage({ id: 'share.title' }, {
-                        product: path(['productName'], product),
-                        sku: path(['name'], this.selectedItem),
-                        store: account,
-                      })}
+                      title={intl.formatMessage(
+                        { id: 'share.title' },
+                        {
+                          product: path(['productName'], product),
+                          sku: path(['name'], this.selectedItem),
+                          store: account,
+                        }
+                      )}
                     />
                   </div>
                 </div>
@@ -370,7 +394,8 @@ class ProductDetails extends Component {
                 <hr className="o-30 db" size="1" />
               </div>
               <div className="pv2 w-100 mt8 h-100">
-                <ProductDescription
+                <ExtensionPoint
+                  id="product-description"
                   specifications={specifications}
                   skuName={skuName}
                   description={description}
