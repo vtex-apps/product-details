@@ -217,17 +217,24 @@ class ProductDetails extends Component {
 
     const buyButtonProps = {
       skuItems: this.selectedItem &&
-        this.sellerId && [
-          {
-            skuId: this.selectedItem.itemId,
-            quantity: selectedQuantity,
-            seller: this.sellerId,
-            name: this.selectedItem.nameComplete,
-            price: this.commertialOffer.Price,
-            variant: this.selectedItem.name,
-            brand: product.brand,
-          },
-        ],
+      this.sellerId && [
+        {
+          skuId: this.selectedItem.itemId,
+          quantity: selectedQuantity,
+          seller: this.sellerId,
+          name: this.selectedItem.nameComplete,
+          price: this.commertialOffer.Price,
+          variant: this.selectedItem.name,
+          brand: product.brand,
+          index: 0,
+
+          /* Optimistic props */
+          detailUrl: `/${product.linkText}/p`,
+          imageUrl: path(['images', '0', 'imageUrl'], this.selectedItem),
+          listPrice: path(['sellers', '0', 'commertialOffer', 'ListPrice'], this.selectedItem),
+          /* End Optimistic props */
+        },
+      ],
       large: true,
       available: showBuyButton,
     }
