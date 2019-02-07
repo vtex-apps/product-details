@@ -1,17 +1,17 @@
 {
   "product-details": {
     "required": [
-      "product-name",
       "product-images",
+      "product-name",
       "product-price",
-      "product-description",
-      "buy-button",
       "sku-selector",
-      "shipping-simulator",
-      "availability-subscriber"
+      "buy-button",
+      "product-description"
     ],
     "allowed": [
       "breadcrumb",
+      "shipping-simulator",
+      "availability-subscriber",
       "share"
     ],
     "component": "ProductDetails"
