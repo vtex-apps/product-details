@@ -227,12 +227,9 @@ class ProductDetails extends Component {
           variant: this.selectedItem.name,
           brand: product.brand,
           index: 0,
-
-          /* Optimistic props */
           detailUrl: `/${product.linkText}/p`,
           imageUrl: path(['images', '0', 'imageUrl'], this.selectedItem),
           listPrice: path(['sellers', '0', 'commertialOffer', 'ListPrice'], this.selectedItem),
-          /* End Optimistic props */
         },
       ],
       large: true,
