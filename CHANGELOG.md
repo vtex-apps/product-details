@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.8.1] - 2019-02-07
+### Changed
+- Make Product Details interface more flexible.
+
 ## [1.8.0] - 2019-02-05
 ### Added
 - Improve use of blocks and interfaces, enhancing reusability.
