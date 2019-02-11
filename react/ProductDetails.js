@@ -4,7 +4,7 @@ import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
-import { Container } from 'vtex.store-components'
+import { Container, ProductSpecifications } from 'vtex.store-components'
 
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
@@ -76,6 +76,7 @@ class ProductDetails extends Component {
       showSku: false,
     },
     displayVertically: false,
+    productSpecificationsTabsMode: false,
   }
 
   static propTypes = {
@@ -200,6 +201,7 @@ class ProductDetails extends Component {
         culture: { country },
       },
       intl,
+      productSpecificationsTabsMode
     } = this.props
     const { selectedQuantity } = this.state
 
@@ -393,13 +395,21 @@ class ProductDetails extends Component {
               <div className="mv4">
                 <hr className="o-30 db" size="1" />
               </div>
-              <div className="pv2 w-100 mt8 h-100">
-                <ExtensionPoint
-                  id="product-description"
-                  specifications={specifications}
-                  skuName={skuName}
-                  description={description}
-                />
+              <div className={`flex ${productSpecificationsTabsMode ? 'flex-wrap' : ''}`}>
+                <div className={`pv2 w-100 mt8 h-100 ${productSpecificationsTabsMode ? 'w-100' : 'w-60'}`}>
+                  <ExtensionPoint
+                    id="product-description"
+                    skuName={skuName}
+                    description={description}
+                  />
+                </div>
+                <div className={`pv2 mt8 h-100 ${productSpecificationsTabsMode ? 'w-100' : 'w-40'}`}>
+                  <ExtensionPoint
+                    id="product-specifications"
+                    tabs={productSpecificationsTabsMode} 
+                    specifications={specifications}
+                  />
+                </div>
               </div>
             </div>
           )}
