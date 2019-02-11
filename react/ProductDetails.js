@@ -76,7 +76,7 @@ class ProductDetails extends Component {
       showSku: false,
     },
     displayVertically: false,
-    showSpecificationsTab: true,
+    showSpecificationsTab: false,
   }
 
   static propTypes = {
@@ -105,6 +105,8 @@ class ProductDetails extends Component {
     }),
     /** Product slug */
     slug: PropTypes.string.isRequired,
+    /** Product specifications tab mode */
+    showSpecificationsTab: PropTypes.bool,
   }
 
   static getSchema = props => {
@@ -408,7 +410,7 @@ class ProductDetails extends Component {
                 <div className="pv2 mt8 h-100 w-100">
                   <ExtensionPoint
                     id="product-specifications"
-                    tabs={showSpecificationsTab}
+                    tabsMode={showSpecificationsTab}
                     specifications={specifications}
                   />
                 </div>
