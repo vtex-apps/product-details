@@ -6,7 +6,8 @@
       "product-price",
       "sku-selector",
       "buy-button",
-      "product-description"
+      "product-description",
+      "product-specifications"
     ],
     "allowed": [
       "breadcrumb",

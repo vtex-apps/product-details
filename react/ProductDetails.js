@@ -76,6 +76,7 @@ class ProductDetails extends Component {
       showSku: false,
     },
     displayVertically: false,
+    showSpecificationsTab: false,
   }
 
   static propTypes = {
@@ -104,6 +105,8 @@ class ProductDetails extends Component {
     }),
     /** Product slug */
     slug: PropTypes.string.isRequired,
+    /** Product specifications tab mode */
+    showSpecificationsTab: PropTypes.bool,
   }
 
   static getSchema = props => {
@@ -180,13 +183,13 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-          imageUrls: imageSizes.map(size =>
-            changeImageUrlSize(image.imageUrl, size)
-          ),
-          thresholds,
-          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-          imageText: image.imageText,
-        }))
+        imageUrls: imageSizes.map(size =>
+          changeImageUrlSize(image.imageUrl, size)
+        ),
+        thresholds,
+        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+        imageText: image.imageText,
+      }))
       : []
   }
 
@@ -200,6 +203,7 @@ class ProductDetails extends Component {
         culture: { country },
       },
       intl,
+      showSpecificationsTab
     } = this.props
     const { selectedQuantity } = this.state
 
@@ -296,12 +300,12 @@ class ProductDetails extends Component {
               <div
                 className={`${
                   productDetails.detailsContainer
-                } pl8-l w-40-l w-100`}
+                  } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                  } c-on-base dn db-l mb4`}
+                    } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -330,7 +334,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                      } pt1 mt mt7 mt4-l dn-l`}
+                        } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -345,13 +349,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                    <div className="pv4">
-                      <ExtensionPoint
-                        id="availability-subscriber"
-                        skuId={this.selectedItem.itemId}
-                      />
-                    </div>
-                  )}
+                      <div className="pv4">
+                        <ExtensionPoint
+                          id="availability-subscriber"
+                          skuId={this.selectedItem.itemId}
+                        />
+                      </div>
+                    )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -388,21 +392,31 @@ class ProductDetails extends Component {
               </div>
             </div>
           </div>
-          {description && specifications && (
-            <div className="ph5 ph0-ns">
-              <div className="mv4">
-                <hr className="o-30 db" size="1" />
-              </div>
-              <div className="pv2 w-100 mt8 h-100">
-                <ExtensionPoint
-                  id="product-description"
-                  specifications={specifications}
-                  skuName={skuName}
-                  description={description}
-                />
-              </div>
+          <div className={`${productDetails.informationsContainer}ph5 ph0-ns`}>
+            <div className="mv4">
+              <hr className="o-30 db" size="1" />
             </div>
-          )}
+            <div className={`flex ${showSpecificationsTab ? 'flex-wrap' : 'justify-between'}`}>
+              {description &&
+                <div className="pv2 mt8 h-100 w-100">
+                  <ExtensionPoint
+                    id="product-description"
+                    skuName={skuName}
+                    description={description}
+                  />
+                </div>
+              }
+              {specifications &&
+                <div className="pv2 mt8 h-100 w-100">
+                  <ExtensionPoint
+                    id="product-specifications"
+                    tabsMode={showSpecificationsTab}
+                    specifications={specifications}
+                  />
+                </div>
+              }
+            </div>
+          </div>
         </div>
       </Container>
     )

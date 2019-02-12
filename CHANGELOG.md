@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.9.0] - 2019-02-12
+### Added
+- Allow the product specifications render in tabs mode.
+
 ## [1.8.1] - 2019-02-07
 ### Changed
 - Make Product Details interface more flexible.
