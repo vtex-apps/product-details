@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.10.0] - 2019-02-13
+### Added
+- Add the optimistic minicart strategy props to the `BuyButton`.
+
 ## [1.9.0] - 2019-02-12
 ### Added
 - Allow the product specifications render in tabs mode.

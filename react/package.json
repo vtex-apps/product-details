@@ -1,6 +1,9 @@
 {
   "name": "product-details",
   "version": "0.1.0",
+  "scripts": {
+    "test": "echo TODO"
+  },
   "dependencies": {
     "prop-types": "^15.6.2",
     "ramda": "^0.26.1",
