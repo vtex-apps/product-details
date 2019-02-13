@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.10.1] - 2019-02-13
+### Fixed
+- Using html5 tags to a more semantic structure.
+
 ## [1.10.0] - 2019-02-13
 ### Added
 - Add the optimistic minicart strategy props to the `BuyButton`.
