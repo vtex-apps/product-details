@@ -276,7 +276,7 @@ class ProductDetails extends Component {
         className={`${productDetails.container} pt6 pb8 justify-center flex`}
       >
         <div className="w-100 mw9">
-          <div className="mb7">
+          <article className="mb7">
             {slug && categories && (
               <ExtensionPoint
                 id="breadcrumb"
@@ -301,7 +301,7 @@ class ProductDetails extends Component {
                   </div>
                 </div>
               </div>
-              <div
+              <aside
                 className={`${
                   productDetails.detailsContainer
                   } pl8-l w-40-l w-100`}
@@ -393,10 +393,10 @@ class ProductDetails extends Component {
                     />
                   </div>
                 </div>
-              </div>
+              </aside>
             </div>
-          </div>
-          <div className={`${productDetails.informationsContainer}ph5 ph0-ns`}>
+          </article>
+          <footer className={`${productDetails.informationsContainer}ph5 ph0-ns`}>
             <div className="mv4">
               <hr className="o-30 db" size="1" />
             </div>
@@ -420,7 +420,7 @@ class ProductDetails extends Component {
                 </div>
               }
             </div>
-          </div>
+          </footer>
         </div>
       </Container>
     )
