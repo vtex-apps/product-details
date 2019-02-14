@@ -1,40 +1,181 @@
-# Product Details
+# VTEX Product Details
 
-Product Details is a canonical component that any VTEX store can use.
+## Description
+The VTEX Category Menu app shows the details of a product like image, name and price. THis app is used by store theme.
+
+:loudspeaker: **Disclaimer:** Don't fork this project. Use, contribute, or open issue with your feature request.
 
 ## Release schedule
 | Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility
 | :--:     | :---:               |  :---:          | :---:                 | :---:       | :---: 
-| [0.x]    | **Maintenance LTS** |  2018-05-29     | 2018-11-28            | March 2019  | 1.x
 | [1.x]    | **Current Release** |  2018-11-28     |                       |             | 2.x
+| [0.x]    | **Maintenance LTS** |  2018-05-29     | 2018-11-28            | March 2019  | 1.x
+See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for more information.
+
+## Table of Contents
+- [Usage](#usage)
+  - [Blocks API](#blocks-api)
+    - [Configuration](#configuration)
+  - [Styles API](#styles-api)
+    - [CSS namespaces](#css-namespaces)
+- [Troubleshooting](#troubleshooting)
+- [Tests](#tests)
 
 ## Usage
 
-To use it, you need to add the dependency in your `manifest.json`
+This app uses our store builder with the blocks architecture. To know more about Store Builder [click here.](https://help.vtex.com/en/tutorial/understanding-storebuilder-and-stylesbuilder#structuring-and-configuring-our-store-with-object-object)
+
+We add the product-details as a block in our [Store Header](https://github.com/vtex-apps/store-header/blob/master/store/interfaces.json).
+
+To configure or customize this app, you need to import it in your dependencies in `manifest.json`.
 
 ```json
-{
-  "dependencies": {
-    "vtex.product-details": "0.x"
+  dependencies: {
+    "vtex.product-details": "1.x"
   }
-}
 ```
 
-You can use it in your code like so
+Then, add `product-details` block into your app theme, like we do in our [Store theme app](https://github.com/vtex-apps/store-theme/blob/master/store/blocks.json). 
 
-```jsx
-<ExtensionPoint id="product-details" />
-```
-
-And in your `pages.json`
+Now, you can change the behavior of the `product-details` block that is in the store header. See an example of how to configure: 
 
 ```json
-{
-  "extensions": {
-    "product-details": {
-      "component": "vtex.product-details/ProductDetails"
+  "product-details": {
+      "blocks": [
+        "breadcrumb",
+        "product-name",
+        "product-images",
+        "product-price",
+        "product-description",
+        "product-specifications",
+        "buy-button",
+        "sku-selector",
+        "shipping-simulator",
+        "availability-subscriber",
+        "share"
+      ],
+      "props": {
+        "displayVertically": true,
+        "share": {
+          "social": {
+            "Facebook": true,
+            "WhatsApp": true,
+            "Twitter": false
+          }
+        },
+        "price": {
+          "labelSellingPrice": null,
+          "showListPrice": true,
+          "showLabels": true,
+          "showInstallments": true,
+          "showSavings": true
+        },
+        "name": {
+          "showBrandName": false,
+          "showSku": false,
+          "showProductReference": false
+        }
+      }
     }
+```
+
+### Blocks API
+
+When implementing this app as a block, various inner blocks may be available. The following interface lists the available blocks within `product-details` and describes if they are required or optional.
+
+```json
+{
+  "product-details": {
+    "required": [
+      "product-images",
+      "product-name",
+      "product-price",
+      "sku-selector",
+      "buy-button",
+      "product-description",
+      "product-specifications"
+    ],
+    "allowed": [
+      "breadcrumb",
+      "shipping-simulator",
+      "availability-subscriber",
+      "share"
+    ],
+    "component": "ProductDetails"
   }
 }
 ```
+The `ProductDetails` has the required blocks: `product-images`, `product-name`, `product-price`, `sku-selector`, `buy-button`, `product-description` and `product-specifications`. So, any `ProductDetails` block implementation created must add these blocks.
+
+#### Configuration 
+Through the Storefront you can change the behavior and interface of `ProductDetails`. But, you can also make adjusts in your theme app, like Store does.
+
+| Prop name          | Type       | Description                                                                 | Default Value |
+| ------------------ | ---------- | --------------------------------------------------------------------------- | -------------- |
+| `price` | `Object`   | Configures the product price area (More info on the table bellow)          | false |
+| `name`     | `Object`  | Configures the product name area (More info on the table bellow)                    | false |
+| `displayVertically`     | `Boolean`  | Whether to display the preview images on the vertical or not     | false |
+| `showSpecificationsTab`      | `Boolean`  | Whether to display the product specification on tab mode or not   | false |
+
+
+Price:
+
+| Prop name          | Type       | Description                                                                 |
+| ------------------ | ---------- | --------------------------------------------------------------------------- |
+| `showListPrice` | `Boolean`   | Shows the list prices          | true |
+| `showLabels`     | `Boolean`  | Shows the labels in the price and installments                     | true |
+| `showInstallments`     | `Boolean`  | Shows the installments information     | true |
+| `showSavings`      | `Boolean`  | Shows the savings information   | true |
+| `labelSellingPrice`      | `String`  | Text of the label before the price   | `null` |
+
+Name:
+
+| Prop name          | Type       | Description                                                                 |
+| ------------------ | ---------- | --------------------------------------------------------------------------- |
+| `showProductReference` | `Boolean`   | Shows the product reference          | false |
+| `showBrandName`     | `Boolean`  | Shows the brand name of the product                     | false |
+| `showSku`     | `Boolean`  | Shows the sku value for this product     | false |
+
+Also, you can configure the `share` that is defined on `ProductDetails`. See [here](https://github.com/vtex-apps/store-components/blob/master/react/components/Share/README.md) the `Share` API. 
+
+### Styles API
+
+This app provides some CSS classes as an API for style customization.
+
+To use this CSS API, you must add the `styles` builder and create an app styling CSS file.
+
+1. Add the `styles` builder to your `manifest.json`:
+
+```json
+  "builders": {
+    "styles": "1.x"
+  }
+```
+
+2. Create a file called `vtex.product-details.css` inside the `styles/css` folder. Add your custom styles:
+
+```css
+.container {
+  margin-top: 10px;
+}
+```
+
+#### CSS namespaces
+Below, we describe the namespaces that is define in the `ProductDetails`.
+
+| Class name         |    Description     |  Component Source                                           |
+| ------------------ | ----------         |------------------------------------------------------- |
+| `container`        |  The main container of Product Details                        | [productDetails](/react/productDetails.js) |
+| `nameContainer`          | The container of the name area | [productDetails](/react/productDetails.js)                                      |
+| `detailsContainer`     | The container of the details area         | [productDetails](/react/productDetails.js) |
+| `priceContainer`              |  The container of the price area                        | [productDetails](/react/productDetails.js)            |
+| `informationsContainer`     |  The container of the information area                    | [productDetails](/react/productDetails.js)   |
+| `fixedButton`          |  The product buy button                           | [FixedButton/index](/react/components/FixedButton/index.js)  |
+
+## Troubleshooting
+You can check if others are passing through similar issues [here](https://github.com/vtex-apps/product-details/issues). Also feel free to [open issues](https://github.com/vtex-apps/product-details/issues/new) or contribute with pull requests.
+
+## Tests
+
+To execute our tests go to react/ folder and run yarn test
 
