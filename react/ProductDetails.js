@@ -217,21 +217,21 @@ class ProductDetails extends Component {
 
     const buyButtonProps = {
       skuItems: this.selectedItem &&
-      this.sellerId && [
-        {
-          skuId: this.selectedItem.itemId,
-          quantity: selectedQuantity,
-          seller: this.sellerId,
-          name: this.selectedItem.nameComplete,
-          price: this.commertialOffer.Price,
-          variant: this.selectedItem.name,
-          brand: product.brand,
-          index: 0,
-          detailUrl: `/${product.linkText}/p`,
-          imageUrl: path(['images', '0', 'imageUrl'], this.selectedItem),
-          listPrice: path(['sellers', '0', 'commertialOffer', 'ListPrice'], this.selectedItem),
-        },
-      ],
+        this.sellerId && [
+          {
+            skuId: this.selectedItem.itemId,
+            quantity: selectedQuantity,
+            seller: this.sellerId,
+            name: this.selectedItem.nameComplete,
+            price: this.commertialOffer.Price,
+            variant: this.selectedItem.name,
+            brand: product.brand,
+            index: 0,
+            detailUrl: `/${product.linkText}/p`,
+            imageUrl: path(['images', '0', 'imageUrl'], this.selectedItem),
+            listPrice: path(['sellers', '0', 'commertialOffer', 'ListPrice'], this.selectedItem),
+          },
+        ],
       large: true,
       available: showBuyButton,
     }
@@ -396,7 +396,7 @@ class ProductDetails extends Component {
               </aside>
             </div>
           </article>
-          <footer className={`${productDetails.informationsContainer}ph5 ph0-ns`}>
+          <footer className={`${productDetails.informationsContainer} ph5 ph0-ns`}>
             <div className="mv4">
               <hr className="o-30 db" size="1" />
             </div>
