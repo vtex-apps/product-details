@@ -396,7 +396,7 @@ class ProductDetails extends Component {
               </aside>
             </div>
           </article>
-          <footer className={`${productDetails.informationsContainer}ph5 ph0-ns`}>
+          <footer className={`${productDetails.informationsContainer} ph5 ph0-ns`}>
             <div className="mv4">
               <hr className="o-30 db" size="1" />
             </div>
