@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Trying to read schemas from `undefined` variables.
 
 ## [1.10.2] - 2019-02-19
 ### Fixed
@@ -72,7 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Lateral padding.
 
-  
+
 ## [1.3.0] - 2018-12-20
 ### Added
 - Support to messages builder.
