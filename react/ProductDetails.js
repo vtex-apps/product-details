@@ -109,30 +109,18 @@ class ProductDetails extends Component {
     showSpecificationsTab: PropTypes.bool,
   }
 
-  static getSchema = props => {
-    const shareSchema = Share.schema || Share.getSchema(props)
-    const priceSchema = mergeSchemaAndDefaultProps(
-      ProductPrice.schema || ProductPrice.getSchema(props),
-      'price'
-    )
-    const nameSchema = ProductName.schema || ProductName.getSchema(props)
-
-    return {
-      title: 'editor.product-details.title',
-      description: 'editor.product-details.description',
-      type: 'object',
-      properties: {
-        displayVertically: {
-          title: 'editor.product-details.displayVertically.title',
-          type: 'boolean',
-          default: false,
-          isLayout: true,
-        },
-        share: shareSchema,
-        price: priceSchema,
-        name: nameSchema,
-      },
-    }
+  static schema =  {
+    title: 'editor.product-details.title',
+    description: 'editor.product-details.description',
+    type: 'object',
+    properties: {
+      displayVertically: {
+        title: 'editor.product-details.displayVertically.title',
+        type: 'boolean',
+        default: false,
+        isLayout: true,
+      }
+    },
   }
 
   state = { selectedQuantity: 1 }

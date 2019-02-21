@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.10.4] - 2019-02-21
+
+## [1.10.3] - 2019-02-21
+### Fixed
+- Trying to read schemas from `undefined` variables.
+
 ## [1.10.2] - 2019-02-19
 ### Fixed
 - Fixed information container `<footer>` class
@@ -72,7 +78,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Lateral padding.
 
-  
+
 ## [1.3.0] - 2018-12-20
 ### Added
 - Support to messages builder.
