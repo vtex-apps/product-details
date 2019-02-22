@@ -4,4 +4,10 @@ __mocks__/
 .editorconfig
 .eslintrc
 .gitignore
+.prettierrc
 README.md
+react/**/__tests__/**
+react/**/__mocks__/**
+react/**/*.test.js
+react/testUtils/**
+react/.babelrc
