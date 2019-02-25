@@ -2,7 +2,9 @@
 
 exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
 <DocumentFragment>
-  <section>
+  <section
+    class="Container-mock"
+  >
     <div
       class="w-100 mw9"
     >
@@ -95,6 +97,9 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
                   </div>
                 </div>
               </div>
+              <div
+                class="NoSSR-mock"
+              />
               <div
                 class="mt8"
               >
@@ -135,7 +140,9 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
 
 exports[`<ProductDetails /> component should match the snapshot with product 1`] = `
 <DocumentFragment>
-  <section>
+  <section
+    class="Container-mock"
+  >
     <div
       class="w-100 mw9"
     >
@@ -228,6 +235,9 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
                   </div>
                 </div>
               </div>
+              <div
+                class="NoSSR-mock"
+              />
               <div
                 class="mt8"
               >
