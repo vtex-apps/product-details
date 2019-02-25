@@ -1,5 +1,5 @@
 import React from 'react'
 
 export const Container = ({ children }) => {
-  return <section>{children}</section>
+  return <section className="Container-mock">{children}</section>
 }

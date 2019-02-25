@@ -8,4 +8,7 @@ export const withRuntimeContext = Comp => {
   const runtime = { account: 'account', culture: { country: 'country' } }
   return props => <Comp runtime={runtime} {...props} />
 }
-export const NoSSR = ({ children }) => children
+
+export const NoSSR = ({ children }) => (
+  <div className="NoSSR-mock">{children}</div>
+)
