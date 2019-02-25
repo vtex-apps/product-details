@@ -1,8 +1,11 @@
 import React from 'react'
 
-export const ExtensionPoint = props => (
-  <div class="ExtensionPoint-mock">{props.children}</div>
+export const ExtensionPoint = ({ children, id }) => (
+  <div className={`ExtensionPoint-mock-${id}`}>{children}</div>
 )
 
-export const withRuntimeContext = comp => comp
-export const NoSSR = comp => comp
+export const withRuntimeContext = Comp => {
+  const runtime = { account: 'account', culture: { country: 'country' } }
+  return props => <Comp runtime={runtime} {...props} />
+}
+export const NoSSR = ({ children }) => children
