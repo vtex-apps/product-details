@@ -2,12 +2,47 @@
   "name": "product-details",
   "version": "0.1.0",
   "scripts": {
-    "test": "echo TODO"
+    "pretest": "yarn",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "prop-types": "^15.6.2",
     "ramda": "^0.26.1",
     "react-content-loader": "^3.1.2",
     "react-intl": "^2.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "babel-jest": "^24.1.0",
+    "babel-preset-react-app": "^7.0.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.1.0",
+    "jest-dom": "^3.1.2",
+    "jest-transform-graphql": "^2.1.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-testing-library": "^5.9.0",
+    "regenerator-runtime": "^0.13.1"
+  },
+  "jest": {
+    "verbose": true,
+    "setupFilesAfterEnv": [
+      "<rootDir>/testUtils/setupTests.js"
+    ],
+    "modulePaths": [
+      "<rootDir>/testUtils"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "transform": {
+      "\\.(gql|graphql)$": "jest-transform-graphql",
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ]
   }
 }

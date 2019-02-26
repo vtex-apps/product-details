@@ -1,7 +1,12 @@
 node_modules/
-__test__/
-__mocks__/
 .editorconfig
 .eslintrc
 .gitignore
+.prettierrc
 README.md
+react/**/node_modules/**
+react/**/__tests__/**
+react/**/__mocks__/**
+react/**/*.test.js
+react/testUtils/**
+react/.babelrc

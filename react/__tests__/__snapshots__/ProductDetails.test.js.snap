@@ -1,0 +1,277 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="Container-mock"
+  >
+    <div
+      class="w-100 mw9"
+    >
+      <article
+        class="mb7"
+      >
+        <div
+          class="nameContainer c-on-base mb4 dn-l"
+        >
+          <div
+            class="ExtensionPoint-mock-product-name"
+          />
+        </div>
+        <div
+          class="flex flex-wrap"
+        >
+          <div
+            class="w-60-l w-100"
+          >
+            <div
+              class="fr-ns w-100 h-100"
+            >
+              <div
+                class="flex justify-center"
+              >
+                <div
+                  class="ExtensionPoint-mock-product-images"
+                />
+              </div>
+            </div>
+          </div>
+          <aside
+            class="detailsContainer pl8-l w-40-l w-100"
+          >
+            <div
+              class="nameContainer c-on-base dn db-l mb4"
+            >
+              <div
+                class="ExtensionPoint-mock-product-name"
+              />
+            </div>
+            <div
+              class="priceContainer pt1 dn db-l"
+            >
+              <div
+                class="ExtensionPoint-mock-product-price"
+              />
+            </div>
+            <div
+              class="mv2 mt5 dn db-l"
+            >
+              <hr
+                class="o-30"
+                size="1"
+              />
+            </div>
+            <div
+              class="mt6"
+            >
+              <div
+                class="priceContainer pt1 mt mt7 mt4-l dn-l"
+              >
+                <div
+                  class="ExtensionPoint-mock-product-price"
+                />
+              </div>
+              <div
+                class="pv2 dn db-l mt8"
+              >
+                <div
+                  class="ExtensionPoint-mock-buy-button"
+                >
+                  <span>
+                    Add item to cart
+                  </span>
+                </div>
+              </div>
+              <div
+                class="fixedButton fixed bottom-0 left-0 w-100 z-999"
+              >
+                <div
+                  class="dn-l bg-base w-100 ph5 pv3"
+                >
+                  <div
+                    class="ExtensionPoint-mock-buy-button"
+                  >
+                    <span>
+                      Add item to cart
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="NoSSR-mock"
+              />
+              <div
+                class="mt8"
+              >
+                <div
+                  class="ExtensionPoint-mock-shipping-simulator"
+                />
+              </div>
+              <div
+                class="flex w-100 mt7"
+              >
+                <div
+                  class="ExtensionPoint-mock-share"
+                />
+              </div>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <footer
+        class="informationsContainer ph5 ph0-ns"
+      >
+        <div
+          class="mv4"
+        >
+          <hr
+            class="o-30 db"
+            size="1"
+          />
+        </div>
+        <div
+          class="flex justify-between"
+        />
+      </footer>
+    </div>
+  </section>
+</DocumentFragment>
+`;
+
+exports[`<ProductDetails /> component should match the snapshot with product 1`] = `
+<DocumentFragment>
+  <section
+    class="Container-mock"
+  >
+    <div
+      class="w-100 mw9"
+    >
+      <article
+        class="mb7"
+      >
+        <div
+          class="nameContainer c-on-base mb4 dn-l"
+        >
+          <div
+            class="ExtensionPoint-mock-product-name"
+          />
+        </div>
+        <div
+          class="flex flex-wrap"
+        >
+          <div
+            class="w-60-l w-100"
+          >
+            <div
+              class="fr-ns w-100 h-100"
+            >
+              <div
+                class="flex justify-center"
+              >
+                <div
+                  class="ExtensionPoint-mock-product-images"
+                />
+              </div>
+            </div>
+          </div>
+          <aside
+            class="detailsContainer pl8-l w-40-l w-100"
+          >
+            <div
+              class="nameContainer c-on-base dn db-l mb4"
+            >
+              <div
+                class="ExtensionPoint-mock-product-name"
+              />
+            </div>
+            <div
+              class="priceContainer pt1 dn db-l"
+            >
+              <div
+                class="ExtensionPoint-mock-product-price"
+              />
+            </div>
+            <div
+              class="mv2 mt5 dn db-l"
+            >
+              <hr
+                class="o-30"
+                size="1"
+              />
+            </div>
+            <div
+              class="mt6"
+            >
+              <div
+                class="priceContainer pt1 mt mt7 mt4-l dn-l"
+              >
+                <div
+                  class="ExtensionPoint-mock-product-price"
+                />
+              </div>
+              <div
+                class="pv2 dn db-l mt8"
+              >
+                <div
+                  class="ExtensionPoint-mock-buy-button"
+                >
+                  <span>
+                    Add item to cart
+                  </span>
+                </div>
+              </div>
+              <div
+                class="fixedButton fixed bottom-0 left-0 w-100 z-999"
+              >
+                <div
+                  class="dn-l bg-base w-100 ph5 pv3"
+                >
+                  <div
+                    class="ExtensionPoint-mock-buy-button"
+                  >
+                    <span>
+                      Add item to cart
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="NoSSR-mock"
+              />
+              <div
+                class="mt8"
+              >
+                <div
+                  class="ExtensionPoint-mock-shipping-simulator"
+                />
+              </div>
+              <div
+                class="flex w-100 mt7"
+              >
+                <div
+                  class="ExtensionPoint-mock-share"
+                />
+              </div>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <footer
+        class="informationsContainer ph5 ph0-ns"
+      >
+        <div
+          class="mv4"
+        >
+          <hr
+            class="o-30 db"
+            size="1"
+          />
+        </div>
+        <div
+          class="flex justify-between"
+        />
+      </footer>
+    </div>
+  </section>
+</DocumentFragment>
+`;
