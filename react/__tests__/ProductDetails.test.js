@@ -1,6 +1,6 @@
 import React from 'react'
 import { renderWithIntl } from 'intl-utils'
-import { getProduct } from 'product-utils'
+import { getProduct } from 'product-mock'
 
 import ProductDetails from '../ProductDetails'
 
