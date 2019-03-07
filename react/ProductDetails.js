@@ -268,7 +268,7 @@ class ProductDetails extends Component {
             {slug && categories && (
               <ExtensionPoint
                 id="breadcrumb"
-                term={slug}
+                term={path(['productName'], product)}
                 categories={categories}
               />
             )}
