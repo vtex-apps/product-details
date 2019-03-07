@@ -265,10 +265,10 @@ class ProductDetails extends Component {
       >
         <div className="w-100 mw9">
           <article className="mb7">
-            {slug && categories && (
+            {categories && (
               <ExtensionPoint
                 id="breadcrumb"
-                term={slug}
+                term={path(['productName'], product)}
                 categories={categories}
               />
             )}
