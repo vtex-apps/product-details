@@ -109,7 +109,7 @@ class ProductDetails extends Component {
     showSpecificationsTab: PropTypes.bool,
   }
 
-  static schema =  {
+  static schema = {
     title: 'editor.product-details.title',
     description: 'editor.product-details.description',
     type: 'object',
@@ -119,7 +119,7 @@ class ProductDetails extends Component {
         type: 'boolean',
         default: false,
         isLayout: true,
-      }
+      },
     },
   }
 
@@ -171,13 +171,13 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-        imageUrls: imageSizes.map(size =>
-          changeImageUrlSize(image.imageUrl, size)
-        ),
-        thresholds,
-        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-        imageText: image.imageText,
-      }))
+          imageUrls: imageSizes.map(size =>
+            changeImageUrlSize(image.imageUrl, size)
+          ),
+          thresholds,
+          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+          imageText: image.imageText,
+        }))
       : []
   }
 
@@ -191,7 +191,7 @@ class ProductDetails extends Component {
         culture: { country },
       },
       intl,
-      showSpecificationsTab
+      showSpecificationsTab,
     } = this.props
     const { selectedQuantity } = this.state
 
@@ -205,21 +205,24 @@ class ProductDetails extends Component {
 
     const buyButtonProps = {
       skuItems: this.selectedItem &&
-      this.sellerId && [
-        {
-          skuId: this.selectedItem.itemId,
-          quantity: selectedQuantity,
-          seller: this.sellerId,
-          name: this.selectedItem.nameComplete,
-          price: this.commertialOffer.Price,
-          variant: this.selectedItem.name,
-          brand: product.brand,
-          index: 0,
-          detailUrl: `/${product.linkText}/p`,
-          imageUrl: path(['images', '0', 'imageUrl'], this.selectedItem),
-          listPrice: path(['sellers', '0', 'commertialOffer', 'ListPrice'], this.selectedItem),
-        },
-      ],
+        this.sellerId && [
+          {
+            skuId: this.selectedItem.itemId,
+            quantity: selectedQuantity,
+            seller: this.sellerId,
+            name: this.selectedItem.nameComplete,
+            price: this.commertialOffer.Price,
+            variant: this.selectedItem.name,
+            brand: product.brand,
+            index: 0,
+            detailUrl: `/${product.linkText}/p`,
+            imageUrl: path(['images', '0', 'imageUrl'], this.selectedItem),
+            listPrice: path(
+              ['sellers', '0', 'commertialOffer', 'ListPrice'],
+              this.selectedItem
+            ),
+          },
+        ],
       large: true,
       available: showBuyButton,
     }
@@ -292,12 +295,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                  } pl8-l w-40-l w-100`}
+                } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                    } c-on-base dn db-l mb4`}
+                  } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -326,7 +329,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                        } pt1 mt mt7 mt4-l dn-l`}
+                      } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -341,13 +344,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                      <div className="pv4">
-                        <ExtensionPoint
-                          id="availability-subscriber"
-                          skuId={this.selectedItem.itemId}
-                        />
-                      </div>
-                    )}
+                    <div className="pv4">
+                      <ExtensionPoint
+                        id="availability-subscriber"
+                        skuId={this.selectedItem.itemId}
+                      />
+                    </div>
+                  )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -384,12 +387,18 @@ class ProductDetails extends Component {
               </aside>
             </div>
           </article>
-          <footer className={`${productDetails.informationsContainer} ph5 ph0-ns`}>
+          <footer
+            className={`${productDetails.informationsContainer} ph5 ph0-ns`}
+          >
             <div className="mv4">
               <hr className="o-30 db" size="1" />
             </div>
-            <div className={`flex ${showSpecificationsTab ? 'flex-wrap' : 'justify-between'}`}>
-              {description &&
+            <div
+              className={`flex ${
+                showSpecificationsTab ? 'flex-wrap' : 'justify-between'
+              }`}
+            >
+              {description && (
                 <div className="pv2 mt8 h-100 w-100">
                   <ExtensionPoint
                     id="product-description"
@@ -397,8 +406,8 @@ class ProductDetails extends Component {
                     description={description}
                   />
                 </div>
-              }
-              {specifications &&
+              )}
+              {specifications && (
                 <div className="pv2 mt8 h-100 w-100">
                   <ExtensionPoint
                     id="product-specifications"
@@ -406,7 +415,7 @@ class ProductDetails extends Component {
                     specifications={specifications}
                   />
                 </div>
-              }
+              )}
             </div>
           </footer>
         </div>

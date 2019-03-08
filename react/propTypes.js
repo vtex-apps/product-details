@@ -5,6 +5,17 @@ export const productShape = PropTypes.shape({
   productId: PropTypes.string.isRequired,
   /** Product's name */
   productName: PropTypes.string.isRequired,
+  /** Product's description */
+  description: PropTypes.string,
+  /** Product's technical specification */
+  properties: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** The property name */
+      name: PropTypes.string,
+      /** The specification description */
+      values: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
   /** Product reference */
   productReference: PropTypes.string,
   /** Product's brand */
@@ -57,10 +68,11 @@ export const productShape = PropTypes.shape({
             Price: PropTypes.number.isRequired,
             /** List Price */
             ListPrice: PropTypes.number.isRequired,
+            /** available item quantity */
+            AvailableQuantity: PropTypes.number,
           }).isRequired,
         })
       ).isRequired,
     })
   ).isRequired,
 })
-
