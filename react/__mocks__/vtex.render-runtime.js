@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const ExtensionPoint = ({ children, id }) => (
-  <div className={`ExtensionPoint-mock-${id}`}>{children}</div>
+  <div className={`extensionPoint-mock-${id}`}>{children}</div>
 )
 
 export const withRuntimeContext = Comp => {

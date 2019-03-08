@@ -1,5 +1,6 @@
 import React from 'react'
 import { renderWithIntl } from 'intl-utils'
+import { querySelector } from 'react-testing-library'
 import { getProduct } from 'product-mock'
 
 import ProductDetails from '../ProductDetails'
@@ -40,5 +41,21 @@ describe('<ProductDetails /> component', () => {
     const render = getComponentRender(props)
     const fragment = render.asFragment()
     expect(fragment).toMatchSnapshot()
+  })
+
+  it('should render categories', () => {
+    const props = {
+      categories: ['Shirt', 'Shoes'],
+      productQuery: {
+        loading: false,
+        product: getProduct(),
+      },
+    }
+
+    const { container } = getComponentRender(props)
+    const productName = container.querySelector(
+      '.extensionPoint-mock-product-name'
+    )
+    expect(productName).toBeTruthy()
   })
 })
