@@ -7,8 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.10.6] - 2019-03-11
+
+### Fixed
+
+- Add missing product proptypes.
+
 ## [1.10.5] - 2019-03-07
+
 ### Changed
+
 - Pass product name to `breadcrumb` and not the slug.
 
 ### Added
