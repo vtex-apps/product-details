@@ -1,6 +1,5 @@
 import React from 'react'
 import { renderWithIntl } from 'intl-utils'
-import { querySelector } from 'react-testing-library'
 import { getProduct } from 'product-mock'
 
 import ProductDetails from '../ProductDetails'
@@ -32,6 +31,7 @@ describe('<ProductDetails /> component', () => {
 
   it('should match the snapshot with product', () => {
     const props = {
+      categories: ['Shirt', 'Shoes'],
       productQuery: {
         loading: false,
         product: getProduct(),
@@ -43,7 +43,7 @@ describe('<ProductDetails /> component', () => {
     expect(fragment).toMatchSnapshot()
   })
 
-  it('should render categories', () => {
+  it('should render breadcrumbs', () => {
     const props = {
       categories: ['Shirt', 'Shoes'],
       productQuery: {
@@ -54,8 +54,21 @@ describe('<ProductDetails /> component', () => {
 
     const { container } = getComponentRender(props)
     const productName = container.querySelector(
-      '.extensionPoint-mock-product-name'
+      '.extensionPoint-mock-breadcrumb'
     )
+    expect(productName).toBeTruthy()
+  })
+
+  it('should render fixed button', () => {
+    const props = {
+      productQuery: {
+        loading: false,
+        product: getProduct(),
+      },
+    }
+
+    const { container } = getComponentRender(props)
+    const productName = container.querySelector('.fixedButton')
     expect(productName).toBeTruthy()
   })
 })
