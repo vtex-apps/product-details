@@ -31,6 +31,7 @@ describe('<ProductDetails /> component', () => {
 
   it('should match the snapshot with product', () => {
     const props = {
+      categories: ['Shirt', 'Shoes'],
       productQuery: {
         loading: false,
         product: getProduct(),
@@ -40,5 +41,34 @@ describe('<ProductDetails /> component', () => {
     const render = getComponentRender(props)
     const fragment = render.asFragment()
     expect(fragment).toMatchSnapshot()
+  })
+
+  it('should render breadcrumbs', () => {
+    const props = {
+      categories: ['Shirt', 'Shoes'],
+      productQuery: {
+        loading: false,
+        product: getProduct(),
+      },
+    }
+
+    const { container } = getComponentRender(props)
+    const productName = container.querySelector(
+      '.extensionPoint-mock-breadcrumb'
+    )
+    expect(productName).toBeTruthy()
+  })
+
+  it('should render fixed button', () => {
+    const props = {
+      productQuery: {
+        loading: false,
+        product: getProduct(),
+      },
+    }
+
+    const { container } = getComponentRender(props)
+    const productName = container.querySelector('.fixedButton')
+    expect(productName).toBeTruthy()
   })
 })
