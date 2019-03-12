@@ -331,12 +331,11 @@ class ProductDetails extends Component {
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
-                <div className={`pt1`}>
-                  <ul>
-                    {highlights.map((item, i) => (
-                      <li key={i}>{item.name}: <span>{item.name}</span> </li>
-                    ))}
-                  </ul>
+                <div className={`pa1`}>
+                  <ExtensionPoint
+                    id="product-highlights"
+                    highlights={highlights}
+                  />
                 </div>
 
                 {showProductPrice && (
