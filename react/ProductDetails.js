@@ -1,6 +1,17 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { mapObjIndexed, mergeDeepRight, path, filter, compose, flip, prop, map, contains, reject } from 'ramda'
+import {
+  mapObjIndexed,
+  mergeDeepRight,
+  path,
+  filter,
+  compose,
+  flip,
+  prop,
+  map,
+  contains,
+  reject,
+} from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
@@ -203,8 +214,21 @@ class ProductDetails extends Component {
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
     const generalSpecifications = path(['generalProperties'], product)
-    const specifications = reject(compose(flip(contains)(map(x=> x.name, generalSpecifications)), prop('name')), allSpecifications)
-    const highlights = filter(compose(flip(contains)(map(x=> x.name, generalSpecifications)), prop('name')), allSpecifications)
+    const specifications = reject(
+      compose(
+        flip(contains)(map(x => x.name, generalSpecifications)),
+        prop('name')
+      ),
+      allSpecifications
+    )
+    const highlights = filter(
+      compose(
+        flip(contains)(map(x => x.name, generalSpecifications)),
+        prop('name')
+      ),
+      allSpecifications
+    )
+    console.log('h', highlights)
 
     const buyButtonProps = {
       skuItems: this.selectedItem &&
@@ -307,6 +331,14 @@ class ProductDetails extends Component {
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
+                <div className={`pt1`}>
+                  <ul>
+                    {highlights.map((item, i) => (
+                      <li key={i}>{item.name}: <span>{item.name}</span> </li>
+                    ))}
+                  </ul>
+                </div>
+
                 {showProductPrice && (
                   <div
                     className={`${productDetails.priceContainer} pt1 dn db-l`}
