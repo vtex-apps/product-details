@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
+import { mapObjIndexed, mergeDeepRight, path, filter, compose, flip, prop, map, contains, reject } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
@@ -199,9 +199,12 @@ class ProductDetails extends Component {
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
 
-    const specifications = path(['properties'], product)
+    const allSpecifications = path(['properties'], product)
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
+    const generalSpecifications = path(['generalProperties'], product)
+    const specifications = reject(compose(flip(contains)(map(x=> x.name, generalSpecifications)), prop('name')), allSpecifications)
+    const highlights = filter(compose(flip(contains)(map(x=> x.name, generalSpecifications)), prop('name')), allSpecifications)
 
     const buyButtonProps = {
       skuItems: this.selectedItem &&
