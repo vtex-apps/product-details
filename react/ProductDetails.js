@@ -198,8 +198,8 @@ class ProductDetails extends Component {
     } = this.props
     const allSpecifications = path(['properties'], product)
     const generalSpecifications = path(['generalProperties'], product)
-    const ENABLE = "Enable"
-    const DISABLE = "Disable"
+    const ENABLE = "enable"
+    const DISABLE = "disable"
 
     const specifications = reject(
       compose(
@@ -208,19 +208,28 @@ class ProductDetails extends Component {
       ),
       allSpecifications
     )
+    const services = allSpecifications.filter(x => {
+      return  x.values[0].toLowerCase() === ENABLE || x.values[0].toLowerCase() === DISABLE
+    })
+
     const highlights = filter(
       compose(
         flip(contains)(map(x => x.name, generalSpecifications)),
         prop('name')
       ),
-      allSpecifications
+      reject(
+        compose(
+          flip(contains)(map(x => x.name, services)),
+          prop('name')
+        ),
+        allSpecifications
+      )
     )
-
-
 
     return {
       specifications,
       highlights,
+      services,
     }
   }
 
@@ -246,8 +255,6 @@ class ProductDetails extends Component {
     const description = path(['description'], product)
     const { specifications, highlights} = this.filterSpecifications()
     
-    console.log('h', highlights)
-
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
