@@ -169,14 +169,15 @@ To use this CSS API, you must add the `styles` builder and create an app styling
 
 Below, we describe the namespaces that is define in the `ProductDetails`.
 
-| Class name              | Description                           | Component Source                                            |
-| ----------------------- | ------------------------------------- | ----------------------------------------------------------- |
-| `container`             | The main container of Product Details | [productDetails](/react/productDetails.js)                  |
-| `nameContainer`         | The container of the name area        | [productDetails](/react/productDetails.js)                  |
-| `detailsContainer`      | The container of the details area     | [productDetails](/react/productDetails.js)                  |
-| `priceContainer`        | The container of the price area       | [productDetails](/react/productDetails.js)                  |
-| `informationsContainer` | The container of the information area | [productDetails](/react/productDetails.js)                  |
-| `fixedButton`           | The product buy button                | [FixedButton/index](/react/components/FixedButton/index.js) |
+| Class name              | Description                              | Component Source                                            |
+| ----------------------- | ---------------------------------------- | ----------------------------------------------------------- |
+| `container`             | The main container of Product Details    | [productDetails](/react/productDetails.js)                  |
+| `nameContainer`         | The container of the name area           | [productDetails](/react/productDetails.js)                  |
+| `detailsContainer`      | The container of the details area        | [productDetails](/react/productDetails.js)                  |
+| `priceContainer`        | The container of the price area          | [productDetails](/react/productDetails.js)                  |
+| `informationsContainer` | The container of the information area    | [productDetails](/react/productDetails.js)                  |
+| `fixedButton`           | The product buy button                   | [FixedButton/index](/react/components/FixedButton/index.js) |
+| `highlightsContainer`   | The container of product highlights area | [productDetails](/react/productDetails.js)                  |
 
 ## Troubleshooting
 
