@@ -192,6 +192,38 @@ class ProductDetails extends Component {
       : []
   }
 
+  filterSpecifications() {
+    const {
+      productQuery: { product },
+    } = this.props
+    const allSpecifications = path(['properties'], product)
+    const generalSpecifications = path(['generalProperties'], product)
+    const ENABLE = "Enable"
+    const DISABLE = "Disable"
+
+    const specifications = reject(
+      compose(
+        flip(contains)(map(x => x.name, generalSpecifications)),
+        prop('name')
+      ),
+      allSpecifications
+    )
+    const highlights = filter(
+      compose(
+        flip(contains)(map(x => x.name, generalSpecifications)),
+        prop('name')
+      ),
+      allSpecifications
+    )
+
+
+
+    return {
+      specifications,
+      highlights,
+    }
+  }
+
   render() {
     const {
       productQuery: { product },
@@ -210,24 +242,10 @@ class ProductDetails extends Component {
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
 
-    const allSpecifications = path(['properties'], product)
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
-    const generalSpecifications = path(['generalProperties'], product)
-    const specifications = reject(
-      compose(
-        flip(contains)(map(x => x.name, generalSpecifications)),
-        prop('name')
-      ),
-      allSpecifications
-    )
-    const highlights = filter(
-      compose(
-        flip(contains)(map(x => x.name, generalSpecifications)),
-        prop('name')
-      ),
-      allSpecifications
-    )
+    const { specifications, highlights} = this.filterSpecifications()
+    
     console.log('h', highlights)
 
     const buyButtonProps = {
