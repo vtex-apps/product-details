@@ -356,7 +356,7 @@ class ProductDetails extends Component {
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
-                <div className={`pa1`}>
+                <div className={`${productDetails.highlightsContainer} pa1`}>
                   <ExtensionPoint
                     id="product-highlights"
                     highlights={highlights}
