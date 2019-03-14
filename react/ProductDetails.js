@@ -182,13 +182,13 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-          imageUrls: imageSizes.map(size =>
-            changeImageUrlSize(image.imageUrl, size)
-          ),
-          thresholds,
-          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-          imageText: image.imageText,
-        }))
+        imageUrls: imageSizes.map(size =>
+          changeImageUrlSize(image.imageUrl, size)
+        ),
+        thresholds,
+        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+        imageText: image.imageText,
+      }))
       : []
   }
 
@@ -253,6 +253,7 @@ class ProductDetails extends Component {
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
+    const iconSize = 20
 
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
@@ -350,12 +351,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                } pl8-l w-40-l w-100`}
+                  } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                  } c-on-base dn db-l mb4`}
+                    } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -369,7 +370,7 @@ class ProductDetails extends Component {
                 )}
                 {services && (
                   <div className={productDetails.servicesContainer}>
-                    <ExtensionPoint id="product-services" services={services} />
+                    <ExtensionPoint id="product-services" iconSize={iconSize} services={services} />
                   </div>
                 )}
                 {showProductPrice && (
@@ -397,7 +398,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                      } pt1 mt mt7 mt4-l dn-l`}
+                        } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -412,13 +413,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                    <div className="pv4">
-                      <ExtensionPoint
-                        id="availability-subscriber"
-                        skuId={this.selectedItem.itemId}
-                      />
-                    </div>
-                  )}
+                      <div className="pv4">
+                        <ExtensionPoint
+                          id="availability-subscriber"
+                          skuId={this.selectedItem.itemId}
+                        />
+                      </div>
+                    )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -464,7 +465,7 @@ class ProductDetails extends Component {
             <div
               className={`flex ${
                 showSpecificationsTab ? 'flex-wrap' : 'justify-between'
-              }`}
+                }`}
             >
               {description && (
                 <div className="pv2 mt8 h-100 w-100">
