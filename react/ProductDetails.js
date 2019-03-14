@@ -253,7 +253,7 @@ class ProductDetails extends Component {
 
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
-    const { specifications, highlights} = this.filterSpecifications()
+    const { specifications, highlights, services} = this.filterSpecifications()
     
     const buyButtonProps = {
       skuItems: this.selectedItem &&
@@ -361,6 +361,14 @@ class ProductDetails extends Component {
                     id="product-highlights"
                     highlights={highlights}
                   />
+                </div>
+
+                <div className={productDetails.servicesContainer}>
+                  {services.map((item, i) => (
+                    <div key={i} className={"flex-row dib ma2 "}>
+                      <span>{item.name}</span>
+                    </div>
+                  ))}
                 </div>
 
                 {showProductPrice && (
