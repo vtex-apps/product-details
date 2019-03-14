@@ -1,6 +1,8 @@
 export const getProduct = () => ({
   productId: 'productId',
   productName: 'productName',
+  generalProperties: [{name: 'Warranty', values:['Enable']}],
+  properties: [{name: 'Warranty', values:['Enable']}, {name: 'Free Shipping', values:['Enable']}],
   items: [
     {
       itemId: 'id',

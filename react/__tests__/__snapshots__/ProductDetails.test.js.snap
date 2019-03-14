@@ -188,6 +188,20 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
               />
             </div>
             <div
+              class="highlightsContainer pa1"
+            >
+              <div
+                class="extensionPoint-mock-product-highlights"
+              />
+            </div>
+            <div
+              class="servicesContainer"
+            >
+              <div
+                class="extensionPoint-mock-product-services"
+              />
+            </div>
+            <div
               class="priceContainer pt1 dn db-l"
             >
               <div
@@ -272,7 +286,15 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
         </div>
         <div
           class="flex justify-between"
-        />
+        >
+          <div
+            class="pv2 mt8 h-100 w-100"
+          >
+            <div
+              class="extensionPoint-mock-product-specifications"
+            />
+          </div>
+        </div>
       </footer>
     </div>
   </section>
