@@ -196,8 +196,8 @@ class ProductDetails extends Component {
     const {
       productQuery: { product },
     } = this.props
-    const allSpecifications = path(['properties'], product)
-    const generalSpecifications = path(['generalProperties'], product)
+    const allSpecifications = path(['properties'], product) || []
+    const generalSpecifications = path(['generalProperties'], product) || []
     const ENABLE = 'enable'
     const DISABLE = 'disable'
 
