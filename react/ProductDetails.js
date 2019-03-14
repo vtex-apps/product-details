@@ -198,8 +198,8 @@ class ProductDetails extends Component {
     } = this.props
     const allSpecifications = path(['properties'], product)
     const generalSpecifications = path(['generalProperties'], product)
-    const ENABLE = "enable"
-    const DISABLE = "disable"
+    const ENABLE = 'enable'
+    const DISABLE = 'disable'
 
     const specifications = reject(
       compose(
@@ -209,7 +209,10 @@ class ProductDetails extends Component {
       allSpecifications
     )
     const services = allSpecifications.filter(x => {
-      return  x.values[0].toLowerCase() === ENABLE || x.values[0].toLowerCase() === DISABLE
+      return (
+        x.values[0].toLowerCase() === ENABLE ||
+        x.values[0].toLowerCase() === DISABLE
+      )
     })
 
     const highlights = filter(
@@ -253,8 +256,8 @@ class ProductDetails extends Component {
 
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
-    const { specifications, highlights, services} = this.filterSpecifications()
-    
+    const { specifications, highlights, services } = this.filterSpecifications()
+
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
@@ -356,21 +359,19 @@ class ProductDetails extends Component {
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
-                <div className={`${productDetails.highlightsContainer} pa1`}>
-                  <ExtensionPoint
-                    id="product-highlights"
-                    highlights={highlights}
-                  />
-                </div>
-
-                <div className={productDetails.servicesContainer}>
-                  {services.map((item, i) => (
-                    <div key={i} className={"flex-row dib ma2 "}>
-                      <span>{item.name}</span>
-                    </div>
-                  ))}
-                </div>
-
+                {highlights && (
+                  <div className={`${productDetails.highlightsContainer} pa1`}>
+                    <ExtensionPoint
+                      id="product-highlights"
+                      highlights={highlights}
+                    />
+                  </div>
+                )}
+                {services && (
+                  <div className={productDetails.servicesContainer}>
+                    <ExtensionPoint id="product-services" services={services} />
+                  </div>
+                )}
                 {showProductPrice && (
                   <div
                     className={`${productDetails.priceContainer} pt1 dn db-l`}
