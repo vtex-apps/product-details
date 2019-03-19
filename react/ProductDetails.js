@@ -347,12 +347,22 @@ class ProductDetails extends Component {
             <div className="flex flex-wrap">
               <div className="w-60-l w-100">
                 <div className="fr-ns w-100 h-100">
-                  <div className="flex justify-center">
+                  <div className="relative flex justify-center">
                     <ExtensionPoint
                       id="product-images"
                       images={this.getImages()}
                       position={thumbnailPosition}
                     />
+                    <div className="absolute z-3 left-0">
+                      <ExtensionPoint
+                        id="add-to-list-btn#product-details"
+                        product={{
+                          quantity: 1,
+                          skuId: this.selectedItem.itemId,
+                          productId: product.productId
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

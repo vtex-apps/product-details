@@ -3,6 +3,7 @@
     "blocks": [
       "breadcrumb",
       "product-name",
+      "add-to-list-btn#product-details",
       "product-images",
       "product-price",
       "product-description",
