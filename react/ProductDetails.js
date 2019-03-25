@@ -12,6 +12,7 @@ import {
   contains,
   reject,
   propOr,
+  pathOr,
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
@@ -123,19 +124,6 @@ class ProductDetails extends Component {
     highlightGroup: PropTypes.string,
   }
 
-  static schema = {
-    title: 'editor.product-details.title',
-    description: 'editor.product-details.description',
-    type: 'object',
-    properties: {
-      displayVertically: {
-        title: 'editor.product-details.displayVertically.title',
-        type: 'boolean',
-        default: false,
-        isLayout: true,
-      },
-    },
-  }
 
   state = { selectedQuantity: 1 }
 
@@ -185,27 +173,24 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-        imageUrls: imageSizes.map(size =>
-          changeImageUrlSize(image.imageUrl, size)
-        ),
-        thresholds,
-        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-        imageText: image.imageText,
-      }))
+          imageUrls: imageSizes.map(size =>
+            changeImageUrlSize(image.imageUrl, size)
+          ),
+          thresholds,
+          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+          imageText: image.imageText,
+        }))
       : []
   }
 
   filterSpecifications() {
+    
     const {
       productQuery: { product },
-      highlightGroup
     } = this.props
-    const allSpecifications =propOr([], 'properties', product)
-    const generalSpecifications = propOr([], 'generalProperties', product) 
-    const specificationGroups = propOr([], 'properties', product)
-    const highlightSpecificationGroup = specificationGroups.filter(x => x.name === highlightGroup)[0]
-    const highlights = propOr([], 'specifications', highlightSpecificationGroup)
-
+    const allSpecifications = propOr([], 'properties', product)
+    const generalSpecifications = propOr([], 'generalProperties', product)
+    const highlights = this.getHighlights()
     const specifications = reject(
       compose(
         flip(contains)(map(x => x.name, generalSpecifications)),
@@ -214,12 +199,24 @@ class ProductDetails extends Component {
       allSpecifications
     )
     const services = []
-
     return {
       specifications,
       highlights,
       services,
     }
+  }
+
+  getHighlights(){
+    const {
+      productQuery: { product },
+      highlightGroup,
+    } = this.props
+    const specificationGroups = propOr([], 'specificationGroups', product)
+    const highlightSpecificationGroup = specificationGroups.filter(
+      x => x.name === highlightGroup
+    )[0]
+    const highlights = propOr([], 'specifications', highlightSpecificationGroup)
+    return highlights
   }
 
   render() {
@@ -340,12 +337,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                  } pl8-l w-40-l w-100`}
+                } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                    } c-on-base dn db-l mb4`}
+                  } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -359,7 +356,11 @@ class ProductDetails extends Component {
                 )}
                 {services && (
                   <div className={productDetails.servicesContainer}>
-                    <ExtensionPoint id="product-services" iconSize={iconSize} services={services} />
+                    <ExtensionPoint
+                      id="product-services"
+                      iconSize={iconSize}
+                      services={services}
+                    />
                   </div>
                 )}
                 {showProductPrice && (
@@ -387,7 +388,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                        } pt1 mt mt7 mt4-l dn-l`}
+                      } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -402,13 +403,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                      <div className="pv4">
-                        <ExtensionPoint
-                          id="availability-subscriber"
-                          skuId={this.selectedItem.itemId}
-                        />
-                      </div>
-                    )}
+                    <div className="pv4">
+                      <ExtensionPoint
+                        id="availability-subscriber"
+                        skuId={this.selectedItem.itemId}
+                      />
+                    </div>
+                  )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -454,7 +455,7 @@ class ProductDetails extends Component {
             <div
               className={`flex ${
                 showSpecificationsTab ? 'flex-wrap' : 'justify-between'
-                }`}
+              }`}
             >
               {description && (
                 <div className="pv2 mt8 h-100 w-100">
@@ -482,27 +483,44 @@ class ProductDetails extends Component {
   }
 }
 
-ProductDetails.schema = {
-  title: "editor.product-details.title",
-  description: "editor.product-details.description",
-  type: "object",
-  properties: {
-    highlightGroup: {
-      type: "string",
-      title: "editor.product-details.highlights.title", 
-      default: "all specifications",
-      isLayout: true,
-    },
-    showHighlight: {
-      type: "boolean",
-      title: "editor.product-details.showHighlight.title",
-      default: true, 
-      isLayout: true,
-    },
+export function getHighlightsName(props) {
+  const names = []
+  const specificationGroups = pathOr([], ['productQuery', 'product', 'specificationGroups'], props)
+  for (const k in specificationGroups){
+    names.push(specificationGroups[k].name)
   }
-  
+  return names
 }
 
+
+
+ProductDetails.getSchema = props => {
+  return {
+    title: 'editor.product-details.title',
+    description: 'editor.product-details.description',
+    type: 'object',
+    properties: {
+      displayVertically: {
+        title: 'editor.product-details.displayVertically.title',
+        type: 'boolean',
+        default: false,
+        isLayout: true,
+      },
+      highlightGroup: {
+        type: 'string',
+        title: 'editor.product-details.highlights.title',
+        default: 'allSpecifications',
+        isLayout: true,
+      },
+      showHighlight: {
+        type: 'boolean',
+        title: 'editor.product-details.showHighlight.title',
+        default: true,
+        isLayout: true,
+      },
+    },
+  }
+}
 
 function mergeSchemaAndDefaultProps(schema, propName) {
   return mergeDeepRight(schema, {
