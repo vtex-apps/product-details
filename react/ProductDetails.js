@@ -510,8 +510,14 @@ ProductDetails.schema = {
       type: "string",
       title: "editor.product-details.highlights.title", 
       default: "all specifications",
-      isLayout: true
-    }
+      isLayout: true,
+    },
+    showHighlight: {
+      type: "boolean",
+      title: "editor.product-details.showHighlight.title",
+      default: true, 
+      isLayout: true,
+    },
   }
   
 }
