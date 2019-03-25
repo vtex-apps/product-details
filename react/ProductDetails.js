@@ -119,6 +119,8 @@ class ProductDetails extends Component {
     slug: PropTypes.string.isRequired,
     /** Product specifications tab mode */
     showSpecificationsTab: PropTypes.bool,
+    /** Define the highlight group select to display  */
+    highlightGroup: PropTypes.string,
   }
 
   static schema = {
@@ -196,11 +198,14 @@ class ProductDetails extends Component {
   filterSpecifications() {
     const {
       productQuery: { product },
+      highlightGroup
     } = this.props
     const allSpecifications =propOr([], 'properties', product)
     const generalSpecifications = propOr([], 'generalProperties', product) 
     const ENABLE = 'enable'
     const DISABLE = 'disable'
+    console.log("highlightGroup", highlightGroup)
+    console.log('p', product)
 
     const specifications = reject(
       compose(
@@ -258,7 +263,9 @@ class ProductDetails extends Component {
 
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
-    const { specifications, highlights, services } = this.filterSpecifications()
+    const { specifications, services } = this.filterSpecifications()
+
+    const highlights = specifications
 
     const buyButtonProps = {
       skuItems: this.selectedItem &&
@@ -493,6 +500,22 @@ class ProductDetails extends Component {
     )
   }
 }
+
+ProductDetails.schema = {
+  title: "editor.product-details.title",
+  description: "editor.product-details.description",
+  type: "object",
+  properties: {
+    highlightGroup: {
+      type: "string",
+      title: "editor.product-details.highlights.title", 
+      default: "all specifications",
+      isLayout: true
+    }
+  }
+  
+}
+
 
 function mergeSchemaAndDefaultProps(schema, propName) {
   return mergeDeepRight(schema, {
