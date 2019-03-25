@@ -202,16 +202,9 @@ class ProductDetails extends Component {
     } = this.props
     const allSpecifications =propOr([], 'properties', product)
     const generalSpecifications = propOr([], 'generalProperties', product) 
-    const ENABLE = 'enable'
-    const DISABLE = 'disable'
-    console.log("highlightGroup", highlightGroup)
-    console.log('p', product)
     const specificationGroups = propOr([], 'properties', product)
-    console.log(specificationGroups)
     const highlightSpecificationGroup = specificationGroups.filter(x => x.name === highlightGroup)[0]
-    //console.log(highlight)
     const highlights = propOr([], 'specifications', highlightSpecificationGroup)
-
 
     const specifications = reject(
       compose(
@@ -220,13 +213,7 @@ class ProductDetails extends Component {
       ),
       allSpecifications
     )
-    const services = allSpecifications.filter(x => {
-      return (
-        x.values[0].toLowerCase() === ENABLE ||
-        x.values[0].toLowerCase() === DISABLE
-      )
-    })
-
+    const services = []
 
     return {
       specifications,
