@@ -206,6 +206,12 @@ class ProductDetails extends Component {
     const DISABLE = 'disable'
     console.log("highlightGroup", highlightGroup)
     console.log('p', product)
+    const specificationGroups = propOr([], 'properties', product)
+    console.log(specificationGroups)
+    const highlightSpecificationGroup = specificationGroups.filter(x => x.name === highlightGroup)[0]
+    //console.log(highlight)
+    const highlights = propOr([], 'specifications', highlightSpecificationGroup)
+
 
     const specifications = reject(
       compose(
@@ -221,19 +227,6 @@ class ProductDetails extends Component {
       )
     })
 
-    const highlights = filter(
-      compose(
-        flip(contains)(map(x => x.name, generalSpecifications)),
-        prop('name')
-      ),
-      reject(
-        compose(
-          flip(contains)(map(x => x.name, services)),
-          prop('name')
-        ),
-        allSpecifications
-      )
-    )
 
     return {
       specifications,
@@ -253,6 +246,7 @@ class ProductDetails extends Component {
       },
       intl,
       showSpecificationsTab,
+      showHighlight,
     } = this.props
     const { selectedQuantity } = this.state
 
@@ -368,7 +362,7 @@ class ProductDetails extends Component {
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
-                {highlights && (
+                {showHighlight && (
                   <div className={`${productDetails.highlightsContainer} pa1`}>
                     <ExtensionPoint
                       id="product-highlights"
