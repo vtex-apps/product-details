@@ -47,13 +47,6 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
               />
             </div>
             <div
-              class="highlightsContainer pa1"
-            >
-              <div
-                class="extensionPoint-mock-product-highlights"
-              />
-            </div>
-            <div
               class="servicesContainer"
             >
               <div
@@ -207,13 +200,6 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
             >
               <div
                 class="extensionPoint-mock-product-name"
-              />
-            </div>
-            <div
-              class="highlightsContainer pa1"
-            >
-              <div
-                class="extensionPoint-mock-product-highlights"
               />
             </div>
             <div
