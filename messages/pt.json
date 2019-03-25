@@ -5,5 +5,7 @@
   "editor.product-details.displayVertically.title": "Exibir miniaturas na vertical",
   "button-label": "Comprar",
   "addToCartButton.label": "Adicionar ao carrinho",
-  "share.title": "{product} {sku} na {store}: "
+  "share.title": "{product} {sku} na {store}: ", 
+  "editor.product-details.highlights.title": "Destaques", 
+  "editor.product-details.showHighlight.title": "Mostrar destaques"
 }
