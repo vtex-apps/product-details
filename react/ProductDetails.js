@@ -71,6 +71,11 @@ const productPriceLoaderStyles = {
   },
 }
 
+const allSpecificationsProduct = {
+  value: 'allSpecifications',
+  choose: 'Type the group bellow',
+}
+
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
@@ -120,10 +125,10 @@ class ProductDetails extends Component {
     slug: PropTypes.string.isRequired,
     /** Product specifications tab mode */
     showSpecificationsTab: PropTypes.bool,
+
     /** Define the highlight group select to display  */
     highlightGroup: PropTypes.string,
   }
-
 
   state = { selectedQuantity: 1 }
 
@@ -184,7 +189,6 @@ class ProductDetails extends Component {
   }
 
   filterSpecifications() {
-    
     const {
       productQuery: { product },
     } = this.props
@@ -198,22 +202,27 @@ class ProductDetails extends Component {
       ),
       allSpecifications
     )
-    const services = []
     return {
       specifications,
       highlights,
-      services,
     }
   }
 
-  getHighlights(){
+  getHighlights() {
     const {
       productQuery: { product },
       highlightGroup,
+      defaultHighlight,
     } = this.props
+    console.log('pros, ', this.props)
+    const highlightName =
+      defaultHighlight === allSpecificationsProduct.value
+        ? defaultHighlight
+        : highlightGroup
+    console.log(highlightName)
     const specificationGroups = propOr([], 'specificationGroups', product)
     const highlightSpecificationGroup = specificationGroups.filter(
-      x => x.name === highlightGroup
+      x => x.name === highlightName
     )[0]
     const highlights = propOr([], 'specifications', highlightSpecificationGroup)
     return highlights
@@ -237,11 +246,10 @@ class ProductDetails extends Component {
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
-    const iconSize = 20
 
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
-    const { specifications, highlights, services } = this.filterSpecifications()
+    const { specifications, highlights } = this.filterSpecifications()
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
@@ -473,14 +481,16 @@ class ProductDetails extends Component {
 
 export function getHighlightsName(props) {
   const names = []
-  const specificationGroups = pathOr([], ['productQuery', 'product', 'specificationGroups'], props)
-  for (const k in specificationGroups){
+  const specificationGroups = pathOr(
+    [],
+    ['productQuery', 'product', 'specificationGroups'],
+    props
+  )
+  for (const k in specificationGroups) {
     names.push(specificationGroups[k].name)
   }
   return names
 }
-
-
 
 ProductDetails.getSchema = props => {
   return {
@@ -488,11 +498,21 @@ ProductDetails.getSchema = props => {
     description: 'editor.product-details.description',
     type: 'object',
     properties: {
-      displayVertically: {
-        title: 'editor.product-details.displayVertically.title',
-        type: 'boolean',
-        default: false,
+      defaultHighlight: {
+        default: 'allSpecifications',
+        enum: [
+          allSpecificationsProduct.value,
+          allSpecificationsProduct.choose,
+        ],
         isLayout: true,
+        title: 'editor.product-details.highlights.default',
+        type: 'string',
+        widget: {
+          'ui:options': {
+            inline: true,
+          },
+          'ui:widget': 'radio',
+        },
       },
       highlightGroup: {
         type: 'string',
