@@ -241,10 +241,7 @@ class ProductDetails extends Component {
 
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
-    const { specifications, services } = this.filterSpecifications()
-
-    const highlights = specifications
-
+    const { specifications, highlights, services } = this.filterSpecifications()
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
@@ -346,8 +343,8 @@ class ProductDetails extends Component {
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
-                {showHighlight && (
-                  <div className={`${productDetails.highlightsContainer} pa1`}>
+                {highlights && showHighlight && (
+                  <div className={productDetails.highlightsContainer}>
                     <ExtensionPoint
                       id="product-highlights"
                       highlights={highlights}
