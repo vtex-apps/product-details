@@ -351,15 +351,6 @@ class ProductDetails extends Component {
                     />
                   </div>
                 )}
-                {services && (
-                  <div className={productDetails.servicesContainer}>
-                    <ExtensionPoint
-                      id="product-services"
-                      iconSize={iconSize}
-                      services={services}
-                    />
-                  </div>
-                )}
                 {showProductPrice && (
                   <div
                     className={`${productDetails.priceContainer} pt1 dn db-l`}
