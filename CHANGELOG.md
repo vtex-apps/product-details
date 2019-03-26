@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Add `ProductHighlights` component. 
-- Add `ProductServices` component. 
 
 ## [1.10.7] - 2019-03-14
 ### Changed
