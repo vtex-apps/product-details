@@ -8,9 +8,7 @@
       "buy-button",
       "product-description",
       "product-specifications", 
-      "product-highlights",
-      "product-services"
-
+      "product-highlights"
     ],
     "allowed": [
       "breadcrumb",

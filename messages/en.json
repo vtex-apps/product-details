@@ -3,6 +3,8 @@
   "editor.product-details.description": "Product Details Component",
   "editor.product-details.maxImages.title": "Max thumbnail images",
   "editor.product-details.displayVertically.title": "Display thumbnails vertically",
+  "editor.product-details.highlights.default": "Choose default highlight",
+  "editor.product-details.highlights.chooseDefault": "Type the group",
   "button-label": "Buy",
   "addToCartButton.label": "Add item to cart",
   "share.title": "{product} {sku} at {store}: ",

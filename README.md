@@ -178,7 +178,6 @@ Below, we describe the namespaces that is define in the `ProductDetails`.
 | `informationsContainer` | The container of the information area    | [productDetails](/react/productDetails.js)                  |
 | `fixedButton`           | The product buy button                   | [FixedButton/index](/react/components/FixedButton/index.js) |
 | `highlightsContainer`   | The container of product highlights area | [productDetails](/react/productDetails.js)                  |
-| `servicesContainer` | The container of product services area | [productDetails](/react/productDetails.js)                  |
 
 ## Troubleshooting
 
