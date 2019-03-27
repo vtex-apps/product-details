@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.11.1] - 2019-03-27
+### Fixed
+- Remove `product-highlights` as a required block.
+
 ## [1.11.0] - 2019-03-27
 ### Added
 - Add `ProductHighlights` component. 
