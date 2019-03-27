@@ -141,6 +141,15 @@ Name:
 | `showBrandName`        | `Boolean` | Shows the brand name of the product  | false |
 | `showSku`              | `Boolean` | Shows the sku value for this product | false |
 
+Highlight:
+
+| Prop name          | Type      | Description                                                                                                            |
+| ------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `defaultHighlight` | `boolean` | Indicates whether the group chosen as the highlight will contain all the properties in product or a group typed entry. |
+| true               |
+| `showHighlights`   | `Boolean` | Shows the highlights of the product                                                                                    | true |
+| `highlightGroup`   |
+
 Also, you can configure the `share` that is defined on `ProductDetails`. See [here](https://github.com/vtex-apps/store-components/blob/master/react/components/Share/README.md) the `Share` API.
 
 ### Styles API

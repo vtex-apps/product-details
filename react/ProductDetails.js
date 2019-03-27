@@ -72,8 +72,22 @@ const productPriceLoaderStyles = {
 }
 
 const allSpecificationsProduct = {
-  value: 'allSpecifications',
-  choose: 'Type the group bellow',
+
+  value: true,
+  choose: false,
+  specifications: 'allSpecifications'
+}
+
+const specificationsProduct = {
+  all: {
+    value: true,
+    name: "All Specifications",
+  },
+  choose: {
+    value: false, 
+    name: "Choose default highlight"
+  },
+  allSpecifications: "allSpecifications"
 }
 
 const thresholds = [640]
@@ -214,12 +228,10 @@ class ProductDetails extends Component {
       highlightGroup,
       defaultHighlight,
     } = this.props
-    console.log('pros, ', this.props)
-    const highlightName =
-      defaultHighlight === allSpecificationsProduct.value
-        ? defaultHighlight
+    const highlightName = 
+      defaultHighlight
+        ? specificationsProduct.allSpecifications
         : highlightGroup
-    console.log(highlightName)
     const specificationGroups = propOr([], 'specificationGroups', product)
     const highlightSpecificationGroup = specificationGroups.filter(
       x => x.name === highlightName
@@ -499,14 +511,15 @@ ProductDetails.getSchema = props => {
     type: 'object',
     properties: {
       defaultHighlight: {
-        default: 'allSpecifications',
+        default: true,
         enum: [
-          allSpecificationsProduct.value,
-          allSpecificationsProduct.choose,
+          specificationsProduct.all.value,
+          specificationsProduct.choose.value,
         ],
+        enumNames: ['All Specifications', 'Type default highlight'],
         isLayout: true,
         title: 'editor.product-details.highlights.default',
-        type: 'string',
+        type: 'boolean',
         widget: {
           'ui:options': {
             inline: true,
