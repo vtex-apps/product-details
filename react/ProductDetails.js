@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useCallback } from 'react'
+import React, { useMemo } from 'react'
 import {
   mapObjIndexed,
   mergeDeepRight,
@@ -139,22 +139,22 @@ const ProductDetails = ({
     return skuItems
   }
 
-  const selectedItem = useCallback(() => {
+  const selectedItem = useMemo(() => {
     const items = path(['product', 'items'], productQuery) || []
     if (!path(['skuId'], query)) return items[0]
     return items.find(sku => sku.itemId === query.skuId)
+  }, [query, productQuery])
+
+  const commertialOffer = useMemo(() => {
+    return path(['sellers', 0, 'commertialOffer'], selectedItem)
   }, [query])
 
-  const commertialOffer = useCallback(() => {
-    return path(['sellers', 0, 'commertialOffer'], selectedItem())
+  const sellerId = useMemo(() => {
+    return parseInt(path(['sellers', 0, 'sellerId'], selectedItem))
   }, [query])
 
-  const sellerId = useCallback(() => {
-    return parseInt(path(['sellers', 0, 'sellerId'], selectedItem()))
-  }, [query])
-
-  const getImages = useCallback(() => {
-    const images = path(['images'], selectedItem())
+  const skuImages = useMemo(() => {
+    const images = path(['images'], selectedItem)
 
     return images
       ? images.map(image => ({
@@ -205,30 +205,30 @@ const ProductDetails = ({
     return highlights
   }
   const showBuyButton =
-    Number.isNaN(+path(['AvailableQuantity'], commertialOffer())) || // Show the BuyButton loading information
-    path(['AvailableQuantity'], commertialOffer()) > 0
+    Number.isNaN(+path(['AvailableQuantity'], commertialOffer)) || // Show the BuyButton loading information
+    path(['AvailableQuantity'], commertialOffer) > 0
 
   const specifications = path(['properties'], product)
-  const skuName = path(['name'], selectedItem())
+  const skuName = path(['name'], selectedItem)
   const description = path(['description'], product)
 
   const buyButtonProps = {
-    skuItems: selectedItem() &&
-      sellerId() && [
+    skuItems: selectedItem &&
+      sellerId && [
         {
-          skuId: selectedItem().itemId,
+          skuId: selectedItem.itemId,
           quantity: selectedQuantity,
-          seller: sellerId(),
-          name: selectedItem().nameComplete,
-          price: commertialOffer().Price,
-          variant: selectedItem().name,
+          seller: sellerId,
+          name: selectedItem.nameComplete,
+          price: commertialOffer.Price,
+          variant: selectedItem.name,
           brand: product.brand,
           index: 0,
           detailUrl: `/${product.linkText}/p`,
-          imageUrl: path(['images', '0', 'imageUrl'], selectedItem()),
+          imageUrl: path(['images', '0', 'imageUrl'], selectedItem),
           listPrice: path(
             ['sellers', '0', 'commertialOffer', 'ListPrice'],
-            selectedItem()
+            selectedItem
           ),
         },
       ],
@@ -239,7 +239,7 @@ const ProductDetails = ({
   const productNameProps = {
     styles: productNameLoaderStyles,
     name: path(['productName'], product),
-    skuName: path(['name'], selectedItem()),
+    skuName: path(['name'], selectedItem),
     brandName: path(['brand'], product),
     productReference: path(['productReference'], product),
     className: 't-heading-4',
@@ -261,13 +261,13 @@ const ProductDetails = ({
     savingsContainerClass: 'c-success mt3',
     savingsClass: 'dib t-small',
     loaderClass: 'h4-s mw6-s pt2-s',
-    listPrice: path(['ListPrice'], commertialOffer()),
-    sellingPrice: path(['Price'], commertialOffer()),
-    installments: path(['Installments'], commertialOffer()),
+    listPrice: path(['ListPrice'], commertialOffer),
+    sellingPrice: path(['Price'], commertialOffer),
+    installments: path(['Installments'], commertialOffer),
     ...price,
   }
 
-  const availableQuantity = path(['AvailableQuantity'], commertialOffer())
+  const availableQuantity = path(['AvailableQuantity'], commertialOffer)
   const showProductPrice =
     Number.isNaN(+availableQuantity) || availableQuantity > 0
 
@@ -292,7 +292,7 @@ const ProductDetails = ({
             <div className="w-60-l w-100">
               <div className="fr-ns w-100 h-100">
                 <div className="flex justify-center">
-                  <ExtensionPoint id="product-images" images={getImages()} />
+                  <ExtensionPoint id="product-images" images={skuImages} />
                 </div>
               </div>
             </div>
@@ -326,12 +326,12 @@ const ProductDetails = ({
               </div>
               <div className="mt6">
                 {product &&
-                  selectedItem().variations &&
-                  selectedItem().variations.length > 0 && (
+                  selectedItem.variations &&
+                  selectedItem.variations.length > 0 && (
                     <ExtensionPoint
                       id="sku-selector"
                       skuItems={skuItems()}
-                      skuSelected={selectedItem()}
+                      skuSelected={selectedItem}
                       productSlug={product.linkText}
                     />
                   )}
@@ -354,7 +354,7 @@ const ProductDetails = ({
                   <div className="pv4">
                     <ExtensionPoint
                       id="availability-subscriber"
-                      skuId={selectedItem().itemId}
+                      skuId={selectedItem.itemId}
                     />
                   </div>
                 )}
@@ -368,8 +368,8 @@ const ProductDetails = ({
                 <div className="mt8">
                   <ExtensionPoint
                     id="shipping-simulator"
-                    skuId={path(['itemId'], selectedItem())}
-                    seller={sellerId()}
+                    skuId={path(['itemId'], selectedItem)}
+                    seller={sellerId}
                     country={country}
                   />
                 </div>
@@ -379,12 +379,12 @@ const ProductDetails = ({
                     shareLabelClass="c-muted-2 t-small mb3"
                     className="db"
                     {...share}
-                    loading={!path(['name'], selectedItem())}
+                    loading={!path(['name'], selectedItem)}
                     title={intl.formatMessage(
                       { id: 'share.title' },
                       {
                         product: path(['productName'], product),
-                        sku: path(['name'], selectedItem()),
+                        sku: path(['name'], selectedItem),
                         store: account,
                       }
                     )}
