@@ -1,6 +1,19 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { mapObjIndexed, mergeDeepRight, path } from 'ramda'
+import {
+  mapObjIndexed,
+  mergeDeepRight,
+  path,
+  filter,
+  compose,
+  flip,
+  prop,
+  map,
+  contains,
+  reject,
+  propOr,
+  pathOr,
+} from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
@@ -58,6 +71,25 @@ const productPriceLoaderStyles = {
   },
 }
 
+const allSpecificationsProduct = {
+
+  value: true,
+  choose: false,
+  specifications: 'allSpecifications'
+}
+
+const specificationsProduct = {
+  all: {
+    value: true,
+    name: "All Specifications",
+  },
+  choose: {
+    value: false, 
+    name: "Choose default highlight"
+  },
+  allSpecifications: "allSpecifications"
+}
+
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
@@ -107,20 +139,9 @@ class ProductDetails extends Component {
     slug: PropTypes.string.isRequired,
     /** Product specifications tab mode */
     showSpecificationsTab: PropTypes.bool,
-  }
 
-  static schema = {
-    title: 'editor.product-details.title',
-    description: 'editor.product-details.description',
-    type: 'object',
-    properties: {
-      displayVertically: {
-        title: 'editor.product-details.displayVertically.title',
-        type: 'boolean',
-        default: false,
-        isLayout: true,
-      },
-    },
+    /** Define the highlight group select to display  */
+    highlightGroup: PropTypes.string,
   }
 
   state = { selectedQuantity: 1 }
@@ -181,6 +202,44 @@ class ProductDetails extends Component {
       : []
   }
 
+  filterSpecifications() {
+    const {
+      productQuery: { product },
+    } = this.props
+    const allSpecifications = propOr([], 'properties', product)
+    const generalSpecifications = propOr([], 'generalProperties', product)
+    const highlights = this.getHighlights()
+    const specifications = reject(
+      compose(
+        flip(contains)(map(x => x.name, generalSpecifications)),
+        prop('name')
+      ),
+      allSpecifications
+    )
+    return {
+      specifications,
+      highlights,
+    }
+  }
+
+  getHighlights() {
+    const {
+      productQuery: { product },
+      highlightGroup,
+      defaultHighlight,
+    } = this.props
+    const highlightName = 
+      defaultHighlight
+        ? specificationsProduct.allSpecifications
+        : highlightGroup
+    const specificationGroups = propOr([], 'specificationGroups', product)
+    const highlightSpecificationGroup = specificationGroups.filter(
+      x => x.name === highlightName
+    )[0]
+    const highlights = propOr([], 'specifications', highlightSpecificationGroup)
+    return highlights
+  }
+
   render() {
     const {
       productQuery: { product },
@@ -192,6 +251,7 @@ class ProductDetails extends Component {
       },
       intl,
       showSpecificationsTab,
+      showHighlight,
     } = this.props
     const { selectedQuantity } = this.state
 
@@ -199,10 +259,9 @@ class ProductDetails extends Component {
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
 
-    const specifications = path(['properties'], product)
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
-
+    const { specifications, highlights } = this.filterSpecifications()
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
@@ -304,6 +363,14 @@ class ProductDetails extends Component {
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
+                {highlights && showHighlight && (
+                  <div className={productDetails.highlightsContainer}>
+                    <ExtensionPoint
+                      id="product-highlights"
+                      highlights={highlights}
+                    />
+                  </div>
+                )}
                 {showProductPrice && (
                   <div
                     className={`${productDetails.priceContainer} pt1 dn db-l`}
@@ -421,6 +488,58 @@ class ProductDetails extends Component {
         </div>
       </Container>
     )
+  }
+}
+
+export function getHighlightsName(props) {
+  const names = []
+  const specificationGroups = pathOr(
+    [],
+    ['productQuery', 'product', 'specificationGroups'],
+    props
+  )
+  for (const k in specificationGroups) {
+    names.push(specificationGroups[k].name)
+  }
+  return names
+}
+
+ProductDetails.getSchema = props => {
+  return {
+    title: 'editor.product-details.title',
+    description: 'editor.product-details.description',
+    type: 'object',
+    properties: {
+      defaultHighlight: {
+        default: true,
+        enum: [
+          specificationsProduct.all.value,
+          specificationsProduct.choose.value,
+        ],
+        enumNames: ['All Specifications', 'Type default highlight'],
+        isLayout: true,
+        title: 'editor.product-details.highlights.default',
+        type: 'boolean',
+        widget: {
+          'ui:options': {
+            inline: true,
+          },
+          'ui:widget': 'radio',
+        },
+      },
+      highlightGroup: {
+        type: 'string',
+        title: 'editor.product-details.highlights.title',
+        default: 'allSpecifications',
+        isLayout: true,
+      },
+      showHighlight: {
+        type: 'boolean',
+        title: 'editor.product-details.showHighlight.title',
+        default: true,
+        isLayout: true,
+      },
+    },
   }
 }
 

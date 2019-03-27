@@ -3,7 +3,11 @@
   "editor.product-details.description": "Componente de detalles del producto",
   "editor.product-details.maxImages.title": "Número máximo de imágenes en miniatura",
   "editor.product-details.displayVertically.title": "Mostrar miniaturas verticalmente",
+  "editor.product-details.highlights.default": "Elegir destaque predeterminado ",
+  "editor.product-details.highlights.chooseDefault": "Escribe el grupo",
   "button-label": "Comprar",
   "addToCartButton.label": "Incluir items en el carrito",
-  "share.title": "{product} {sku} en la {store}: "
+  "share.title": "{product} {sku} en la {store}: ",
+  "editor.product-details.highlights.title": "Destacados", 
+  "editor.product-details.showHighlight.title": "Mostrar lo más destacados"
 }
