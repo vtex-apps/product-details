@@ -7,14 +7,14 @@
       "sku-selector",
       "buy-button",
       "product-description",
-      "product-specifications", 
-      "product-highlights"
+      "product-specifications"
     ],
     "allowed": [
       "breadcrumb",
       "shipping-simulator",
       "availability-subscriber",
-      "share"
+      "share",
+      "product-highlights"
     ],
     "component": "ProductDetails"
   }
