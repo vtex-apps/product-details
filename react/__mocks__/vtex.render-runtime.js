@@ -12,3 +12,6 @@ export const withRuntimeContext = Comp => {
 export const NoSSR = ({ children }) => (
   <div className="NoSSR-mock">{children}</div>
 )
+export const useRuntime = () => {
+  return { account: 'storecomponents', culture: { country: 'Brasil' } }
+}
