@@ -104,6 +104,9 @@ const ProductDetails = ({
   share,
   price,
   name,
+  highlightGroup,
+  showHighlight,
+  defaultHighlight,
 }) => {
   const {
     account,
@@ -169,12 +172,9 @@ const ProductDetails = ({
   }, [query])
 
   const filterSpecifications = () => {
-    const {
-      productQuery: { product },
-    } = this.props
     const allSpecifications = propOr([], 'properties', product)
     const generalSpecifications = propOr([], 'generalProperties', product)
-    const highlights = this.getHighlights()
+    const highlights = getHighlights()
     const specifications = reject(
       compose(
         flip(contains)(map(x => x.name, generalSpecifications)),
@@ -189,11 +189,6 @@ const ProductDetails = ({
   }
 
   const getHighlights = () => {
-    const {
-      productQuery: { product },
-      highlightGroup,
-      defaultHighlight,
-    } = this.props
     const highlightName = defaultHighlight
       ? specificationsProduct.allSpecifications
       : highlightGroup
@@ -204,13 +199,15 @@ const ProductDetails = ({
     const highlights = propOr([], 'specifications', highlightSpecificationGroup)
     return highlights
   }
+
   const showBuyButton =
     Number.isNaN(+path(['AvailableQuantity'], commertialOffer)) || // Show the BuyButton loading information
     path(['AvailableQuantity'], commertialOffer) > 0
 
-  const specifications = path(['properties'], product)
   const skuName = path(['name'], selectedItem)
   const description = path(['description'], product)
+
+  const { specifications, highlights } = filterSpecifications()
 
   const buyButtonProps = {
     skuItems: selectedItem &&
@@ -308,17 +305,17 @@ const ProductDetails = ({
               >
                 <ExtensionPoint id="product-name" {...productNameProps} />
               </div>
-              {showProductPrice && (
-                <div className={`${productDetails.priceContainer} pt1 dn db-l`}>
-                  <ExtensionPoint id="product-price" {...productPriceProps} />
-                </div>
-              )}
               {highlights && showHighlight && (
                 <div className={productDetails.highlightsContainer}>
                   <ExtensionPoint
                     id="product-highlights"
                     highlights={highlights}
                   />
+                </div>
+              )}
+              {showProductPrice && (
+                <div className={`${productDetails.priceContainer} pt1 dn db-l`}>
+                  <ExtensionPoint id="product-price" {...productPriceProps} />
                 </div>
               )}
               <div className="mv2 mt5 dn db-l">
