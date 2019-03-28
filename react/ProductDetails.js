@@ -224,21 +224,25 @@ class ProductDetails extends Component {
   getHighlights() {
     const {
       productQuery: { product },
-      highlightGroup,
-      defaultHighlight,
       conditional,
     } = this.props
-    console.log('c', conditional)
     const name = propOr('', 'typeHighlight', conditional )
     const highlightName = !name
       ? specificationsProduct.allSpecifications
       : name.trim()
     
+    const names = highlightName.split(',')
     const specificationGroups = propOr([], 'specificationGroups', product)
-    const highlightSpecificationGroup = specificationGroups.filter(
-      x => x.name === highlightName
-    )[0]
-    const highlights = propOr([], 'specifications', highlightSpecificationGroup)
+
+    const highlights = names.reduce((acc, item)=> {
+      const highlightSpecificationGroup = specificationGroups.filter(
+        x => x.name.toLowerCase() === item.trim().toLowerCase()
+      )[0]
+      const highlight = propOr([], 'specifications', highlightSpecificationGroup)
+      return acc.concat(highlight)
+
+    }, [])
+
     return highlights
   }
 
