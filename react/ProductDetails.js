@@ -72,22 +72,21 @@ const productPriceLoaderStyles = {
 }
 
 const allSpecificationsProduct = {
-
   value: true,
   choose: false,
-  specifications: 'allSpecifications'
+  specifications: 'allSpecifications',
 }
 
 const specificationsProduct = {
   all: {
     value: true,
-    name: "All Specifications",
+    name: 'All Specifications',
   },
   choose: {
-    value: false, 
-    name: "Choose default highlight"
+    value: false,
+    name: 'Choose default highlight',
   },
-  allSpecifications: "allSpecifications"
+  allSpecifications: 'allSpecifications',
 }
 
 const thresholds = [640]
@@ -227,11 +226,14 @@ class ProductDetails extends Component {
       productQuery: { product },
       highlightGroup,
       defaultHighlight,
+      conditional,
     } = this.props
-    const highlightName = 
-      defaultHighlight
-        ? specificationsProduct.allSpecifications
-        : highlightGroup
+    console.log('c', conditional)
+    const name = propOr('', 'typeHighlight', conditional )
+    const highlightName = !name
+      ? specificationsProduct.allSpecifications
+      : name.trim()
+    
     const specificationGroups = propOr([], 'specificationGroups', product)
     const highlightSpecificationGroup = specificationGroups.filter(
       x => x.name === highlightName
@@ -509,29 +511,62 @@ ProductDetails.getSchema = props => {
     title: 'editor.product-details.title',
     description: 'editor.product-details.description',
     type: 'object',
-    properties: {
-      defaultHighlight: {
-        default: true,
-        enum: [
-          specificationsProduct.all.value,
-          specificationsProduct.choose.value,
-        ],  
-        enumNames: ['editor.product-details.highlights.allSpecifications', 'editor.product-details.highlights.chooseDefault'],
-        isLayout: false,
-        title: 'editor.product-details.highlights.default',
-        type: 'boolean',
-        widget: {
-          'ui:options': {
-            inline: false,
+    widget: {
+      'ui:options': {
+        inline: false,
+      },
+      'ui:widget': 'radio',
+    },
+    definitions: {
+      highlightGroupDefault: {
+        title: 'Person',
+        type: 'object',
+        properties: {
+          highlight: {
+            title: 'editor.product-details.highlights.default',
+            type: 'string',
+            enum: [
+              'editor.product-details.highlights.allSpecifications',
+              'editor.product-details.highlights.chooseDefault',
+            ],
+            default: 'editor.product-details.highlights.allSpecifications',
           },
-          'ui:widget': 'radio',
+        },
+        required: ['highlight'],
+        dependencies: {
+          highlight: {
+            oneOf: [
+              {
+                properties: {
+                  highlight: {
+                    enum: [
+                      'editor.product-details.highlights.allSpecifications',
+                    ],
+                  },
+                },
+              },
+              {
+                properties: {
+                  highlight: {
+                    enum: ['editor.product-details.highlights.chooseDefault'],
+                  },
+                  typeHighlight: {
+                    type: 'string',
+                    title: 'editor.product-details.highlights.title',
+                  },
+                },
+                required: [''],
+              },
+            ],
+          },
         },
       },
-      highlightGroup: {
-        type: 'string',
-        title: 'editor.product-details.highlights.title',
-        default: 'allSpecifications',
-        isLayout: false,
+    },
+    properties: {
+      conditional: {
+        title: 'Conditional',
+        $ref: '#/definitions/highlightGroupDefault',
+        
       },
       showHighlight: {
         type: 'boolean',
