@@ -515,8 +515,8 @@ ProductDetails.getSchema = props => {
         enum: [
           specificationsProduct.all.value,
           specificationsProduct.choose.value,
-        ],
-        enumNames: ['All Specifications', 'Custom specifications'],
+        ],  
+        enumNames: ['editor.product-details.highlights.allSpecifications', 'editor.product-details.highlights.chooseDefault'],
         isLayout: false,
         title: 'editor.product-details.highlights.default',
         type: 'boolean',

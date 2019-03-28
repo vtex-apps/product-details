@@ -9,5 +9,7 @@
   "addToCartButton.label": "Add item to cart",
   "share.title": "{product} {sku} at {store}: ",
   "editor.product-details.highlights.title": "Type specification groups bellow", 
-  "editor.product-details.showHighlight.title": "Show highlights"
+  "editor.product-details.showHighlight.title": "Show highlights",
+  "editor.product-details.highlights.allSpecifications": "All Specifications",
+  "editor.product-details.highlights.chooseDefault": "Custom specifications"
 }

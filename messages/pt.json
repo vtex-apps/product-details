@@ -9,5 +9,7 @@
   "addToCartButton.label": "Adicionar ao carrinho",
   "share.title": "{product} {sku} na {store}: ", 
   "editor.product-details.highlights.title": "Escreva o grupo de especificações abaixo", 
-  "editor.product-details.showHighlight.title": "Mostrar destaques"
+  "editor.product-details.showHighlight.title": "Mostrar destaques",
+  "editor.product-details.highlights.allSpecifications": "Todas as especificações",
+  "editor.product-details.highlights.chooseDefault": "Especificações personalizadas"
 }
