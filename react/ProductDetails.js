@@ -516,13 +516,13 @@ ProductDetails.getSchema = props => {
           specificationsProduct.all.value,
           specificationsProduct.choose.value,
         ],
-        enumNames: ['All Specifications', 'Type default highlight'],
-        isLayout: true,
+        enumNames: ['All Specifications', 'Custom specifications'],
+        isLayout: false,
         title: 'editor.product-details.highlights.default',
         type: 'boolean',
         widget: {
           'ui:options': {
-            inline: true,
+            inline: false,
           },
           'ui:widget': 'radio',
         },
@@ -531,13 +531,13 @@ ProductDetails.getSchema = props => {
         type: 'string',
         title: 'editor.product-details.highlights.title',
         default: 'allSpecifications',
-        isLayout: true,
+        isLayout: false,
       },
       showHighlight: {
         type: 'boolean',
         title: 'editor.product-details.showHighlight.title',
         default: true,
-        isLayout: true,
+        isLayout: false,
       },
     },
   }
