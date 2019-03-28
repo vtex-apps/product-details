@@ -103,9 +103,13 @@ When implementing this app as a block, various inner blocks may be available. Th
       "breadcrumb",
       "shipping-simulator",
       "availability-subscriber",
-      "share"
+      "share",
+      "add-to-list-btn#product-details"
     ],
     "component": "ProductDetails"
+  },
+  "add-to-list-btn#product-details": {
+    "component": "*"
   }
 }
 ```
