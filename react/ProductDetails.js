@@ -229,8 +229,8 @@ class ProductDetails extends Component {
     const typeHighlight = propOr('', 'typeHighlight', conditional)
     const typeSpecifications = propOr('', 'typeSpecifications', conditional)
     let highlights
-    const high = propOr('', 'highlight', conditional)
-    if (high === 'editor.product-details.highlights.chooseDefault') {
+    const choose = propOr('', 'highlight', conditional)
+    const highlightsFromGroup = () => {
       const highlightName = typeHighlight.trim()
       const names = highlightName.split(',')
       const specificationGroups = propOr([], 'specificationGroups', product)
@@ -241,15 +241,17 @@ class ProductDetails extends Component {
         const highlight = propOr([], 'specifications', highlightSpecificationGroup)
         return acc.concat(highlight)
       }, [])
-
-    } else if (high === 'editor.product-details.highlights.chooseDefaultSpecification') {
+    }
+    const highlightsFromSpecifications = () => {
       const specificationNames = typeSpecifications.trim().split(',')
       const allSpecifications = propOr([], 'properties', product)
       highlights = specificationNames.reduce((acc, item) => {
         const highlight = allSpecifications.filter(x => x.name.toLowerCase() === item.trim().toLowerCase())
         return acc.concat(highlight)
       }, [])
-    } else if (high === 'editor.product-details.highlights.allSpecifications') {
+    }
+
+    const highlightsFromAllSpecifications = () => {
       const allSpecifications = propOr([], 'properties', product)
       const generalSpecifications = propOr([], 'generalProperties', product)
       highlights = reject(
@@ -259,6 +261,15 @@ class ProductDetails extends Component {
         ),
         allSpecifications
       )
+    }
+
+
+    if (choose === 'editor.product-details.highlights.chooseDefault') {
+      highlightsFromGroup()
+    } else if (choose === 'editor.product-details.highlights.chooseDefaultSpecification') {
+      highlightsFromSpecifications()
+    } else if (choose === 'editor.product-details.highlights.allSpecifications') {
+      highlightsFromAllSpecifications()
     }
     return highlights
 
