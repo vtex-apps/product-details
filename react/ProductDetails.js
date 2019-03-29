@@ -191,13 +191,13 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-          imageUrls: imageSizes.map(size =>
-            changeImageUrlSize(image.imageUrl, size)
-          ),
-          thresholds,
-          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-          imageText: image.imageText,
-        }))
+        imageUrls: imageSizes.map(size =>
+          changeImageUrlSize(image.imageUrl, size)
+        ),
+        thresholds,
+        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+        imageText: image.imageText,
+      }))
       : []
   }
 
@@ -226,24 +226,42 @@ class ProductDetails extends Component {
       productQuery: { product },
       conditional,
     } = this.props
-    const name = propOr('', 'typeHighlight', conditional )
-    const highlightName = !name
-      ? specificationsProduct.allSpecifications
-      : name.trim()
-    
-    const names = highlightName.split(',')
-    const specificationGroups = propOr([], 'specificationGroups', product)
+    const typeHighlight = propOr('', 'typeHighlight', conditional)
+    const typeSpecifications = propOr('', 'typeSpecifications', conditional)
+    let highlights
+    const high = propOr('', 'highlight', conditional)
+    if (high === 'editor.product-details.highlights.chooseDefault') {
+      const highlightName = typeHighlight.trim()
+      const names = highlightName.split(',')
+      const specificationGroups = propOr([], 'specificationGroups', product)
+      highlights = names.reduce((acc, item) => {
+        const highlightSpecificationGroup = specificationGroups.filter(
+          x => x.name.toLowerCase() === item.trim().toLowerCase()
+        )[0]
+        const highlight = propOr([], 'specifications', highlightSpecificationGroup)
+        return acc.concat(highlight)
+      }, [])
 
-    const highlights = names.reduce((acc, item)=> {
-      const highlightSpecificationGroup = specificationGroups.filter(
-        x => x.name.toLowerCase() === item.trim().toLowerCase()
-      )[0]
-      const highlight = propOr([], 'specifications', highlightSpecificationGroup)
-      return acc.concat(highlight)
-
-    }, [])
-
+    } else if (high === 'editor.product-details.highlights.chooseDefaultSpecification') {
+      const specificationNames = typeSpecifications.trim().split(',')
+      const allSpecifications = propOr([], 'properties', product)
+      highlights = specificationNames.reduce((acc, item) => {
+        const highlight = allSpecifications.filter(x => x.name.toLowerCase() === item.trim().toLowerCase())
+        return acc.concat(highlight)
+      }, [])
+    } else if (high === 'editor.product-details.highlights.allSpecifications') {
+      const allSpecifications = propOr([], 'properties', product)
+      const generalSpecifications = propOr([], 'generalProperties', product)
+      highlights = reject(
+        compose(
+          flip(contains)(map(x => x.name, generalSpecifications)),
+          prop('name')
+        ),
+        allSpecifications
+      )
+    }
     return highlights
+
   }
 
   render() {
@@ -360,12 +378,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                } pl8-l w-40-l w-100`}
+                  } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                  } c-on-base dn db-l mb4`}
+                    } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -402,7 +420,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                      } pt1 mt mt7 mt4-l dn-l`}
+                        } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -417,13 +435,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                    <div className="pv4">
-                      <ExtensionPoint
-                        id="availability-subscriber"
-                        skuId={this.selectedItem.itemId}
-                      />
-                    </div>
-                  )}
+                      <div className="pv4">
+                        <ExtensionPoint
+                          id="availability-subscriber"
+                          skuId={this.selectedItem.itemId}
+                        />
+                      </div>
+                    )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -469,7 +487,7 @@ class ProductDetails extends Component {
             <div
               className={`flex ${
                 showSpecificationsTab ? 'flex-wrap' : 'justify-between'
-              }`}
+                }`}
             >
               {description && (
                 <div className="pv2 mt8 h-100 w-100">
@@ -532,8 +550,9 @@ ProductDetails.getSchema = props => {
             enum: [
               'editor.product-details.highlights.allSpecifications',
               'editor.product-details.highlights.chooseDefault',
+              'editor.product-details.highlights.chooseDefaultSpecification',
             ],
-            default: 'editor.product-details.highlights.allSpecifications',
+            default: 'editor.product-details.highlights.chooseDefault',
           },
         },
         required: ['highlight'],
@@ -561,6 +580,18 @@ ProductDetails.getSchema = props => {
                 },
                 required: [''],
               },
+              {
+                properties: {
+                  highlight: {
+                    enum: ['editor.product-details.highlights.chooseDefaultSpecification'],
+                  },
+                  typeSpecifications: {
+                    type: 'string',
+                    title: 'editor.product-details.highlights.typeSpecifications.title',
+                  },
+                },
+                required: [''],
+              },
             ],
           },
         },
@@ -570,7 +601,7 @@ ProductDetails.getSchema = props => {
       conditional: {
         title: 'Conditional',
         $ref: '#/definitions/highlightGroupDefault',
-        
+
       },
       showHighlight: {
         type: 'boolean',

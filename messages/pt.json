@@ -7,9 +7,11 @@
   "editor.product-details.highlights.chooseDefault": "Digite o grupo",
   "button-label": "Comprar",
   "addToCartButton.label": "Adicionar ao carrinho",
-  "share.title": "{product} {sku} na {store}: ", 
-  "editor.product-details.highlights.title": "Escreva o grupo de especificações abaixo", 
+  "share.title": "{product} {sku} na {store}: ",
+  "editor.product-details.highlights.title": "Escreva o grupo de especificações abaixo",
+  "editor.product-details.highlights.typeSpecifications.title": "Escreve as especificações abaixo",
   "editor.product-details.showHighlight.title": "Mostrar destaques",
   "editor.product-details.highlights.allSpecifications": "Todas as especificações",
-  "editor.product-details.highlights.chooseDefault": "Especificações personalizadas"
+  "editor.product-details.highlights.chooseDefault": "Grupo de especificações personalizadas",
+  "editor.product-details.highlights.chooseDefaultSpecification": "Especificações personalizadas"
 }
