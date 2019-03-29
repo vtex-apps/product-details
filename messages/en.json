@@ -12,6 +12,6 @@
   "editor.product-details.highlights.typeSpecifications.title": "Type specifications bellow",
   "editor.product-details.showHighlight.title": "Show highlights",
   "editor.product-details.highlights.allSpecifications": "All Specifications",
-  "editor.product-details.highlights.chooseDefault": "Custom group specifications",
-  "editor.product-details.highlights.chooseDefaultSpecification": "Custom specifications"
+  "editor.product-details.highlights.chooseDefault": "Groups Specification",
+  "editor.product-details.highlights.chooseDefaultSpecification": "Fields Specifications"
 }
