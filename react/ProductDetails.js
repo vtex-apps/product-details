@@ -74,6 +74,24 @@ const productPriceLoaderStyles = {
   },
 }
 
+const allSpecificationsProduct = {
+
+  value: true,
+  choose: false,
+  specifications: 'allSpecifications'
+}
+
+const specificationsProduct = {
+  all: {
+    value: true,
+    name: "All Specifications",
+  },
+  choose: {
+    value: false,
+    name: "Choose default highlight"
+  },
+  allSpecifications: "allSpecifications"
+}
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
@@ -358,8 +376,8 @@ class ProductDetails extends Component {
                         id="add-to-list-btn#product-details"
                         product={{
                           quantity: 1,
-                          skuId: this.selectedItem.itemId,
-                          productId: product.productId
+                          skuId: path(['itemId'], this.selectedItem),
+                          productId: path(['productId'], product)
                         }}
                       />
                     </div>
