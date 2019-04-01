@@ -71,24 +71,6 @@ const productPriceLoaderStyles = {
   },
 }
 
-const allSpecificationsProduct = {
-  value: true,
-  choose: false,
-  specifications: 'allSpecifications',
-}
-
-const specificationsProduct = {
-  all: {
-    value: true,
-    name: 'All Specifications',
-  },
-  choose: {
-    value: false,
-    name: 'Choose default highlight',
-  },
-  allSpecifications: 'allSpecifications',
-}
-
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
@@ -226,52 +208,50 @@ class ProductDetails extends Component {
       productQuery: { product },
       conditional,
     } = this.props
-    const typeHighlight = propOr('', 'typeHighlight', conditional)
-    const typeSpecifications = propOr('', 'typeSpecifications', conditional)
-    let highlights
     const choose = propOr('', 'highlight', conditional)
     const highlightsFromGroup = () => {
+      const typeHighlight = propOr('', 'typeHighlight', conditional)
       const highlightName = typeHighlight.trim()
       const names = highlightName.split(',')
       const specificationGroups = propOr([], 'specificationGroups', product)
-      highlights = names.reduce((acc, item) => {
+      const highlights = names.reduce((acc, item) => {
         const highlightSpecificationGroup = specificationGroups.filter(
           x => x.name.toLowerCase() === item.trim().toLowerCase()
         )[0]
         const highlight = propOr([], 'specifications', highlightSpecificationGroup)
         return acc.concat(highlight)
       }, [])
+      return highlights
     }
     const highlightsFromSpecifications = () => {
+      const typeSpecifications = propOr('', 'typeSpecifications', conditional)
       const specificationNames = typeSpecifications.trim().split(',')
       const allSpecifications = propOr([], 'properties', product)
-      highlights = specificationNames.reduce((acc, item) => {
+      const highlights = specificationNames.reduce((acc, item) => {
         const highlight = allSpecifications.filter(x => x.name.toLowerCase() === item.trim().toLowerCase())
         return acc.concat(highlight)
       }, [])
+      return highlights
     }
 
     const highlightsFromAllSpecifications = () => {
       const allSpecifications = propOr([], 'properties', product)
       const generalSpecifications = propOr([], 'generalProperties', product)
-      highlights = reject(
+      const highlights = reject(
         compose(
           flip(contains)(map(x => x.name, generalSpecifications)),
           prop('name')
         ),
         allSpecifications
       )
+      return highlights
     }
 
-
-    if (choose === 'editor.product-details.highlights.chooseDefault') {
-      highlightsFromGroup()
-    } else if (choose === 'editor.product-details.highlights.chooseDefaultSpecification') {
-      highlightsFromSpecifications()
-    } else if (choose === 'editor.product-details.highlights.allSpecifications') {
-      highlightsFromAllSpecifications()
+    switch (choose){
+      case 'editor.product-details.highlights.chooseDefault': return highlightsFromGroup()
+      case 'editor.product-details.highlights.chooseDefaultSpecification': return highlightsFromSpecifications()
+      case 'editor.product-details.highlights.allSpecifications': return highlightsFromAllSpecifications()
     }
-    return highlights
 
   }
 
@@ -524,19 +504,6 @@ class ProductDetails extends Component {
       </Container>
     )
   }
-}
-
-export function getHighlightsName(props) {
-  const names = []
-  const specificationGroups = pathOr(
-    [],
-    ['productQuery', 'product', 'specificationGroups'],
-    props
-  )
-  for (const k in specificationGroups) {
-    names.push(specificationGroups[k].name)
-  }
-  return names
 }
 
 ProductDetails.getSchema = props => {
