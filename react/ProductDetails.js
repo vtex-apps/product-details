@@ -71,25 +71,6 @@ const productPriceLoaderStyles = {
   },
 }
 
-const allSpecificationsProduct = {
-
-  value: true,
-  choose: false,
-  specifications: 'allSpecifications'
-}
-
-const specificationsProduct = {
-  all: {
-    value: true,
-    name: "All Specifications",
-  },
-  choose: {
-    value: false, 
-    name: "Choose default highlight"
-  },
-  allSpecifications: "allSpecifications"
-}
-
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
@@ -192,13 +173,13 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-          imageUrls: imageSizes.map(size =>
-            changeImageUrlSize(image.imageUrl, size)
-          ),
-          thresholds,
-          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-          imageText: image.imageText,
-        }))
+        imageUrls: imageSizes.map(size =>
+          changeImageUrlSize(image.imageUrl, size)
+        ),
+        thresholds,
+        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+        imageText: image.imageText,
+      }))
       : []
   }
 
@@ -225,19 +206,53 @@ class ProductDetails extends Component {
   getHighlights() {
     const {
       productQuery: { product },
-      highlightGroup,
-      defaultHighlight,
+      conditional,
     } = this.props
-    const highlightName = 
-      defaultHighlight
-        ? specificationsProduct.allSpecifications
-        : highlightGroup
-    const specificationGroups = propOr([], 'specificationGroups', product)
-    const highlightSpecificationGroup = specificationGroups.filter(
-      x => x.name === highlightName
-    )[0]
-    const highlights = propOr([], 'specifications', highlightSpecificationGroup)
-    return highlights
+    const choose = propOr('', 'highlight', conditional)
+    const highlightsFromGroup = () => {
+      const typeHighlight = propOr('', 'typeHighlight', conditional)
+      const highlightName = typeHighlight.trim()
+      const names = highlightName.split(',')
+      const specificationGroups = propOr([], 'specificationGroups', product)
+      const highlights = names.reduce((acc, item) => {
+        const highlightSpecificationGroup = specificationGroups.filter(
+          x => x.name.toLowerCase() === item.trim().toLowerCase()
+        )[0]
+        const highlight = propOr([], 'specifications', highlightSpecificationGroup)
+        return acc.concat(highlight)
+      }, [])
+      return highlights
+    }
+    const highlightsFromSpecifications = () => {
+      const typeSpecifications = propOr('', 'typeSpecifications', conditional)
+      const specificationNames = typeSpecifications.trim().split(',')
+      const allSpecifications = propOr([], 'properties', product)
+      const highlights = specificationNames.reduce((acc, item) => {
+        const highlight = allSpecifications.filter(x => x.name.toLowerCase() === item.trim().toLowerCase())
+        return acc.concat(highlight)
+      }, [])
+      return highlights
+    }
+
+    const highlightsFromAllSpecifications = () => {
+      const allSpecifications = propOr([], 'properties', product)
+      const generalSpecifications = propOr([], 'generalProperties', product)
+      const highlights = reject(
+        compose(
+          flip(contains)(map(x => x.name, generalSpecifications)),
+          prop('name')
+        ),
+        allSpecifications
+      )
+      return highlights
+    }
+
+    switch (choose){
+      case 'editor.product-details.highlights.chooseDefault': return highlightsFromGroup()
+      case 'editor.product-details.highlights.chooseDefaultSpecification': return highlightsFromSpecifications()
+      case 'editor.product-details.highlights.allSpecifications': return highlightsFromAllSpecifications()
+    }
+
   }
 
   render() {
@@ -354,12 +369,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                } pl8-l w-40-l w-100`}
+                  } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                  } c-on-base dn db-l mb4`}
+                    } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -396,7 +411,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                      } pt1 mt mt7 mt4-l dn-l`}
+                        } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -411,13 +426,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                    <div className="pv4">
-                      <ExtensionPoint
-                        id="availability-subscriber"
-                        skuId={this.selectedItem.itemId}
-                      />
-                    </div>
-                  )}
+                      <div className="pv4">
+                        <ExtensionPoint
+                          id="availability-subscriber"
+                          skuId={this.selectedItem.itemId}
+                        />
+                      </div>
+                    )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -463,7 +478,7 @@ class ProductDetails extends Component {
             <div
               className={`flex ${
                 showSpecificationsTab ? 'flex-wrap' : 'justify-between'
-              }`}
+                }`}
             >
               {description && (
                 <div className="pv2 mt8 h-100 w-100">
@@ -491,53 +506,86 @@ class ProductDetails extends Component {
   }
 }
 
-export function getHighlightsName(props) {
-  const names = []
-  const specificationGroups = pathOr(
-    [],
-    ['productQuery', 'product', 'specificationGroups'],
-    props
-  )
-  for (const k in specificationGroups) {
-    names.push(specificationGroups[k].name)
-  }
-  return names
-}
-
 ProductDetails.getSchema = props => {
   return {
     title: 'editor.product-details.title',
     description: 'editor.product-details.description',
     type: 'object',
-    properties: {
-      defaultHighlight: {
-        default: true,
-        enum: [
-          specificationsProduct.all.value,
-          specificationsProduct.choose.value,
-        ],
-        enumNames: ['All Specifications', 'Type default highlight'],
-        isLayout: true,
-        title: 'editor.product-details.highlights.default',
-        type: 'boolean',
-        widget: {
-          'ui:options': {
-            inline: true,
+    widget: {
+      'ui:options': {
+        inline: false,
+      },
+      'ui:widget': 'radio',
+    },
+    definitions: {
+      highlightGroupDefault: {
+        title: 'Person',
+        type: 'object',
+        properties: {
+          highlight: {
+            title: 'editor.product-details.highlights.default',
+            type: 'string',
+            enum: [
+              'editor.product-details.highlights.allSpecifications',
+              'editor.product-details.highlights.chooseDefault',
+              'editor.product-details.highlights.chooseDefaultSpecification',
+            ],
+            default: 'editor.product-details.highlights.chooseDefault',
           },
-          'ui:widget': 'radio',
+        },
+        required: ['highlight'],
+        dependencies: {
+          highlight: {
+            oneOf: [
+              {
+                properties: {
+                  highlight: {
+                    enum: [
+                      'editor.product-details.highlights.allSpecifications',
+                    ],
+                  },
+                },
+              },
+              {
+                properties: {
+                  highlight: {
+                    enum: ['editor.product-details.highlights.chooseDefault'],
+                  },
+                  typeHighlight: {
+                    type: 'string',
+                    title: 'editor.product-details.highlights.title',
+                  },
+                },
+                required: [''],
+              },
+              {
+                properties: {
+                  highlight: {
+                    enum: ['editor.product-details.highlights.chooseDefaultSpecification'],
+                  },
+                  typeSpecifications: {
+                    type: 'string',
+                    title: 'editor.product-details.highlights.typeSpecifications.title',
+                  },
+                },
+                required: [''],
+              },
+            ],
+          },
         },
       },
-      highlightGroup: {
-        type: 'string',
-        title: 'editor.product-details.highlights.title',
-        default: 'allSpecifications',
-        isLayout: true,
+    },
+    properties: {
+      conditional: {
+        title: 'Conditional',
+        $ref: '#/definitions/highlightGroupDefault',
+
       },
       showHighlight: {
         type: 'boolean',
         title: 'editor.product-details.showHighlight.title',
         default: true,
-        isLayout: true,
+        isLayout: false,
       },
     },
   }
