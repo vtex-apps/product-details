@@ -14,5 +14,8 @@
   "editor.product-details.displayVertically.title": "editor.product-details.displayVertically.title",
   "button-label": "button-label",
   "addToCartButton.label": "addToCartButton.label",
-  "share.title": "share.title"
+  "share.title": "share.title",
+  "editor.product-details.thumbnailsPosition.title": "editor.product-details.thumbnailsPosition.title",
+  "editor.product-details.thumbnailsPosition.left": "editor.product-details.thumbnailsPosition.left",
+  "editor.product-details.thumbnailsPosition.right": "editor.product-details.thumbnailsPosition.right"
 }

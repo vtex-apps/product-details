@@ -13,5 +13,8 @@
   "editor.product-details.showHighlight.title": "Mostrar destaques",
   "editor.product-details.highlights.allSpecifications": "Todas as especificações",
   "editor.product-details.highlights.chooseDefault": "Grupo de especificações personalizadas",
-  "editor.product-details.highlights.chooseDefaultSpecification": "Especificações personalizadas"
+  "editor.product-details.highlights.chooseDefaultSpecification": "Especificações personalizadas",
+  "editor.product-details.thumbnailsPosition.title": "Posição das miniaturas",
+  "editor.product-details.thumbnailsPosition.left": "Esquerda",
+  "editor.product-details.thumbnailsPosition.right": "Direita"
 }

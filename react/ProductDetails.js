@@ -22,6 +22,10 @@ import { Container } from 'vtex.store-components'
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
 import { productShape } from './propTypes'
+import thumbnailsPosition, {
+  getThumbnailsPositionNames,
+  getThumbnailsPositionValues,
+} from './utils/thumbnailPositionEnum'
 
 import productDetails from './productDetails.css'
 
@@ -173,13 +177,13 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-        imageUrls: imageSizes.map(size =>
-          changeImageUrlSize(image.imageUrl, size)
-        ),
-        thresholds,
-        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-        imageText: image.imageText,
-      }))
+          imageUrls: imageSizes.map(size =>
+            changeImageUrlSize(image.imageUrl, size)
+          ),
+          thresholds,
+          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+          imageText: image.imageText,
+        }))
       : []
   }
 
@@ -218,7 +222,11 @@ class ProductDetails extends Component {
         const highlightSpecificationGroup = specificationGroups.filter(
           x => x.name.toLowerCase() === item.trim().toLowerCase()
         )[0]
-        const highlight = propOr([], 'specifications', highlightSpecificationGroup)
+        const highlight = propOr(
+          [],
+          'specifications',
+          highlightSpecificationGroup
+        )
         return acc.concat(highlight)
       }, [])
       return highlights
@@ -228,7 +236,9 @@ class ProductDetails extends Component {
       const specificationNames = typeSpecifications.trim().split(',')
       const allSpecifications = propOr([], 'properties', product)
       const highlights = specificationNames.reduce((acc, item) => {
-        const highlight = allSpecifications.filter(x => x.name.toLowerCase() === item.trim().toLowerCase())
+        const highlight = allSpecifications.filter(
+          x => x.name.toLowerCase() === item.trim().toLowerCase()
+        )
         return acc.concat(highlight)
       }, [])
       return highlights
@@ -247,12 +257,14 @@ class ProductDetails extends Component {
       return highlights
     }
 
-    switch (choose){
-      case 'editor.product-details.highlights.chooseDefault': return highlightsFromGroup()
-      case 'editor.product-details.highlights.chooseDefaultSpecification': return highlightsFromSpecifications()
-      case 'editor.product-details.highlights.allSpecifications': return highlightsFromAllSpecifications()
+    switch (choose) {
+      case 'editor.product-details.highlights.chooseDefault':
+        return highlightsFromGroup()
+      case 'editor.product-details.highlights.chooseDefaultSpecification':
+        return highlightsFromSpecifications()
+      case 'editor.product-details.highlights.allSpecifications':
+        return highlightsFromAllSpecifications()
     }
-
   }
 
   render() {
@@ -267,6 +279,7 @@ class ProductDetails extends Component {
       intl,
       showSpecificationsTab,
       showHighlight,
+      thumbnailPosition,
     } = this.props
     const { selectedQuantity } = this.state
 
@@ -362,6 +375,7 @@ class ProductDetails extends Component {
                     <ExtensionPoint
                       id="product-images"
                       images={this.getImages()}
+                      position={thumbnailPosition}
                     />
                   </div>
                 </div>
@@ -369,12 +383,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                  } pl8-l w-40-l w-100`}
+                } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                    } c-on-base dn db-l mb4`}
+                  } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -411,7 +425,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                        } pt1 mt mt7 mt4-l dn-l`}
+                      } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -426,13 +440,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                      <div className="pv4">
-                        <ExtensionPoint
-                          id="availability-subscriber"
-                          skuId={this.selectedItem.itemId}
-                        />
-                      </div>
-                    )}
+                    <div className="pv4">
+                      <ExtensionPoint
+                        id="availability-subscriber"
+                        skuId={this.selectedItem.itemId}
+                      />
+                    </div>
+                  )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -478,7 +492,7 @@ class ProductDetails extends Component {
             <div
               className={`flex ${
                 showSpecificationsTab ? 'flex-wrap' : 'justify-between'
-                }`}
+              }`}
             >
               {description && (
                 <div className="pv2 mt8 h-100 w-100">
@@ -561,11 +575,14 @@ ProductDetails.getSchema = props => {
               {
                 properties: {
                   highlight: {
-                    enum: ['editor.product-details.highlights.chooseDefaultSpecification'],
+                    enum: [
+                      'editor.product-details.highlights.chooseDefaultSpecification',
+                    ],
                   },
                   typeSpecifications: {
                     type: 'string',
-                    title: 'editor.product-details.highlights.typeSpecifications.title',
+                    title:
+                      'editor.product-details.highlights.typeSpecifications.title',
                   },
                 },
                 required: [''],
@@ -579,12 +596,19 @@ ProductDetails.getSchema = props => {
       conditional: {
         title: 'Conditional',
         $ref: '#/definitions/highlightGroupDefault',
-
       },
       showHighlight: {
         type: 'boolean',
         title: 'editor.product-details.showHighlight.title',
         default: true,
+        isLayout: false,
+      },
+      thumbnailPosition: {
+        title: 'editor.product-details.thumbnailsPosition.title',
+        type: 'string',
+        enum: getThumbnailsPositionValues(),
+        enumNames: getThumbnailsPositionNames(),
+        default: thumbnailsPosition.DISPLAY_LEFT.value,
         isLayout: false,
       },
     },
