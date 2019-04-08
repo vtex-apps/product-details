@@ -344,6 +344,7 @@ class ProductDetails extends Component {
       installments: path(['Installments'], this.commertialOffer),
       ...this.props.price,
     }
+    const productImageUrl = path(['items', 0, 'images', 0, 'imageUrl'], product)
 
     const availableQuantity = path(['AvailableQuantity'], this.commertialOffer)
     const showProductPrice =
@@ -467,6 +468,7 @@ class ProductDetails extends Component {
                       id="share"
                       shareLabelClass="c-muted-2 t-small mb3"
                       className="db"
+                      imageUrl={productImageUrl}
                       {...this.props.share}
                       loading={!path(['name'], this.selectedItem)}
                       title={intl.formatMessage(
