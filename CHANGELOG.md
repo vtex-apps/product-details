@@ -7,24 +7,40 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.12.0] - 2019-04-08
+## [1.12.1] - 2019-04-09
+
 ### Added
-- Thumbnails position on storefront. 
+
+- Pass imageUrl prop to `Share`.
+
+## [1.12.0] - 2019-04-08
+
+### Added
+
+- Thumbnails position on storefront.
 
 ## [1.11.2] - 2019-04-02
+
 ### Fixed
-- Improve `product-highlights` schema. 
+
+- Improve `product-highlights` schema.
 
 ## [1.11.1] - 2019-03-27
+
 ### Fixed
+
 - Remove `product-highlights` as a required block.
 
 ## [1.11.0] - 2019-03-27
+
 ### Added
-- Add `ProductHighlights` component. 
+
+- Add `ProductHighlights` component.
 
 ## [1.10.7] - 2019-03-14
+
 ### Changed
+
 - Change basic language files names.
 
 ### Added
