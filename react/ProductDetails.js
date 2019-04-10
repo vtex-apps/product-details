@@ -17,7 +17,6 @@ import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
 import { Container } from 'vtex.store-components'
 
-
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
 import { productShape } from './propTypes'
@@ -267,7 +266,6 @@ class ProductDetails extends Component {
   }
 
   render() {
-    console.log('teste FATHER PROPS: ', this.props)
     const {
       productQuery: { product },
       categories,
@@ -441,11 +439,6 @@ class ProductDetails extends Component {
                         onChange={value => this.setState({ selectedQuantity: value })}
                         availableQuantity={availableQuantity}
                       />
-                      {/* <QuantityStepper
-                        selectedQuantity={selectedQuantity}
-                        onChange={value => this.setState({ selectedQuantity: value })}
-                        availableQuantity={availableQuantity}
-                      /> */}
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
                         <FormattedMessage id="addToCartButton.label" />
                       </ExtensionPoint>

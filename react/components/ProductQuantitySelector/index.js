@@ -28,6 +28,7 @@ const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity
 
 ProductQuantitySelector.defaultProps = {
   maximumAvailableQuantity: 0,
+  onChange: () => {},
 }
 
 ProductQuantitySelector.propTypes = {
