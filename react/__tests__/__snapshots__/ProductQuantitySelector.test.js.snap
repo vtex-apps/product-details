@@ -31,7 +31,7 @@ exports[`<ProductQuantitySelector /> component should render and show available 
     </div>
     NumericStepper props={"size":"small","value":1,"minValue":1,"maxValue":5}
     <div
-      class="mv4 c-muted-2 t-small"
+      class="availableQuantityContainer mv4 c-muted-2 t-small"
     >
       <span>
         5 available
