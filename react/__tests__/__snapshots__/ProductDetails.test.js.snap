@@ -75,6 +75,9 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
                 class="pv2 dn db-l mt8"
               >
                 <div
+                  class="extensionPoint-mock-product-quantity-selector"
+                />
+                <div
                   class="extensionPoint-mock-buy-button"
                 >
                   <span>
@@ -223,6 +226,9 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
               <div
                 class="pv2 dn db-l mt8"
               >
+                <div
+                  class="extensionPoint-mock-product-quantity-selector"
+                />
                 <div
                   class="extensionPoint-mock-buy-button"
                 >

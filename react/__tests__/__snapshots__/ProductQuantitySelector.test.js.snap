@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductQuantitySelector /> component should render and not show available quantity view 1`] = `
+<DocumentFragment>
+  <div
+    class="quantitySelectorContainer flex flex-column mb4"
+  >
+    <div
+      class="mb3 c-muted-2 t-body"
+    >
+      <span>
+        Quantity
+      </span>
+    </div>
+    NumericStepper props={"size":"small","value":1,"minValue":1,"maxValue":50}
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<ProductQuantitySelector /> component should render and show available quantity view 1`] = `
+<DocumentFragment>
+  <div
+    class="quantitySelectorContainer flex flex-column mb4"
+  >
+    <div
+      class="mb3 c-muted-2 t-body"
+    >
+      <span>
+        Quantity
+      </span>
+    </div>
+    NumericStepper props={"size":"small","value":1,"minValue":1,"maxValue":5}
+    <div
+      class="mv4 c-muted-2 t-small"
+    >
+      <span>
+        5 available
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
