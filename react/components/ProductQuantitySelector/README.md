@@ -69,7 +69,7 @@ To use it, you must declare its use in your `product-details` block array. An ex
   },
 "product-quantity-selector": {
     "props": {
-      "maximumAvailableQuantity": 9999999
+      "warningQuantityThreshold": 9999999
     }
   },
 ```
@@ -94,7 +94,7 @@ Through the Storefront, you can change the Product Quantity Selector's behavior 
 
 | Prop name           | Type      | Description                                                                                 |
 | ------------------- | --------- | ------------------------------------------------------------------------------------------- |
-| `maximumAvailableQuantity`     | `Number` | Only show the quantity of remaining items in stock if item available quantity is less than or equal to the value passed in this property. Default: 0 (does not appear).    |
+| `warningQuantityThreshold`     | `Number` | Only show the quantity of remaining items in stock if item available quantity is less than or equal to the value passed in this property. Default: 0 (does not appear).    |
 
 ### Styles API
 
@@ -125,3 +125,4 @@ Below, we describe the namespaces that are defined in the Product Quantity Selec
 | Token name                 | Component                                                                                                                                                                                                                                                                                                                                                                     | Description                                                   |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
 | `quantitySelectorContainer`                | [index](https://github.com/vtex-apps/product-details/blob/master/react/components/ProductQuantitySelector/index.js) | The main container of `Product Quantity Selector`                        |
+| `availableQuantityContainer`                | [index](https://github.com/vtex-apps/product-details/blob/master/react/components/ProductQuantitySelector/index.js) | The container that wraps the available quantity view.                        |

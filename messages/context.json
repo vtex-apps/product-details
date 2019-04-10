@@ -22,6 +22,6 @@
   "product-details.quantity-available": "Tells user how many items are available in stock",
   "editor.product-quantity-selector.title": "Title of Product Quantity Selector component",
   "editor.product-quantity-selector.description": "Description of Product Quantity Selector component",
-  "editor.product-quantity-selector.maximumAvailableQuantity.title": "Title of maximumAvailableQuantity property",
-  "editor.product-quantity-selector.maximumAvailableQuantity.description": "Description of maximumAvailableQuantity property"
+  "editor.product-quantity-selector.warningQuantityThreshold.title": "Title of warningQuantityThreshold property",
+  "editor.product-quantity-selector.warningQuantityThreshold.description": "Description of warningQuantityThreshold property"
 }

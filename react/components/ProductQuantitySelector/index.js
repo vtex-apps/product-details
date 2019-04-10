@@ -5,8 +5,8 @@ import { FormattedMessage } from 'react-intl'
 
 import styles from './quantitySelector.css'
 
-const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity, maximumAvailableQuantity }) => {
-  const showAvailable = availableQuantity <= maximumAvailableQuantity
+const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity, warningQuantityThreshold }) => {
+  const showAvailable = availableQuantity <= warningQuantityThreshold
   return (
     <div className={`${styles.quantitySelectorContainer} flex flex-column mb4`}>
       <div className="mb3 c-muted-2 t-body">
@@ -19,15 +19,16 @@ const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity
         maxValue={availableQuantity ? availableQuantity : undefined}
         onChange={useCallback(e => onChange(e.value), [])}
       />
-      {showAvailable && <div className="mv4 c-muted-2 t-small">
-        <FormattedMessage id="product-details.quantity-available" values={{ availableQuantity }} />
-      </div>}
+      {showAvailable && 
+        <div className={`${styles.availableQuantityContainer} mv4 c-muted-2 t-small`}>
+          <FormattedMessage id="product-details.quantity-available" values={{ availableQuantity }} />
+        </div>}
     </div>
   )
 }
 
 ProductQuantitySelector.defaultProps = {
-  maximumAvailableQuantity: 0,
+  warningQuantityThreshold: 0,
   onChange: () => {},
 }
 
@@ -35,7 +36,7 @@ ProductQuantitySelector.propTypes = {
   selectedQuantity: PropTypes.number.isRequired,
   availableQuantity: PropTypes.number,
   onChange: PropTypes.func,
-  maximumAvailableQuantity: PropTypes.number.isRequired
+  warningQuantityThreshold: PropTypes.number.isRequired
 }
 
 ProductQuantitySelector.schema = {
@@ -43,9 +44,9 @@ ProductQuantitySelector.schema = {
   description: 'editor.product-quantity-selector.description',
   type: 'object',
   properties: {
-    maximumAvailableQuantity: {
-      title: 'editor.product-quantity-selector.maximumAvailableQuantity.title',
-      description: 'editor.product-quantity-selector.maximumAvailableQuantity.title',
+    warningQuantityThreshold: {
+      title: 'editor.product-quantity-selector.warningQuantityThreshold.title',
+      description: 'editor.product-quantity-selector.warningQuantityThreshold.title',
       type: 'number',
       default: 0,
     },

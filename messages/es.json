@@ -18,9 +18,9 @@
   "editor.product-details.thumbnailsPosition.left": "Izquierda",
   "editor.product-details.thumbnailsPosition.right": "Derecha",
   "product-details.quantity": "Cantidad",
-  "product-details.quantity-available": "{availableQuantity} disponibles",
+  "product-details.quantity-available": "{availableQuantity, plural, one {# disponible} other {# disponibles}}",
   "editor.product-quantity-selector.title": "Selector de Cantidad de Producto",
   "editor.product-quantity-selector.description": "Un componente que permite al usuario a seleccionar la cantidad de elementos para añadir al carrito.",
-  "editor.product-quantity-selector.maximumAvailableQuantity.title": "Cantidad Máxima Disponible",
-  "editor.product-quantity-selector.maximumAvailableQuantity.description": "Sólo muestra la cantidad de elementos en stock si la cantidad de elementos disponibles es menor que el valor pasado en esa propiedad."
+  "editor.product-quantity-selector.warningQuantityThreshold.title": "Cantidad de umbral disponible",
+  "editor.product-quantity-selector.warningQuantityThreshold.description": "Sólo muestra la cantidad de elementos en stock si la cantidad de elementos disponibles es menor que el valor pasado en esa propiedad."
 }
