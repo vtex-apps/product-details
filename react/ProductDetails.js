@@ -169,7 +169,7 @@ class ProductDetails extends Component {
   }
 
   get sellerId() {
-    return parseInt(path(['sellers', 0, 'sellerId'], this.selectedItem))
+    return path(['sellers', 0, 'sellerId'], this.selectedItem)
   }
 
   getImages() {
