@@ -14,8 +14,12 @@
       "shipping-simulator",
       "availability-subscriber",
       "share",
-      "product-highlights"
+      "product-highlights",
+      "product-quantity-selector"
     ],
     "component": "ProductDetails"
+  },
+  "product-quantity-selector": {
+    "component": "ProductQuantitySelector"
   }
 }

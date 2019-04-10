@@ -4,7 +4,6 @@ import {
   mapObjIndexed,
   mergeDeepRight,
   path,
-  filter,
   compose,
   flip,
   prop,
@@ -12,7 +11,6 @@ import {
   contains,
   reject,
   propOr,
-  pathOr,
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
@@ -270,7 +268,6 @@ class ProductDetails extends Component {
   render() {
     const {
       productQuery: { product },
-      slug,
       categories,
       runtime: {
         account,
@@ -436,6 +433,12 @@ class ProductDetails extends Component {
                   )}
                   {showBuyButton ? (
                     <div className="pv2 dn db-l mt8">
+                      <ExtensionPoint 
+                        id="product-quantity-selector"
+                        selectedQuantity={selectedQuantity}
+                        onChange={value => this.setState({ selectedQuantity: value })}
+                        availableQuantity={availableQuantity}
+                      />
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
                         <FormattedMessage id="addToCartButton.label" />
                       </ExtensionPoint>

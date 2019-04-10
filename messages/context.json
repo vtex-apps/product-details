@@ -17,5 +17,11 @@
   "share.title": "share.title",
   "editor.product-details.thumbnailsPosition.title": "editor.product-details.thumbnailsPosition.title",
   "editor.product-details.thumbnailsPosition.left": "editor.product-details.thumbnailsPosition.left",
-  "editor.product-details.thumbnailsPosition.right": "editor.product-details.thumbnailsPosition.right"
+  "editor.product-details.thumbnailsPosition.right": "editor.product-details.thumbnailsPosition.right",
+  "product-details.quantity": "Item quantity",
+  "product-details.quantity-available": "Tells user how many items are available in stock",
+  "editor.product-quantity-selector.title": "Title of Product Quantity Selector component",
+  "editor.product-quantity-selector.description": "Description of Product Quantity Selector component",
+  "editor.product-quantity-selector.warningQuantityThreshold.title": "Title of warningQuantityThreshold property",
+  "editor.product-quantity-selector.warningQuantityThreshold.description": "Description of warningQuantityThreshold property"
 }

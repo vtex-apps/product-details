@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.13.0] - 2019-04-10
+### Added
+- Add `product-quantity-selector` block to `interfaces.json`.
+
 ## [1.12.2] - 2019-04-10
 ### Fixed
 - SellerId does not need to be an int, like in account coinmarket
