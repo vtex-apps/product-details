@@ -22,5 +22,8 @@
   "editor.product-quantity-selector.title": "Product Quantity Selector component",
   "editor.product-quantity-selector.description": "A component that allows user to select the amount of items to add to cart",
   "editor.product-quantity-selector.warningQuantityThreshold.title": "Threshold of available quantity warning",
-  "editor.product-quantity-selector.warningQuantityThreshold.description": "Only show the quantity of remaining items in stock if item available quantity is less than or equal to the value passed in this property"
+  "editor.product-quantity-selector.warningQuantityThreshold.description": "Only show the quantity of remaining items in stock if item available quantity is less than or equal to the value passed in this property",
+  "editor.product-specifications.displaySpecification.title": "Display Product Specifications by:",
+  "editor.product-specifications.displaySpecification.tabMode": "Tab view mode",
+  "editor.product-specifications.displaySpecification.tableMode": "Table view mode"
 }
