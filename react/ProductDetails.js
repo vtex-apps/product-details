@@ -11,6 +11,7 @@ import {
   contains,
   reject,
   propOr,
+  pathOr,
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
@@ -129,31 +130,8 @@ class ProductDetails extends Component {
 
   state = { selectedQuantity: 1 }
 
-  compareSku = (item, otherItem) => {
-    const [
-      {
-        commertialOffer: { AvailableQuantity: quantity, Price: price },
-      },
-    ] = item.sellers
-    const [
-      {
-        commertialOffer: {
-          AvailableQuantity: otherQuantity,
-          Price: otherPrice,
-        },
-      },
-    ] = otherItem.sellers
-
-    return quantity === 0
-      ? 1
-      : (otherQuantity === 0 && -1) || price - otherPrice
-  }
-
   get skuItems() {
-    const items = path(['productQuery', 'product', 'items'], this.props) || []
-    const skuItems = items.slice()
-    skuItems.sort(this.compareSku)
-    return skuItems
+    return pathOr([], ['productQuery', 'product', 'items'], this.props)
   }
 
   get selectedItem() {
