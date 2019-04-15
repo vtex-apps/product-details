@@ -153,13 +153,13 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-        imageUrls: imageSizes.map(size =>
-          changeImageUrlSize(image.imageUrl, size)
-        ),
-        thresholds,
-        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-        imageText: image.imageText,
-      }))
+          imageUrls: imageSizes.map(size =>
+            changeImageUrlSize(image.imageUrl, size)
+          ),
+          thresholds,
+          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+          imageText: image.imageText,
+        }))
       : []
   }
 
@@ -266,6 +266,7 @@ class ProductDetails extends Component {
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
     const { specifications, highlights } = this.filterSpecifications()
+    console.log('s', specifications)
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
@@ -360,12 +361,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                  } pl8-l w-40-l w-100`}
+                } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                    } c-on-base dn db-l mb4`}
+                  } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -402,7 +403,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                        } pt1 mt mt7 mt4-l dn-l`}
+                      } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -415,7 +416,9 @@ class ProductDetails extends Component {
                       <ExtensionPoint
                         id="product-quantity-selector"
                         selectedQuantity={selectedQuantity}
-                        onChange={value => this.setState({ selectedQuantity: value })}
+                        onChange={value =>
+                          this.setState({ selectedQuantity: value })
+                        }
                         availableQuantity={availableQuantity}
                       />
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -423,13 +426,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                      <div className="pv4">
-                        <ExtensionPoint
-                          id="availability-subscriber"
-                          skuId={this.selectedItem.itemId}
-                        />
-                      </div>
-                    )}
+                    <div className="pv4">
+                      <ExtensionPoint
+                        id="availability-subscriber"
+                        skuId={this.selectedItem.itemId}
+                      />
+                    </div>
+                  )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -476,7 +479,7 @@ class ProductDetails extends Component {
             <div
               className={`flex ${
                 displaySpecification ? 'flex-wrap' : 'justify-between'
-                }`}
+              }`}
             >
               {description && (
                 <div className="pv2 mt8 h-100 w-100">
@@ -517,7 +520,7 @@ ProductDetails.getSchema = props => {
     },
     definitions: {
       highlightGroupDefault: {
-        title: 'Person',
+        title: 'highlightGroupDefault',
         type: 'object',
         properties: {
           highlight: {
@@ -575,18 +578,71 @@ ProductDetails.getSchema = props => {
           },
         },
       },
+      specificationsDefault: {
+        title: 'specificationsDefault',
+        type: 'object',
+        properties: {
+          showSpecifications: {
+            title: 'Show specifications',
+            type: 'boolean',
+            enum: [true, false],
+            default: false,
+          },
+        },
+        required: ['showSpecifications'],
+        dependencies: {
+          showSpecifications: {
+            oneOf: [
+              {
+                properties: {
+                  showSpecifications: {
+                    enum: [true],
+                  },
+                  typeSpecifications: {
+                    type: 'string',
+                    title:
+                      'editor.product-details.highlights.typeSpecifications.title',
+                  },
+                  displaySpecification: {
+                    type: 'boolean',
+                    title: 'editor.product-specifications.displaySpecification.title',
+                    enum: [true, false],
+                    enumNames: [
+                      'editor.product-specifications.displaySpecification.tabMode',
+                      'editor.product-specifications.displaySpecification.tableMode',
+                    ],
+                    default: false,
+                    widget: {
+                      'ui:options': {
+                        inline: false,
+                      },
+                      'ui:widget': 'radio',
+                    },
+                  }
+                },
+                required: [''],
+              },
+            ],
+          },
+        },
+      },
     },
     properties: {
-      conditional: {
-        title: 'Conditional',
-        $ref: '#/definitions/highlightGroupDefault',
-      },
       showHighlight: {
         type: 'boolean',
         title: 'editor.product-details.showHighlight.title',
         default: true,
         isLayout: false,
       },
+      conditional: {
+        title: 'Conditional',
+        $ref: '#/definitions/highlightGroupDefault',
+      },
+      showSpecification: {
+        title: 'specification',
+        $ref: '#/definitions/specificationsDefault',
+      },
+
       thumbnailPosition: {
         title: 'editor.product-details.thumbnailsPosition.title',
         type: 'string',
@@ -595,25 +651,22 @@ ProductDetails.getSchema = props => {
         default: thumbnailsPosition.DISPLAY_LEFT.value,
         isLayout: false,
       },
-      displaySpecification: {
-        type: "boolean",
-        title: 'editor.product-specifications.displaySpecification.title',
-        enum: [
-          true,
-          false
-        ],
-        enumNames: [
-          'editor.product-specifications.displaySpecification.tabMode',
-          'editor.product-specifications.displaySpecification.tableMode'
-        ],
-        default: false,
-        widget: {
-          'ui:options': {
-            inline: false,
-          },
-          'ui:widget': 'radio',
-        },
-      }
+      // displaySpecification: {
+      //   type: 'boolean',
+      //   title: 'editor.product-specifications.displaySpecification.title',
+      //   enum: [true, false],
+      //   enumNames: [
+      //     'editor.product-specifications.displaySpecification.tabMode',
+      //     'editor.product-specifications.displaySpecification.tableMode',
+      //   ],
+      //   default: false,
+      //   widget: {
+      //     'ui:options': {
+      //       inline: false,
+      //     },
+      //     'ui:widget': 'radio',
+      //   },
+      // },
     },
   }
 }
