@@ -187,8 +187,11 @@ class ProductDetails extends Component {
     const {
       productQuery: { product },
       conditional,
+      specificationsDefault,
     } = this.props
+    console.log('this', this.props)
     const choose = propOr('', 'highlight', conditional)
+    console.log('spec', specificationsDefault)
     const highlightsFromGroup = () => {
       const typeHighlight = propOr('', 'typeHighlight', conditional)
       const highlightName = typeHighlight.trim()
@@ -252,12 +255,14 @@ class ProductDetails extends Component {
         culture: { country },
       },
       intl,
-      showSpecificationsTab,
       displaySpecification,
       showHighlight,
       thumbnailPosition,
+      specificationsDefault,
     } = this.props
     const { selectedQuantity } = this.state
+    const showSpecificationsTab = prop('showSpecifications', specificationsDefault)
+    const viewSpecificationsMode = propOr(false,'viewMode', specificationsDefault)
 
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
@@ -266,7 +271,6 @@ class ProductDetails extends Component {
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
     const { specifications, highlights } = this.filterSpecifications()
-    console.log('s', specifications)
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
@@ -478,7 +482,7 @@ class ProductDetails extends Component {
             </div>
             <div
               className={`flex ${
-                displaySpecification ? 'flex-wrap' : 'justify-between'
+                viewSpecificationsMode ? 'flex-wrap' : 'justify-between'
               }`}
             >
               {description && (
@@ -490,11 +494,11 @@ class ProductDetails extends Component {
                   />
                 </div>
               )}
-              {specifications && (
+              {showSpecificationsTab && (
                 <div className="pv2 mt8 h-100 w-100">
                   <ExtensionPoint
                     id="product-specifications"
-                    tabsMode={displaySpecification}
+                    tabsMode={viewSpecificationsMode}
                     specifications={specifications}
                   />
                 </div>
@@ -531,7 +535,7 @@ ProductDetails.getSchema = props => {
               'editor.product-details.highlights.chooseDefault',
               'editor.product-details.highlights.chooseDefaultSpecification',
             ],
-            default: 'editor.product-details.highlights.chooseDefault',
+            default: 'editor.product-details.highlights.allSpecifications',
           },
         },
         required: ['highlight'],
@@ -603,7 +607,7 @@ ProductDetails.getSchema = props => {
                     title:
                       'editor.product-details.highlights.typeSpecifications.title',
                   },
-                  displaySpecification: {
+                  viewMode: {
                     type: 'boolean',
                     title: 'editor.product-specifications.displaySpecification.title',
                     enum: [true, false],
@@ -631,14 +635,14 @@ ProductDetails.getSchema = props => {
       showHighlight: {
         type: 'boolean',
         title: 'editor.product-details.showHighlight.title',
-        default: true,
+        default: false,
         isLayout: false,
       },
       conditional: {
         title: 'Conditional',
         $ref: '#/definitions/highlightGroupDefault',
       },
-      showSpecification: {
+      specificationsDefault: {
         title: 'specification',
         $ref: '#/definitions/specificationsDefault',
       },
