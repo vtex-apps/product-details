@@ -25,5 +25,8 @@
   "editor.product-quantity-selector.warningQuantityThreshold.description": "Only show the quantity of remaining items in stock if item available quantity is less than or equal to the value passed in this property",
   "editor.product-specifications.displaySpecification.title": "Display Product Specifications by:",
   "editor.product-specifications.displaySpecification.tabMode": "Tab view mode",
-  "editor.product-specifications.displaySpecification.tableMode": "Table view mode"
+  "editor.product-specifications.displaySpecification.tableMode": "Table view mode",
+  "editor.product-details.product-specifications.default" :"Choose default specifications",
+  "editor.product-details.product-specifications.allSpecifications":"All Specifications",
+  "editor.product-details.product-specifications.chooseDefaultSpecification": "Fields Specifications"
 }

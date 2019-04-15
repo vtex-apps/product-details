@@ -183,15 +183,28 @@ class ProductDetails extends Component {
     }
   }
 
+  getSpecifications () {
+    const { 
+      productQuery: {product},
+      specificationsDefault
+    } = this.props
+    const choose = path(['specificationsGroups', 'specifications'], specificationsDefault)
+
+    const getAllSpecifications = () => {
+      const typedSpecifications = path(['typeSpecifications', 'specifications'], specificationsDefault)
+
+    }
+
+
+
+  }
+
   getHighlights() {
     const {
       productQuery: { product },
       conditional,
-      specificationsDefault,
     } = this.props
-    console.log('this', this.props)
     const choose = propOr('', 'highlight', conditional)
-    console.log('spec', specificationsDefault)
     const highlightsFromGroup = () => {
       const typeHighlight = propOr('', 'typeHighlight', conditional)
       const highlightName = typeHighlight.trim()
@@ -261,8 +274,15 @@ class ProductDetails extends Component {
       specificationsDefault,
     } = this.props
     const { selectedQuantity } = this.state
-    const showSpecificationsTab = prop('showSpecifications', specificationsDefault)
-    const viewSpecificationsMode = propOr(false,'viewMode', specificationsDefault)
+    const showSpecificationsTab = prop(
+      'showSpecifications',
+      specificationsDefault
+    )
+    const viewSpecificationsMode = propOr(
+      false,
+      'viewMode',
+      specificationsDefault
+    )
 
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
@@ -602,14 +622,57 @@ ProductDetails.getSchema = props => {
                   showSpecifications: {
                     enum: [true],
                   },
-                  typeSpecifications: {
-                    type: 'string',
-                    title:
-                      'editor.product-details.highlights.typeSpecifications.title',
+                  specificationGroups: {
+                    title: 'specificationGroups',
+                    type: 'object',
+                    properties: {
+                      specification: {
+                        title: 'editor.product-details.product-specifications.default',
+                        type: 'string',
+                        enum: [
+                          'editor.product-details.product-specifications.allSpecifications',
+                          'editor.product-details.product-specifications.chooseDefaultSpecification',
+                        ],
+                        default:
+                          'editor.product-details.product-specifications.allSpecifications',
+                      },
+                    },
+                    required: ['specification'],
+                    dependencies: {
+                      specification: {
+                        oneOf: [
+                          {
+                            properties: {
+                              specification: {
+                                enum: [
+                                  'editor.product-details.product-specifications.allSpecifications',
+                                ],
+                              },
+                            },
+                          },
+                          {
+                            properties: {
+                              specification: {
+                                enum: [
+                                  'editor.product-details.product-specifications.chooseDefaultSpecification',
+                                ],
+                              },
+                              typeSpecifications: {
+                                type: 'string',
+                                title:
+                                  'editor.product-details.product-specifications.typeSpecifications.title',
+                              },
+                            },
+                            required: [''],
+                          },
+                        ],
+                      },
+                    },
                   },
                   viewMode: {
                     type: 'boolean',
-                    title: 'editor.product-specifications.displaySpecification.title',
+                    title:
+                      'editor.product-specifications.displaySpecification.title',
                     enum: [true, false],
                     enumNames: [
                       'editor.product-specifications.displaySpecification.tabMode',
@@ -622,7 +685,7 @@ ProductDetails.getSchema = props => {
                       },
                       'ui:widget': 'radio',
                     },
-                  }
+                  },
                 },
                 required: [''],
               },
@@ -655,22 +718,6 @@ ProductDetails.getSchema = props => {
         default: thumbnailsPosition.DISPLAY_LEFT.value,
         isLayout: false,
       },
-      // displaySpecification: {
-      //   type: 'boolean',
-      //   title: 'editor.product-specifications.displaySpecification.title',
-      //   enum: [true, false],
-      //   enumNames: [
-      //     'editor.product-specifications.displaySpecification.tabMode',
-      //     'editor.product-specifications.displaySpecification.tableMode',
-      //   ],
-      //   default: false,
-      //   widget: {
-      //     'ui:options': {
-      //       inline: false,
-      //     },
-      //     'ui:widget': 'radio',
-      //   },
-      // },
     },
   }
 }

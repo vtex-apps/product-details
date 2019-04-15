@@ -25,5 +25,8 @@
   "editor.product-quantity-selector.warningQuantityThreshold.description": "Sólo muestra la cantidad de elementos en stock si la cantidad de elementos disponibles es menor que el valor pasado en esa propiedad.",
   "editor.product-specifications.displaySpecification.title": "Mostrar la Especificaciones del Product por:",
   "editor.product-specifications.displaySpecification.tabMode": "Modo de vista de tab",
-  "editor.product-specifications.displaySpecification.tableMode": "Modo de vista de tabela"
+  "editor.product-specifications.displaySpecification.tableMode": "Modo de vista de tabela",
+  "editor.product-details.product-specifications.default" :"Elegir destaque predeterminado",
+  "editor.product-details.product-specifications.allSpecifications":"Todas las especificaciones",
+  "editor.product-details.product-specifications.chooseDefaultSpecification": "Especificaciones personalizadas"
 }
