@@ -163,11 +163,9 @@ class ProductDetails extends Component {
       productQuery: { product },
       specificationsDefault
     } = this.props
+
     const choose = path(['specificationGroups', 'specification'], specificationsDefault)
     const allSpecifications = propOr([], 'properties', product)
-    const getAllSpecifications = () => {
-      return allSpecifications
-    }
     const getFromProperties = () => {
       const typedSpecifications = pathOr('', ['specificationGroups', 'typeSpecifications'], specificationsDefault)
       const specificationNames = typedSpecifications.trim().split(',')
@@ -182,7 +180,7 @@ class ProductDetails extends Component {
 
     switch (choose) {
       case 'editor.product-details.product-specifications.chooseDefaultSpecification': return getFromProperties()
-      case 'editor.product-details.product-specifications.allSpecifications': return getAllSpecifications()
+      case 'editor.product-details.product-specifications.allSpecifications': return allSpecifications
     }
   }
 
