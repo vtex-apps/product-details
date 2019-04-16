@@ -5,12 +5,7 @@ import {
   mergeDeepRight,
   path,
   pathOr,
-  compose,
-  flip,
   prop,
-  map,
-  contains,
-  reject,
   propOr,
   pathOr,
 } from 'ramda'
@@ -192,9 +187,6 @@ class ProductDetails extends Component {
   }
 
   filterSpecifications() {
-    const {
-      productQuery: { product },
-    } = this.props
     const highlights = this.getHighlights()
     const specifications = this.getSpecifications()
     return {
@@ -265,13 +257,11 @@ class ProductDetails extends Component {
         culture: { country },
       },
       intl,
-      displaySpecification,
       showHighlight,
       thumbnailPosition,
       specificationsDefault,
     } = this.props
     const { selectedQuantity } = this.state
-    console.log('spec', specificationsDefault)
     const showSpecificationsTab = prop(
       'showSpecifications',
       specificationsDefault
