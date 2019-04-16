@@ -4,6 +4,7 @@ import {
   mapObjIndexed,
   mergeDeepRight,
   path,
+  pathOr,
   compose,
   flip,
   prop,
@@ -173,7 +174,7 @@ class ProductDetails extends Component {
       return allSpecifications
     }
     const getFromProperties = () => {
-      const typedSpecifications = path(['specificationGroups', 'typeSpecifications'], specificationsDefault)
+      const typedSpecifications = pathOr('', ['specificationGroups', 'typeSpecifications'], specificationsDefault)
       const specificationNames = typedSpecifications.trim().split(',')
       const specifications = specificationNames.reduce((acc, item) => {
         const specification = allSpecifications.filter(
@@ -270,15 +271,17 @@ class ProductDetails extends Component {
       specificationsDefault,
     } = this.props
     const { selectedQuantity } = this.state
+    console.log('spec', specificationsDefault)
     const showSpecificationsTab = prop(
       'showSpecifications',
       specificationsDefault
     )
-    const viewSpecificationsMode = propOr(
-      false,
+    const viewMode = prop(
       'viewMode',
       specificationsDefault
     )
+
+    const viewSpecificationsMode = viewMode === 'table'
 
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
@@ -669,12 +672,12 @@ ProductDetails.getSchema = props => {
                     type: 'string',
                     title:
                       'editor.product-specifications.displaySpecification.title',
-                    enum: [true, false],
+                    enum: ['tab', 'table'],
                     enumNames: [
                       'editor.product-specifications.displaySpecification.tabMode',
                       'editor.product-specifications.displaySpecification.tableMode',
                     ],
-                    default: false,
+                    default: 'editor.product-specifications.displaySpecification.tabMode',
                     widget: {
                       'ui:options': {
                         inline: false,
