@@ -6,8 +6,7 @@ import {
   path,
   pathOr,
   prop,
-  propOr,
-  pathOr,
+  propOr
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
