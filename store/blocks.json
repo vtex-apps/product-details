@@ -14,5 +14,10 @@
       "product-specifications",
       "product-highlights"
     ]
+  },
+  "product-details.layout": {
+    "children": [
+      "product-name.wrapper"
+    ]
   }
 }
