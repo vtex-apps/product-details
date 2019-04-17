@@ -23,5 +23,11 @@
   "editor.product-quantity-selector.title": "Title of Product Quantity Selector component",
   "editor.product-quantity-selector.description": "Description of Product Quantity Selector component",
   "editor.product-quantity-selector.warningQuantityThreshold.title": "Title of warningQuantityThreshold property",
-  "editor.product-quantity-selector.warningQuantityThreshold.description": "Description of warningQuantityThreshold property"
+  "editor.product-quantity-selector.warningQuantityThreshold.description": "Description of warningQuantityThreshold property",
+  "editor.product-specifications.displaySpecification.title": "editor.product-specifications.displaySpecification.title",
+  "editor.product-specifications.displaySpecification.tabMode": "editor.product-specifications.displaySpecification.tabMode",
+  "editor.product-specifications.displaySpecification.tableMode": "editor.product-specifications.displaySpecification.tableMode",
+  "editor.product-details.product-specifications.default" :"editor.product-details.product-specifications.default",
+  "editor.product-details.product-specifications.allSpecifications":"editor.product-details.product-specifications.allSpecifications",
+  "editor.product-details.product-specifications.chooseDefaultSpecification": "editor.product-details.product-specifications.chooseDefaultSpecification"
 }
