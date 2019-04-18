@@ -17,7 +17,8 @@
   },
   "product-details.layout": {
     "children": [
-      "product-name.wrapper"
+      "product-name.wrapper",
+      "product-quantity-selector.layout"
     ]
   }
 }

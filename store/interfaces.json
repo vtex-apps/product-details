@@ -19,6 +19,9 @@
     "component": "ProductDetailsLegacy"
   },
   "product-quantity-selector": {
+    "component": "ProductQuantitySelectorLegacy"
+  },
+  "product-quantity-selector.layout": {
     "component": "ProductQuantitySelector"
   },
   "product-details.layout": {

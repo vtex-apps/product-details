@@ -2,24 +2,11 @@ import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { NumericStepper } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
-import { ProductContext } from 'vtex.product-context'
 
 import styles from './quantitySelector.css'
 
-const ProductQuantitySelector = ({ onChange, availableQuantity, warningQuantityThreshold }) => {
+const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity, warningQuantityThreshold }) => {
   const showAvailable = availableQuantity <= warningQuantityThreshold
-  const { component, dispatch } = React.useContext(ProductContext.Context)
-
-  const { selectedQuantity } = component.state
-
-  const handleChange = (value) => {
-    return dispatch({ type: 'SET_STATE', payload: {
-      state: {
-        selectedQuantity: value,
-      },
-    }})
-  }
-
   return (
     <div className={`${styles.quantitySelectorContainer} flex flex-column mb4`}>
       <div className="mb3 c-muted-2 t-body">
@@ -30,7 +17,7 @@ const ProductQuantitySelector = ({ onChange, availableQuantity, warningQuantityT
         value={selectedQuantity}
         minValue={1}
         maxValue={availableQuantity ? availableQuantity : undefined}
-        onChange={useCallback(e => handleChange(e.value), [])}
+        onChange={useCallback(e => onChange(e.value), [])}
       />
       {showAvailable && 
         <div className={`${styles.availableQuantityContainer} mv4 c-muted-2 t-small`}>
