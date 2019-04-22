@@ -27,6 +27,8 @@
   "add-to-list-btn#product-details": {
   },
   "add-btn": {
+  },
+  "addon-details-btn": {
     "component": "*"
   }
 }

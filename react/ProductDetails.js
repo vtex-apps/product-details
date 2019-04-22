@@ -372,7 +372,7 @@ class ProductDetails extends Component {
                     />
                     <div className="absolute z-3 left-0">
                       <ExtensionPoint
-                        id="add-btn"
+                        id="addon-details-btn"
                         product={{
                           quantity: 1,
                           skuId: path(['itemId'], this.selectedItem),
