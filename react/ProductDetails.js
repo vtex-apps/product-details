@@ -6,8 +6,8 @@ import { Container } from 'vtex.store-components'
 import productDetails from './productDetails.css'
 
 const ProductDetails = ({ productQuery, categories, query, slug, runtime, children }) => {
+  const [ selectedQuantity, setSelectedQuantity ] = React.useState(1)
   const { product } = productQuery
-  const { dispatch } = React.useContext(ProductContext.Context)
 
   const getSelectedItem = () => {
     const items = path(['items'], product) || []
@@ -16,30 +16,21 @@ const ProductDetails = ({ productQuery, categories, query, slug, runtime, childr
     return items.find(sku => sku.itemId === query.skuId)
   }
 
-  // @TODO: it should also listen to query changes
-  React.useEffect(() => {
-    const payload = {
-      props: {
-        product,
-        categories,
-        selectedItem: getSelectedItem(),
-      },
-    }
-
-    return dispatch({ type: 'SET_PROPS', payload })
-  }, [])
-
   return (
     <Container className={`${productDetails.container} pt6 pb8 justify-center flex`}>
       <div className="w-100 mw9">
-        {children}
+        <ProductContext.Provider value={{
+          product,
+          categories,
+          selectedItem: getSelectedItem(),
+          onChangeQuantity: setSelectedQuantity,
+          selectedQuantity,
+        }}>
+          {children}
+        </ProductContext.Provider>
       </div>
     </Container>
   )
 }
 
-export default (props) => (
-  <ProductContext.Provider>
-    <ProductDetails { ...props } />
-  </ProductContext.Provider>
-)
+export default ProductDetails

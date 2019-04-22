@@ -18,6 +18,7 @@
   "product-details.layout": {
     "children": [
       "product-name.wrapper",
+      "buy-button.wrapper",
       "product-quantity-selector.layout"
     ]
   }

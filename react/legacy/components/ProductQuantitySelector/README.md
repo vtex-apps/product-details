@@ -81,7 +81,7 @@ This is the defined interface for this block:
 ```json
 {
   "product-quantity-selector": {
-    "component": "ProductQuantitySelector"
+    "component": "ProductQuantitySelectorLegacy"
   }
 }
 ```
