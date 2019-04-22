@@ -75,22 +75,21 @@ const productPriceLoaderStyles = {
 }
 
 const allSpecificationsProduct = {
-
   value: true,
   choose: false,
-  specifications: 'allSpecifications'
+  specifications: 'allSpecifications',
 }
 
 const specificationsProduct = {
   all: {
     value: true,
-    name: "All Specifications",
+    name: 'All Specifications',
   },
   choose: {
     value: false,
-    name: "Choose default highlight"
+    name: 'Choose default highlight',
   },
-  allSpecifications: "allSpecifications"
+  allSpecifications: 'allSpecifications',
 }
 const thresholds = [640]
 const imageSizes = [1280, 1920]
@@ -373,11 +372,11 @@ class ProductDetails extends Component {
                     />
                     <div className="absolute z-3 left-0">
                       <ExtensionPoint
-                        id="add-to-list-btn#product-details"
+                        id="add-btn"
                         product={{
                           quantity: 1,
                           skuId: path(['itemId'], this.selectedItem),
-                          productId: path(['productId'], product)
+                          productId: path(['productId'], product),
                         }}
                       />
                     </div>
