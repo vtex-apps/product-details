@@ -33,4 +33,9 @@ const ProductDetails = ({ productQuery, categories, query, slug, runtime, childr
   )
 }
 
+ProductDetails.schema = {
+  title: 'editor.product-details.title',
+  description: 'editor.product-details.description',
+}
+
 export default ProductDetails

@@ -9,24 +9,9 @@ import styles from './quantitySelector.css'
 
 const ProductQuantitySelector = ({ warningQuantityThreshold }) => {
   const { selectedItem, selectedQuantity, onChangeQuantity } = React.useContext(ProductContext)
-  // const { component, dispatch } = React.useContext(ProductContext.Context)
-
-  // const { selectedQuantity } = component.state
-  // const { selectedItem } = component.props
 
   const availableQuantity = path(['sellers', 0, 'commertialOffer', 'AvailableQuantity'], selectedItem)
   const showAvailable = availableQuantity <= warningQuantityThreshold
-
-  // const handleChange = (value) => {
-  //   return dispatch({ type: 'SET_STATE', payload: {
-  //     state: {
-  //       selectedQuantity: value,
-  //     },
-  //   }})
-  // }
-  const handleChange = (value) => {
-    return onChangeQuantity(value)
-  }
 
   return (
     <div className={`${styles.quantitySelectorContainer} flex flex-column mb4`}>
@@ -38,7 +23,7 @@ const ProductQuantitySelector = ({ warningQuantityThreshold }) => {
         value={selectedQuantity}
         minValue={1}
         maxValue={availableQuantity ? availableQuantity : undefined}
-        onChange={useCallback(e => handleChange(e.value), [])}
+        onChange={useCallback(e => onChangeQuantity(e.value), [])}
       />
       {showAvailable && 
         <div className={`${styles.availableQuantityContainer} mv4 c-muted-2 t-small`}>
