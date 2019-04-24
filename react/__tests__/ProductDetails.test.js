@@ -4,7 +4,7 @@ import { getProduct } from 'product-mock'
 
 import ProductDetails from '../ProductDetails'
 
-describe('<ProductDetails /> component', () => {
+describe.skip('<ProductDetails /> component', () => {
   const getComponentRender = customProps => {
     const props = {
       slug: 'productSlug',

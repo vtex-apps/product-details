@@ -17,9 +17,25 @@
   },
   "product-details.layout": {
     "children": [
-      "product-name.wrapper",
-      "buy-button.wrapper",
-      "product-quantity-selector.layout"
+      "product-breadcrumb",
+      "flex-layout.row#main",
+      "product-description"
+    ]
+  },
+  "flex-layout.row#main": {
+    "children": [
+      "product-images",
+      "flex-layout.col#price"
+    ]
+  },
+  "flex-layout.col#price": {
+    "children": [
+      "product-name",
+      "product-price",
+      "sku-selector",
+      "buy-button",
+      "shipping-simulator",
+      "share"
     ]
   }
 }
