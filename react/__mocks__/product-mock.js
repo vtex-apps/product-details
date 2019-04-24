@@ -29,6 +29,7 @@ export const getProduct = () => ({
             ],
             Price: 2,
             ListPrice: 1,
+            AvailableQuantity: 50,
           },
         },
       ],
