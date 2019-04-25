@@ -2,11 +2,11 @@ import { values, map } from 'ramda'
 
 const thumbnailsPosition = {
   DISPLAY_LEFT: {
-    name: 'editor.product-details.thumbnailsPosition.left',
+    name: 'admin/editor.product-details.thumbnailsPosition.left',
     value: 'left',
   },
   DISPLAY_RIGHT: {
-    name: 'editor.product-details.thumbnailsPosition.right',
+    name: 'admin/editor.product-details.thumbnailsPosition.right',
     value: 'right',
   },
 }

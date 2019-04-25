@@ -10,7 +10,7 @@ const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity
   return (
     <div className={`${styles.quantitySelectorContainer} flex flex-column mb4`}>
       <div className="mb3 c-muted-2 t-body">
-        <FormattedMessage id="product-details.quantity" />
+        <FormattedMessage id="store/product-details.quantity" />
       </div>
       <NumericStepper
         size="small"
@@ -21,7 +21,7 @@ const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity
       />
       {showAvailable && 
         <div className={`${styles.availableQuantityContainer} mv4 c-muted-2 t-small`}>
-          <FormattedMessage id="product-details.quantity-available" values={{ availableQuantity }} />
+          <FormattedMessage id="store/product-details.quantity-available" values={{ availableQuantity }} />
         </div>}
     </div>
   )
@@ -40,13 +40,13 @@ ProductQuantitySelector.propTypes = {
 }
 
 ProductQuantitySelector.schema = {
-  title: 'editor.product-quantity-selector.title',
-  description: 'editor.product-quantity-selector.description',
+  title: 'admin/editor.product-quantity-selector.title',
+  description: 'admin/editor.product-quantity-selector.description',
   type: 'object',
   properties: {
     warningQuantityThreshold: {
-      title: 'editor.product-quantity-selector.warningQuantityThreshold.title',
-      description: 'editor.product-quantity-selector.warningQuantityThreshold.title',
+      title: 'admin/editor.product-quantity-selector.warningQuantityThreshold.title',
+      description: 'admin/editor.product-quantity-selector.warningQuantityThreshold.title',
       type: 'number',
       default: 0,
     },

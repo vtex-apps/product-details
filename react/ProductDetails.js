@@ -178,8 +178,8 @@ class ProductDetails extends Component {
     }
 
     switch (choose) {
-      case 'editor.product-details.product-specifications.chooseDefaultSpecification': return getFromProperties()
-      case 'editor.product-details.product-specifications.allSpecifications': return allSpecifications
+      case 'admin/editor.product-details.product-specifications.chooseDefaultSpecification': return getFromProperties()
+      case 'admin/editor.product-details.product-specifications.allSpecifications': return allSpecifications
     }
   }
 
@@ -236,11 +236,11 @@ class ProductDetails extends Component {
     }
 
     switch (choose) {
-      case 'editor.product-details.highlights.chooseDefault':
+      case 'admin/editor.product-details.highlights.chooseDefault':
         return highlightsFromGroup()
-      case 'editor.product-details.highlights.chooseDefaultSpecification':
+      case 'admin/editor.product-details.highlights.chooseDefaultSpecification':
         return highlightsFromSpecifications()
-      case 'editor.product-details.highlights.allSpecifications':
+      case 'admin/editor.product-details.highlights.allSpecifications':
         return highlightsFromAllSpecifications()
     }
   }
@@ -432,7 +432,7 @@ class ProductDetails extends Component {
                         availableQuantity={availableQuantity}
                       />
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
-                        <FormattedMessage id="addToCartButton.label" />
+                        <FormattedMessage id="store/addToCartButton.label" />
                       </ExtensionPoint>
                     </div>
                   ) : (
@@ -446,7 +446,7 @@ class ProductDetails extends Component {
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
-                        <FormattedMessage id="addToCartButton.label" />
+                        <FormattedMessage id="store/addToCartButton.label" />
                       </ExtensionPoint>
                     </div>
                   </FixedButton>
@@ -467,7 +467,7 @@ class ProductDetails extends Component {
                       {...this.props.share}
                       loading={!path(['name'], this.selectedItem)}
                       title={intl.formatMessage(
-                        { id: 'share.title' },
+                        { id: 'store/share.title' },
                         {
                           product: path(['productName'], product),
                           sku: path(['name'], this.selectedItem),
@@ -519,8 +519,8 @@ class ProductDetails extends Component {
 
 ProductDetails.getSchema = props => {
   return {
-    title: 'editor.product-details.title',
-    description: 'editor.product-details.description',
+    title: 'admin/editor.product-details.title',
+    description: 'admin/editor.product-details.description',
     type: 'object',
     widget: {
       'ui:options': {
@@ -534,14 +534,14 @@ ProductDetails.getSchema = props => {
         type: 'object',
         properties: {
           highlight: {
-            title: 'editor.product-details.highlights.default',
+            title: 'admin/editor.product-details.highlights.default',
             type: 'string',
             enum: [
-              'editor.product-details.highlights.allSpecifications',
-              'editor.product-details.highlights.chooseDefault',
-              'editor.product-details.highlights.chooseDefaultSpecification',
+              'admin/editor.product-details.highlights.allSpecifications',
+              'admin/editor.product-details.highlights.chooseDefault',
+              'admin/editor.product-details.highlights.chooseDefaultSpecification',
             ],
-            default: 'editor.product-details.highlights.allSpecifications',
+            default: 'admin/editor.product-details.highlights.allSpecifications',
           },
         },
         required: ['highlight'],
@@ -552,7 +552,7 @@ ProductDetails.getSchema = props => {
                 properties: {
                   highlight: {
                     enum: [
-                      'editor.product-details.highlights.allSpecifications',
+                      'admin/editor.product-details.highlights.allSpecifications',
                     ],
                   },
                 },
@@ -560,11 +560,11 @@ ProductDetails.getSchema = props => {
               {
                 properties: {
                   highlight: {
-                    enum: ['editor.product-details.highlights.chooseDefault'],
+                    enum: ['admin/editor.product-details.highlights.chooseDefault'],
                   },
                   typeHighlight: {
                     type: 'string',
-                    title: 'editor.product-details.highlights.title',
+                    title: 'admin/editor.product-details.highlights.title',
                   },
                 },
                 required: [''],
@@ -573,13 +573,13 @@ ProductDetails.getSchema = props => {
                 properties: {
                   highlight: {
                     enum: [
-                      'editor.product-details.highlights.chooseDefaultSpecification',
+                      'admin/editor.product-details.highlights.chooseDefaultSpecification',
                     ],
                   },
                   typeSpecifications: {
                     type: 'string',
                     title:
-                      'editor.product-details.highlights.typeSpecifications.title',
+                      'admin/editor.product-details.highlights.typeSpecifications.title',
                   },
                 },
                 required: [''],
@@ -613,14 +613,14 @@ ProductDetails.getSchema = props => {
                     type: 'object',
                     properties: {
                       specification: {
-                        title: 'editor.product-details.product-specifications.default',
+                        title: 'admin/editor.product-details.product-specifications.default',
                         type: 'string',
                         enum: [
-                          'editor.product-details.product-specifications.allSpecifications',
-                          'editor.product-details.product-specifications.chooseDefaultSpecification',
+                          'admin/editor.product-details.product-specifications.allSpecifications',
+                          'admin/editor.product-details.product-specifications.chooseDefaultSpecification',
                         ],
                         default:
-                          'editor.product-details.product-specifications.allSpecifications',
+                          'admin/editor.product-details.product-specifications.allSpecifications',
                       },
                     },
                     required: ['specification'],
@@ -631,7 +631,7 @@ ProductDetails.getSchema = props => {
                             properties: {
                               specification: {
                                 enum: [
-                                  'editor.product-details.product-specifications.allSpecifications',
+                                  'admin/editor.product-details.product-specifications.allSpecifications',
                                 ],
                               },
                             },
@@ -640,13 +640,13 @@ ProductDetails.getSchema = props => {
                             properties: {
                               specification: {
                                 enum: [
-                                  'editor.product-details.product-specifications.chooseDefaultSpecification',
+                                  'admin/editor.product-details.product-specifications.chooseDefaultSpecification',
                                 ],
                               },
                               typeSpecifications: {
                                 type: 'string',
                                 title:
-                                  'editor.product-details.product-specifications.typeSpecifications.title',
+                                  'admin/editor.product-details.product-specifications.typeSpecifications.title',
                               },
                             },
                             required: [''],
@@ -658,13 +658,13 @@ ProductDetails.getSchema = props => {
                   viewMode: {
                     type: 'string',
                     title:
-                      'editor.product-specifications.displaySpecification.title',
+                      'admin/editor.product-specifications.displaySpecification.title',
                     enum: ['tab', 'table'],
                     enumNames: [
-                      'editor.product-specifications.displaySpecification.tabMode',
-                      'editor.product-specifications.displaySpecification.tableMode',
+                      'admin/editor.product-specifications.displaySpecification.tabMode',
+                      'admin/editor.product-specifications.displaySpecification.tableMode',
                     ],
-                    default: 'editor.product-specifications.displaySpecification.tabMode',
+                    default: 'admin/editor.product-specifications.displaySpecification.tabMode',
                     widget: {
                       'ui:options': {
                         inline: false,
@@ -683,7 +683,7 @@ ProductDetails.getSchema = props => {
     properties: {
       showHighlight: {
         type: 'boolean',
-        title: 'editor.product-details.showHighlight.title',
+        title: 'admin/editor.product-details.showHighlight.title',
         default: false,
         isLayout: false,
       },
@@ -697,7 +697,7 @@ ProductDetails.getSchema = props => {
       },
 
       thumbnailPosition: {
-        title: 'editor.product-details.thumbnailsPosition.title',
+        title: 'admin/editor.product-details.thumbnailsPosition.title',
         type: 'string',
         enum: getThumbnailsPositionValues(),
         enumNames: getThumbnailsPositionNames(),
