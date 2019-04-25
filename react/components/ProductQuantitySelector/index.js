@@ -17,7 +17,7 @@ const ProductQuantitySelector = ({ warningQuantityThreshold, ...props }) => {
       return {
         availableQuantity,
         selectedQuantity,
-        onChange: useCallback(e => onChange(e.values), []),
+        onChange: useCallback(e => onChange(e.value), []),
       }
     }
 
