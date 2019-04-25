@@ -6,12 +6,14 @@ import {
   path,
   pathOr,
   prop,
-  propOr
+  propOr,
+  compose
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
 import { Container } from 'vtex.store-components'
+import { Pixel } from 'vtex.pixel-manager/PixelContext'
 
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
@@ -192,6 +194,16 @@ class ProductDetails extends Component {
     }
   }
 
+  sendPixelEvents() {
+    this.props.push({
+      event: 'productView',
+      items: this.props.productQuery.product,
+    })
+  }
+
+  componentDidMount() {
+    this.sendPixelEvents()
+  }
 
   getHighlights() {
     const {
@@ -517,7 +529,13 @@ class ProductDetails extends Component {
   }
 }
 
-ProductDetails.getSchema = props => {
+const ProductDetailsWithPixel = compose(
+  Pixel,
+  withRuntimeContext,
+  injectIntl
+)(ProductDetails)
+
+ProductDetailsWithPixel.getSchema = props => {
   return {
     title: 'editor.product-details.title',
     description: 'editor.product-details.description',
@@ -719,4 +737,4 @@ function mergeSchemaAndDefaultProps(schema, propName) {
   })
 }
 
-export default withRuntimeContext(injectIntl(ProductDetails))
+export default ProductDetailsWithPixel
