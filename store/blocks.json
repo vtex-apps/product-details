@@ -32,8 +32,10 @@
     "children": [
       "product-name",
       "product-price",
+      "product-quantity-selector",
       "sku-selector",
       "buy-button",
+      "availability-subscriber",
       "shipping-simulator",
       "share"
     ]

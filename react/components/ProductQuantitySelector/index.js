@@ -3,15 +3,36 @@ import PropTypes from 'prop-types'
 import { NumericStepper } from 'vtex.styleguide'
 import { FormattedMessage } from 'react-intl'
 import { ProductContext } from 'vtex.product-context'
-import { path } from 'ramda'
+import { path, isEmpty } from 'ramda'
 
 import styles from './quantitySelector.css'
 
-const ProductQuantitySelector = ({ warningQuantityThreshold }) => {
-  const { selectedItem, selectedQuantity, onChangeQuantity } = React.useContext(ProductContext)
+const ProductQuantitySelector = ({ warningQuantityThreshold, ...props }) => {
+  const valuesFromContext = React.useContext(ProductContext)
 
-  const availableQuantity = path(['sellers', 0, 'commertialOffer', 'AvailableQuantity'], selectedItem)
+  const numericStepperProps = () => {
+    if (!valuesFromContext || isEmpty(valuesFromContext)) {
+      const { onChange, availableQuantity, selectedQuantity } = props
+
+      return {
+        availableQuantity,
+        selectedQuantity,
+        onChange: useCallback(e => onChange(e.values), []),
+      }
+    }
+
+    const { selectedItem, selectedQuantity, onChangeQuantity } = valuesFromContext
+    return {
+      availableQuantity: path(['sellers', 0, 'commertialOffer', 'AvailableQuantity'], selectedItem),
+      selectedQuantity,
+      onChange: useCallback(e => onChangeQuantity(e.value), []),
+    }
+  }
+
+  const { availableQuantity, onChange, selectedQuantity } = numericStepperProps()
   const showAvailable = availableQuantity <= warningQuantityThreshold
+
+  if (availableQuantity < 1) return null
 
   return (
     <div className={`${styles.quantitySelectorContainer} flex flex-column mb4`}>
@@ -23,7 +44,7 @@ const ProductQuantitySelector = ({ warningQuantityThreshold }) => {
         value={selectedQuantity}
         minValue={1}
         maxValue={availableQuantity ? availableQuantity : undefined}
-        onChange={useCallback(e => onChangeQuantity(e.value), [])}
+        onChange={onChange}
       />
       {showAvailable && 
         <div className={`${styles.availableQuantityContainer} mv4 c-muted-2 t-small`}>

@@ -19,16 +19,14 @@
     "component": "ProductDetailsLegacy"
   },
   "product-quantity-selector": {
-    "component": "ProductQuantitySelectorLegacy"
-  },
-  "product-quantity-selector.layout": {
     "component": "ProductQuantitySelector"
   },
   "product-details.layout": {
     "component": "ProductDetails",
     "composition": "children",
     "allowed": [
-      "flex-layout"
+      "flex-layout",
+      "product-breadcrumb"
     ]
   }
 }
