@@ -7,16 +7,22 @@ import {
   compose,
   flip,
   prop,
+<<<<<<< HEAD
   map,
   contains,
   reject,
   propOr,
   pathOr,
+=======
+  propOr,
+  compose
+>>>>>>> Send produdcView event
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
 import { Container } from 'vtex.store-components'
+import { Pixel } from 'vtex.pixel-manager/PixelContext'
 
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
@@ -170,13 +176,13 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-          imageUrls: imageSizes.map(size =>
-            changeImageUrlSize(image.imageUrl, size)
-          ),
-          thresholds,
-          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-          imageText: image.imageText,
-        }))
+        imageUrls: imageSizes.map(size =>
+          changeImageUrlSize(image.imageUrl, size)
+        ),
+        thresholds,
+        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+        imageText: image.imageText,
+      }))
       : []
   }
 
@@ -198,6 +204,17 @@ class ProductDetails extends Component {
       specifications,
       highlights,
     }
+  }
+
+  sendPixelEvents() {
+    this.props.push({
+      event: 'productView',
+      items: this.props.productQuery.product,
+    })
+  }
+
+  componentDidMount() {
+    this.sendPixelEvents()
   }
 
   getHighlights() {
@@ -386,12 +403,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                } pl8-l w-40-l w-100`}
+                  } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                  } c-on-base dn db-l mb4`}
+                    } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -428,7 +445,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                      } pt1 mt mt7 mt4-l dn-l`}
+                        } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -438,7 +455,7 @@ class ProductDetails extends Component {
                   )}
                   {showBuyButton ? (
                     <div className="pv2 dn db-l mt8">
-                      <ExtensionPoint 
+                      <ExtensionPoint
                         id="product-quantity-selector"
                         selectedQuantity={selectedQuantity}
                         onChange={value => this.setState({ selectedQuantity: value })}
@@ -449,13 +466,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                    <div className="pv4">
-                      <ExtensionPoint
-                        id="availability-subscriber"
-                        skuId={this.selectedItem.itemId}
-                      />
-                    </div>
-                  )}
+                      <div className="pv4">
+                        <ExtensionPoint
+                          id="availability-subscriber"
+                          skuId={this.selectedItem.itemId}
+                        />
+                      </div>
+                    )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -502,7 +519,7 @@ class ProductDetails extends Component {
             <div
               className={`flex ${
                 showSpecificationsTab ? 'flex-wrap' : 'justify-between'
-              }`}
+                }`}
             >
               {description && (
                 <div className="pv2 mt8 h-100 w-100">
@@ -530,7 +547,13 @@ class ProductDetails extends Component {
   }
 }
 
-ProductDetails.getSchema = props => {
+const ProductDetailsWithPixel = compose(
+  Pixel,
+  withRuntimeContext,
+  injectIntl
+)(ProductDetails)
+
+ProductDetailsWithPixel.getSchema = props => {
   return {
     title: 'admin/editor.product-details.title',
     description: 'admin/editor.product-details.description',
@@ -636,4 +659,4 @@ function mergeSchemaAndDefaultProps(schema, propName) {
   })
 }
 
-export default withRuntimeContext(injectIntl(ProductDetails))
+export default ProductDetailsWithPixel
