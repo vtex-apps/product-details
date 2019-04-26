@@ -1,6 +1,5 @@
 {
   "product-details": {
-    "required": [],
     "allowed": [
       "product-images",
       "product-name",

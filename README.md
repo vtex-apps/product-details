@@ -50,72 +50,108 @@ Now, you can change the behavior of the `product-details` block that is in the s
 
 ```json
   "product-details": {
-      "blocks": [
-        "breadcrumb",
-        "product-name",
-        "product-images",
-        "product-price",
-        "product-description",
-        "product-specifications",
-        "buy-button",
-        "sku-selector",
-        "shipping-simulator",
-        "availability-subscriber",
-        "share"
-      ],
-      "props": {
-        "displayVertically": true,
-        "share": {
-          "social": {
-            "Facebook": true,
-            "WhatsApp": true,
-            "Twitter": false
-          }
-        },
-        "price": {
-          "labelSellingPrice": null,
-          "showListPrice": true,
-          "showLabels": true,
-          "showInstallments": true,
-          "showSavings": true
-        },
-        "name": {
-          "showBrandName": false,
-          "showSku": false,
-          "showProductReference": false
+    "blocks": [
+      "breadcrumb",
+      "product-name",
+      "product-images",
+      "product-price",
+      "product-description",
+      "product-specifications",
+      "buy-button",
+      "sku-selector",
+      "shipping-simulator",
+      "availability-subscriber",
+      "share"
+    ],
+    "props": {
+      "displayVertically": true,
+      "share": {
+        "social": {
+          "Facebook": true,
+          "WhatsApp": true,
+          "Twitter": false
         }
+      },
+      "price": {
+        "labelSellingPrice": null,
+        "showListPrice": true,
+        "showLabels": true,
+        "showInstallments": true,
+        "showSavings": true
+      },
+      "name": {
+        "showBrandName": false,
+        "showSku": false,
+        "showProductReference": false
       }
     }
+  }
+```
+
+Since version `1.16.0`, product-details also support flex-layout. It means that you can define where the blocks will appear in the theme. See an example of a `blocks.json` using the flex feature:
+
+```json
+  "product-details.layout": {
+    "children": [
+      "product-breadcrumb",
+      "flex-layout.row#main",
+      "product-description"
+    ]
+  },
+  "flex-layout.row#main": {
+    "children": [
+      "product-images",
+      "flex-layout.col#price"
+    ]
+  },
+  "flex-layout.col#price": {
+    "children": [
+      "product-name",
+      "product-price",
+      "sku-selector",
+      "product-quantity-selector",
+      "buy-button",
+      "availability-subscriber",
+      "shipping-simulator",
+      "share"
+    ]
+  }
 ```
 
 ### Blocks API
 
-When implementing this app as a block, various inner blocks may be available. The following interface lists the available blocks within `product-details` and describes if they are required or optional.
+When implementing this app as a block, various inner blocks may be available. The following interface lists the available blocks within `product-details` and `product-details.layout`.
 
 ```json
 {
   "product-details": {
-    "required": [
+    "allowed": [
       "product-images",
       "product-name",
       "product-price",
       "sku-selector",
       "buy-button",
       "product-description",
-      "product-specifications"
-    ],
-    "allowed": [
+      "product-specifications",
       "breadcrumb",
       "shipping-simulator",
       "availability-subscriber",
       "share"
     ],
-    "component": "ProductDetails"
+    "component": "ProductDetailsLegacy"
+  },
+  "product-details.layout": {
+    "component": "ProductDetails",
+    "composition": "children",
+    "allowed": [
+      "flex-layout",
+      "product-breadcrumb"
+    ]
   }
 }
 ```
 
-The `ProductDetails` has the required blocks: `product-images`, `product-name`, `product-price`, `sku-selector`, `buy-button`, `product-description` and `product-specifications`. So, any `ProductDetails` block implementation created must add these blocks.
+The `ProductDetails` will also allow all blocks listed in `ProductDetailsLegacy`.
 
 #### Configuration
 

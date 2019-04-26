@@ -32,8 +32,8 @@
     "children": [
       "product-name",
       "product-price",
-      "product-quantity-selector",
       "sku-selector",
+      "product-quantity-selector",
       "buy-button",
       "availability-subscriber",
       "shipping-simulator",

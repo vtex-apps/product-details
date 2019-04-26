@@ -42,7 +42,7 @@ To use it, you must declare its use in your `product-details` block array. An ex
       "shipping-simulator",
       "availability-subscriber",
       "share",
-      "product-quantity-selector.layout"
+      "product-quantity-selector"
     ],
     "props": {
       "displayVertically": true,
@@ -80,7 +80,7 @@ This is the defined interface for this block:
 
 ```json
 {
-  "product-quantity-selector.layout": {
+  "product-quantity-selector": {
     "component": "ProductQuantitySelector"
   }
 }
