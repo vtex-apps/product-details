@@ -104,11 +104,11 @@ When implementing this app as a block, various inner blocks may be available. Th
       "shipping-simulator",
       "availability-subscriber",
       "share",
-      "add-to-list-btn#product-details"
+      "addon-details-btn"
     ],
     "component": "ProductDetails"
   },
-  "add-to-list-btn#product-details": {
+  "addon-details-btn": {
     "component": "*"
   }
 }
