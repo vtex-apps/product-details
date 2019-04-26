@@ -527,11 +527,7 @@ ProductDetails.getSchema = props => {
               'admin/editor.product-details.highlights.chooseDefault',
               'admin/editor.product-details.highlights.chooseDefaultSpecification',
             ],
-<<<<<<< HEAD
             default: 'admin/editor.product-details.highlights.allSpecifications',
-=======
-            default: 'editor.product-details.highlights.chooseDefault',
->>>>>>> parent of c24fe41... Merge pull request #110 from vtex-apps/feature/product-specifications
           },
         },
         required: ['highlight'],
@@ -578,110 +574,8 @@ ProductDetails.getSchema = props => {
           },
         },
       },
-<<<<<<< HEAD
-      specificationsDefault: {
-        title: 'specificationsDefault',
-        type: 'object',
-        properties: {
-          showSpecifications: {
-            title: 'Show specifications',
-            type: 'boolean',
-            enum: [true, false],
-            default: false,
-          },
-        },
-        required: ['showSpecifications'],
-        dependencies: {
-          showSpecifications: {
-            oneOf: [
-              {
-                properties: {
-                  showSpecifications: {
-                    enum: [true],
-                  },
-                  specificationGroups: {
-                    title: 'specificationGroups',
-                    type: 'object',
-                    properties: {
-                      specification: {
-                        title: 'admin/editor.product-details.product-specifications.default',
-                        type: 'string',
-                        enum: [
-                          'admin/editor.product-details.product-specifications.allSpecifications',
-                          'admin/editor.product-details.product-specifications.chooseDefaultSpecification',
-                        ],
-                        default:
-                          'admin/editor.product-details.product-specifications.allSpecifications',
-                      },
-                    },
-                    required: ['specification'],
-                    dependencies: {
-                      specification: {
-                        oneOf: [
-                          {
-                            properties: {
-                              specification: {
-                                enum: [
-                                  'admin/editor.product-details.product-specifications.allSpecifications',
-                                ],
-                              },
-                            },
-                          },
-                          {
-                            properties: {
-                              specification: {
-                                enum: [
-                                  'admin/editor.product-details.product-specifications.chooseDefaultSpecification',
-                                ],
-                              },
-                              typeSpecifications: {
-                                type: 'string',
-                                title:
-                                  'admin/editor.product-details.product-specifications.typeSpecifications.title',
-                              },
-                            },
-                            required: [''],
-                          },
-                        ],
-                      },
-                    },
-                  },
-                  viewMode: {
-                    type: 'string',
-                    title:
-                      'admin/editor.product-specifications.displaySpecification.title',
-                    enum: ['tab', 'table'],
-                    enumNames: [
-                      'admin/editor.product-specifications.displaySpecification.tabMode',
-                      'admin/editor.product-specifications.displaySpecification.tableMode',
-                    ],
-                    default: 'admin/editor.product-specifications.displaySpecification.tabMode',
-                    widget: {
-                      'ui:options': {
-                        inline: false,
-                      },
-                      'ui:widget': 'radio',
-                    },
-                  },
-                },
-                required: [''],
-              },
-            ],
-          },
-        },
-      },
     },
     properties: {
-      showHighlight: {
-        type: 'boolean',
-        title: 'admin/editor.product-details.showHighlight.title',
-        default: false,
-        isLayout: false,
-      },
-=======
-    },
-    properties: {
->>>>>>> parent of c24fe41... Merge pull request #110 from vtex-apps/feature/product-specifications
       conditional: {
         title: 'Conditional',
         $ref: '#/definitions/highlightGroupDefault',
