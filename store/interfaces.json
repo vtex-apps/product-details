@@ -16,17 +16,12 @@
       "share",
       "product-highlights",
       "product-quantity-selector",
-      "add-to-list-btn#product-details",
-      "add-btn"
+      "addon-details-btn"
     ],
     "component": "ProductDetails"
   },
   "product-quantity-selector": {
     "component": "ProductQuantitySelector"
-  },
-  "add-to-list-btn#product-details": {
-  },
-  "add-btn": {
   },
   "addon-details-btn": {
     "component": "*"
