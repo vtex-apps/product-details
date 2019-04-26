@@ -8,27 +8,22 @@ The VTEX Category Menu app shows the details of a product like image, name and p
 
 ## Release schedule
 
-| Release | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility |
+| Release |       Status        | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility |
 | :-----: | :-----------------: | :-------------: | :-------------------: | :---------: | :----------------------: |
-| [1.x]   | **Current Release** | 2018-11-28      |                       |             | 2.x                      |
-| [0.x]   | **Maintenance LTS** | 2018-05-29      | 2018-11-28            | March 2019  | 1.x                      |
+|  [1.x]  | **Current Release** |   2018-11-28    |                       |             |           2.x            |
+|  [0.x]  | **Maintenance LTS** |   2018-05-29    |      2018-11-28       | March 2019  |           1.x            |
 
 See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for more information.
 
 ## Table of Contents
 
-- [VTEX Product Details](#vtex-product-details)
-  - [Description](#description)
-  - [Release schedule](#release-schedule)
-  - [Table of Contents](#table-of-contents)
-  - [Usage](#usage)
-    - [Blocks API](#blocks-api)
-      - [Configuration](#configuration)
-    - [Styles API](#styles-api)
-      - [CSS namespaces](#css-namespaces)
-  - [Troubleshooting](#troubleshooting)
-  - [Tests](#tests)
-    - [Travis CI](#travis-ci)
+- [Usage](#usage)
+  - [Blocks API](#blocks-api)
+    - [Configuration](#configuration)
+  - [Styles API](#styles-api)
+    - [CSS namespaces](#css-namespaces)
+- [Troubleshooting](#troubleshooting)
+- [Tests](#tests)
 
 ## Usage
 
@@ -132,10 +127,10 @@ Price:
 
 | Prop name           | Type      | Description                                    |
 | ------------------- | --------- | ---------------------------------------------- |
-| `showListPrice`     | `Boolean` | Shows the list prices                          | true   |
-| `showLabels`        | `Boolean` | Shows the labels in the price and installments | true   |
-| `showInstallments`  | `Boolean` | Shows the installments information             | true   |
-| `showSavings`       | `Boolean` | Shows the savings information                  | true   |
+| `showListPrice`     | `Boolean` | Shows the list prices                          | true |
+| `showLabels`        | `Boolean` | Shows the labels in the price and installments | true |
+| `showInstallments`  | `Boolean` | Shows the installments information             | true |
+| `showSavings`       | `Boolean` | Shows the savings information                  | true |
 | `labelSellingPrice` | `String`  | Text of the label before the price             | `null` |
 
 Name:
@@ -154,15 +149,6 @@ Highlight:
 | true               |
 | `showHighlights`   | `Boolean` | Shows the highlights of the product                                                                                    | true |
 | `highlightGroup`   |
-
-Specification:
-
-| Prop name             | Type      | Description                                                                                        |
-| --------------------- | --------- | -------------------------------------------------------------------------------------------------- |
-| `showSpecifications`  | `boolean` | Show the specifications of the product                                                             |
-| `specificationGroups` | `object`  | Define if will be displayed all the specifications of the product or a set of this specifications. |
-| `viewMode`            | `string`  | Define what is the current view mode for the specifications.                                       |
-| `typeSpecifications`  | `string`  | indicates which specifications will be displayed                                                   |
 
 Also, you can configure the `share` that is defined on `ProductDetails`. See [here](https://github.com/vtex-apps/store-components/blob/master/react/components/Share/README.md) the `Share` API.
 
