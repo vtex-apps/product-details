@@ -4,9 +4,14 @@ import {
   mapObjIndexed,
   mergeDeepRight,
   path,
-  pathOr,
+  compose,
+  flip,
   prop,
-  propOr
+  map,
+  contains,
+  reject,
+  propOr,
+  pathOr,
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
@@ -148,50 +153,35 @@ class ProductDetails extends Component {
 
     return images
       ? images.map(image => ({
-        imageUrls: imageSizes.map(size =>
-          changeImageUrlSize(image.imageUrl, size)
-        ),
-        thresholds,
-        thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
-        imageText: image.imageText,
-      }))
+          imageUrls: imageSizes.map(size =>
+            changeImageUrlSize(image.imageUrl, size)
+          ),
+          thresholds,
+          thumbnailUrl: changeImageUrlSize(image.imageUrl, thumbnailSize),
+          imageText: image.imageText,
+        }))
       : []
-  }
-  getSpecifications() {
-    const {
-      productQuery: { product },
-      specificationsDefault
-    } = this.props
-
-    const choose = path(['specificationGroups', 'specification'], specificationsDefault)
-    const allSpecifications = propOr([], 'properties', product)
-    const getFromProperties = () => {
-      const typedSpecifications = pathOr('', ['specificationGroups', 'typeSpecifications'], specificationsDefault)
-      const specificationNames = typedSpecifications.trim().split(',')
-      const specifications = specificationNames.reduce((acc, item) => {
-        const specification = allSpecifications.filter(
-          x => x.name.toLowerCase() === item.trim().toLowerCase()
-        )
-        return acc.concat(specification)
-      }, [])
-      return specifications
-    }
-
-    switch (choose) {
-      case 'admin/editor.product-details.product-specifications.chooseDefaultSpecification': return getFromProperties()
-      case 'admin/editor.product-details.product-specifications.allSpecifications': return allSpecifications
-    }
   }
 
   filterSpecifications() {
+    const {
+      productQuery: { product },
+    } = this.props
+    const allSpecifications = propOr([], 'properties', product)
+    const generalSpecifications = propOr([], 'generalProperties', product)
     const highlights = this.getHighlights()
-    const specifications = this.getSpecifications()
+    const specifications = reject(
+      compose(
+        flip(contains)(map(x => x.name, generalSpecifications)),
+        prop('name')
+      ),
+      allSpecifications
+    )
     return {
       specifications,
       highlights,
     }
   }
-
 
   getHighlights() {
     const {
@@ -232,7 +222,15 @@ class ProductDetails extends Component {
 
     const highlightsFromAllSpecifications = () => {
       const allSpecifications = propOr([], 'properties', product)
-      return allSpecifications
+      const generalSpecifications = propOr([], 'generalProperties', product)
+      const highlights = reject(
+        compose(
+          flip(contains)(map(x => x.name, generalSpecifications)),
+          prop('name')
+        ),
+        allSpecifications
+      )
+      return highlights
     }
 
     switch (choose) {
@@ -254,21 +252,11 @@ class ProductDetails extends Component {
         culture: { country },
       },
       intl,
+      showSpecificationsTab,
       showHighlight,
       thumbnailPosition,
-      specificationsDefault,
     } = this.props
     const { selectedQuantity } = this.state
-    const showSpecificationsTab = prop(
-      'showSpecifications',
-      specificationsDefault
-    )
-    const viewMode = prop(
-      'viewMode',
-      specificationsDefault
-    )
-
-    const viewSpecificationsMode = viewMode === 'table'
 
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
@@ -371,12 +359,12 @@ class ProductDetails extends Component {
               <aside
                 className={`${
                   productDetails.detailsContainer
-                  } pl8-l w-40-l w-100`}
+                } pl8-l w-40-l w-100`}
               >
                 <div
                   className={`${
                     productDetails.nameContainer
-                    } c-on-base dn db-l mb4`}
+                  } c-on-base dn db-l mb4`}
                 >
                   <ExtensionPoint id="product-name" {...productNameProps} />
                 </div>
@@ -413,7 +401,7 @@ class ProductDetails extends Component {
                     <div
                       className={`${
                         productDetails.priceContainer
-                        } pt1 mt mt7 mt4-l dn-l`}
+                      } pt1 mt mt7 mt4-l dn-l`}
                     >
                       <ExtensionPoint
                         id="product-price"
@@ -423,12 +411,10 @@ class ProductDetails extends Component {
                   )}
                   {showBuyButton ? (
                     <div className="pv2 dn db-l mt8">
-                      <ExtensionPoint
+                      <ExtensionPoint 
                         id="product-quantity-selector"
                         selectedQuantity={selectedQuantity}
-                        onChange={value =>
-                          this.setState({ selectedQuantity: value })
-                        }
+                        onChange={value => this.setState({ selectedQuantity: value })}
                         availableQuantity={availableQuantity}
                       />
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -436,13 +422,13 @@ class ProductDetails extends Component {
                       </ExtensionPoint>
                     </div>
                   ) : (
-                      <div className="pv4">
-                        <ExtensionPoint
-                          id="availability-subscriber"
-                          skuId={this.selectedItem.itemId}
-                        />
-                      </div>
-                    )}
+                    <div className="pv4">
+                      <ExtensionPoint
+                        id="availability-subscriber"
+                        skuId={this.selectedItem.itemId}
+                      />
+                    </div>
+                  )}
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -488,8 +474,8 @@ class ProductDetails extends Component {
             </div>
             <div
               className={`flex ${
-                viewSpecificationsMode ? 'flex-wrap' : 'justify-between'
-                }`}
+                showSpecificationsTab ? 'flex-wrap' : 'justify-between'
+              }`}
             >
               {description && (
                 <div className="pv2 mt8 h-100 w-100">
@@ -500,11 +486,11 @@ class ProductDetails extends Component {
                   />
                 </div>
               )}
-              {showSpecificationsTab && (
+              {specifications && (
                 <div className="pv2 mt8 h-100 w-100">
                   <ExtensionPoint
                     id="product-specifications"
-                    tabsMode={viewSpecificationsMode}
+                    tabsMode={showSpecificationsTab}
                     specifications={specifications}
                   />
                 </div>
@@ -530,7 +516,7 @@ ProductDetails.getSchema = props => {
     },
     definitions: {
       highlightGroupDefault: {
-        title: 'highlightGroupDefault',
+        title: 'Person',
         type: 'object',
         properties: {
           highlight: {
@@ -588,114 +574,18 @@ ProductDetails.getSchema = props => {
           },
         },
       },
-      specificationsDefault: {
-        title: 'specificationsDefault',
-        type: 'object',
-        properties: {
-          showSpecifications: {
-            title: 'Show specifications',
-            type: 'boolean',
-            enum: [true, false],
-            default: false,
-          },
-        },
-        required: ['showSpecifications'],
-        dependencies: {
-          showSpecifications: {
-            oneOf: [
-              {
-                properties: {
-                  showSpecifications: {
-                    enum: [true],
-                  },
-                  specificationGroups: {
-                    title: 'specificationGroups',
-                    type: 'object',
-                    properties: {
-                      specification: {
-                        title: 'admin/editor.product-details.product-specifications.default',
-                        type: 'string',
-                        enum: [
-                          'admin/editor.product-details.product-specifications.allSpecifications',
-                          'admin/editor.product-details.product-specifications.chooseDefaultSpecification',
-                        ],
-                        default:
-                          'admin/editor.product-details.product-specifications.allSpecifications',
-                      },
-                    },
-                    required: ['specification'],
-                    dependencies: {
-                      specification: {
-                        oneOf: [
-                          {
-                            properties: {
-                              specification: {
-                                enum: [
-                                  'admin/editor.product-details.product-specifications.allSpecifications',
-                                ],
-                              },
-                            },
-                          },
-                          {
-                            properties: {
-                              specification: {
-                                enum: [
-                                  'admin/editor.product-details.product-specifications.chooseDefaultSpecification',
-                                ],
-                              },
-                              typeSpecifications: {
-                                type: 'string',
-                                title:
-                                  'admin/editor.product-details.product-specifications.typeSpecifications.title',
-                              },
-                            },
-                            required: [''],
-                          },
-                        ],
-                      },
-                    },
-                  },
-                  viewMode: {
-                    type: 'string',
-                    title:
-                      'admin/editor.product-specifications.displaySpecification.title',
-                    enum: ['tab', 'table'],
-                    enumNames: [
-                      'admin/editor.product-specifications.displaySpecification.tabMode',
-                      'admin/editor.product-specifications.displaySpecification.tableMode',
-                    ],
-                    default: 'admin/editor.product-specifications.displaySpecification.tabMode',
-                    widget: {
-                      'ui:options': {
-                        inline: false,
-                      },
-                      'ui:widget': 'radio',
-                    },
-                  },
-                },
-                required: [''],
-              },
-            ],
-          },
-        },
-      },
     },
     properties: {
-      showHighlight: {
-        type: 'boolean',
-        title: 'admin/editor.product-details.showHighlight.title',
-        default: false,
-        isLayout: false,
-      },
       conditional: {
         title: 'Conditional',
         $ref: '#/definitions/highlightGroupDefault',
       },
-      specificationsDefault: {
-        title: 'specification',
-        $ref: '#/definitions/specificationsDefault',
+      showHighlight: {
+        type: 'boolean',
+        title: 'editor.product-details.showHighlight.title',
+        default: true,
+        isLayout: false,
       },
-
       thumbnailPosition: {
         title: 'admin/editor.product-details.thumbnailsPosition.title',
         type: 'string',

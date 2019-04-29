@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.15.1] - 2019-04-29
+### Removed
+- Remove `Product-Specifications` configuration throught CMS, due to it being a breaking change. 
+
 ## [1.15.0] - 2019-04-25
 ### Changed
 - Scope messages by domain
