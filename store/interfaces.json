@@ -15,11 +15,15 @@
       "availability-subscriber",
       "share",
       "product-highlights",
-      "product-quantity-selector"
+      "product-quantity-selector",
+      "addon-details-btn"
     ],
     "component": "ProductDetails"
   },
   "product-quantity-selector": {
     "component": "ProductQuantitySelector"
+  },
+  "addon-details-btn": {
+    "component": "*"
   }
 }

@@ -28,11 +28,18 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
               class="fr-ns w-100 h-100"
             >
               <div
-                class="flex justify-center"
+                class="relative flex justify-center"
               >
                 <div
                   class="extensionPoint-mock-product-images"
                 />
+                <div
+                  class="absolute z-3 left-0"
+                >
+                  <div
+                    class="extensionPoint-mock-addon-details-btn"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -180,11 +187,18 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
               class="fr-ns w-100 h-100"
             >
               <div
-                class="flex justify-center"
+                class="relative flex justify-center"
               >
                 <div
                   class="extensionPoint-mock-product-images"
                 />
+                <div
+                  class="absolute z-3 left-0"
+                >
+                  <div
+                    class="extensionPoint-mock-addon-details-btn"
+                  />
+                </div>
               </div>
             </div>
           </div>

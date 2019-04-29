@@ -74,6 +74,23 @@ const productPriceLoaderStyles = {
   },
 }
 
+const allSpecificationsProduct = {
+  value: true,
+  choose: false,
+  specifications: 'allSpecifications',
+}
+
+const specificationsProduct = {
+  all: {
+    value: true,
+    name: 'All Specifications',
+  },
+  choose: {
+    value: false,
+    name: 'Choose default highlight',
+  },
+  allSpecifications: 'allSpecifications',
+}
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
@@ -347,12 +364,22 @@ class ProductDetails extends Component {
             <div className="flex flex-wrap">
               <div className="w-60-l w-100">
                 <div className="fr-ns w-100 h-100">
-                  <div className="flex justify-center">
+                  <div className="relative flex justify-center">
                     <ExtensionPoint
                       id="product-images"
                       images={this.getImages()}
                       position={thumbnailPosition}
                     />
+                    <div className="absolute z-3 left-0">
+                      <ExtensionPoint
+                        id="addon-details-btn"
+                        product={{
+                          quantity: 1,
+                          skuId: path(['itemId'], this.selectedItem),
+                          productId: path(['productId'], product),
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
