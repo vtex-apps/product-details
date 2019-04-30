@@ -88,70 +88,35 @@ Now, you can change the behavior of the `product-details` block that is in the s
   }
 ```
 
-Since version `1.16.0`, product-details also support flex-layout. It means that you can define where the blocks will appear in the theme. See an example of a `blocks.json` using the flex feature:
-
-```json
-  "product-details.layout": {
-    "children": [
-      "product-breadcrumb",
-      "flex-layout.row#main",
-      "product-description"
-    ]
-  },
-  "flex-layout.row#main": {
-    "children": [
-      "product-images",
-      "flex-layout.col#price"
-    ]
-  },
-  "flex-layout.col#price": {
-    "children": [
-      "product-name",
-      "product-price",
-      "sku-selector",
-      "product-quantity-selector",
-      "buy-button",
-      "availability-subscriber",
-      "shipping-simulator",
-      "share"
-    ]
-  }
-```
-
 ### Blocks API
 
-When implementing this app as a block, various inner blocks may be available. The following interface lists the available blocks within `product-details` and `product-details.layout`.
+When implementing this app as a block, various inner blocks may be available. The following interface lists the available blocks within `product-details` and describes if they are required or optional.
 
 ```json
 {
   "product-details": {
-    "allowed": [
+    "required": [
       "product-images",
       "product-name",
       "product-price",
       "sku-selector",
       "buy-button",
       "product-description",
-      "product-specifications",
+      "product-specifications"
+    ],
+    "allowed": [
       "breadcrumb",
       "shipping-simulator",
       "availability-subscriber",
-      "share"
+      "share",
+      "product-highlights",
+      "product-quantity-selector",
+      "flex-layout"
     ],
     "component": "ProductDetailsLegacy"
-  },
-  "product-details.layout": {
-    "component": "ProductDetails",
-    "composition": "children",
-    "allowed": [
-      "flex-layout",
-      "product-breadcrumb"
-    ]
   }
 }
 ```
-
-The `ProductDetails` will also allow all blocks listed in `ProductDetailsLegacy`.
 
 #### Configuration
 
