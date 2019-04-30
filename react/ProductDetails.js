@@ -7,16 +7,11 @@ import {
   compose,
   flip,
   prop,
-<<<<<<< HEAD
   map,
   contains,
   reject,
   propOr,
   pathOr,
-=======
-  propOr,
-  compose
->>>>>>> Send produdcView event
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
