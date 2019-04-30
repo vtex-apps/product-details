@@ -1,31 +1,23 @@
 {
   "product-details": {
-    "allowed": [
+    "required": [
       "product-images",
       "product-name",
       "product-price",
       "sku-selector",
       "buy-button",
       "product-description",
-      "product-specifications",
+      "product-specifications"
+    ],
+    "allowed": [
       "breadcrumb",
       "shipping-simulator",
       "availability-subscriber",
       "share",
       "product-highlights",
-      "product-quantity-selector"
+      "product-quantity-selector",
+      "flex-layout"
     ],
     "component": "ProductDetailsLegacy"
-  },
-  "product-quantity-selector": {
-    "component": "ProductQuantitySelector"
-  },
-  "product-details.layout": {
-    "component": "ProductDetails",
-    "composition": "children",
-    "allowed": [
-      "flex-layout",
-      "product-breadcrumb"
-    ]
   }
 }
