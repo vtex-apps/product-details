@@ -20,9 +20,6 @@
     ],
     "component": "ProductDetails"
   },
-  "product-quantity-selector": {
-    "component": "ProductQuantitySelector"
-  },
   "addon-details-btn": {
     "component": "*"
   }

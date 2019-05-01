@@ -422,6 +422,7 @@ class ProductDetails extends Component {
                         skuItems={this.skuItems}
                         skuSelected={this.selectedItem}
                         productSlug={product.linkText}
+                        variations={this.selectedItem.variations}
                       />
                     )}
                   {showProductPrice && (
@@ -453,6 +454,7 @@ class ProductDetails extends Component {
                       <ExtensionPoint
                         id="availability-subscriber"
                         skuId={this.selectedItem.itemId}
+                        available={showBuyButton}
                       />
                     </div>
                   )}
