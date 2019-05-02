@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.17.0] - 2019-05-02
+### Added
+- Send produdcView events to Pixel Manager.
+
 ## [1.16.0] - 2019-04-29
 ### Add
 - Add block to inject `wish-list`.
