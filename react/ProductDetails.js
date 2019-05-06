@@ -276,6 +276,7 @@ class ProductDetails extends Component {
     const {
       productQuery: { product },
       categories,
+      categoryTree,
       runtime: {
         account,
         culture: { country },
@@ -360,11 +361,12 @@ class ProductDetails extends Component {
       >
         <div className="w-100 mw9">
           <article className="mb7">
-            {categories && (
+            {(categories || categoryTree) && (
               <ExtensionPoint
                 id="breadcrumb"
                 term={path(['productName'], product)}
                 categories={categories}
+                categoryTree={categoryTree}
               />
             )}
 
