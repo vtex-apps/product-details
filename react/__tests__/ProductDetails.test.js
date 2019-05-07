@@ -22,7 +22,6 @@ describe('<ProductDetails /> component', () => {
       productQuery: {
         loading: true,
       },
-      push: (args) => { }
     }
 
     const render = getComponentRender(props)
@@ -37,7 +36,6 @@ describe('<ProductDetails /> component', () => {
         loading: false,
         product: getProduct(),
       },
-      push: (args) => { }
     }
 
     const render = getComponentRender(props)
@@ -52,7 +50,6 @@ describe('<ProductDetails /> component', () => {
         loading: false,
         product: getProduct(),
       },
-      push: (args) => { }
     }
 
     const { container } = getComponentRender(props)
@@ -68,7 +65,6 @@ describe('<ProductDetails /> component', () => {
         loading: false,
         product: getProduct(),
       },
-      push: (args) => { }
     }
 
     const { container } = getComponentRender(props)
