@@ -183,7 +183,7 @@ class ProductDetails extends Component {
       const specificationNames = typedSpecifications.trim().split(',')
       const specifications = specificationNames.reduce((acc, item) => {
         const specification = allSpecifications.filter(
-          x => x.name.toLowerCase() === item.trim().toLowerCase()
+          spec => spec.name.toLowerCase() === item.trim().toLowerCase()
         )
         return acc.concat(specification)
       }, [])
