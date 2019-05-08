@@ -536,6 +536,7 @@ ProductDetails.schema = {
     'ui:options': {
       inline: false,
     },
+<<<<<<< HEAD
     'ui:widget': 'radio',
   },
   definitions: {
@@ -564,6 +565,45 @@ ProductDetails.schema = {
                   enum: [
                     'admin/editor.product-details.highlights.allSpecifications',
                   ],
+=======
+    definitions: {
+      highlightsDefault: {
+        title: 'highlightsDefault',
+        type: 'object',
+        properties: {
+<<<<<<< HEAD
+          highlight: {
+            title: 'admin/editor.product-details.highlights.default',
+            type: 'string',
+            enum: [
+              'admin/editor.product-details.highlights.allSpecifications',
+              'admin/editor.product-details.highlights.chooseDefault',
+              'admin/editor.product-details.highlights.chooseDefaultSpecification',
+            ],
+            default:
+              'admin/editor.product-details.highlights.allSpecifications',
+=======
+          showHighlights: {
+            title: 'Show highlights',
+            type: 'boolean',
+            enum: [true, false],
+            default: false,
+>>>>>>> Improve product-details schema
+          },
+        },
+        required: ['showHighlights'],
+        dependencies: {
+          showHighlights: {
+            oneOf: [
+              {
+                properties: {
+<<<<<<< HEAD
+                  highlight: {
+                    enum: [
+                      'admin/editor.product-details.highlights.allSpecifications',
+                    ],
+                  },
+>>>>>>> Improve product-details schema
                 },
               },
             },
@@ -579,6 +619,7 @@ ProductDetails.schema = {
                   title: 'admin/editor.product-details.highlights.title',
                 },
               },
+<<<<<<< HEAD
               required: [''],
             },
             {
@@ -592,6 +633,83 @@ ProductDetails.schema = {
                   type: 'string',
                   title:
                     'admin/editor.product-details.highlights.typeSpecifications.title',
+=======
+              {
+                properties: {
+                  highlight: {
+                    enum: [
+                      'admin/editor.product-details.highlights.chooseDefaultSpecification',
+                    ],
+=======
+                  showHighlights: {
+                    enum: [true],
+>>>>>>> Improve product-details schema
+                  },
+                  highlightGroupDefault: {
+                    title: 'Person',
+                    type: 'object',
+                    properties: {
+                      highlight: {
+                        title:
+                          'admin/editor.product-details.highlights.default',
+                        type: 'string',
+                        enum: [
+                          'admin/editor.product-details.highlights.allSpecifications',
+                          'admin/editor.product-details.highlights.chooseDefault',
+                          'admin/editor.product-details.highlights.chooseDefaultSpecification',
+                        ],
+                        default:
+                          'admin/editor.product-details.highlights.allSpecifications',
+                      },
+                    },
+                    required: ['highlight'],
+                    dependencies: {
+                      highlight: {
+                        oneOf: [
+                          {
+                            properties: {
+                              highlight: {
+                                enum: [
+                                  'admin/editor.product-details.highlights.allSpecifications',
+                                ],
+                              },
+                            },
+                          },
+                          {
+                            properties: {
+                              highlight: {
+                                enum: [
+                                  'admin/editor.product-details.highlights.chooseDefault',
+                                ],
+                              },
+                              typeHighlight: {
+                                type: 'string',
+                                title:
+                                  'admin/editor.product-details.highlights.title',
+                              },
+                            },
+                            required: [''],
+                          },
+                          {
+                            properties: {
+                              highlight: {
+                                enum: [
+                                  'admin/editor.product-details.highlights.chooseDefaultSpecification',
+                                ],
+                              },
+                              typeSpecifications: {
+                                type: 'string',
+                                title:
+                                  'admin/editor.product-details.highlights.typeSpecifications.title',
+                              },
+                            },
+                            required: [''],
+                          },
+                        ],
+                      },
+                    },
+                  },
+>>>>>>> Improve product-details schema
                 },
               },
               required: [''],
@@ -599,6 +717,7 @@ ProductDetails.schema = {
           ],
         },
       },
+
       specificationsDefault: {
         title: 'specificationsDefault',
         type: 'object',
@@ -695,16 +814,16 @@ ProductDetails.schema = {
     },
 
     properties: {
-      conditional: {
+      highlightGroupDefault: {
         title: 'Conditional',
-        $ref: '#/definitions/highlightGroupDefault',
+        $ref: '#/definitions/highlightsDefault',
       },
-      showHighlight: {
-        type: 'boolean',
-        title: 'editor.product-details.showHighlight.title',
-        default: true,
-        isLayout: false,
-      },
+      // showHighlight: {
+      //   type: 'boolean',
+      //   title: 'editor.product-details.showHighlight.title',
+      //   default: true,
+      //   isLayout: false,
+      // },
       specificationsDefault: {
         title: 'specification',
         $ref: '#/definitions/specificationsDefault',
