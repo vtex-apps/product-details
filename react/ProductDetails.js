@@ -275,7 +275,6 @@ class ProductDetails extends Component {
     const product = productQuery ? productQuery.product : {}
 
     const { selectedQuantity } = this.state
-    console.log(">>>>>>>>>>>>>>>", highlightGroupDefault)
     const showHighlight = prop('showHighlights', highlightGroupDefault)
     const showSpecificationsTab = prop(
       'showSpecifications',
@@ -294,7 +293,6 @@ class ProductDetails extends Component {
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
     const { specifications, highlights } = this.filterSpecifications()
-    console.log("HIGHI", highlights)
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
