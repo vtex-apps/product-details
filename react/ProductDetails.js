@@ -164,16 +164,22 @@ class ProductDetails extends Component {
   }
 
   getSpecifications() {
-    
     const {
       productQuery: { product },
-      specificationsDefault
+      specificationsDefault,
     } = this.props
-    const option = path(['specificationGroups', 'specification'], specificationsDefault)
+    const option = path(
+      ['specificationGroups', 'specification'],
+      specificationsDefault
+    )
 
     const allSpecifications = propOr([], 'properties', product)
     const getFromProperties = () => {
-      const typedSpecifications = pathOr('', ['specificationGroups', 'typeSpecifications'], specificationsDefault)
+      const typedSpecifications = pathOr(
+        '',
+        ['specificationGroups', 'typeSpecifications'],
+        specificationsDefault
+      )
       const specificationNames = typedSpecifications.trim().split(',')
       const specifications = specificationNames.reduce((acc, item) => {
         const specification = allSpecifications.filter(
@@ -184,11 +190,12 @@ class ProductDetails extends Component {
       return specifications
     }
 
-     switch (option) {
-      case 'admin/editor.product-details.product-specifications.chooseDefaultSpecification': return getFromProperties()
-      case 'admin/editor.product-details.product-specifications.allSpecifications': return allSpecifications
+    switch (option) {
+      case 'admin/editor.product-details.product-specifications.chooseDefaultSpecification':
+        return getFromProperties()
+      case 'admin/editor.product-details.product-specifications.allSpecifications':
+        return allSpecifications
     }
-
   }
 
   filterSpecifications() {
@@ -208,9 +215,17 @@ class ProductDetails extends Component {
       productQuery: { product },
       highlightGroupDefault,
     } = this.props
-    const option = pathOr('',[ 'highlightGroupDefault', 'highlight'], highlightGroupDefault)
+    const option = pathOr(
+      '',
+      ['highlightGroupDefault', 'highlight'],
+      highlightGroupDefault
+    )
     const highlightsFromGroup = () => {
-      const typeHighlight = pathOr('',[ 'highlightGroupDefault', 'typeHighlight'], highlightGroupDefault)
+      const typeHighlight = pathOr(
+        '',
+        ['highlightGroupDefault', 'typeHighlight'],
+        highlightGroupDefault
+      )
       const highlightName = typeHighlight.trim()
       const names = highlightName.split(',')
       const specificationGroups = propOr([], 'specificationGroups', product)
@@ -228,7 +243,11 @@ class ProductDetails extends Component {
       return highlights
     }
     const highlightsFromSpecifications = () => {
-      const typeSpecifications =  pathOr('',[ 'highlightGroupDefault', 'typeSpecifications'], highlightGroupDefault) 
+      const typeSpecifications = pathOr(
+        '',
+        ['highlightGroupDefault', 'typeSpecifications'],
+        highlightGroupDefault
+      )
       const specificationNames = typeSpecifications.trim().split(',')
       const allSpecifications = propOr([], 'properties', product)
       const highlights = specificationNames.reduce((acc, item) => {
@@ -241,8 +260,7 @@ class ProductDetails extends Component {
     }
 
     const highlightsFromAllSpecifications = () => {
-     
-      return  propOr([], 'properties', product)
+      return propOr([], 'properties', product)
     }
 
     switch (option) {
@@ -269,7 +287,6 @@ class ProductDetails extends Component {
       thumbnailPosition,
       highlightGroupDefault,
       specificationsDefault,
-
     } = this.props
 
     const product = productQuery ? productQuery.product : {}
@@ -280,10 +297,7 @@ class ProductDetails extends Component {
       'showSpecifications',
       specificationsDefault
     )
-    const viewMode = prop(
-      'viewMode',
-      specificationsDefault
-    )
+    const viewMode = prop('viewMode', specificationsDefault)
 
     const viewSpecificationsMode = viewMode === 'table'
     const showBuyButton =
