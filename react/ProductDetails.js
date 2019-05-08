@@ -859,12 +859,6 @@ ProductDetails.schema = {
         title: 'Conditional',
         $ref: '#/definitions/highlightsDefault',
       },
-      // showHighlight: {
-      //   type: 'boolean',
-      //   title: 'editor.product-details.showHighlight.title',
-      //   default: true,
-      //   isLayout: false,
-      // },
       specificationsDefault: {
         title: 'specification',
         $ref: '#/definitions/specificationsDefault',
