@@ -7,8 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Readded `Product-Specifications` configuration throught CMS
-
+- `Product-Specifications` configuration throught CMS.
 
 ## [1.18.5] - 2019-05-26
 ### Fixed
