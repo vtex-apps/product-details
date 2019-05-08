@@ -186,11 +186,11 @@ class ProductDetails extends Component {
   getHighlights() {
     const {
       productQuery: { product },
-      conditional,
+      highlightGroupDefault,
     } = this.props
-    const choose = propOr('', 'highlight', conditional)
+    const choose = pathOr('',[ 'highlightGroupDefault', 'highlight'], highlightGroupDefault)
     const highlightsFromGroup = () => {
-      const typeHighlight = propOr('', 'typeHighlight', conditional)
+      const typeHighlight = pathOr('',[ 'highlightGroupDefault', 'typeHighlight'], highlightGroupDefault)
       const highlightName = typeHighlight.trim()
       const names = highlightName.split(',')
       const specificationGroups = propOr([], 'specificationGroups', product)
@@ -208,7 +208,7 @@ class ProductDetails extends Component {
       return highlights
     }
     const highlightsFromSpecifications = () => {
-      const typeSpecifications = propOr('', 'typeSpecifications', conditional)
+      const typeSpecifications =  pathOr('',[ 'highlightGroupDefault', 'typeSpecifications'], highlightGroupDefault) 
       const specificationNames = typeSpecifications.trim().split(',')
       const allSpecifications = propOr([], 'properties', product)
       const highlights = specificationNames.reduce((acc, item) => {
@@ -221,16 +221,8 @@ class ProductDetails extends Component {
     }
 
     const highlightsFromAllSpecifications = () => {
-      const allSpecifications = propOr([], 'properties', product)
-      const generalSpecifications = propOr([], 'generalProperties', product)
-      const highlights = reject(
-        compose(
-          flip(contains)(map(x => x.name, generalSpecifications)),
-          prop('name')
-        ),
-        allSpecifications
-      )
-      return highlights
+     
+      return  propOr([], 'properties', product)
     }
 
     switch (choose) {
@@ -255,14 +247,15 @@ class ProductDetails extends Component {
       },
       intl,
       showSpecificationsTab,
-      showHighlight,
       thumbnailPosition,
+      highlightGroupDefault
     } = this.props
 
     const product = productQuery ? productQuery.product : {}
 
     const { selectedQuantity } = this.state
-
+    console.log(">>>>>>>>>>>>>>>", highlightGroupDefault)
+    const showHighlight = prop('showHighlights', highlightGroupDefault)
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
@@ -270,6 +263,7 @@ class ProductDetails extends Component {
     const skuName = path(['name'], this.selectedItem)
     const description = path(['description'], product)
     const { specifications, highlights } = this.filterSpecifications()
+    console.log("HIGHI", highlights)
     const buyButtonProps = {
       skuItems: this.selectedItem &&
         this.sellerId && [
