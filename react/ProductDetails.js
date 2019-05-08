@@ -163,20 +163,40 @@ class ProductDetails extends Component {
       : []
   }
 
+  getSpecifications() {
+    
+    const {
+      productQuery: { product },
+      specificationsDefault
+    } = this.props
+    const option = path(['specificationGroups', 'specification'], specificationsDefault)
+
+    const allSpecifications = propOr([], 'properties', product)
+    const getFromProperties = () => {
+      const typedSpecifications = pathOr('', ['specificationGroups', 'typeSpecifications'], specificationsDefault)
+      const specificationNames = typedSpecifications.trim().split(',')
+      const specifications = specificationNames.reduce((acc, item) => {
+        const specification = allSpecifications.filter(
+          x => x.name.toLowerCase() === item.trim().toLowerCase()
+        )
+        return acc.concat(specification)
+      }, [])
+      return specifications
+    }
+
+     switch (option) {
+      case 'admin/editor.product-details.product-specifications.chooseDefaultSpecification': return getFromProperties()
+      case 'admin/editor.product-details.product-specifications.allSpecifications': return allSpecifications
+    }
+
+  }
+
   filterSpecifications() {
     const {
       productQuery: { product },
     } = this.props
-    const allSpecifications = propOr([], 'properties', product)
-    const generalSpecifications = propOr([], 'generalProperties', product)
     const highlights = this.getHighlights()
-    const specifications = reject(
-      compose(
-        flip(contains)(map(x => x.name, generalSpecifications)),
-        prop('name')
-      ),
-      allSpecifications
-    )
+    const specifications = this.getSpecifications()
     return {
       specifications,
       highlights,
@@ -188,7 +208,7 @@ class ProductDetails extends Component {
       productQuery: { product },
       highlightGroupDefault,
     } = this.props
-    const choose = pathOr('',[ 'highlightGroupDefault', 'highlight'], highlightGroupDefault)
+    const option = pathOr('',[ 'highlightGroupDefault', 'highlight'], highlightGroupDefault)
     const highlightsFromGroup = () => {
       const typeHighlight = pathOr('',[ 'highlightGroupDefault', 'typeHighlight'], highlightGroupDefault)
       const highlightName = typeHighlight.trim()
@@ -225,7 +245,7 @@ class ProductDetails extends Component {
       return  propOr([], 'properties', product)
     }
 
-    switch (choose) {
+    switch (option) {
       case 'admin/editor.product-details.highlights.chooseDefault':
         return highlightsFromGroup()
       case 'admin/editor.product-details.highlights.chooseDefaultSpecification':
@@ -246,9 +266,10 @@ class ProductDetails extends Component {
         hints: { mobile },
       },
       intl,
-      showSpecificationsTab,
       thumbnailPosition,
-      highlightGroupDefault
+      highlightGroupDefault,
+      specificationsDefault,
+
     } = this.props
 
     const product = productQuery ? productQuery.product : {}
@@ -256,6 +277,16 @@ class ProductDetails extends Component {
     const { selectedQuantity } = this.state
     console.log(">>>>>>>>>>>>>>>", highlightGroupDefault)
     const showHighlight = prop('showHighlights', highlightGroupDefault)
+    const showSpecificationsTab = prop(
+      'showSpecifications',
+      specificationsDefault
+    )
+    const viewMode = prop(
+      'viewMode',
+      specificationsDefault
+    )
+
+    const viewSpecificationsMode = viewMode === 'table'
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
@@ -493,7 +524,7 @@ class ProductDetails extends Component {
             </div>
             <div
               className={`flex ${
-                showSpecificationsTab ? 'flex-wrap' : 'justify-between'
+                viewSpecificationsMode ? 'flex-wrap' : 'justify-between'
               }`}
             >
               {description && (
@@ -505,11 +536,11 @@ class ProductDetails extends Component {
                   />
                 </div>
               )}
-              {specifications && (
+              {showSpecificationsTab && (
                 <div className="pv2 mt8 h-100 w-100">
                   <ExtensionPoint
                     id="product-specifications"
-                    tabsMode={showSpecificationsTab}
+                    tabsMode={viewSpecificationsMode}
                     specifications={specifications}
                   />
                 </div>
@@ -581,8 +612,12 @@ ProductDetails.schema = {
             title: 'Show highlights',
             type: 'boolean',
             enum: [true, false],
+<<<<<<< HEAD
             default: false,
 >>>>>>> Improve product-details schema
+=======
+            default: true,
+>>>>>>> Fix unuexÃpect behavoir and some bugs
           },
         },
         required: ['showHighlights'],
