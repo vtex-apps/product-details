@@ -346,8 +346,8 @@ class ProductDetails extends Component {
     const showProductPrice =
       Number.isNaN(+availableQuantity) || availableQuantity > 0
 
-    
-    const classAddonDetails = classNames('absolute z-3 left-0', {
+
+    const addonDetailsClasses = classNames('absolute z-3 left-0', {
       'ml-20-ns': this.getImages().length > 1 && (!thumbnailPosition || thumbnailPosition === 'left')
     })
 
@@ -380,7 +380,7 @@ class ProductDetails extends Component {
                       images={this.getImages()}
                       position={thumbnailPosition}
                     />
-                    <div className={classAddonDetails}>
+                    <div className={addonDetailsClasses}>
                       <ExtensionPoint
                         id="addon-details-btn"
                         large={!mobile}
