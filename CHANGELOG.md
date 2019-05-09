@@ -7,13 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.18.1] - 2019-05-09
+
+### Fixed
+- Remove `productView` event added in v1.17.0.
+
 ## [1.18.0] - 2019-05-07
 ### Changed
 - Forwards categoryTree prop to breadcrumb
 
-## [1.17.0] - 2019-05-02
+## [1.17.0] - 2019-05-02 [YANKED]
 ### Added
-- Send produdcView events to Pixel Manager.
+- Send `productView` event to Pixel Manager.
 
 ## [1.16.0] - 2019-04-29
 ### Add
