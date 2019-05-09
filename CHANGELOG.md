@@ -6,8 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Fixed
-- Fix heart's position and size, and align products menu's button.
+### Changed
+- Heart's position and size.
 
 ## [1.17.0] - 2019-05-02
 ### Added
