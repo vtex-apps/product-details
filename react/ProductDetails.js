@@ -15,6 +15,8 @@ import {
 } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
+import classNames from 'classnames'
+
 import { ExtensionPoint, withRuntimeContext } from 'vtex.render-runtime'
 import { Container } from 'vtex.store-components'
 
@@ -268,6 +270,7 @@ class ProductDetails extends Component {
       runtime: {
         account,
         culture: { country },
+        hints: { mobile }
       },
       intl,
       showSpecificationsTab,
@@ -343,6 +346,11 @@ class ProductDetails extends Component {
     const showProductPrice =
       Number.isNaN(+availableQuantity) || availableQuantity > 0
 
+
+    const addonDetailsClasses = classNames('absolute z-3 left-0', {
+      'ml-20-ns': this.getImages().length > 1 && (!thumbnailPosition || thumbnailPosition === 'left')
+    })
+
     return (
       <Container
         className={`${productDetails.container} pt6 pb8 justify-center flex`}
@@ -372,9 +380,10 @@ class ProductDetails extends Component {
                       images={this.getImages()}
                       position={thumbnailPosition}
                     />
-                    <div className="absolute z-3 left-0">
+                    <div className={addonDetailsClasses}>
                       <ExtensionPoint
                         id="addon-details-btn"
+                        large={!mobile}
                         product={{
                           quantity: 1,
                           skuId: path(['itemId'], this.selectedItem),
