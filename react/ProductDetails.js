@@ -1,16 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import {
-  path,
-  compose,
-  flip,
-  prop,
-  map,
-  contains,
-  reject,
-  propOr,
-  pathOr,
-} from 'ramda'
+import { path, prop, propOr, pathOr } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import classNames from 'classnames'
@@ -21,10 +11,6 @@ import { Container } from 'vtex.store-components'
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
 import { productShape } from './propTypes'
-import thumbnailsPosition, {
-  getThumbnailsPositionNames,
-  getThumbnailsPositionValues,
-} from './utils/thumbnailPositionEnum'
 
 import { schema } from './utils/schema'
 
@@ -75,7 +61,6 @@ const productPriceLoaderStyles = {
     height: '0.686em',
   },
 }
-
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
