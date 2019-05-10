@@ -173,6 +173,8 @@ class ProductDetails extends Component {
       specificationsDefault
     )
 
+    console.log(">...............",specificationsDefault)
+
     const allSpecifications = propOr([], 'properties', product)
     const getFromProperties = () => {
       const typedSpecifications = pathOr(
@@ -193,7 +195,7 @@ class ProductDetails extends Component {
     switch (option) {
       case 'admin/editor.product-details.product-specifications.chooseDefaultSpecification':
         return getFromProperties()
-      case 'admin/editor.product-details.product-specifications.allSpecifications':
+      default:
         return allSpecifications
     }
   }
@@ -293,7 +295,7 @@ class ProductDetails extends Component {
 
     const { selectedQuantity } = this.state
     const showHighlight = prop('showHighlights', highlightGroupDefault)
-    const showSpecificationsTab = prop(
+    const showSpecificationsTab = propOr(true,
       'showSpecifications',
       specificationsDefault
     )
@@ -767,7 +769,7 @@ ProductDetails.schema = {
             title: 'Show specifications',
             type: 'boolean',
             enum: [true, false],
-            default: false,
+            default: true,
           },
         },
         required: ['showSpecifications'],
