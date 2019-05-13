@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.18.3] - 2019-05-13
+### Fixed
+- Button of add product to list not appearing.
+
 ## [1.18.2] - 2019-05-09
 ### Changed
 - Heart's position and size.

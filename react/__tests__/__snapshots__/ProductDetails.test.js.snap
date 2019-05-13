@@ -28,7 +28,7 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
               class="fr-ns w-100 h-100"
             >
               <div
-                class="relative flex justify-center"
+                class="relative flex justify-center z-3"
               >
                 <div
                   class="extensionPoint-mock-product-images"
@@ -187,7 +187,7 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
               class="fr-ns w-100 h-100"
             >
               <div
-                class="relative flex justify-center"
+                class="relative flex justify-center z-3"
               >
                 <div
                   class="extensionPoint-mock-product-images"
