@@ -270,7 +270,7 @@ class ProductDetails extends Component {
       runtime: {
         account,
         culture: { country },
-        hints: { mobile }
+        hints: { mobile },
       },
       intl,
       showSpecificationsTab,
@@ -346,9 +346,10 @@ class ProductDetails extends Component {
     const showProductPrice =
       Number.isNaN(+availableQuantity) || availableQuantity > 0
 
-
     const addonDetailsClasses = classNames('absolute z-3 left-0', {
-      'ml-20-ns': this.getImages().length > 1 && (!thumbnailPosition || thumbnailPosition === 'left')
+      'ml-20-ns':
+        this.getImages().length > 1 &&
+        (!thumbnailPosition || thumbnailPosition === 'left'),
     })
 
     return (
@@ -374,7 +375,7 @@ class ProductDetails extends Component {
             <div className="flex flex-wrap">
               <div className="w-60-l w-100">
                 <div className="fr-ns w-100 h-100">
-                  <div className="relative flex justify-center">
+                  <div className="relative flex justify-center z-3">
                     <ExtensionPoint
                       id="product-images"
                       images={this.getImages()}
@@ -449,10 +450,12 @@ class ProductDetails extends Component {
                   )}
                   {showBuyButton ? (
                     <div className="pv2 dn db-l mt8">
-                      <ExtensionPoint 
+                      <ExtensionPoint
                         id="product-quantity-selector"
                         selectedQuantity={selectedQuantity}
-                        onChange={value => this.setState({ selectedQuantity: value })}
+                        onChange={value =>
+                          this.setState({ selectedQuantity: value })
+                        }
                         availableQuantity={availableQuantity}
                       />
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
@@ -565,7 +568,8 @@ ProductDetails.getSchema = props => {
               'admin/editor.product-details.highlights.chooseDefault',
               'admin/editor.product-details.highlights.chooseDefaultSpecification',
             ],
-            default: 'admin/editor.product-details.highlights.allSpecifications',
+            default:
+              'admin/editor.product-details.highlights.allSpecifications',
           },
         },
         required: ['highlight'],
@@ -584,7 +588,9 @@ ProductDetails.getSchema = props => {
               {
                 properties: {
                   highlight: {
-                    enum: ['admin/editor.product-details.highlights.chooseDefault'],
+                    enum: [
+                      'admin/editor.product-details.highlights.chooseDefault',
+                    ],
                   },
                   typeHighlight: {
                     type: 'string',
