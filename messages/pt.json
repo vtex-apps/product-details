@@ -11,7 +11,6 @@
   "admin/editor.product-details.highlights.typeSpecifications.title": "Escreve as especificações abaixo",
   "admin/editor.product-details.showHighlight.title": "Mostrar destaques",
   "admin/editor.product-details.highlights.allSpecifications": "Todas as especificações",
-  "admin/editor.product-details.highlights.chooseDefault": "Grupo de especificações personalizadas",
   "admin/editor.product-details.highlights.chooseDefaultSpecification": "Especificações personalizadas",
   "admin/editor.product-details.thumbnailsPosition.title": "Posição das miniaturas",
   "admin/editor.product-details.thumbnailsPosition.left": "Esquerda",
@@ -27,5 +26,7 @@
   "admin/editor.product-specifications.displaySpecification.tableMode": "Visualização em tabela",
   "admin/editor.product-details.product-specifications.default": "Escolha o destaque padrão",
   "admin/editor.product-details.product-specifications.allSpecifications": "Todas as especificações",
-  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Especificações personalizadas"
+  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Especificações personalizadas",
+  "admin/editor.product-details.product-specifications.typeHelper": "Digite os valores separados por vírgula"
+
 }

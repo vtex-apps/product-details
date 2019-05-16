@@ -27,7 +27,8 @@
   "admin/editor.product-specifications.displaySpecification.title": "admin/editor.product-specifications.displaySpecification.title",
   "admin/editor.product-specifications.displaySpecification.tabMode": "admin/editor.product-specifications.displaySpecification.tabMode",
   "admin/editor.product-specifications.displaySpecification.tableMode": "admin/editor.product-specifications.displaySpecification.tableMode",
-  "admin/editor.product-details.product-specifications.default" :"admin/editor.product-details.product-specifications.default",
-  "admin/editor.product-details.product-specifications.allSpecifications":"admin/editor.product-details.product-specifications.allSpecifications",
-  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "admin/editor.product-details.product-specifications.chooseDefaultSpecification"
+  "admin/editor.product-details.product-specifications.default": "admin/editor.product-details.product-specifications.default",
+  "admin/editor.product-details.product-specifications.allSpecifications": "admin/editor.product-details.product-specifications.allSpecifications",
+  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "admin/editor.product-details.product-specifications.chooseDefaultSpecification",
+  "admin/editor.product-details.product-specifications.typeHelper": "admin/editor.product-details.product-specifications.typeHelper"
 }

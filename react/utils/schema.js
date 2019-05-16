@@ -1,6 +1,6 @@
 import thumbnailsPosition, {
-    getThumbnailsPositionNames,
-    getThumbnailsPositionValues,
+  getThumbnailsPositionNames,
+  getThumbnailsPositionValues,
 } from './thumbnailPositionEnum'
 
 export const schema = {
@@ -74,6 +74,8 @@ export const schema = {
                               type: 'string',
                               title:
                                 'admin/editor.product-details.highlights.title',
+                              description:
+                                'admin/editor.product-details.product-specifications.typeHelper',
                             },
                           },
                           required: [''],
@@ -89,6 +91,8 @@ export const schema = {
                               type: 'string',
                               title:
                                 'admin/editor.product-details.highlights.typeSpecifications.title',
+                              description:
+                                'admin/editor.product-details.product-specifications.typeHelper',
                             },
                           },
                           required: [''],
@@ -164,6 +168,8 @@ export const schema = {
                               type: 'string',
                               title:
                                 'admin/editor.product-details.product-specifications.typeSpecifications.title',
+                              description:
+                                'admin/editor.product-details.product-specifications.typeHelper',
                             },
                           },
                           required: [''],

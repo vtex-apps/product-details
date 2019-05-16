@@ -27,5 +27,6 @@
   "admin/editor.product-specifications.displaySpecification.tableMode": "Modo de vista de tabela",
   "admin/editor.product-details.product-specifications.default" :"Elegir destaque predeterminado",
   "admin/editor.product-details.product-specifications.allSpecifications":"Todas las especificaciones",
-  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Especificaciones personalizadas"
+  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Especificaciones personalizadas",
+  "admin/editor.product-details.product-specifications.typeHelper": "Escriba los valores separados por coma"
 }
