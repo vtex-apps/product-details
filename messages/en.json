@@ -4,7 +4,6 @@
   "admin/editor.product-details.maxImages.title": "Max thumbnail images",
   "admin/editor.product-details.displayVertically.title": "Display thumbnails vertically",
   "admin/editor.product-details.highlights.default": "Choose default highlight",
-  "admin/editor.product-details.highlights.chooseDefault": "Type the group",
   "store/button-label": "Buy",
   "store/addToCartButton.label": "Add item to cart",
   "store/share.title": "{product} {sku} at {store}: ",
