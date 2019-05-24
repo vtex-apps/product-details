@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.18.4] - 2019-05-24
+### Fixed
+
+- Added message scope to missing message, get rid of getSchema with unused props.
+
 ## [1.18.3] - 2019-05-13
 ### Fixed
 - Button of add product to list not appearing.

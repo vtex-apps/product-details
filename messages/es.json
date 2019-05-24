@@ -4,7 +4,6 @@
   "admin/editor.product-details.maxImages.title": "Número máximo de imágenes en miniatura",
   "admin/editor.product-details.displayVertically.title": "Mostrar miniaturas verticalmente",
   "admin/editor.product-details.highlights.default": "Elegir destaque predeterminado ",
-  "admin/editor.product-details.highlights.chooseDefault": "Escribe el grupo",
   "store/button-label": "Comprar",
   "store/addToCartButton.label": "Incluir items en el carrito",
   "store/share.title": "{product} {sku} en la {store}: ",

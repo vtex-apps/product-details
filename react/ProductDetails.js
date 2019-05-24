@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import {
-  mapObjIndexed,
-  mergeDeepRight,
   path,
   compose,
   flip,
@@ -76,23 +74,6 @@ const productPriceLoaderStyles = {
   },
 }
 
-const allSpecificationsProduct = {
-  value: true,
-  choose: false,
-  specifications: 'allSpecifications',
-}
-
-const specificationsProduct = {
-  all: {
-    value: true,
-    name: 'All Specifications',
-  },
-  choose: {
-    value: false,
-    name: 'Choose default highlight',
-  },
-  allSpecifications: 'allSpecifications',
-}
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
@@ -544,113 +525,100 @@ class ProductDetails extends Component {
   }
 }
 
-ProductDetails.getSchema = props => {
-  return {
-    title: 'admin/editor.product-details.title',
-    description: 'admin/editor.product-details.description',
-    type: 'object',
-    widget: {
-      'ui:options': {
-        inline: false,
-      },
-      'ui:widget': 'radio',
+ProductDetails.schema = {
+  title: 'admin/editor.product-details.title',
+  description: 'admin/editor.product-details.description',
+  type: 'object',
+  widget: {
+    'ui:options': {
+      inline: false,
     },
-    definitions: {
-      highlightGroupDefault: {
-        title: 'Person',
-        type: 'object',
-        properties: {
-          highlight: {
-            title: 'admin/editor.product-details.highlights.default',
-            type: 'string',
-            enum: [
-              'admin/editor.product-details.highlights.allSpecifications',
-              'admin/editor.product-details.highlights.chooseDefault',
-              'admin/editor.product-details.highlights.chooseDefaultSpecification',
-            ],
-            default:
-              'admin/editor.product-details.highlights.allSpecifications',
-          },
+    'ui:widget': 'radio',
+  },
+  definitions: {
+    highlightGroupDefault: {
+      title: 'Person',
+      type: 'object',
+      properties: {
+        highlight: {
+          title: 'admin/editor.product-details.highlights.default',
+          type: 'string',
+          enum: [
+            'admin/editor.product-details.highlights.allSpecifications',
+            'admin/editor.product-details.highlights.chooseDefault',
+            'admin/editor.product-details.highlights.chooseDefaultSpecification',
+          ],
+          default:
+            'admin/editor.product-details.highlights.allSpecifications',
         },
-        required: ['highlight'],
-        dependencies: {
-          highlight: {
-            oneOf: [
-              {
-                properties: {
-                  highlight: {
-                    enum: [
-                      'admin/editor.product-details.highlights.allSpecifications',
-                    ],
-                  },
+      },
+      required: ['highlight'],
+      dependencies: {
+        highlight: {
+          oneOf: [
+            {
+              properties: {
+                highlight: {
+                  enum: [
+                    'admin/editor.product-details.highlights.allSpecifications',
+                  ],
                 },
               },
-              {
-                properties: {
-                  highlight: {
-                    enum: [
-                      'admin/editor.product-details.highlights.chooseDefault',
-                    ],
-                  },
-                  typeHighlight: {
-                    type: 'string',
-                    title: 'admin/editor.product-details.highlights.title',
-                  },
+            },
+            {
+              properties: {
+                highlight: {
+                  enum: [
+                    'admin/editor.product-details.highlights.chooseDefault',
+                  ],
                 },
-                required: [''],
-              },
-              {
-                properties: {
-                  highlight: {
-                    enum: [
-                      'admin/editor.product-details.highlights.chooseDefaultSpecification',
-                    ],
-                  },
-                  typeSpecifications: {
-                    type: 'string',
-                    title:
-                      'admin/editor.product-details.highlights.typeSpecifications.title',
-                  },
+                typeHighlight: {
+                  type: 'string',
+                  title: 'admin/editor.product-details.highlights.title',
                 },
-                required: [''],
               },
-            ],
-          },
+              required: [''],
+            },
+            {
+              properties: {
+                highlight: {
+                  enum: [
+                    'admin/editor.product-details.highlights.chooseDefaultSpecification',
+                  ],
+                },
+                typeSpecifications: {
+                  type: 'string',
+                  title:
+                    'admin/editor.product-details.highlights.typeSpecifications.title',
+                },
+              },
+              required: [''],
+            },
+          ],
         },
       },
     },
-    properties: {
-      conditional: {
-        title: 'Conditional',
-        $ref: '#/definitions/highlightGroupDefault',
-      },
-      showHighlight: {
-        type: 'boolean',
-        title: 'editor.product-details.showHighlight.title',
-        default: true,
-        isLayout: false,
-      },
-      thumbnailPosition: {
-        title: 'admin/editor.product-details.thumbnailsPosition.title',
-        type: 'string',
-        enum: getThumbnailsPositionValues(),
-        enumNames: getThumbnailsPositionNames(),
-        default: thumbnailsPosition.DISPLAY_LEFT.value,
-        isLayout: false,
-      },
+  },
+  properties: {
+    conditional: {
+      title: 'Conditional',
+      $ref: '#/definitions/highlightGroupDefault',
     },
-  }
-}
-
-function mergeSchemaAndDefaultProps(schema, propName) {
-  return mergeDeepRight(schema, {
-    properties: {
-      ...mapObjIndexed(
-        value => ({ default: value }),
-        ProductDetails.defaultProps[propName]
-      ),
+    showHighlight: {
+      type: 'boolean',
+      title: 'admin/editor.product-details.showHighlight.title',
+      default: true,
+      isLayout: false,
     },
-  })
+    thumbnailPosition: {
+      title: 'admin/editor.product-details.thumbnailsPosition.title',
+      type: 'string',
+      enum: getThumbnailsPositionValues(),
+      enumNames: getThumbnailsPositionNames(),
+      default: thumbnailsPosition.DISPLAY_LEFT.value,
+      isLayout: false,
+    },
+  },
 }
 
 export default withRuntimeContext(injectIntl(ProductDetails))
