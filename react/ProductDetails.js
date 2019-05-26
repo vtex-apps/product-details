@@ -259,12 +259,8 @@ class ProductDetails extends Component {
       thumbnailPosition,
     } = this.props
 
-    const product = productQuery && productQuery.product
+    const product = productQuery ? productQuery.product : {}
     
-    if (!product) {
-      return null
-    }
-
     const { selectedQuantity } = this.state
 
     const showBuyButton =
