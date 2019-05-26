@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.18.5] - 2019-05-26
+### Fixed
+- Prevent from throwing errors when ProductQuery is empty for some reason on ProductDetails
+
 ## [1.18.4] - 2019-05-24
 ### Fixed
 

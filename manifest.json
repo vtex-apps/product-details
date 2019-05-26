@@ -1,7 +1,7 @@
 {
   "name": "product-details",
   "vendor": "vtex",
-  "version": "1.18.4",
+  "version": "1.18.5",
   "title": "Product Details",
   "description": "Product details component",
   "defaultLocale": "pt-BR",
@@ -22,5 +22,6 @@
     "vtex.store-graphql": "2.x",
     "vtex.store-components": "3.x",
     "vtex.styleguide": "9.x"
-  }
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
