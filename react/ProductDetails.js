@@ -245,7 +245,7 @@ class ProductDetails extends Component {
 
   render() {
     const {
-      productQuery: { product },
+      productQuery,
       categories,
       categoryTree,
       runtime: {
@@ -258,6 +258,13 @@ class ProductDetails extends Component {
       showHighlight,
       thumbnailPosition,
     } = this.props
+
+    const product = productQuery && productQuery.product
+    
+    if (!product) {
+      return null
+    }
+
     const { selectedQuantity } = this.state
 
     const showBuyButton =
