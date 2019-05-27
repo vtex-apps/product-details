@@ -554,15 +554,4 @@ class ProductDetails extends Component {
 
 ProductDetails.schema = schema
 
-function mergeSchemaAndDefaultProps(schema, propName) {
-  return mergeDeepRight(schema, {
-    properties: {
-      ...mapObjIndexed(
-        value => ({ default: value }),
-        ProductDetails.defaultProps[propName]
-      ),
-    },
-  })
-}
-
 export default withRuntimeContext(injectIntl(ProductDetails))
