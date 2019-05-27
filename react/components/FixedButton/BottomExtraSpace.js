@@ -14,11 +14,15 @@ class BottomExtraSpace extends Component {
   componentDidMount() {
     this.fixedRoot = this.ref.current
 
-    while (this.fixedRoot &&
-    window.getComputedStyle(this.fixedRoot)
-      .getPropertyValue('overflow') !== 'auto') { this.fixedRoot = this.fixedRoot.parentElement }
+    while (
+      this.fixedRoot &&
+      window.getComputedStyle(this.fixedRoot).getPropertyValue('overflow') !==
+        'auto'
+    ) {
+      this.fixedRoot = this.fixedRoot.parentElement
+    }
 
-    if (!this.fixedRoot)this.fixedRoot = document.body
+    if (!this.fixedRoot) this.fixedRoot = document.body
 
     this.fixedRoot && this.fixedRoot.appendChild(this.el)
     this.setState({ mounted: true })
@@ -39,7 +43,7 @@ class BottomExtraSpace extends Component {
       <div className="o-0" tabIndex="-1">
         {children}
       </div>,
-      this.el,
+      this.el
     )
   }
 }
