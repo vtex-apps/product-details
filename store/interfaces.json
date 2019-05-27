@@ -21,7 +21,9 @@
     "component": "ProductDetails",
     "content": {
       "properties": {
-        "product-details": { "$ref": "#/definitions/ProductDetails" }
+        "product-details": {
+          "$ref": "app:vtex.product-details#/definitions/ProductDetails"
+        }
       }
     }
   },

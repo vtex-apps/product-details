@@ -1,7 +1,17 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { path, prop, propOr, pathOr } from 'ramda'
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
+import {
+  path,
+  compose,
+  flip,
+  prop,
+  map,
+  contains,
+  reject,
+  propOr,
+  pathOr,
+} from 'ramda'
+import { injectIntl, intlShape } from 'react-intl'
 import { IOMessage, formatIOMessage } from 'vtex.native-types'
 
 import classNames from 'classnames'
