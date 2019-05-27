@@ -7,74 +7,111 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Add `contentSchemas.json` for definition of content properties
+- i18n content edition support through CMS
+
 ## [1.19.2] - 2019-05-28
+
 ### Changed
+
 - Improve store-components props
 
 ## [1.19.1] - 2019-05-27
+
 ### Fixed
+
 - Set default view mode back to "tab".
 
 ## [1.19.0] - 2019-05-27
+
 ### Added
+
 - `Product-Specifications` configuration throught CMS.
 
 ## [1.18.5] - 2019-05-26
+
 ### Fixed
+
 - Prevent from throwing errors when ProductQuery is empty for some reason on ProductDetails
 
 ## [1.18.4] - 2019-05-24
+
 ### Fixed
 
 - Added message scope to missing message, get rid of getSchema with unused props.
 
 ## [1.18.3] - 2019-05-13
+
 ### Fixed
+
 - Button of add product to list not appearing.
 
 ## [1.18.2] - 2019-05-09
+
 ### Changed
+
 - Heart's position and size.
 
 ## [1.18.1] - 2019-05-09
 
 ### Fixed
+
 - Remove `productView` event added in v1.17.0.
 
 ## [1.18.0] - 2019-05-07
+
 ### Changed
+
 - Forwards categoryTree prop to breadcrumb
 
 ## [1.17.0] - 2019-05-02 [YANKED]
+
 ### Added
+
 - Send `productView` event to Pixel Manager.
 
 ## [1.16.0] - 2019-04-29
+
 ### Add
+
 - Add block to inject `wish-list`.
 
 ## [1.15.1] - 2019-04-29
+
 ### Removed
-- Remove `Product-Specifications` configuration throught CMS, due to it being a breaking change. 
+
+- Remove `Product-Specifications` configuration throught CMS, due to it being a breaking change.
 
 ## [1.15.0] - 2019-04-25
+
 ### Changed
+
 - Scope messages by domain
 
 ## [1.14.0] - 2019-04-17
-### Added 
-- Enable `Product-Specifications` configuration throught CMS. 
+
+### Added
+
+- Enable `Product-Specifications` configuration throught CMS.
 
 ## [1.13.1] - 2019-04-15
+
 ### Changed
+
 - Remove sort of sku items.
 
 ## [1.13.0] - 2019-04-10
+
 ### Added
+
 - Add `product-quantity-selector` block to `interfaces.json`.
 
 ## [1.12.2] - 2019-04-10
+
 ### Fixed
+
 - SellerId does not need to be an int, like in account coinmarket
 
 ## [1.12.1] - 2019-04-09
