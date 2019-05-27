@@ -21,7 +21,8 @@
     "component": "ProductDetails",
     "content": {
       "properties": {
-        "button": { "$ref": "#/definitions/Button" }
+        "button": { "$ref": "#/definitions/Button" },
+        "share": { "$ref": "#/definitions/Share" }
       }
     }
   },

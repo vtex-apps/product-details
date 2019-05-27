@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { path, prop, propOr, pathOr } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
-import { IOMessage } from 'vtex.native-types'
+import { IOMessage, formatIOMessage } from 'vtex.native-types'
 
 import classNames from 'classnames'
 
@@ -272,6 +272,8 @@ class ProductDetails extends Component {
       highlightGroupDefault,
       specificationsDefault,
       showSpecificationsTab: showSpecificationsTabProp,
+      button: { addToCart },
+      share: { titleTexxt },
     } = this.props
 
     const { product } = productQuery || { product: {} }
@@ -279,11 +281,10 @@ class ProductDetails extends Component {
     const { selectedQuantity } = this.state
     const showHighlight = prop('showHighlights', highlightGroupDefault)
 
-    const showSpecificationsTab = showSpecificationsTabProp == null ? propOr(
-      true,
-      'showSpecifications',
-      specificationsDefault
-    ) : showSpecificationsTabProp
+    const showSpecificationsTab =
+      showSpecificationsTabProp == null
+        ? propOr(true, 'showSpecifications', specificationsDefault)
+        : showSpecificationsTabProp
 
     const viewMode = prop('viewMode', specificationsDefault) || 'tab'
 

@@ -8,6 +8,15 @@
           "default": "store/addToCartButton.label"
         }
       }
+    },
+    "Share": {
+      "properties": {
+        "titleText": {
+          "title": "store/share.title",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": "store/share.title"
+        }
+      }
     }
   }
 }
