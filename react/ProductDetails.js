@@ -283,6 +283,7 @@ class ProductDetails extends Component {
 
     const { selectedQuantity } = this.state
     const showHighlight = prop('showHighlights', highlightGroupDefault)
+
     const showSpecificationsTab = showSpecificationsTabProp == null ? propOr(
       true,
       'showSpecifications',
@@ -541,7 +542,7 @@ class ProductDetails extends Component {
                   />
                 </div>
               )}
-              {showSpecificationsTab && (
+              {specifications && showSpecificationsTab && (
                 <div className="pv2 mt8 h-100 w-100">
                   <ExtensionPoint
                     id="product-specifications"
