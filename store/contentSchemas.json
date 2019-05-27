@@ -1,0 +1,13 @@
+{
+  "definitions": {
+    "Button": {
+      "properties": {
+        "addToCart": {
+          "title": "store/addToCartButton.label",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": "store/addToCartButton.label"
+        }
+      }
+    }
+  }
+}

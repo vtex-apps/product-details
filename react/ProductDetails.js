@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { path, prop, propOr, pathOr } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
+import { IOMessage } from 'vtex.native-types'
 
 import classNames from 'classnames'
 
@@ -151,10 +152,7 @@ class ProductDetails extends Component {
   }
 
   getSpecifications() {
-    const {
-      productQuery,
-      specificationsDefault,
-    } = this.props
+    const { productQuery, specificationsDefault } = this.props
 
     const product = productQuery ? productQuery.product : {}
 
@@ -197,10 +195,7 @@ class ProductDetails extends Component {
   }
 
   getHighlights() {
-    const {
-      productQuery,
-      highlightGroupDefault,
-    } = this.props
+    const { productQuery, highlightGroupDefault } = this.props
 
     const { product } = productQuery || { product: {} }
 
@@ -475,7 +470,7 @@ class ProductDetails extends Component {
                         availableQuantity={availableQuantity}
                       />
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
-                        <FormattedMessage id="store/addToCartButton.label" />
+                        <IOMessage id={addToCart} />
                       </ExtensionPoint>
                     </div>
                   ) : (
@@ -490,7 +485,7 @@ class ProductDetails extends Component {
                   <FixedButton>
                     <div className="dn-l bg-base w-100 ph5 pv3">
                       <ExtensionPoint id="buy-button" {...buyButtonProps}>
-                        <FormattedMessage id="store/addToCartButton.label" />
+                        <IOMessage id={addToCart} />
                       </ExtensionPoint>
                     </div>
                   </FixedButton>

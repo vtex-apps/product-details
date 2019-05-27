@@ -18,7 +18,12 @@
       "product-quantity-selector",
       "addon-details-btn"
     ],
-    "component": "ProductDetails"
+    "component": "ProductDetails",
+    "content": {
+      "properties": {
+        "button": { "$ref": "#/definitions/Button" }
+      }
+    }
   },
   "product-quantity-selector": {
     "component": "ProductQuantitySelector"
