@@ -152,9 +152,12 @@ class ProductDetails extends Component {
 
   getSpecifications() {
     const {
-      productQuery: { product },
+      productQuery,
       specificationsDefault,
     } = this.props
+
+    const product = productQuery ? productQuery.product : {}
+
     const option = path(
       ['specificationGroups', 'specification'],
       specificationsDefault
@@ -185,9 +188,6 @@ class ProductDetails extends Component {
   }
 
   filterSpecifications() {
-    const {
-      productQuery: { product },
-    } = this.props
     const highlights = this.getHighlights()
     const specifications = this.getSpecifications()
     return {
@@ -198,9 +198,12 @@ class ProductDetails extends Component {
 
   getHighlights() {
     const {
-      productQuery: { product },
+      productQuery,
       highlightGroupDefault,
     } = this.props
+
+    const { product } = productQuery || { product: {} }
+
     const option = pathOr(
       '',
       ['highlightGroupDefault', 'highlight'],
@@ -275,7 +278,7 @@ class ProductDetails extends Component {
       specificationsDefault,
     } = this.props
 
-    const product = productQuery ? productQuery.product : {}
+    const { product } = productQuery || { product: {} }
 
     const { selectedQuantity } = this.state
     const showHighlight = prop('showHighlights', highlightGroupDefault)
