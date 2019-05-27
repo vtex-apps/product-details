@@ -1,16 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import {
-  path,
-  compose,
-  flip,
-  prop,
-  map,
-  contains,
-  reject,
-  propOr,
-  pathOr,
-} from 'ramda'
+import { path, prop, propOr, pathOr } from 'ramda'
 import { injectIntl, intlShape } from 'react-intl'
 import { IOMessage, formatIOMessage } from 'vtex.native-types'
 

@@ -5,7 +5,11 @@ export const ExtensionPoint = ({ children, id }) => (
 )
 
 export const withRuntimeContext = Comp => {
-  const runtime = { account: 'account', culture: { country: 'country' }, hints: { mobile: false } }
+  const runtime = {
+    account: 'account',
+    culture: { country: 'country' },
+    hints: { mobile: false },
+  }
   return props => <Comp runtime={runtime} {...props} />
 }
 

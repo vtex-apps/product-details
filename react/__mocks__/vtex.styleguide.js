@@ -1,1 +1,2 @@
-export const NumericStepper = (props) => `NumericStepper props=${JSON.stringify(props)}`
+export const NumericStepper = props =>
+  `NumericStepper props=${JSON.stringify(props)}`
