@@ -36,7 +36,10 @@ const ProductQuantitySelector = ({
             styles.availableQuantityContainer
           } mv4 c-muted-2 t-small`}
         >
-          <IOMessage id={quantityText} values={{ availableQuantity }} />
+          <IOMessage
+            id={quantityAvailableText}
+            values={{ availableQuantity }}
+          />
         </div>
       )}
     </div>
