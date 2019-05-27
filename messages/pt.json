@@ -27,6 +27,6 @@
   "admin/editor.product-details.product-specifications.default": "Escolha o destaque padrão",
   "admin/editor.product-details.product-specifications.allSpecifications": "Todas as especificações",
   "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Especificações personalizadas",
-  "admin/editor.product-details.product-specifications.typeHelper": "Digite os valores separados por vírgula"
-
+  "admin/editor.product-details.product-specifications.typeHelper": "Digite os valores separados por vírgula",
+  "admin/editor.product-details.product-specifications.typeSpecifications.title": "Escreve as especificações abaixo"
 }
