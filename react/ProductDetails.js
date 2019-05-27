@@ -276,20 +276,23 @@ class ProductDetails extends Component {
       thumbnailPosition,
       highlightGroupDefault,
       specificationsDefault,
+      showSpecificationsTab: showSpecificationsTabProp,
     } = this.props
 
     const { product } = productQuery || { product: {} }
 
     const { selectedQuantity } = this.state
     const showHighlight = prop('showHighlights', highlightGroupDefault)
-    const showSpecificationsTab = propOr(
+    const showSpecificationsTab = showSpecificationsTabProp == null ? propOr(
       true,
       'showSpecifications',
       specificationsDefault
-    )
-    const viewMode = prop('viewMode', specificationsDefault)
+    ) : showSpecificationsTabProp
 
-    const viewSpecificationsMode = viewMode === 'table'
+    const viewMode = prop('viewMode', specificationsDefault) || 'tab'
+
+    const viewSpecificationsMode = viewMode === 'tab'
+
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
