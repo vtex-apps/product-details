@@ -25,7 +25,9 @@
   "admin/editor.product-specifications.displaySpecification.title": "Display Product Specifications by:",
   "admin/editor.product-specifications.displaySpecification.tabMode": "Tab view mode",
   "admin/editor.product-specifications.displaySpecification.tableMode": "Table view mode",
-  "admin/editor.product-details.product-specifications.default" :"Choose default specifications",
-  "admin/editor.product-details.product-specifications.allSpecifications":"All Specifications",
-  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Fields Specifications"
+  "admin/editor.product-details.product-specifications.default": "Choose default specifications",
+  "admin/editor.product-details.product-specifications.allSpecifications": "All Specifications",
+  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Fields Specifications",
+  "admin/editor.product-details.product-specifications.typeHelper": "Type the values separate by comman",
+  "admin/editor.product-details.product-specifications.typeSpecifications.title": "Type specifications bellow"
 }

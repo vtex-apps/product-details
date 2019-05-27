@@ -1,16 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import {
-  path,
-  compose,
-  flip,
-  prop,
-  map,
-  contains,
-  reject,
-  propOr,
-  pathOr,
-} from 'ramda'
+import { path, prop, propOr, pathOr } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import classNames from 'classnames'
@@ -21,10 +11,8 @@ import { Container } from 'vtex.store-components'
 import { changeImageUrlSize } from './utils/generateUrl'
 import FixedButton from './components/FixedButton'
 import { productShape } from './propTypes'
-import thumbnailsPosition, {
-  getThumbnailsPositionNames,
-  getThumbnailsPositionValues,
-} from './utils/thumbnailPositionEnum'
+
+import { schema } from './utils/schema'
 
 import productDetails from './productDetails.css'
 
@@ -73,7 +61,6 @@ const productPriceLoaderStyles = {
     height: '0.686em',
   },
 }
-
 const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
@@ -163,20 +150,46 @@ class ProductDetails extends Component {
       : []
   }
 
-  filterSpecifications() {
+  getSpecifications() {
     const {
-      productQuery: { product },
+      productQuery,
+      specificationsDefault,
     } = this.props
-    const allSpecifications = propOr([], 'properties', product)
-    const generalSpecifications = propOr([], 'generalProperties', product)
-    const highlights = this.getHighlights()
-    const specifications = reject(
-      compose(
-        flip(contains)(map(x => x.name, generalSpecifications)),
-        prop('name')
-      ),
-      allSpecifications
+
+    const product = productQuery ? productQuery.product : {}
+
+    const option = path(
+      ['specificationGroups', 'specification'],
+      specificationsDefault
     )
+    const allSpecifications = propOr([], 'properties', product)
+    const getFromProperties = () => {
+      const typedSpecifications = pathOr(
+        '',
+        ['specificationGroups', 'typeSpecifications'],
+        specificationsDefault
+      )
+      const specificationNames = typedSpecifications.trim().split(',')
+      const specifications = specificationNames.reduce((acc, item) => {
+        const specification = allSpecifications.filter(
+          spec => spec.name.toLowerCase() === item.trim().toLowerCase()
+        )
+        return acc.concat(specification)
+      }, [])
+      return specifications
+    }
+
+    switch (option) {
+      case 'admin/editor.product-details.product-specifications.chooseDefaultSpecification':
+        return getFromProperties()
+      default:
+        return allSpecifications
+    }
+  }
+
+  filterSpecifications() {
+    const highlights = this.getHighlights()
+    const specifications = this.getSpecifications()
     return {
       specifications,
       highlights,
@@ -185,12 +198,23 @@ class ProductDetails extends Component {
 
   getHighlights() {
     const {
-      productQuery: { product },
-      conditional,
+      productQuery,
+      highlightGroupDefault,
     } = this.props
-    const choose = propOr('', 'highlight', conditional)
+
+    const { product } = productQuery || { product: {} }
+
+    const option = pathOr(
+      '',
+      ['highlightGroupDefault', 'highlight'],
+      highlightGroupDefault
+    )
     const highlightsFromGroup = () => {
-      const typeHighlight = propOr('', 'typeHighlight', conditional)
+      const typeHighlight = pathOr(
+        '',
+        ['highlightGroupDefault', 'typeHighlight'],
+        highlightGroupDefault
+      )
       const highlightName = typeHighlight.trim()
       const names = highlightName.split(',')
       const specificationGroups = propOr([], 'specificationGroups', product)
@@ -208,7 +232,11 @@ class ProductDetails extends Component {
       return highlights
     }
     const highlightsFromSpecifications = () => {
-      const typeSpecifications = propOr('', 'typeSpecifications', conditional)
+      const typeSpecifications = pathOr(
+        '',
+        ['highlightGroupDefault', 'typeSpecifications'],
+        highlightGroupDefault
+      )
       const specificationNames = typeSpecifications.trim().split(',')
       const allSpecifications = propOr([], 'properties', product)
       const highlights = specificationNames.reduce((acc, item) => {
@@ -221,19 +249,10 @@ class ProductDetails extends Component {
     }
 
     const highlightsFromAllSpecifications = () => {
-      const allSpecifications = propOr([], 'properties', product)
-      const generalSpecifications = propOr([], 'generalProperties', product)
-      const highlights = reject(
-        compose(
-          flip(contains)(map(x => x.name, generalSpecifications)),
-          prop('name')
-        ),
-        allSpecifications
-      )
-      return highlights
+      return propOr([], 'properties', product)
     }
 
-    switch (choose) {
+    switch (option) {
       case 'admin/editor.product-details.highlights.chooseDefault':
         return highlightsFromGroup()
       case 'admin/editor.product-details.highlights.chooseDefaultSpecification':
@@ -254,15 +273,23 @@ class ProductDetails extends Component {
         hints: { mobile },
       },
       intl,
-      showSpecificationsTab,
-      showHighlight,
       thumbnailPosition,
+      highlightGroupDefault,
+      specificationsDefault,
     } = this.props
 
-    const product = productQuery ? productQuery.product : {}
-    
-    const { selectedQuantity } = this.state
+    const { product } = productQuery || { product: {} }
 
+    const { selectedQuantity } = this.state
+    const showHighlight = prop('showHighlights', highlightGroupDefault)
+    const showSpecificationsTab = propOr(
+      true,
+      'showSpecifications',
+      specificationsDefault
+    )
+    const viewMode = prop('viewMode', specificationsDefault)
+
+    const viewSpecificationsMode = viewMode === 'table'
     const showBuyButton =
       Number.isNaN(+path(['AvailableQuantity'], this.commertialOffer)) || // Show the BuyButton loading information
       path(['AvailableQuantity'], this.commertialOffer) > 0
@@ -499,7 +526,7 @@ class ProductDetails extends Component {
             </div>
             <div
               className={`flex ${
-                showSpecificationsTab ? 'flex-wrap' : 'justify-between'
+                viewSpecificationsMode ? 'flex-wrap' : 'justify-between'
               }`}
             >
               {description && (
@@ -511,11 +538,11 @@ class ProductDetails extends Component {
                   />
                 </div>
               )}
-              {specifications && (
+              {showSpecificationsTab && (
                 <div className="pv2 mt8 h-100 w-100">
                   <ExtensionPoint
                     id="product-specifications"
-                    tabsMode={showSpecificationsTab}
+                    tabsMode={viewSpecificationsMode}
                     specifications={specifications}
                   />
                 </div>
@@ -528,100 +555,6 @@ class ProductDetails extends Component {
   }
 }
 
-ProductDetails.schema = {
-  title: 'admin/editor.product-details.title',
-  description: 'admin/editor.product-details.description',
-  type: 'object',
-  widget: {
-    'ui:options': {
-      inline: false,
-    },
-    'ui:widget': 'radio',
-  },
-  definitions: {
-    highlightGroupDefault: {
-      title: 'Person',
-      type: 'object',
-      properties: {
-        highlight: {
-          title: 'admin/editor.product-details.highlights.default',
-          type: 'string',
-          enum: [
-            'admin/editor.product-details.highlights.allSpecifications',
-            'admin/editor.product-details.highlights.chooseDefault',
-            'admin/editor.product-details.highlights.chooseDefaultSpecification',
-          ],
-          default:
-            'admin/editor.product-details.highlights.allSpecifications',
-        },
-      },
-      required: ['highlight'],
-      dependencies: {
-        highlight: {
-          oneOf: [
-            {
-              properties: {
-                highlight: {
-                  enum: [
-                    'admin/editor.product-details.highlights.allSpecifications',
-                  ],
-                },
-              },
-            },
-            {
-              properties: {
-                highlight: {
-                  enum: [
-                    'admin/editor.product-details.highlights.chooseDefault',
-                  ],
-                },
-                typeHighlight: {
-                  type: 'string',
-                  title: 'admin/editor.product-details.highlights.title',
-                },
-              },
-              required: [''],
-            },
-            {
-              properties: {
-                highlight: {
-                  enum: [
-                    'admin/editor.product-details.highlights.chooseDefaultSpecification',
-                  ],
-                },
-                typeSpecifications: {
-                  type: 'string',
-                  title:
-                    'admin/editor.product-details.highlights.typeSpecifications.title',
-                },
-              },
-              required: [''],
-            },
-          ],
-        },
-      },
-    },
-  },
-  properties: {
-    conditional: {
-      title: 'Conditional',
-      $ref: '#/definitions/highlightGroupDefault',
-    },
-    showHighlight: {
-      type: 'boolean',
-      title: 'admin/editor.product-details.showHighlight.title',
-      default: true,
-      isLayout: false,
-    },
-    thumbnailPosition: {
-      title: 'admin/editor.product-details.thumbnailsPosition.title',
-      type: 'string',
-      enum: getThumbnailsPositionValues(),
-      enumNames: getThumbnailsPositionNames(),
-      default: thumbnailsPosition.DISPLAY_LEFT.value,
-      isLayout: false,
-    },
-  },
-}
+ProductDetails.schema = schema
 
 export default withRuntimeContext(injectIntl(ProductDetails))

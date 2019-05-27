@@ -155,6 +155,17 @@ Highlight:
 | `showHighlights`   | `Boolean` | Shows the highlights of the product                                                                                    | true |
 | `highlightGroup`   |
 
+
+Specification:
+
+ | Prop name             | Type      | Description                                                                                        |
+| --------------------- | --------- | -------------------------------------------------------------------------------------------------- |
+| `showSpecifications`  | `boolean` | Show the specifications of the product                                                             |
+| `specificationGroups` | `object`  | Define if will be displayed all the specifications of the product or a set of this specifications. |
+| `viewMode`            | `string`  | Define what is the current view mode for the specifications.                                       |
+| `typeSpecifications`  | `string`  | indicates which specifications will be displayed                                                   |
+
+
 Also, you can configure the `share` that is defined on `ProductDetails`. See [here](https://github.com/vtex-apps/store-components/blob/master/react/components/Share/README.md) the `Share` API.
 
 ### Styles API

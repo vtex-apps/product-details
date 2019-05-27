@@ -25,7 +25,9 @@
   "admin/editor.product-specifications.displaySpecification.title": "Mostrar la Especificaciones del Product por:",
   "admin/editor.product-specifications.displaySpecification.tabMode": "Modo de vista de tab",
   "admin/editor.product-specifications.displaySpecification.tableMode": "Modo de vista de tabela",
-  "admin/editor.product-details.product-specifications.default" :"Elegir destaque predeterminado",
-  "admin/editor.product-details.product-specifications.allSpecifications":"Todas las especificaciones",
-  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Especificaciones personalizadas"
+  "admin/editor.product-details.product-specifications.default": "Elegir destaque predeterminado",
+  "admin/editor.product-details.product-specifications.allSpecifications": "Todas las especificaciones",
+  "admin/editor.product-details.product-specifications.chooseDefaultSpecification": "Especificaciones personalizadas",
+  "admin/editor.product-details.product-specifications.typeHelper": "Escriba los valores separados por coma",
+  "admin/editor.product-details.product-specifications.typeSpecifications.title": "Escriva las especificaciones abajo"
 }
