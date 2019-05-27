@@ -1,16 +1,27 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { NumericStepper } from 'vtex.styleguide'
-import { FormattedMessage } from 'react-intl'
+import { injectIntl } from 'react-intl'
+import { IOMessage } from 'vtex.native-types'
 
 import styles from './quantitySelector.css'
 
-const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity, warningQuantityThreshold }) => {
+const ProductQuantitySelector = ({
+  selectedQuantity,
+  onChange,
+  availableQuantity,
+  warningQuantityThreshold,
+  ...props
+}) => {
+  const {
+    intl,
+    'product-details': { quantityText, quantityAvailableText },
+  } = props
   const showAvailable = availableQuantity <= warningQuantityThreshold
   return (
     <div className={`${styles.quantitySelectorContainer} flex flex-column mb4`}>
       <div className="mb3 c-muted-2 t-body">
-        <FormattedMessage id="store/product-details.quantity" />
+        <IOMessage id={quantityText} />
       </div>
       <NumericStepper
         size="small"
@@ -19,10 +30,15 @@ const ProductQuantitySelector = ({ selectedQuantity, onChange, availableQuantity
         maxValue={availableQuantity ? availableQuantity : undefined}
         onChange={useCallback(e => onChange(e.value), [])}
       />
-      {showAvailable && 
-        <div className={`${styles.availableQuantityContainer} mv4 c-muted-2 t-small`}>
-          <FormattedMessage id="store/product-details.quantity-available" values={{ availableQuantity }} />
-        </div>}
+      {showAvailable && (
+        <div
+          className={`${
+            styles.availableQuantityContainer
+          } mv4 c-muted-2 t-small`}
+        >
+          <IOMessage id={quantityText} values={{ availableQuantity }} />
+        </div>
+      )}
     </div>
   )
 }
@@ -36,7 +52,7 @@ ProductQuantitySelector.propTypes = {
   selectedQuantity: PropTypes.number.isRequired,
   availableQuantity: PropTypes.number,
   onChange: PropTypes.func,
-  warningQuantityThreshold: PropTypes.number.isRequired
+  warningQuantityThreshold: PropTypes.number.isRequired,
 }
 
 ProductQuantitySelector.schema = {
@@ -45,12 +61,14 @@ ProductQuantitySelector.schema = {
   type: 'object',
   properties: {
     warningQuantityThreshold: {
-      title: 'admin/editor.product-quantity-selector.warningQuantityThreshold.title',
-      description: 'admin/editor.product-quantity-selector.warningQuantityThreshold.title',
+      title:
+        'admin/editor.product-quantity-selector.warningQuantityThreshold.title',
+      description:
+        'admin/editor.product-quantity-selector.warningQuantityThreshold.title',
       type: 'number',
       default: 0,
     },
   },
 }
 
-export default ProductQuantitySelector
+export default injectIntl(ProductQuantitySelector)

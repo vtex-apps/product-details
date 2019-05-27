@@ -11,6 +11,16 @@
           "title": "store/share.title",
           "$ref": "app:vtex.native-types#/definitions/text",
           "default": "store/share.title"
+        },
+        "quantityText": {
+          "title": "store/product-details.quantity",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": "store/product-details.quantity"
+        },
+        "quantityAvailableText": {
+          "title": "store/product-details.quantity-available",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": "store/product-details.quantity-available"
         }
       }
     }
