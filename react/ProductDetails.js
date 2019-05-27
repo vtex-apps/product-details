@@ -272,8 +272,7 @@ class ProductDetails extends Component {
       highlightGroupDefault,
       specificationsDefault,
       showSpecificationsTab: showSpecificationsTabProp,
-      button: { addToCart },
-      share: { titleTexxt },
+      'product-details': { addToCart, shareTitleText },
     } = this.props
 
     const { product } = productQuery || { product: {} }
@@ -506,14 +505,13 @@ class ProductDetails extends Component {
                       imageUrl={productImageUrl}
                       {...this.props.share}
                       loading={!path(['name'], this.selectedItem)}
-                      title={intl.formatMessage(
-                        { id: 'store/share.title' },
-                        {
-                          product: path(['productName'], product),
-                          sku: path(['name'], this.selectedItem),
-                          store: account,
-                        }
-                      )}
+                      title={formatIOMessage({
+                        intl: intl,
+                        id: shareTitleText,
+                        product: path(['productName'], product),
+                        sku: path(['name'], this.selectedItem),
+                        store: account,
+                      })}
                     />
                   </div>
                 </div>

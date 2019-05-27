@@ -1,17 +1,13 @@
 {
   "definitions": {
-    "Button": {
+    "ProductDetails": {
       "properties": {
         "addToCart": {
           "title": "store/addToCartButton.label",
           "$ref": "app:vtex.native-types#/definitions/text",
           "default": "store/addToCartButton.label"
-        }
-      }
-    },
-    "Share": {
-      "properties": {
-        "titleText": {
+        },
+        "shareTitleText": {
           "title": "store/share.title",
           "$ref": "app:vtex.native-types#/definitions/text",
           "default": "store/share.title"
