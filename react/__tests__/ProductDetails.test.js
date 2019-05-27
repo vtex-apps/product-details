@@ -11,6 +11,12 @@ describe('<ProductDetails /> component', () => {
       query: {
         skuId: 'id',
       },
+      'product-details': {
+        addToCart: 'store/addToCartButton.label',
+        quantityAvailableText: 'store/product-details.quantity-available',
+        quantityText: 'store/product-details.quantity',
+        shareTitleText: 'store/share.title',
+      },
       ...customProps,
     }
 
