@@ -6,9 +6,7 @@
   "description": "Product details component",
   "defaultLocale": "pt-BR",
   "mustUpdateAt": "2019-05-08",
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "scripts": {
     "postreleasy": "vtex publish --verbose"
   },
@@ -18,6 +16,7 @@
     "store": "0.x"
   },
   "dependencies": {
+    "vtex.native-types": "0.x",
     "vtex.breadcrumb": "1.x",
     "vtex.store-graphql": "2.x",
     "vtex.store-components": "3.x",
