@@ -140,16 +140,8 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
           />
         </div>
         <div
-          class="flex justify-between"
-        >
-          <div
-            class="pv2 mt8 h-100 w-100"
-          >
-            <div
-              class="extensionPoint-mock-product-specifications"
-            />
-          </div>
-        </div>
+          class="flex flex-wrap"
+        />
       </footer>
     </div>
   </section>
@@ -299,16 +291,8 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
           />
         </div>
         <div
-          class="flex justify-between"
-        >
-          <div
-            class="pv2 mt8 h-100 w-100"
-          >
-            <div
-              class="extensionPoint-mock-product-specifications"
-            />
-          </div>
-        </div>
+          class="flex flex-wrap"
+        />
       </footer>
     </div>
   </section>
