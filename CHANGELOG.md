@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.19.2] - 2019-05-28
+### Changed
+- Improve store-components props
+
 ## [1.19.1] - 2019-05-27
 ### Fixed
 - Set default view mode back to "tab".
