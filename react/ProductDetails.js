@@ -272,7 +272,8 @@ class ProductDetails extends Component {
       highlightGroupDefault,
       specificationsDefault,
       showSpecificationsTab: showSpecificationsTabProp,
-      'product-details': { addToCart, shareTitleText },
+      addToCart,
+      shareTitleText,
     } = this.props
 
     const { product } = productQuery || { product: {} }

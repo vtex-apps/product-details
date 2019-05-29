@@ -20,11 +20,7 @@
     ],
     "component": "ProductDetails",
     "content": {
-      "properties": {
-        "product-details": {
-          "$ref": "app:vtex.product-details#/definitions/ProductDetails"
-        }
-      }
+      "$ref": "app:vtex.product-details#/definitions/ProductDetails"
     }
   },
   "product-quantity-selector": {
