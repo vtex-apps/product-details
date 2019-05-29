@@ -6,12 +6,10 @@ import ProductQuantitySelector from '../ProductQuantitySelector'
 describe('<ProductQuantitySelector /> component', () => {
   const getComponentRender = customProps => {
     const props = {
-      'product-details': {
-        addToCart: 'store/addToCartButton.label',
-        quantityAvailableText: 'store/product-details.quantity-available',
-        quantityText: 'store/product-details.quantity',
-        shareTitleText: 'store/share.title',
-      },
+      addToCart: 'store/addToCartButton.label',
+      quantityAvailableText: 'store/product-details.quantity-available',
+      quantityText: 'store/product-details.quantity',
+      shareTitleText: 'store/share.title',
       ...customProps,
     }
     return renderWithIntl(<ProductQuantitySelector {...props} />)

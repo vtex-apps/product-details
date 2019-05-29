@@ -13,10 +13,7 @@ const ProductQuantitySelector = ({
   warningQuantityThreshold,
   ...props
 }) => {
-  const {
-    intl,
-    'product-details': { quantityText, quantityAvailableText },
-  } = props
+  const { intl, quantityText, quantityAvailableText } = props
   const showAvailable = availableQuantity <= warningQuantityThreshold
   return (
     <div className={`${styles.quantitySelectorContainer} flex flex-column mb4`}>
