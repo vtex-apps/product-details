@@ -442,6 +442,7 @@ class ProductDetails extends Component {
                 </div>
                 <div className="mt6">
                   {product &&
+                    this.selectedItem &&
                     this.selectedItem.variations &&
                     this.selectedItem.variations.length > 0 && (
                       <ExtensionPoint
