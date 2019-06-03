@@ -151,10 +151,7 @@ class ProductDetails extends Component {
   }
 
   getSpecifications() {
-    const {
-      productQuery,
-      specificationsDefault,
-    } = this.props
+    const { productQuery, specificationsDefault } = this.props
 
     const product = productQuery ? productQuery.product : {}
 
@@ -197,10 +194,7 @@ class ProductDetails extends Component {
   }
 
   getHighlights() {
-    const {
-      productQuery,
-      highlightGroupDefault,
-    } = this.props
+    const { productQuery, highlightGroupDefault } = this.props
 
     const { product } = productQuery || { product: {} }
 
@@ -284,11 +278,10 @@ class ProductDetails extends Component {
     const { selectedQuantity } = this.state
     const showHighlight = prop('showHighlights', highlightGroupDefault)
 
-    const showSpecificationsTab = showSpecificationsTabProp == null ? propOr(
-      true,
-      'showSpecifications',
-      specificationsDefault
-    ) : showSpecificationsTabProp
+    const showSpecificationsTab =
+      showSpecificationsTabProp == null
+        ? propOr(true, 'showSpecifications', specificationsDefault)
+        : showSpecificationsTabProp
 
     const viewMode = prop('viewMode', specificationsDefault) || 'tab'
 
@@ -442,6 +435,7 @@ class ProductDetails extends Component {
                 </div>
                 <div className="mt6">
                   {product &&
+                    this.selectedItem &&
                     this.selectedItem.variations &&
                     this.selectedItem.variations.length > 0 && (
                       <ExtensionPoint

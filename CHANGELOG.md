@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.19.3] - 2019-06-03
+### Fixed
+- Bug where `selectedItem` was undefined.
+
 ## [1.19.2] - 2019-05-28
 ### Changed
 - Improve store-components props
