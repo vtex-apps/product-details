@@ -351,8 +351,12 @@ class ProductDetails extends Component {
     const productImageUrl = path(['items', 0, 'images', 0, 'imageUrl'], product)
 
     const availableQuantity = path(['AvailableQuantity'], this.commertialOffer)
+    console.log('teste ==== this.commertialOffer:', this.commertialOffer)
     const showProductPrice =
       Number.isNaN(+availableQuantity) || availableQuantity > 0
+
+    console.log('teste showProductPrice: ', showProductPrice)
+    console.log('teste availableQuantity: ', availableQuantity)
 
     const addonDetailsClasses = classNames('absolute z-3 left-0', {
       'ml-20-ns':
