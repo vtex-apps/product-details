@@ -392,12 +392,6 @@ class ProductDetails extends Component {
                     <div className={addonDetailsClasses}>
                       <ExtensionPoint
                         id="addon-details-btn"
-                        large={!mobile}
-                        product={{
-                          quantity: 1,
-                          skuId: path(['itemId'], this.selectedItem),
-                          productId: path(['productId'], product),
-                        }}
                       />
                     </div>
                   </div>
