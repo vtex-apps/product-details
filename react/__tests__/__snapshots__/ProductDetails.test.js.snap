@@ -34,12 +34,8 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
                   class="extensionPoint-mock-product-images"
                 />
                 <div
-                  class="absolute z-3 left-0"
-                >
-                  <div
-                    class="extensionPoint-mock-addon-details-btn"
-                  />
-                </div>
+                  class="extensionPoint-mock-addon-details-btn"
+                />
               </div>
             </div>
           </div>
@@ -185,12 +181,8 @@ exports[`<ProductDetails /> component should match the snapshot with product 1`]
                   class="extensionPoint-mock-product-images"
                 />
                 <div
-                  class="absolute z-3 left-0"
-                >
-                  <div
-                    class="extensionPoint-mock-addon-details-btn"
-                  />
-                </div>
+                  class="extensionPoint-mock-addon-details-btn"
+                />
               </div>
             </div>
           </div>
