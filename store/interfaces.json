@@ -23,8 +23,8 @@
   "product-quantity-selector": {
     "component": "ProductQuantitySelector"
   },
-  "product-addon-wrapper": {
-    "component": "AddonWrapper",
+  "product-add-to-list-button": {
+    "component": "ProductAddToListButton",
     "allowed": ["addon-details-btn"]
   },
   "addon-details-btn": {
