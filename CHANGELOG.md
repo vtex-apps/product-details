@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.19.4] - 2019-06-12
+### Fixed
+- Show the heart icon of wish list in product details.
+
 ## [1.19.3] - 2019-06-03
 ### Fixed
 - Bug where `selectedItem` was undefined.

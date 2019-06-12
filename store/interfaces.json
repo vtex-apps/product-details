@@ -23,6 +23,10 @@
   "product-quantity-selector": {
     "component": "ProductQuantitySelector"
   },
+  "product-add-to-list-button": {
+    "component": "ProductAddToListButton",
+    "allowed": ["addon-details-btn"]
+  },
   "addon-details-btn": {
     "component": "*"
   }

@@ -1,7 +1,7 @@
 {
   "name": "product-details",
   "vendor": "vtex",
-  "version": "1.19.3",
+  "version": "1.19.4",
   "title": "Product Details",
   "description": "Product details component",
   "defaultLocale": "pt-BR",
@@ -21,7 +21,8 @@
     "vtex.breadcrumb": "1.x",
     "vtex.store-graphql": "2.x",
     "vtex.store-components": "3.x",
-    "vtex.styleguide": "9.x"
+    "vtex.styleguide": "9.x",
+    "vtex.product-context": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
