@@ -366,14 +366,7 @@ class ProductDetails extends Component {
       >
         <div className="w-100 mw9">
           <article className="mb7">
-            {(categories || categoryTree) && (
-              <ExtensionPoint
-                id="breadcrumb"
-                term={path(['productName'], product)}
-                categories={categories}
-                categoryTree={categoryTree}
-              />
-            )}
+            <ExtensionPoint id="breadcrumb" term={path(['productName'], product)} />
 
             <div
               className={`${productDetails.nameContainer} c-on-base mb4 dn-l`}
