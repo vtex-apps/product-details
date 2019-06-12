@@ -12,6 +12,9 @@ exports[`<ProductDetails /> component should match the loading snapshot 1`] = `
         class="mb7"
       >
         <div
+          class="extensionPoint-mock-breadcrumb"
+        />
+        <div
           class="nameContainer c-on-base mb4 dn-l"
         >
           <div
