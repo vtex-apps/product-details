@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.19.4] - 2019-06-12
 ### Fixed
 - Issue where breadcrumbs had disappeared, due to lack of categories/category tree. It is now gotten from the ProductContext.
 
