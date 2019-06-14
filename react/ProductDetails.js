@@ -123,7 +123,7 @@ class ProductDetails extends Component {
 
   get selectedItem() {
     const items = path(['productQuery', 'product', 'items'], this.props) || []
-    if (!this.props.query || this.props.query.skuId) return items[0]
+    if (!this.props.query || !this.props.query.skuId) return items[0]
     return items.find(sku => sku.itemId === this.props.query.skuId)
   }
 
