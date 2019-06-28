@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { path, prop, propOr, pathOr } from 'ramda'
+import { any, path, prop, propOr, pathOr } from 'ramda'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 
 import classNames from 'classnames'
@@ -65,6 +65,10 @@ const thresholds = [640]
 const imageSizes = [1280, 1920]
 const thumbnailSize = 160
 
+const hasSellerWithAvailableItems = (item) => {
+  return item.sellers && any((s) => s.commertialOffer && s.commertialOffer.AvailableQuantity > 0, item.sellers)
+}
+
 class ProductDetails extends Component {
   static defaultProps = {
     price: {
@@ -123,7 +127,9 @@ class ProductDetails extends Component {
 
   get selectedItem() {
     const items = path(['productQuery', 'product', 'items'], this.props) || []
-    if (!this.props.query || !this.props.query.skuId) return items[0]
+    if (!this.props.query || !this.props.query.skuId) {
+      return items.find(hasSellerWithAvailableItems) || items[0]
+    }
     return items.find(sku => sku.itemId === this.props.query.skuId)
   }
 
