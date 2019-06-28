@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.19.9] - 2019-06-28
+
 ### Changed
 - Fix how default sku is selected by finding the first item with a seller with available quantity.
 
