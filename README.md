@@ -1,4 +1,4 @@
-# VTEX Product Details
+# VTEX Product Details [DEPRECATED] 
 
 ## Description
 
