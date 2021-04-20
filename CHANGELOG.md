@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- I18n Dk, Fi, Jp, Kr and Ro.
+- Crowdin configuration file.
+
 ## [1.19.10] - 2019-08-29
 
 ## [1.19.9] - 2019-06-28
