@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.20.0] - 2021-04-22
+
 ### Added
 
 - I18n Dk, Fi, Jp, Kr and Ro.
