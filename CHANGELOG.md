@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Norwegian translation.
+
 ## [1.20.1] - 2021-09-30
 
 ### Added
@@ -99,15 +103,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.15.1] - 2019-04-29
 ### Removed
-- Remove `Product-Specifications` configuration throught CMS, due to it being a breaking change. 
+- Remove `Product-Specifications` configuration throught CMS, due to it being a breaking change.
 
 ## [1.15.0] - 2019-04-25
 ### Changed
 - Scope messages by domain
 
 ## [1.14.0] - 2019-04-17
-### Added 
-- Enable `Product-Specifications` configuration throught CMS. 
+### Added
+- Enable `Product-Specifications` configuration throught CMS.
 
 ## [1.13.1] - 2019-04-15
 ### Changed
