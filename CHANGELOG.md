@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Indonesian and Thai translations.
+- Indonesian, Italian and Thai translations.
 
 ### Fixed
 
